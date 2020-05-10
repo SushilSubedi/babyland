@@ -1,7 +1,7 @@
 import React from 'react';
-import {Box,makeStyles, createStyles,Typography,Button,AppBar } from '@material-ui/core';
+import {makeStyles, createStyles,Typography,Button,AppBar } from '@material-ui/core';
 
-const NavigationBar = (props) =>{
+const NavigationBar = () =>{
     const classes = useStyles();
 return(
     <div>
@@ -14,8 +14,8 @@ return(
           </div>
           <div style={{display:'flex'}}>
             <Button color="inherit" classes={{text:classes.text}}>Home</Button>
-            <Button color="inherit" classes={{text:classes.text}}>Search</Button>
-            <Button color="inherit" classes={{text:classes.text}}>Explore</Button>
+            <Button color="inherit" classes={{text:classes.text}}>Shop</Button>
+            <Button color="inherit" classes={{text:classes.text}}>Baby</Button>
             <Button color="inherit"classes={{text:classes.text}}>Login/Signup</Button>
           </div>
         </div>
