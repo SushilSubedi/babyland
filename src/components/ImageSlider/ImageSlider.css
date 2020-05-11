@@ -1,10 +1,6 @@
 .ant-carousel .slick-slide {
     text-align: center;
-<<<<<<< HEAD
-    height: 160px;
-=======
     height: 360px;
->>>>>>> dce0ecf40c42a403b94b6774056ace92d2d32b0b
     line-height: 160px;
     background: #364d79;
     overflow: hidden;
