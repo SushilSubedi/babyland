@@ -1,31 +1,29 @@
 import React from 'react';
-import NavigationBar from './components/NavigationBar/NavigationBar';
-import { Box, makeStyles, createStyles } from '@material-ui/core'
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './Theme/theme';
+<<<<<<< HEAD
 import AppCard from './components/AppCard/AppCard';
+=======
+import Routers from './Routers/Routers';
+>>>>>>> dce0ecf40c42a403b94b6774056ace92d2d32b0b
 
-const App = (props) =>{
-  const classes = useStyles();
 
+const App = () => {
   return(
     <MuiThemeProvider theme={theme}>
+<<<<<<< HEAD
       <Box className={classes.App}>
         <NavigationBar/>
          <AppCard/>
       </Box>
+=======
+      <Routers/>
+>>>>>>> dce0ecf40c42a403b94b6774056ace92d2d32b0b
     </MuiThemeProvider>
    
     
   )
   
 }
-
-const useStyles = makeStyles(theme => 
-  createStyles({
-      App: {
-        padding:'10px'
-      } 
-  }))
 
 export default App;
