@@ -2,29 +2,29 @@ import React from 'react';
 import {Box,Typography,Button,makeStyles, createStyles,Paper} from '@material-ui/core';
 
 
-const AppCard = () =>{
-// const {name,description,imgSrc} = props;
+const AppCard = (props) =>{
+const {name,description,imgSrc} = props;
 const classes = useStyles();
 return(
     <Box component={Paper} className={classes.card} >
         <div style={{marginRight:'auto',marginLeft:'auto',textAlign:'center'}}>
-            {/* <img src={imgSrc} alt="hotel png file" className={classes.img}/> */}
+             <img src={imgSrc}  className={classes.img}/> 
             <Typography>
                 <Box
                     fontWeight= {600}
-                    fontSize={16}
+                    fontSize={20}
                     style={{textTransform:"capitalize",
                     paddingTop:'10px',
                     paddingBottom:'15px'
                     }}
                 >
-                    name 
+                    {name}
                 </Box>
             </Typography>
             <Typography>
                 <Box
                     fontWeight= {300}
-                    fontSize={12}
+                    fontSize={15}
                     style={{
                     paddingTop:'10px',
                     paddingBottom:'15px',
@@ -32,13 +32,15 @@ return(
                     }}
                     
                 >
-                 hello there   
+                 {description}   
                 </Box>
                 
             </Typography>
+
             <Button className={classes.button}>
                 view
             </Button>
+
 
         </div>
     </Box>
@@ -50,8 +52,8 @@ createStyles({
     card: {
         display: 'flex',
         flexDirection: 'column',
-        width: '228px',
-        height: '233px',
+        width: '250px',
+        height: '270px',
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: '2% 1% 6% 1%',
@@ -64,7 +66,7 @@ createStyles({
         }
     },
     button:{
-        backgroundColor:'Green',
+        backgroundColor:'hotpink',
         color:'white',
         textTransform:'initial',
         "&:hover":{
@@ -72,8 +74,9 @@ createStyles({
         }
     },
     img:{
-        width:'32%',
-        marginTop:'16px'
+        width:'90px',
+        height:'90px',
+        marginTop:'14px'
     }
 })
 )
