@@ -4,10 +4,10 @@ import { createMuiTheme } from '@material-ui/core';
 const theme = createMuiTheme({
     palette: {
         primary: {
-          main:'#3cfaf4'
+          main:'#f51bb3'
         },
         secondary: {
-          main:'#ef5cf7'
+          main:'#f5790c'
         },
         // text: {
         //   primary:'white'  
@@ -17,6 +17,7 @@ const theme = createMuiTheme({
       MuiButton: {
         root: {
           color: 'white',
+          fontSize:'16px'
           // '&:hover': {
           //   backgroundColor: ''
           // }

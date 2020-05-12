@@ -4,7 +4,6 @@ import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 const NavigationBar = () =>{
     const classes = useStyles();
@@ -15,9 +14,9 @@ return(
             <div style={{paddingRight:'9%'}}>
               <Link to={'/'}><img src={logo} alt="logo" className={classes.logo} /></Link>
             </div>
-            <Link to ={'/'}><Button color="inherit" classes={{text:classes.text}}>Home</Button></Link>
-            <Link to ={'/Shop'}><Button color="inherit" classes={{text:classes.text}}>Shop</Button></Link> 
-            <Link to ={'/Baby'}><Button color="inherit" classes={{text:classes.text}}>Baby</Button></Link>
+            <Link to ={'/'}><Button classes={{text:classes.text}}>Home</Button></Link>
+            <Link to ={'/Shop'}><Button classes={{text:classes.text}}>Shop</Button></Link> 
+            <Link to ={'/Baby'}><Button classes={{text:classes.text}}>Baby</Button></Link>
             {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}
           </Toolbar>
           <div style={{display:'flex'}}>
@@ -34,7 +33,8 @@ return(
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Link to ={'/Login'}><Button color="inherit"classes={{text:classes.text}}>Login/Signup</Button></Link>
+            <Link to ={'/Login'}><Button  classes={{text:classes.text}}>Login/Register</Button></Link>
+            {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
           </div>
         </div>
       </AppBar>
@@ -61,9 +61,9 @@ const useStyles = makeStyles(theme =>
         search: {
           position: "relative",
           borderRadius: '9px',
-          backgroundColor: fade(theme.palette.common.white, 0.7),
+          backgroundColor: fade(theme.palette.common.white, 0.4),
           "&:hover": {
-            backgroundColor: fade(theme.palette.common.white, 0.7)
+            backgroundColor: fade(theme.palette.common.white, 0.4)
           },
           marginLeft: 0,
           width: "100%",
@@ -90,11 +90,11 @@ const useStyles = makeStyles(theme =>
           paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
           transition: theme.transitions.create("width"),
           width: "100%",
-          color:'blue',
+          color:'white',
           [theme.breakpoints.up("sm")]: {
             width: "12ch",
             "&:focus": {
-              width: "20ch"
+              width: "26ch"
             }
           }
         }
