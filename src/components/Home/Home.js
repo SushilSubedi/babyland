@@ -1,16 +1,40 @@
 import React from 'react';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import AppCardList from '../AppCard/AppCardList';
+import { Typography,makeStyles,createStyles } from '@material-ui/core';
+import HomeBlog from '../HomeBlog/HomeBlog';
 
 const Home = () =>{
+    const classes = useStyles();
     return(
-        <div>
-            <div style={{paddingTop:'2%'}}>
+        <div style={{paddingTop:'2%'}}>
             <ImageSlider/>
-            <AppCardList/>
-            
-            </div>
+            <div className={classes.CardTop}>
+                <div className={classes.Typography}>
+                    <Typography className={classes.Typo}>"We should always be careful what we are doing with baby"</Typography>
+                </div>
+                <AppCardList/> 
+            </div>           
+            <HomeBlog/>
         </div>
     )
 }
+
+const useStyles = makeStyles(theme =>
+    createStyles({
+        CardTop:{
+            padding:'2% 6%  2% 11%'
+        },
+        Typography: {
+            display:'flex',
+            justifyContent:'center',
+            padding:'3%'
+        },
+        Typo: {
+            fontSize:'19px',
+            fontFamily:'cursive'
+        }
+    }))
+
+
 export default Home;

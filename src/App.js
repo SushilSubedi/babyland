@@ -7,11 +7,8 @@ const App = () => {
   return(
     <MuiThemeProvider theme={theme}>
       <Routers/>
-    </MuiThemeProvider>
-   
-    
+    </MuiThemeProvider> 
   )
-  
 }
 
 export default App;

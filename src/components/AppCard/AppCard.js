@@ -8,7 +8,7 @@ const classes = useStyles();
 return(
     <Box component={Paper} className={classes.card} >
         <div style={{marginRight:'auto',marginLeft:'auto',textAlign:'center'}}>
-             <img src={imgSrc}  className={classes.img}/> 
+             <img src={imgSrc}  className={classes.img} alt="mother text"/> 
             <Typography>
                 <Box
                     fontWeight= {600}
@@ -52,12 +52,12 @@ createStyles({
     card: {
         display: 'flex',
         flexDirection: 'column',
-        width: '250px',
-        height: '270px',
+        width: '280px',
+        height: '250px',
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: '2% 1% 6% 1%',
-        marginBottom: '22%',
+        // marginBottom: '22%',
         boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)',
         position:'relative',
         border: '1px solid rgba(0,0,0,0.1)',
@@ -70,7 +70,7 @@ createStyles({
         color:'white',
         textTransform:'initial',
         "&:hover":{
-            backgroundColor:'blue'
+            backgroundColor:'#fc03d7'
         }
     },
     img:{

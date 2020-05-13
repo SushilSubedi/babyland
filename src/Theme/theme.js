@@ -17,7 +17,8 @@ const theme = createMuiTheme({
       MuiButton: {
         root: {
           color: 'white',
-          fontSize:'16px'
+          // backgroundColor:'hotpink',
+          fontSize:'14px'
           // '&:hover': {
           //   backgroundColor: ''
           // }
