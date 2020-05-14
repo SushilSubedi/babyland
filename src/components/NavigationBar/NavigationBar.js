@@ -33,7 +33,7 @@ return(
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Link to ={'/Login'}><Button  classes={{text:classes.text}}>Login/Register</Button></Link>
+            <Link to ={'/Login'}><Button  classes={{text:classes.text}}>Login | Register</Button></Link>
             {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
           </div>
         </div>

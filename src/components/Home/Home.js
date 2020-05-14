@@ -7,7 +7,7 @@ import HomeBlog from '../HomeBlog/HomeBlog';
 const Home = () =>{
     const classes = useStyles();
     return(
-        <div style={{paddingTop:'2%'}}>
+        <div style={{padding:'2% 2% 0% 2%'}}>
             <ImageSlider/>
             <div className={classes.CardTop}>
                 <div className={classes.Typography}>
