@@ -6,7 +6,7 @@ const HomeBlog = () =>{
     const classes = useStyles();
     return(
         <Box className={classes.Blog} >
-            <div>
+            <div style={{alignSelf:'center'}}>
                 <Typography  variant="h5" className={classes.Typography1}>BECAUSE ORDINARY WON’T DO.</Typography>
                 <Typography className={classes.Typography2}>The arrival of a baby calls for a celebration. Finding the right gift to mark this occasion is a lot more than about welcoming the new arrival, it is about marveling at the miracle of life. Celebrate it with our curated gift hampers.</Typography>
                 <Button className={classes.button}>

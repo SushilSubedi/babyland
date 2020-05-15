@@ -3,6 +3,7 @@ import ImageSlider from '../ImageSlider/ImageSlider';
 import AppCardList from '../AppCard/AppCardList';
 import { Typography,makeStyles,createStyles } from '@material-ui/core';
 import HomeBlog from '../HomeBlog/HomeBlog';
+import Connect from '../Connect/Connect';
 
 const Home = () =>{
     const classes = useStyles();
@@ -16,6 +17,7 @@ const Home = () =>{
                 <AppCardList/> 
             </div>           
             <HomeBlog/>
+            <Connect/>
         </div>
     )
 }
