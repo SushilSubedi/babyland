@@ -4,6 +4,7 @@ import AppCardList from '../AppCard/AppCardList';
 import { Typography,makeStyles,createStyles } from '@material-ui/core';
 import HomeBlog from '../HomeBlog/HomeBlog';
 import Connect from '../Connect/Connect';
+import Footer from '../Footer/footer';
 
 const Home = () =>{
     const classes = useStyles();
@@ -18,6 +19,7 @@ const Home = () =>{
             </div>           
             <HomeBlog/>
             <Connect/>
+            <Footer/>
         </div>
     )
 }
