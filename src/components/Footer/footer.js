@@ -80,6 +80,7 @@ const Footer = () =>{
          },
          Icon:{
            marginLeft:'6px',
+           color:'secondary',
          },
          connectus:{
            alignSelf:'flex-end',

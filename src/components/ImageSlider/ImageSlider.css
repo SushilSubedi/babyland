@@ -1,11 +1,75 @@
-.ant-carousel .slick-slide {
-    text-align: center;
-    height: 360px;
-    line-height: 160px;
-    background: #364d79;
-    overflow: hidden;
-  }
-  
-  .ant-carousel .slick-slide h3 {
-    color: #fff;
-  }
+html{
+  height: 100vh;
+}
+body{
+  padding: 0;
+  margin: 0;
+  font-family: cursive;
+}
+.accordian{
+  max-width: 800px;
+  background: rgba(0, 0 ,0, 0.10);
+  height: 300px;
+  margin: 20px auto;
+  display: flex;
+  box-shadow: 0px 20px 30px rgba(0, 0 ,0, 0.47);
+  flex-direction: row;
+  cursor: pointer;
+  margin-bottom: 100px;
+}
+.box{
+  margin-top: 60px;
+  position: relative;
+  height: 100;
+  flex: 1;
+  background-position: left;
+  background-size: cover;
+  transition: .7s;
+  box-shadow: 0px 20px 30px rgba(0, 0 ,0, 0.47);
+}
+.box:hover{
+  flex: 7;
+  height: 400px;
+}
+.a1{
+  background-image: url(b.jpg);
+  width:400px;
+}
+.a2{
+  /* background-image: url(); */
+  width:400px;
+}
+.a3{
+  /* background-image: url("3.jpeg.jpg"); */
+  width:400px;
+}
+.a4{
+  /* background-image: url("4.jpeg.jpg"); */
+  width:400px;
+}
+.a5{
+  /* background-image: url("5.jpeg.jpg"); */
+  width:400px;
+}
+
+p{
+  font-weight: normal;
+  color: #fff;
+}
+h2{
+  color: #fff;
+}
+.text{
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  padding: 10px;
+}
+.box:hover .text{
+  opacity:1;
+}
+h1{
+  width: 450px;
+  text-align: center;
+  margin: 100px auto 20px auto;
+}

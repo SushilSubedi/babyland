@@ -1,42 +1,59 @@
-import React from 'react';
-import 'antd/dist/antd.css';
+import React,{Component} from 'react';
 import './ImageSlider.css';
-import { Carousel } from 'antd';
-import mothertoddler from '../../Asset/ImageSlider/mother-and-toddler.jpg';
-import babymother from '../../Asset/ImageSlider/babymother.jpeg';
 
-const ImageSlider = () =>{
-    
+class ImageSlider extends Component{
+render(){
     return(
-        <Carousel autoplay>
-            <div>
-                {/* <img src={mothertoddler} height='400px' width='1450px' alt="Image first to appear"/> */}
-                <h1>1</h1>
+        <div>
+        <div className="box a1">
+        <div className="image_1">
+            <div className="text">
+                <h2>Lorem Ipsum</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, deserunt amet. Similique eos sunt harum earum enim, veritatis distinctio quo qui incidunt laboriosam. Odio fugit possimus, nulla dolorem placeat atque.
+                </p>
             </div>
-            <div>
-            <h1>1</h1>
-                
-                {/* <img src={babymother} height='400px' width='1300px' alt= "Image second to appe/> */}
+        </div>
+    </div>
+
+    <div className="box a2">
+        <div className="image_2">
+            <div className="text">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam modi, ducimus dignissimos ipsa harum quam nobis officiis odit tempora autem magni! Facilis reiciendis perferendis, quas quos sit dolor modi odit.</p>
             </div>
-            <div>
-                <h3>3</h3>
+        </div>
+    </div>
+    <div className="box a3">
+        <div className="image_3">
+            <div className="text">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non illum nulla consectetur. Sit, unde, debitis ad sunt vitae eligendi tempore, sed expedita aliquid animi enim? Consequatur dignissimos facere recusandae excepturi!</p>
             </div>
-            <div>
-                <h3>4</h3>
+        </div>
+    </div>
+
+    
+    <div className="box a4">
+        <div className="image_4">
+            <div className="text">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic aliquam, unde animi excepturi quos doloribus sed veritatis voluptatum sit quisquam velit corporis, voluptas vitae placeat accusantium! Perferendis sunt molestias est.</p>
             </div>
-        </Carousel>
+        </div>
+    </div>
+
+    
+    <div className="box a5">
+        <div className="image_5">
+            <div className="text">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro tempore vero molestias atque inventore impedit modi repellendus veniam quisquam eum iusto nesciunt sed earum, ut beatae dignissimos magnam accusantium quos?</p>
+            </div>
+        </div>
+    </div>
+    </div>
     )
 }
-
-// const useStyles = makeStyles(theme =>
-//     createStyles({
-        
-//         img:{
-//             width:'200px',
-//             height:'200px',
-            
-//         }
-//     })
-//     )
-
+}
 export default ImageSlider;
