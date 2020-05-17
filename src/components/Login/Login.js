@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link } from '@material-ui/core';
+import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link,Fab } from '@material-ui/core';
 import Input from '../../GlobalComponents/Input';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 const data = [
     {
@@ -20,6 +21,9 @@ const Login = () =>{
         <Box padding="8% 0 0 0">
             <Container maxWidth= "xs">
                 <Box component={Paper} padding="2%"  className={classes.loginPage}>
+                    <Fab color="primary" className={classes.fabButton}>
+                        <CreateOutlinedIcon style={{fontSize:'34px'}}/>
+                    </Fab>
                     <form className={classes.form} onSubmit={'/'}>
                         <Typography className={classes.Typography1}>Login</Typography>
                         {data.map((items,index) =>{
@@ -50,7 +54,8 @@ const useStyles = makeStyles(theme =>
         loginPage: {
             display:'flex',
             justifyContent:'center',
-            height:'350px'
+            height:'350px',
+            position:'relative'
             
         },
         Typography1: {
@@ -73,7 +78,16 @@ const useStyles = makeStyles(theme =>
             display:'flex',
             justifyContent:'center',
             padding:'4% 0 0 0'
-        }
+        },
+        fabButton: {
+            position: "absolute",
+            zIndex: 1,
+            top: '11px',
+            right: '-9%',
+            margin: "0 auto",
+            height:'80px',
+            width:'80px'
+          }
     }))
 
 
