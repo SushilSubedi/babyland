@@ -43,19 +43,21 @@ const Footer = () =>{
               
             </div> 
             <div className={classes.contactus }>
-              <Typography className={classes.contactustext}>Contact US</Typography>
-              <Typography className={classes.text}>
-                <EmailIcon color='secondary'/>
-                Email:info@babyland.com
-              </Typography> 
-              <Typography  className={classes.text}>
-                <PhoneIcon  color='secondary'/>
-                Phone:9824490359
-              </Typography>
-              <Typography  className={classes.text}>
-                <LocationOnIcon  color='secondary'/>
-                Address:kathmandu
+              <div className={classes.icons}>
+                <Typography className={classes.contactustext}>Contact US</Typography>
+                <Typography className={classes.text}>
+                  <EmailIcon color='secondary'/>
+                  Email:info@babyland.com
+                </Typography> 
+                <Typography  className={classes.text}>
+                  <PhoneIcon  color='secondary'/>
+                  Phone:9824490359
+                </Typography>
+                <Typography  className={classes.text}>
+                  <LocationOnIcon  color='secondary'/>
+                  Address:kathmandu
                </Typography>
+              </div>
             </div>
           </div>
           
@@ -79,7 +81,7 @@ const Footer = () =>{
            color:'black',
          },
          Icon:{
-           marginLeft:'6px',
+           marginLeft:'8px',
            color:'secondary',
          },
          connectus:{
@@ -95,6 +97,7 @@ const Footer = () =>{
          contactustext:{
            color:'#000080',
            fontSize:'20px',
+           marginBottom:'6px',
          },
          text:{
            color:'black',
@@ -106,6 +109,13 @@ const Footer = () =>{
          },
          blogtext:{
            color:'black',
+         },
+         contactus:{
+           marginTop:'40px',
+           
+         },
+         icons:{
+           padding:'0.5% 0% 1% 0%',
          }
 
     }));
