@@ -8,11 +8,11 @@ import Connect from '../Connect/Connect';
 const Home = () =>{
     const classes = useStyles();
     return(
-        <div style={{padding:'2% 2% 0% 2%'}}>
+        <div style={{padding:'2% 0% 0% 0%'}}>
             <ImageSlider/>
             <div className={classes.CardTop}>
                 <div className={classes.Typography}>
-                    <Typography className={classes.Typo}>"We should always be careful what we are doing with baby"</Typography>
+                    <Typography className={classes.Typo}>"With our exclusive collection be ready for big day"</Typography>
                 </div>
                 <AppCardList/> 
             </div>           
