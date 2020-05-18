@@ -8,7 +8,6 @@ import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import babylogo from '../../components/NavigationBar/logo.png';
-import Item from 'antd/lib/list/Item';
 
 
 
