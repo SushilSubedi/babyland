@@ -8,7 +8,6 @@ import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import babylogo from '../../components/NavigationBar/logo.png';
-import Item from 'antd/lib/list/Item';
 
 
 
@@ -43,11 +42,11 @@ const Footer = () =>{
               
             </div> 
             <div className={classes.contactus }>
-              <div className={classes.icons}>
                 <Typography className={classes.contactustext}>Contact US</Typography>
+              <div className={classes.icons}>
                 <Typography className={classes.text}>
-                  <EmailIcon color='secondary'/>
-                  Email:info@babyland.com
+                  <EmailIcon color='secondary' className={classes.emailicon}/>
+                  <Typography >Email:info@babyland.com</Typography>
                 </Typography> 
                 <Typography  className={classes.text}>
                   <PhoneIcon  color='secondary'/>
@@ -97,7 +96,8 @@ const Footer = () =>{
          contactustext:{
            color:'#000080',
            fontSize:'20px',
-           marginBottom:'6px',
+           position:'relative',
+           top:'16px',
          },
          text:{
            color:'black',
@@ -111,11 +111,16 @@ const Footer = () =>{
            color:'black',
          },
          contactus:{
-           marginTop:'40px',
+           marginTop:'30px',
            
          },
-         icons:{
-           padding:'0.5% 0% 1% 0%',
+         emailicon:{
+           position:'relative ',
+           top:'29px',
+           right:'29px',
+           
+           
+           
          }
 
     }));

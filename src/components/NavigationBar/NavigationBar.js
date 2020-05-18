@@ -14,9 +14,9 @@ return(
             <div style={{paddingRight:'9%'}}>
               <Link to={'/'}><img src={logo} alt="logo" className={classes.logo} /></Link>
             </div>
-            <Link to ={'/'}><Button classes={{text:classes.text}}>Home</Button></Link>
-            <Link to ={'/Shop'}><Button classes={{text:classes.text}}>Shop</Button></Link> 
-            <Link to ={'/Baby'}><Button classes={{text:classes.text}}>Baby</Button></Link>
+            <Link to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
+            <Link to ={'/Shop'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Shop</Button></Link> 
+            <Link to ={'/Baby'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Baby</Button></Link>
             {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}
           </Toolbar>
           <div style={{display:'flex'}}>
@@ -33,7 +33,7 @@ return(
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Link to ={'/Authentication'}><Button  classes={{text:classes.text}}>Login | Register</Button></Link>
+            <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link>
             {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
           </div>
         </div>

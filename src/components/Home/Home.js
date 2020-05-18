@@ -9,7 +9,7 @@ import Footer from '../Footer/footer';
 const Home = () =>{
     const classes = useStyles();
     return(
-        <div style={{padding:'2% 0% 0% 0%'}}>
+        <div>
             <ImageSlider/>
             <div className={classes.CardTop}>
                 <div className={classes.Typography}>

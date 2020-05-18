@@ -1,66 +1,34 @@
 import React from 'react';
-import { Box, makeStyles, createStyles, Typography, Button } from '@material-ui/core';
+import { Zoom } from 'react-slideshow-image';
+import toychild from '../../Asset/ImageSlider/toychild.jpg';
+import mother from '../../Asset/ImageSlider/mother.jpg';
+import babe from '../../Asset/ImageSlider/babe.jpg'
+ 
+const images = [
+  mother,
+  toychild,
+  babe
 
-
-
-
-const ImageSlider = () =>{
-    const classes = useStyles();
-    return(
-        
-        <Box className={classes.Footer}>
-          
-          
-
-          
-        </Box>        
+];
+ 
+const zoomOutProperties = {
+  duration: 5000,
+  transitionDuration: 500,
+  infinite: true,
+  indicators: true,
+  scale: 0.4,
+  arrows: true
+}
+ 
+const ImageSlider = () => {
+    return (
+      <div className="slide-container">
+        <Zoom {...zoomOutProperties}>
+          {
+            images.map((each, index) => <img key={index} style={{height:'520px', width:'100%'}} src={each} />)
+          }
+        </Zoom>
+      </div>
     )
-
- }
-
- const useStyles = makeStyles(theme => 
-    createStyles({
-        Footer: {
-            padding:'1%',
-            backgroundColor:'pink',
-            display:'flex',
-            justifyContent:'space-between',
-         },
-         copyright:{
-           alignSelf:'flex-end',
-           color:'black',
-         },
-         Icon:{
-           marginLeft:'6px',
-           color:'secondary',
-         },
-         connectus:{
-           alignSelf:'flex-end',
-           marginTop:'3%',
-           color:'blue',
-         },
-         followus:{
-           color:'#000080',
-           fontSize:'20px',
-
-         },
-         contactustext:{
-           color:'#000080',
-           fontSize:'20px',
-         },
-         text:{
-           color:'black',
-           fontSize:'15px',
-         },
-         bloghead:{
-           color:'#000080',
-           fontSize:'20px',
-         },
-         blogtext:{
-           color:'black',
-         }
-
-    }));
-
-
- export default ImageSlider;
+}
+export default ImageSlider;
