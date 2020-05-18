@@ -11,17 +11,17 @@ const Data = [
     {
         name:'Baby Bed Fence',
         src:babyfence,
-        description:'Protective bed fence for babies'
+        description:'Protective bed fence for babies.Perfect for kid bed,solid wood bed,kid bed,thick mattresses bed,and any large-size beds. '
     },
     {
         name:'Baby Cloth',
         src:babycloth,
-        description:'Clothes for new born baby'
+        description:'BabySuit for newly born babies.Like T-shirts, infant bodysuits come in a wide variety of designs.'
     },
     {
-        name:'WalkyTalky',
+        name:'Baby Walker',
         src:walkytalky,
-        description:'WalkyTalky for toddler '
+        description:"Baby Walker with Adjustable Height and Push Handle Bar.Sturdy design to support and nurture baby's first steps. ",
     },
     
     

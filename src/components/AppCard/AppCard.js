@@ -11,11 +11,13 @@ return(
              <img src={imgSrc}  className={classes.img} alt="mother text"/> 
             <Typography>
                 <Box
-                    fontWeight= {600}
-                    fontSize={20}
+                    fontWeight= {500}
+                    fontSize={22}
                     style={{textTransform:"capitalize",
-                    paddingTop:'10px',
-                    paddingBottom:'15px'
+                    paddingTop:'5px',
+                    paddingBottom:'15px',
+                    color:'#00669b',
+                    
                     }}
                 >
                     {name}
@@ -26,9 +28,11 @@ return(
                     fontWeight= {300}
                     fontSize={15}
                     style={{
-                    paddingTop:'10px',
-                    paddingBottom:'15px',
-                    color:'grey'
+                    paddingTop:'8px',
+                    paddingBottom:'3px',
+                    color:'balck,',
+                    position:'relative',
+                    bottom:'15px',
                     }}
                     
                 >
@@ -66,6 +70,8 @@ createStyles({
         }
     },
     button:{
+        
+        padding:'1% 0% 1% 0%',
         backgroundColor:'hotpink',
         color:'white',
         textTransform:'initial',
@@ -74,9 +80,11 @@ createStyles({
         }
     },
     img:{
-        width:'90px',
-        height:'90px',
-        marginTop:'14px'
+    
+        width:'150px',
+        height:'95px',
+        marginTop:'12px',
+        
     }
 })
 )
