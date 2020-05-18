@@ -49,12 +49,12 @@ const Footer = () =>{
                   <Typography >Email:info@babyland.com</Typography>
                 </Typography> 
                 <Typography  className={classes.text}>
-                  <PhoneIcon  color='secondary'/>
-                  Phone:9824490359
+                  <PhoneIcon   color='secondary' className={classes.phoneicon}/>
+                  <Typography style={{bottom:'30px', position:'relative'}}>Phone:9824490359</Typography>
                 </Typography>
                 <Typography  className={classes.text}>
-                  <LocationOnIcon  color='secondary'/>
-                  Address:kathmandu
+                  <LocationOnIcon  color='secondary' className={classes.addressicon}/>
+                  <Typography style={{position:'relative',bottom:'58px'}}> Address:kathmandu</Typography>
                </Typography>
               </div>
             </div>
@@ -118,9 +118,20 @@ const Footer = () =>{
            position:'relative ',
            top:'29px',
            right:'29px',
-           
-           
-           
+         },
+         phoneicon:{
+           position:'relative',
+           right:'29px',
+         },
+         addressicon:{
+           position:'relative',
+           right:'29px',
+         },
+         addressicon:{
+           position:'relative',
+           right:'29px',
+           bottom:'27px',
+
          }
 
     }));
