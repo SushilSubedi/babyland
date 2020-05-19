@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link,Fab } from '@material-ui/core';
 import Input from '../../GlobalComponents/Input';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
@@ -14,18 +14,28 @@ const data = [
     }
 ];
 
-const Login = () =>{
+const Login = (props) =>{
+
     const classes = useStyles();
+    const [isAuth,setIsAuth] = useState(false);
+
+    const handleChangeAuthentication = () => {
+        if(!isAuth){
+            setIsAuth(true);
+        }else{
+            setIsAuth(false);
+        }
+    };
 
     return(
         <Box padding="8% 0 0 0">
             <Container maxWidth= "xs">
                 <Box component={Paper} padding="2%"  className={classes.loginPage}>
-                    <Fab color="primary" className={classes.fabButton}>
+                    <Fab color="primary" className={classes.fabButton} onClick={handleChangeAuthentication}>
                         <CreateOutlinedIcon style={{fontSize:'34px'}}/>
                     </Fab>
                     <form className={classes.form} onSubmit={'/'}>
-                        <Typography className={classes.Typography1}>Login</Typography>
+                        <Typography className={classes.Typography1}>{!isAuth ? 'Login' : 'SignUP'}</Typography>
                         {data.map((items,index) =>{
                             return(<div style={{padding:'7% 0%'}} key={index}>
                                         <Input label={items.label} type={items.type}/>
@@ -33,10 +43,10 @@ const Login = () =>{
                                 )
                         })}
                         <div className={classes.ButtonLink} style={{display:'flex',justifyContent:'center',padding:'7% 0 0 0'}}>
-                            <Button className={classes.button}>Submit</Button>
+                            <Button className={classes.button}>{!isAuth ? 'Login' : 'Submit'}</Button>
                         </div>
                         <div className={classes.ButtonLink}>
-                            <Link>Forget your password?</Link>
+                    <Link>{!isAuth ? 'Forget your password?' : null}</Link>
                         </div>
                     </form>
                 </Box>

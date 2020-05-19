@@ -9,7 +9,7 @@ return(
     <Box component={Paper} className={classes.card} >
         <div style={{marginRight:'auto',marginLeft:'auto',textAlign:'center'}}>
              <img src={imgSrc}  className={classes.img} alt="mother text"/> 
-            <Typography>
+            <Typography variant="h5">
                 <Box
                     fontWeight= {500}
                     fontSize={22}
