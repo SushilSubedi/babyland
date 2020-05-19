@@ -42,19 +42,21 @@ const Footer = () =>{
               
             </div> 
             <div className={classes.contactus }>
-              <Typography className={classes.contactustext}>Contact US</Typography>
-              <Typography className={classes.text}>
-                <EmailIcon color='secondary'/>
-                Email:info@babyland.com
-              </Typography> 
-              <Typography  className={classes.text}>
-                <PhoneIcon  color='secondary'/>
-                Phone:9824490359
-              </Typography>
-              <Typography  className={classes.text}>
-                <LocationOnIcon  color='secondary'/>
-                Address:kathmandu
+                <Typography className={classes.contactustext}>Contact US</Typography>
+              <div className={classes.icons}>
+                <Typography className={classes.text}>
+                  <EmailIcon color='secondary' className={classes.emailicon}/>
+                  <Typography >Email:info@babyland.com</Typography>
+                </Typography> 
+                <Typography  className={classes.text}>
+                  <PhoneIcon   color='secondary' className={classes.phoneicon}/>
+                  <Typography style={{bottom:'30px', position:'relative'}}>Phone:9824490359</Typography>
+                </Typography>
+                <Typography  className={classes.text}>
+                  <LocationOnIcon  color='secondary' className={classes.addressicon}/>
+                  <Typography style={{position:'relative',bottom:'58px'}}> Address:kathmandu</Typography>
                </Typography>
+              </div>
             </div>
           </div>
           
@@ -78,7 +80,7 @@ const Footer = () =>{
            color:'black',
          },
          Icon:{
-           marginLeft:'6px',
+           marginLeft:'8px',
            color:'secondary',
          },
          connectus:{
@@ -94,6 +96,8 @@ const Footer = () =>{
          contactustext:{
            color:'#000080',
            fontSize:'20px',
+           position:'relative',
+           top:'16px',
          },
          text:{
            color:'black',
@@ -105,6 +109,29 @@ const Footer = () =>{
          },
          blogtext:{
            color:'black',
+         },
+         contactus:{
+           marginTop:'30px',
+           
+         },
+         emailicon:{
+           position:'relative ',
+           top:'29px',
+           right:'29px',
+         },
+         phoneicon:{
+           position:'relative',
+           right:'29px',
+         },
+         addressicon:{
+           position:'relative',
+           right:'29px',
+         },
+         addressicon:{
+           position:'relative',
+           right:'29px',
+           bottom:'27px',
+
          }
 
     }));
