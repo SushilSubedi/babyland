@@ -1,8 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Login from '../Login/Login';
-import Signup from '../Signup/SignUp';
+import Login from './Login/Login';
+import Signup from './Signup/SignUp';
 import {Tabs,Tab,Container} from '@material-ui/core';
 
 function TabPanel(props) {

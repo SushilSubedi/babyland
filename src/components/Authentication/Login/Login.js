@@ -1,7 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link,Fab } from '@material-ui/core';
-import Input from '../../GlobalComponents/Input';
-import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import Input from '../../../GlobalComponents/Input';
 
 const data = [
     {
@@ -14,13 +13,12 @@ const data = [
     }
 ];
 
-
-const SignUp = () =>{
+const Login = () =>{
     const classes = useStyles();
     return(
-        <Box component={Paper} padding="2%"  className={classes.SignupPage}>
+        <Box component={Paper} padding="2%"  className={classes.loginPage}>
             <form className={classes.form} onSubmit={'/'}>
-                <Typography className={classes.Typography1}>Sign up</Typography>
+                <Typography className={classes.Typography1}>Login</Typography>
                 {data.map((items,index) =>{
                     return(<div style={{padding:'7% 0%'}} key={index}>
                                 <Input label={items.label} type={items.type}/>
@@ -28,12 +26,15 @@ const SignUp = () =>{
                         )
                 })}
                 <div className={classes.ButtonLink} style={{display:'flex',justifyContent:'center',padding:'7% 0 0 0'}}>
-                    <Button className={classes.button}>Submit</Button>
+                    <Button className={classes.button}>Login</Button>
+                </div>
+                <div className={classes.ButtonLink}>
+                <Link>Forget your password?</Link>
                 </div>
             </form>
         </Box>
     )
-};
+}
 
 const useStyles = makeStyles(theme =>
     createStyles({
@@ -41,11 +42,12 @@ const useStyles = makeStyles(theme =>
             width:'70%',
             alignSelf:'center'
         },
-        SignupPage: {
+        loginPage: {
             display:'flex',
             justifyContent:'center',
             height:'350px',
-            position:'relative'           
+            position:'relative'
+            
         },
         Typography1: {
             fontSize:'22px',
@@ -68,15 +70,8 @@ const useStyles = makeStyles(theme =>
             justifyContent:'center',
             padding:'4% 0 0 0'
         },
-        icon: {
-            position: "absolute",
-            zIndex: 1,
-            top: '11px',
-            right: '-9%',
-            margin: "0 auto",
-            height:'80px',
-            width:'80px'
-          }
     }))
 
-export default SignUp;    
+
+
+export default Login;
