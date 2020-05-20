@@ -1,19 +1,26 @@
 import React from 'react';
 import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link,Fab } from '@material-ui/core';
-import Input from '../../../GlobalComponents/Input';
+import Input from '../../GlobalComponents/Input';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
-const SignUp = (props) =>{
+const data = [
+    {
+        label: 'Emailaddress',
+        type: 'email'
+    },
+    {
+        label: 'Password',
+        type: 'password'
+    }
+];
+
+
+const SignUp = () =>{
     const classes = useStyles();
-    const { data } = props;
     return(
-        <Container maxWidth= "xs">
         <Box component={Paper} padding="2%"  className={classes.SignupPage}>
-            <div className={classes.icon}> 
-                <CreateOutlinedIcon style={{fontSize:'34px'}}/>
-            </div>
             <form className={classes.form} onSubmit={'/'}>
-                <Typography className={classes.Typography1}>SignUP</Typography>
+                <Typography className={classes.Typography1}>Sign up</Typography>
                 {data.map((items,index) =>{
                     return(<div style={{padding:'7% 0%'}} key={index}>
                                 <Input label={items.label} type={items.type}/>
@@ -23,12 +30,8 @@ const SignUp = (props) =>{
                 <div className={classes.ButtonLink} style={{display:'flex',justifyContent:'center',padding:'7% 0 0 0'}}>
                     <Button className={classes.button}>Submit</Button>
                 </div>
-                <div className={classes.ButtonLink}>
-                    <Link>Forget your password?</Link>
-                </div>
             </form>
         </Box>
-    </Container>
     )
 };
 

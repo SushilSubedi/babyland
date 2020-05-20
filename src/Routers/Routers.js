@@ -3,7 +3,7 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Baby from '../components/Baby/Baby';
 import Shop from '../components/Shop/Shop';
-import Login from '../components/Login/Login';
+import Authentication from '../components/Authentication/Authentication';
 import NavigationBar from '../components/NavigationBar/NavigationBar';
 import { makeStyles, createStyles } from '@material-ui/core'
 
@@ -18,7 +18,7 @@ const Routers = () => {
                 <Route path="/" exact component={Home}/>
                 <Route path="/Baby" component={Baby}/>
                 <Route path="/shop" component={Shop}/>
-                <Route path="/Authentication" component={Login}/>
+                <Route path="/Authentication" component={Authentication}/>
             </Switch>
         </Router>
     )
