@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Container,Paper, makeStyles, createStyles,Typography,Button,Link,Fab } from '@material-ui/core';
+import { Box, Container,Paper, makeStyles, createStyles,Typography,Button } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
-import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 const data = [
     {
@@ -18,7 +17,7 @@ const data = [
 const SignUp = () =>{
     const classes = useStyles();
     return(
-        <Box component={Paper} padding="2%"  className={classes.SignupPage}>
+        <Box component={Paper} padding="2%" className={classes.SignupPage}>
             <form className={classes.form} onSubmit={'/'}>
                 <Typography className={classes.Typography1}>Sign up</Typography>
                 {data.map((items,index) =>{
@@ -27,7 +26,7 @@ const SignUp = () =>{
                         </div>
                         )
                 })}
-                <div className={classes.ButtonLink} style={{display:'flex',justifyContent:'center',padding:'7% 0 0 0'}}>
+                <div className={classes.ButtonLink}>
                     <Button className={classes.button}>Submit</Button>
                 </div>
             </form>
@@ -66,7 +65,7 @@ const useStyles = makeStyles(theme =>
         ButtonLink: {
             display:'flex',
             justifyContent:'center',
-            padding:'4% 0 0 0'
+            padding:'7% 0 0 0'
         },
         icon: {
             position: "absolute",

@@ -4,12 +4,14 @@ import { makeStyles, createStyles } from '@material-ui/core';
 
 const Input = (props) =>{
     const classes = useStyles();
-    const { label,type } = props;
+    const { label,type,value,onChange } = props;
         return(
             <TextField
                 id= "input field"
                 label= {label}
                 type= {type}
+                value={value}
+                onChange={onChange}
                 className={classes.InputField}
                 // variant= "outlined"
             />

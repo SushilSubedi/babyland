@@ -7,7 +7,7 @@ import smile from '../../Asset/smile.png';
 const Connect = () => {
     const classes = useStyles();
     return(
-        <Box component={Paper} elavation= {false} className={classes.connect}>
+        <Box component={Paper} elavation={0} className={classes.connect}>
             <div className={classes.feedback}>
                 <Button className={classes.button}>Feedback here</Button>
             </div>

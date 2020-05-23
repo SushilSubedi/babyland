@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Login from './Login/Login';
 import Signup from './Signup/SignUp';
-import {Tabs,Tab,Container} from '@material-ui/core';
+import { Tabs,Tab,Container } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -17,7 +17,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-          <Typography>{children}</Typography>
+          <Typography component={'div'}>{children}</Typography>
       )}
     </div>
   );
@@ -42,10 +42,10 @@ export default function SimpleTabs() {
                 <Tab label="Signup" />
             </Tabs>
             <TabPanel value={value} index={0}>
-                    <Login/>
+                <Login/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                    <Signup/>
+                <Signup/>
             </TabPanel>
         </Container>  
     </Box>

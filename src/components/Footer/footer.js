@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, makeStyles, createStyles, Typography, Button } from '@material-ui/core';
+import { Box, makeStyles, createStyles, Typography } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -7,7 +7,6 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import EmailIcon from '@material-ui/icons/Email';
 import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import babylogo from '../../components/NavigationBar/logo.png';
 
 
 
