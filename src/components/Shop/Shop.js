@@ -4,7 +4,7 @@ import {} from '@material-ui/core';
 const Shop = () =>{
     return(
         <div>
-            
+            shop
         </div>
     )
 }

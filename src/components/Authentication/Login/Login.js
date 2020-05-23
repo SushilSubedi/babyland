@@ -9,9 +9,10 @@ const Login = (props) =>{
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [isValid,setIsValid] = useState(false);
-    const [emailMessage,setEmailMessage] = useState(null);
-    const [passwordMessage,setPasswordMessage] = useState(null);
+    const [emailMessage,setEmailMessage] = useState('');
+    const [passwordMessage,setPasswordMessage] = useState('');
 
+    
     const handleEmail = (e) =>{
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(e.target.value === ''){
@@ -45,6 +46,13 @@ const Login = (props) =>{
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
             console.log(password,email);
+        }else if(!isValid){
+            setPasswordMessage('Password field is empty');
+            setEmailMessage('Email-address is empty');
+        }else if(emailMessage === ''){
+            setEmailMessage('Email-address is empty');
+        }else if(passwordMessage === ''){
+            setPasswordMessage('Password is empty');
         }
     }
 
