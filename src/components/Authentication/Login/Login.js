@@ -5,44 +5,47 @@ import Input from '../../../GlobalComponents/Input';
 
 const Login = (props) =>{
 
+    const classes = useStyles();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [isValid,setIsValid] = useState(false);
+    const [emailMessage,setEmailMessage] = useState(null);
+    const [passwordMessage,setPasswordMessage] = useState(null);
 
     const handleEmail = (e) =>{
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(e.target.value === ''){
-            setIsValid(true);
-            console.log("email is khali")
-
+            setIsValid(false);
+            setEmailMessage('Email-address field is empty');
         }else if( re.test(e.target.value) ){
-            setEmail(e.target.value);
-            console.log("invalid");
+            setIsValid(true);
+            setEmailMessage(null);
         }else{
             setIsValid(false);
-            console.log("invalid")
+            setEmailMessage('Email-address field is not valid');
         }
-        console.log(e.target.value)
+        setEmail(e.target.value);
     }
 
     const handlePassword = (e) =>{
+
         if(e.target.value === ''){
             setIsValid(false);
-            console.log("password kehi xaina");
-        }else if(e.target.value < 6 && e.target.value > 16 ){
-            setPassword(e.target.value);
+            setPasswordMessage('Password field is empty');
+        }else if(e.target.value.length > 6 && e.target.value.length < 16 ){
             setIsValid(true);
+            setPasswordMessage(null);
         }else{
             setIsValid(false);
-            console.log("password sahi xaina");
+            setPasswordMessage('Password is not valid');
         }
+        setPassword(e.target.value);
     }
 
     const onSubmitHandler = () =>{
-        if(isValid === true){
-            console.log('submited')
+        if(emailMessage === null && passwordMessage === null && isValid === true){
+            console.log(password,email);
         }
-        console.log('error');
     }
 
     const data = [
@@ -50,34 +53,30 @@ const Login = (props) =>{
             label: 'Emailaddress',
             type: 'email',
             value: email,
-            onChange: handleEmail
+            onChange: handleEmail,
+            errorMessage: emailMessage
         },
         {
             label: 'Password',
             type: 'password',
             value: password,
-            onChange: handlePassword
+            onChange: handlePassword,
+            errorMessage: passwordMessage
         }
     ];
 
-
-
-    const classes = useStyles();
     return(
-        <Box component={Paper} padding="2%" elevation={0} className={classes.loginPage}>
-            <form className={classes.form} onSubmit={onSubmitHandler}>
+        <Box component={Paper} padding="2%" className={classes.loginPage}>
+            <form className={classes.form}>
                 <Typography className={classes.Typography1}>Login</Typography>
                 {data.map((items,index) =>{
-                    return(<div style={{padding:'7% 0%'}} key={index}>
-                                <Input label={items.label} type={items.type} value={items.value} onChange={items.onChange} />
-                        </div>
-                        )
+                    return(<Input key={index} label={items.label} type={items.type} value={items.value} onChange={items.onChange} errorMessage={items.errorMessage}/>)
                 })}
                 <div className={classes.ButtonLink}>
-                    <Button className={classes.button}>Submit</Button>
+                    <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
                 </div>
                 <div className={classes.ButtonLink}>
-                <Link>Forget your password?</Link>
+                    <Link>Forget your password?</Link>
                 </div>
             </form>
         </Box>

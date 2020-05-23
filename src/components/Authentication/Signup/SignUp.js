@@ -18,7 +18,7 @@ const SignUp = () =>{
     const classes = useStyles();
     return(
         <Box component={Paper} padding="2%" className={classes.SignupPage}>
-            <form className={classes.form} onSubmit={'/'}>
+            <form className={classes.form} onSubmit={()=>{}}>
                 <Typography className={classes.Typography1}>Sign up</Typography>
                 {data.map((items,index) =>{
                     return(<div style={{padding:'7% 0%'}} key={index}>
