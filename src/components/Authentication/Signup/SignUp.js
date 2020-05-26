@@ -3,6 +3,7 @@ import { Box,Paper, makeStyles, createStyles,Typography,Button } from '@material
 import Input from '../../../GlobalComponents/Input';
 
 const SignUp = (props) =>{
+    
     const classes = useStyles();
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -43,7 +44,7 @@ const SignUp = (props) =>{
 
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
-            console.log(password,email);
+            console.log("hey there on submit button on process!")
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');
