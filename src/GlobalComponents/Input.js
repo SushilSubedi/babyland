@@ -1,18 +1,23 @@
  import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, createStyles } from '@material-ui/core';
+import { makeStyles, createStyles,Typography } from '@material-ui/core';
 
 const Input = (props) =>{
     const classes = useStyles();
-    const { label,type } = props;
+    const { label,type,value,onChange,errorMessage } = props;
         return(
-            <TextField
-                id= "input field"
-                label= {label}
-                type= {type}
-                className={classes.InputField}
-                // variant= "outlined"
-            />
+            <div style={{padding:'6% 0%'}}>
+                <TextField
+                    id= "input field"
+                    label= {label}
+                    type= {type}
+                    value={value}
+                    onChange={onChange}
+                    className={classes.InputField}
+                    // variant= "outlined"
+                />
+                <Typography className={classes.Typography}>{errorMessage}</Typography>
+            </div>
         )
 }
 
@@ -21,6 +26,10 @@ const useStyles = makeStyles(theme =>
         InputField: {
             width: '100%',
             height: '50px'
+        },
+        Typography: {
+            fontSize: '12px',
+            color:'red'
         }
     }))
 

@@ -9,14 +9,15 @@ return(
     <Box component={Paper} className={classes.card} >
         <div style={{marginRight:'auto',marginLeft:'auto',textAlign:'center'}}>
              <img src={imgSrc}  className={classes.img} alt="mother text"/> 
-            <Typography variant="h5">
+            <Typography variant="h5" component={'div'}>
                 <Box
-                    fontWeight= {500}
+                    fontWeight={500}
                     fontSize={22}
-                    style={{textTransform:"capitalize",
-                    paddingTop:'5px',
-                    paddingBottom:'15px',
-                    color:'#00669b',
+                    style={{
+                        textTransform:"capitalize",
+                        paddingTop:'5px',
+                        paddingBottom:'15px',
+                        color:'#00669b',
                     
                     }}
                 >
@@ -28,11 +29,11 @@ return(
                     fontWeight= {300}
                     fontSize={15}
                     style={{
-                    paddingTop:'8px',
-                    paddingBottom:'3px',
-                    color:'balck,',
-                    position:'relative',
-                    bottom:'15px',
+                        paddingTop:'8px',
+                        paddingBottom:'3px',
+                        color:'balck,',
+                        position:'relative',
+                        bottom:'15px',
                     }}
                     
                 >

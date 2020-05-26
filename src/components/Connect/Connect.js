@@ -19,8 +19,7 @@ const Connect = (props) => {
     const classes = useStyles();
     
     return(
-        
-        <Box component={Paper} elavation= {false} className={classes.connect}>
+        <Box component={Paper} elavation={0} className={classes.connect}>
             <div className={classes.feedback}>
                 <Button  onClick={handleOpen}  className={classes.button}>Feedback here</Button>
                 
@@ -48,7 +47,8 @@ const useStyles = makeStyles(theme =>
             padding:'2%',
             justifyContent:'space-between'
         },
-        Typography1: {
+        Typography1:{
+        
             fontSize:'22px',
             fontFamily:'inherit',
             fontWeight:'500',
