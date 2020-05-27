@@ -1,7 +1,7 @@
 import React,{ useState } from 'react';
 import { Box,Paper, makeStyles, createStyles,Typography,Button,Link } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
-
+import fire from '../../../config/fire';
 
 const Login = (props) =>{
 
@@ -45,7 +45,14 @@ const Login = (props) =>{
 
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
-            console.log(password,email);
+            fire.auth().signInWithEmailAndPassword(email, password).then(message =>{
+                console.log("login",message);
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+              });
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');

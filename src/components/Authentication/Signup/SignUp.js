@@ -1,6 +1,11 @@
 import React,{useState} from 'react';
 import { Box,Paper, makeStyles, createStyles,Typography,Button } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
+// import fire from '../../../config/fire';
+import { useDispatch } from 'react-redux';
+import { auth,setAuthRedirectPath } from '../AuthRedux/action';
+
+
 
 const SignUp = (props) =>{
     
@@ -10,8 +15,22 @@ const SignUp = (props) =>{
     const [isValid,setIsValid] = useState(false);
     const [emailMessage,setEmailMessage] = useState('');
     const [passwordMessage,setPasswordMessage] = useState('');
+    const [nameMessage,setNameMessage] = useState('');
+    const [name,setName] = useState('');
 
+    const dispatch = useDispatch();
     
+
+    const handleName = (e) => {
+        if(e.target.value === ''){
+            setIsValid(false);
+            setNameMessage('Name field is empty');
+        }else{
+            setNameMessage(null);
+        }
+        setName(e.target.value);
+    }
+
     const handleEmail = (e) =>{
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(e.target.value === ''){
@@ -43,11 +62,13 @@ const SignUp = (props) =>{
     }
 
     const onSubmitHandler = () =>{
-        if(emailMessage === null && passwordMessage === null && isValid === true){
-            console.log("hey there on submit button on process!")
+        if(emailMessage === null && passwordMessage === null && isValid === true && nameMessage === null){
+          dispatch(auth(email,password,name));
+
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');
+            setNameMessage('Name is empty');
         }else if(emailMessage === ''){
             setEmailMessage('Email-address is empty');
         }else if(passwordMessage === ''){
@@ -56,6 +77,13 @@ const SignUp = (props) =>{
     }
 
     const data = [
+        {
+            label:'Name',
+            type:'text',
+            value: name,
+            onChange: handleName,
+            errorMessage: nameMessage
+        },
         {
             label: 'Emailaddress',
             type: 'email',
@@ -101,7 +129,7 @@ const useStyles = makeStyles(theme =>
         SignupPage: {
             display:'flex',
             justifyContent:'center',
-            height:'350px',
+            height:'390px',
             position:'relative'           
         },
         Typography1: {
