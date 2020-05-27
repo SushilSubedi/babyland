@@ -18,15 +18,7 @@ const Footer = () =>{
           <div className={classes.blog} >
             <babylogo/>
             <Typography  className={classes.bloghead}>Babyland.com</Typography>
-            <Typography className={classes.blogtext}>We aim to provide the best of the products and<br/> 
-              brands at the most reasonable prices with the<br/> 
-               unforgettable online shopping experience, and <br/>
-               prompt customer service. We have set a benchmark <br/>
-               to provide  our customers with a virtual physical <br/>
-               store's shopping experience; online, without the <br/>
-               trouble of moving around the city  heavy traffic <br/>
-               and locating stores that may or may not meet your <br/>
-               requirements at the end of the day. </Typography>
+            <Typography className={classes.blogtext}>We aim to provide the best of the products and brands at the most reasonable prices with the unforgettable online shopping experience, and prompt customer service. We have set a benchmark to provide customers with a virtual physical store's shopping experience; online, without the trouble of moving around the city  heavy traffic and locating stores that may or may not meet your requirements at the end of the day. </Typography>
           </div>
           <div className={classes.copyright}>
             Copyright 2020 Babyland.com
@@ -108,6 +100,7 @@ const Footer = () =>{
          },
          blogtext:{
            color:'black',
+           width:'400px',
          },
          contactus:{
            marginTop:'30px',
