@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState } from 'react';
 import { Box,Paper, makeStyles, createStyles,Typography,Button } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
 // import fire from '../../../config/fire';
@@ -10,16 +10,16 @@ import { auth,setAuthRedirectPath } from '../AuthRedux/action';
 const SignUp = (props) =>{
     
     const classes = useStyles();
+    const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [isValid,setIsValid] = useState(false);
+
     const [emailMessage,setEmailMessage] = useState('');
     const [passwordMessage,setPasswordMessage] = useState('');
     const [nameMessage,setNameMessage] = useState('');
-    const [name,setName] = useState('');
 
     const dispatch = useDispatch();
-    
 
     const handleName = (e) => {
         if(e.target.value === ''){
@@ -61,10 +61,13 @@ const SignUp = (props) =>{
         setPassword(e.target.value);
     }
 
+
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true && nameMessage === null){
-          dispatch(auth(email,password,name));
-
+            dispatch(auth(email,password,name));
+            setName('');
+            setEmail('');
+            setPassword('');
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');
@@ -108,6 +111,7 @@ const SignUp = (props) =>{
                                 key={index}
                                 label={items.label} 
                                 type={items.type} 
+                                value={items.value}
                                 onChange={items.onChange} 
                                 errorMessage={items.errorMessage}
                             />)

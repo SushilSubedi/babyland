@@ -44,18 +44,17 @@ export const checkAuthLogout = () =>{
     }
 };
 
-export const auth = (email,password,name) => dispatch =>  {
+export const auth = (email,password,name) => {
    return dispatch =>{
     fire.auth().createUserWithEmailAndPassword(email, password).then(result =>{
         result.user.updateProfile({
             displayName: name
         })
-        console.log(result);
         localStorage.setItem('token',result.user.refreshToken);
         localStorage.setItem('user',result.user.displayName);
         localStorage.setItem('userID',result.user.uid);
         dispatch(authSuccess(name,result.user.uid,result.user.refreshToken));
-        dispatch(checkAuthLogout());
+        // dispatch(checkAuthLogout());
     }).catch(function(error) {
         // // Handle Errors here.
         // var errorCode = error.code;
@@ -76,10 +75,11 @@ export const setAuthRedirectPath = (path) =>{
 export const authCheckState = () =>{
     return dispatch =>{
         const token = localStorage.getItem('token');
+        const user =localStorage.getItem('user');
+        console.log(token);
         if(!token){
             dispatch(logout());
         } else {
-            const user =localStorage.getItem('user');
             const userID = localStorage.getItem('userID');
             dispatch(authSuccess(token,userID,user));
             dispatch(checkAuthLogout());

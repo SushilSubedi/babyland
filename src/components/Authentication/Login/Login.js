@@ -45,14 +45,16 @@ const Login = (props) =>{
 
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
-            fire.auth().signInWithEmailAndPassword(email, password).then(message =>{
-                console.log("login",message);
-            }).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-              });
+            // fire.auth().signInWithEmailAndPassword(email, password).then(message =>{
+            //     console.log("login",message);
+            // }).catch(function(error) {
+            //     // Handle Errors here.
+            //     var errorCode = error.code;
+            //     var errorMessage = error.message;
+            //     // ...
+            //   });
+            setEmail('');
+            setPassword('');
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');

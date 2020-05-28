@@ -3,13 +3,13 @@ import * as actionType from './action';
 const initialState = {
     loading:false,
     user:'',
+    userID:'',
     error:'',
     refreshToken:'',
-    authRedirectPath:'/',
-    userID:''
+    authRedirectPath:'/'
 }
 
-const reducer = (state= initialState,action) =>{
+const reducer = (state = initialState,action) =>{
     switch(action.type){
         case actionType.AUTH_START:
             return{
@@ -31,17 +31,17 @@ const reducer = (state= initialState,action) =>{
                 error: action.error,
                 loading:false
             }
-            case actionType.AUTH_LOGOUT:
-                return{
-                    ...state,
-                    refreshToken:null,
-                    user:null
-                }
-            case actionType.SET_AUTH_REDIRECT:
-                return{
-                    ...state,
-                    authRedirectPath:action.path
-                }    
+        case actionType.AUTH_LOGOUT:
+            return{
+                ...state,
+                refreshToken:null,
+                user:null
+            }
+        case actionType.SET_AUTH_REDIRECT:
+            return{
+                ...state,
+                authRedirectPath:action.path
+            }    
         default:
             return state            
     }
