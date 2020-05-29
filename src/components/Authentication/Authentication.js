@@ -1,9 +1,10 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import React,{useState} from "react";
 import Login from './Login/Login';
 import Signup from './Signup/SignUp';
-import { Tabs,Tab,Container } from '@material-ui/core';
+import { Tabs,Tab,Container,Box,Typography,Snackbar } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Alert } from '@material-ui/lab';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,16 +24,24 @@ function TabPanel(props) {
   );
 }
 
-export default function SimpleTabs() {
-  const [value, setValue] = React.useState(0);
+export default function SimpleTabs(props) {
 
+  const [value, setValue] = React.useState(0);
+  const [open,setOpen] = useState(true);
+
+  const error = useSelector(state => state.AuthRedux.error);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  let errorMessage = null;
+  if(error){
+    errorMessage = (<Snackbar open={open} onClose={()=>setOpen(false)} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={4000}><Alert variant="filled" severity="error">{error}</Alert></Snackbar>)
+  }
 
   return (
     <Box padding="8% 0 0 0">
         <Container maxWidth= "xs">
+            {errorMessage}
             <Tabs
                 value={value}
                 onChange={handleChange}

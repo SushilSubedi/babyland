@@ -1,13 +1,20 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import {makeStyles, createStyles,Button,AppBar,Toolbar,fade } from '@material-ui/core';
 import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+<<<<<<< HEAD
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+=======
+import { useSelector } from 'react-redux';
+>>>>>>> dabd23a322205c4a5febcd5e38fa5fb60c852ca1
 
-const NavigationBar = () =>{
+
+const NavigationBar = (props) =>{
     const classes = useStyles();
+    const token = useSelector(state => state.AuthRedux.refreshToken !== null);
+
 return(
       <AppBar position="fixed" color="primary" elevation={0}>
         <div className={classes.navBar}>
@@ -15,7 +22,7 @@ return(
             <div style={{paddingRight:'9%'}}>
               <Link to={'/'}><img src={logo} alt="logo" className={classes.logo} /></Link>
             </div>
-            <Link to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
+            <Link  to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
             <Link to ={'/Shop'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Shop</Button></Link> 
             <Link to ={'/Baby'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Baby</Button></Link>
             
@@ -36,7 +43,7 @@ return(
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link>
+          {token ? <Link to ='/logout' style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Logout</Button></Link> : <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link> } 
             {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
 
             <Link to ={'/Cart'}> <Button  classes={{text:classes.text}}> <ShoppingCartIcon fontSize= "large"  /> </Button>  </Link> 

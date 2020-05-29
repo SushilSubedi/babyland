@@ -24,7 +24,7 @@ return(
                     {name}
                 </Box>
             </Typography>
-            <Typography>
+            <Typography component={'div'}>
                 <Box
                     fontWeight= {300}
                     fontSize={15}
