@@ -4,6 +4,7 @@ import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const NavigationBar = () =>{
     const classes = useStyles();
@@ -17,7 +18,9 @@ return(
             <Link to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
             <Link to ={'/Shop'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Shop</Button></Link> 
             <Link to ={'/Baby'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Baby</Button></Link>
+            
             {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}
+          
           </Toolbar>
           <div style={{display:'flex'}}>
             <div className={classes.search}>
@@ -35,6 +38,8 @@ return(
             </div>
             <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link>
             {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
+
+            <Link to ={'/Cart'}> <Button  classes={{text:classes.text}}> <ShoppingCartIcon fontSize= "large"  /> </Button>  </Link> 
           </div>
         </div>
       </AppBar>
