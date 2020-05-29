@@ -1,11 +1,11 @@
 import * as actionType from './action';
 
 const initialState = {
-    loading:false,
+    loading: false,
     user:'',
     userID:'',
     error:'',
-    refreshToken:'',
+    refreshToken: null,
     authRedirectPath:'/'
 }
 

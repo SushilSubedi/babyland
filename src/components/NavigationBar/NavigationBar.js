@@ -4,28 +4,12 @@ import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import fire from '../../config/fire';
+import { useSelector } from 'react-redux';
 
-const NavigationBar = () =>{
+
+const NavigationBar = (props) =>{
     const classes = useStyles();
-    const [user,setUser] = useState(null);
-
-
-// useEffect(()=>{
-//   authListener();
-// },[user]);
-
-
-// const authListener = () => {
-//   fire.auth().onAuthStateChanged((user) => {
-//     if(user){
-//       setUser(user);
-//       console.log("logname",user.displayName);
-//     }else{
-//       setUser(null);
-//     }
-//   })
-// };
+    const token = useSelector(state => state.AuthRedux.refreshToken !== null);
 
 return(
       <AppBar position="fixed" color="primary" elevation={0}>
@@ -53,7 +37,7 @@ return(
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-          {user ? <Link to ='/logout' style={{textDecoration:'none'}}>Logout</Link> : <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link> } 
+          {token ? <Link to ='/logout' style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Logout</Button></Link> : <Link to ={'/Authentication'} style={{textDecoration:'none'}}><Button  classes={{text:classes.text}}>Login | Register</Button></Link> } 
             {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
           </div>
         </div>

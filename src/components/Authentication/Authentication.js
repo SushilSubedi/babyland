@@ -27,6 +27,7 @@ function TabPanel(props) {
 export default function SimpleTabs(props) {
 
   const [value, setValue] = React.useState(0);
+  const [open,setOpen] = useState(true);
 
   const error = useSelector(state => state.AuthRedux.error);
   const handleChange = (event, newValue) => {
@@ -34,7 +35,7 @@ export default function SimpleTabs(props) {
   };
   let errorMessage = null;
   if(error){
-    errorMessage = (<Snackbar anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={4000}><Alert variant="filled" severity="error">{error}</Alert></Snackbar>)
+    errorMessage = (<Snackbar open={open} onClose={()=>setOpen(false)} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={4000}><Alert variant="filled" severity="error">{error}</Alert></Snackbar>)
   }
 
   return (
