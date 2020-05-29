@@ -1,7 +1,8 @@
 import React,{ useState } from 'react';
 import { Box,Paper, makeStyles, createStyles,Typography,Button,Link } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
-import fire from '../../../config/fire';
+import { useDispatch } from 'react-redux';
+import { authLogin } from '../AuthRedux/action';
 
 const Login = (props) =>{
 
@@ -12,7 +13,8 @@ const Login = (props) =>{
     const [emailMessage,setEmailMessage] = useState('');
     const [passwordMessage,setPasswordMessage] = useState('');
 
-    
+    const dispatch = useDispatch();
+
     const handleEmail = (e) =>{
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(e.target.value === ''){
@@ -45,16 +47,7 @@ const Login = (props) =>{
 
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
-            // fire.auth().signInWithEmailAndPassword(email, password).then(message =>{
-            //     console.log("login",message);
-            // }).catch(function(error) {
-            //     // Handle Errors here.
-            //     var errorCode = error.code;
-            //     var errorMessage = error.message;
-            //     // ...
-            //   });
-            setEmail('');
-            setPassword('');
+            dispatch(authLogin(email,password));
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');
@@ -63,6 +56,8 @@ const Login = (props) =>{
         }else if(passwordMessage === ''){
             setPasswordMessage('Password is empty');
         }
+        setEmail('');
+        setPassword('');
     }
 
     const data = [

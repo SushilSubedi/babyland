@@ -1,7 +1,7 @@
 import React,{useState}from 'react';
 import { Box,Paper,Button,createStyles,makeStyles,Typography } from '@material-ui/core';
 import smile from '../../Asset/smile.png';
-import FeedbackDialog from '../FeedbackDialog/FeedbackDialog';
+import FeedbackDialog from './FeedbackDialog/FeedbackDialog';
 
 // import TextField from '@material-ui/core/TextField
 const Connect = (props) => {
@@ -48,7 +48,6 @@ const useStyles = makeStyles(theme =>
             justifyContent:'space-between'
         },
         Typography1:{
-        
             fontSize:'22px',
             fontFamily:'inherit',
             fontWeight:'500',

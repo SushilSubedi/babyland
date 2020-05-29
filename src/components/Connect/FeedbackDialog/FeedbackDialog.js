@@ -1,13 +1,14 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles, createStyles, Typography, IconButton} from '@material-ui/core';
+import { 
+  makeStyles,
+  createStyles, 
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  TextField,Button
+} from '@material-ui/core';
+// import { EmailIcon,SubjectIcon,ChatBubbleIcon } from '@material-ui/icons'
 import EmailIcon from '@material-ui/icons/Email';
 import SubjectIcon from '@material-ui/icons/Subject';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';

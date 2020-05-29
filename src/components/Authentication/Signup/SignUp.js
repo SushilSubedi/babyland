@@ -1,10 +1,10 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { Box,Paper, makeStyles, createStyles,Typography,Button } from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
 // import fire from '../../../config/fire';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { auth,setAuthRedirectPath } from '../AuthRedux/action';
-
+import Loader from '../../../GlobalComponents/Loader';
 
 
 const SignUp = (props) =>{
@@ -20,6 +20,13 @@ const SignUp = (props) =>{
     const [nameMessage,setNameMessage] = useState('');
 
     const dispatch = useDispatch();
+
+   const loading = useSelector(state => state.AuthRedux.loading);
+
+    useEffect(()=>{
+        console.log(loading);
+    },[loading])
+
 
     const handleName = (e) => {
         if(e.target.value === ''){
@@ -102,24 +109,33 @@ const SignUp = (props) =>{
             errorMessage: passwordMessage
         }
     ];
+
+    let form = (
+        <form className={classes.form}>
+        <Typography className={classes.Typography1}>Sign up</Typography>
+        {data.map((items,index) =>{
+            return(<Input
+                        key={index}
+                        label={items.label} 
+                        type={items.type} 
+                        value={items.value}
+                        onChange={items.onChange} 
+                        errorMessage={items.errorMessage}
+                    />)
+        })}
+        <div className={classes.ButtonLink}>
+            <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
+        </div>
+    </form>
+    );
+
+    if(loading) {
+      form = <Loader/>
+    };
+
     return(
         <Box component={Paper} padding="2%" className={classes.SignupPage}>
-            <form className={classes.form}>
-                <Typography className={classes.Typography1}>Sign up</Typography>
-                {data.map((items,index) =>{
-                    return(<Input
-                                key={index}
-                                label={items.label} 
-                                type={items.type} 
-                                value={items.value}
-                                onChange={items.onChange} 
-                                errorMessage={items.errorMessage}
-                            />)
-                })}
-                <div className={classes.ButtonLink}>
-                    <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
-                </div>
-            </form>
+            {form}
         </Box>
     )
 };

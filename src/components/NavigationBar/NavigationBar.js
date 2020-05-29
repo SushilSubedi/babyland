@@ -34,7 +34,7 @@ return(
             <div style={{paddingRight:'9%'}}>
               <Link to={'/'}><img src={logo} alt="logo" className={classes.logo} /></Link>
             </div>
-            <Link to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
+            <Link  to ={'/'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Home</Button></Link>
             <Link to ={'/Shop'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Shop</Button></Link> 
             <Link to ={'/Baby'} style={{textDecoration:'none'}}><Button classes={{text:classes.text}}>Baby</Button></Link>
             {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}

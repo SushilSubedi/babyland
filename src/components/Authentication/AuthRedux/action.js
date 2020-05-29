@@ -44,8 +44,11 @@ export const checkAuthLogout = () =>{
     }
 };
 
+
+//SignUp
 export const auth = (email,password,name) => {
    return dispatch =>{
+    dispatch(authStart());
     fire.auth().createUserWithEmailAndPassword(email, password).then(result =>{
         result.user.updateProfile({
             displayName: name
@@ -64,6 +67,22 @@ export const auth = (email,password,name) => {
       });
    }
 }
+
+export const authLogin = (email,password) => {
+    return dispatch =>{
+        dispatch(authStart());
+        fire.auth().signInWithEmailAndPassword(email, password).then(result=>{
+            console.log("login",result);
+            localStorage.setItem('token',result.user.refreshToken);
+            localStorage.setItem('user',result.user.displayName);
+            localStorage.setItem('userID',result.user.uid);
+            dispatch(authSuccess(result.user.displayName,result.user.uid,result.user.refreshToken));
+        }).catch(function(error) {
+            dispatch(authFail(error.message));
+          });
+         // dispatch(checkAuthLogout());
+    }
+ }
 
 export const setAuthRedirectPath = (path) =>{
     return{
