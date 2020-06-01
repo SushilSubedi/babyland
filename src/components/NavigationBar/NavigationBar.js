@@ -4,11 +4,8 @@ import logo from './logo.png';
 import { Link } from 'react-router-dom';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-<<<<<<< HEAD
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-=======
 import { useSelector } from 'react-redux';
->>>>>>> dabd23a322205c4a5febcd5e38fa5fb60c852ca1
 
 
 const NavigationBar = (props) =>{

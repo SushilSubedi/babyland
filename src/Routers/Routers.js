@@ -21,11 +21,8 @@ const Routers = () => {
                 <Route path="/Baby" component={Baby}/>
                 <Route path="/shop" component={Shop}/>
                 <Route path="/Authentication" component={Authentication}/>
-<<<<<<< HEAD
                 <Route path="/Cart" component={Cart}/>
-=======
                 <Route path ='/logout' component={Logout}/>
->>>>>>> dabd23a322205c4a5febcd5e38fa5fb60c852ca1
             </Switch>
         </Router>
     )
