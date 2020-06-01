@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import smile from "../../Asset/smile.png";
-import FeedbackDialog from "../FeedbackDialog/FeedbackDialog";
+import FeedbackDialog from "./FeedbackDialog/FeedbackDialog";
 
 // import TextField from '@material-ui/core/TextField
 const Connect = (props) => {
@@ -48,7 +48,6 @@ const Connect = (props) => {
     </Box>
   );
 };
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     connect: {
@@ -86,5 +85,3 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-
-export default Connect;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/components/FeedbackDialog/FeedbackDialog.js
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -12,6 +13,22 @@ import {
   Typography,
   IconButton,
 } from "@material-ui/core";
+=======
+import React from 'react';
+import { 
+  makeStyles,
+  createStyles, 
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  TextField,Button
+} from '@material-ui/core';
+// import { EmailIcon,SubjectIcon,ChatBubbleIcon } from '@material-ui/icons'
+import EmailIcon from '@material-ui/icons/Email';
+import SubjectIcon from '@material-ui/icons/Subject';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+>>>>>>> c10cb619932e1a49d849bba2769cbfb9a7fee962:src/components/Connect/FeedbackDialog/FeedbackDialog.js
 
 import EmailIcon from "@material-ui/icons/Email";
 import SubjectIcon from "@material-ui/icons/Subject";

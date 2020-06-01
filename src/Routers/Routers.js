@@ -6,7 +6,8 @@ import Shop from "../components/Shop/Shop";
 import Authentication from "../components/Authentication/Authentication";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
-import Dropdown from "../components/Dropdown/Dropdown";
+import Cart from "../components/Cart/Cart";
+import Logout from "../Logout/logout";
 
 const Routers = () => {
   const classes = useStyles();
@@ -20,7 +21,8 @@ const Routers = () => {
         <Route path="/Baby" component={Baby} />
         <Route path="/shop" component={Shop} />
         <Route path="/Authentication" component={Authentication} />
-        {/* <Route path="/Dropdown" component={Dropdown} /> */}
+        <Route path="/Cart" component={Cart} />
+        <Route path="/logout" component={Logout} />
       </Switch>
     </Router>
   );

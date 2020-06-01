@@ -1,6 +1,8 @@
-import React from 'react';
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
+import AuthRedux from '../components/Authentication/AuthRedux/AuthRedux';
 
-export default combineReducers({
-
+const rootReducer = combineReducers({
+AuthRedux
 });
+
+export default rootReducer;
