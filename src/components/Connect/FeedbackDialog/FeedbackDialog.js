@@ -1,108 +1,76 @@
-<<<<<<< HEAD:src/components/FeedbackDialog/FeedbackDialog.js
 import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import {
   makeStyles,
   createStyles,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
-=======
-import React from 'react';
-import { 
-  makeStyles,
-  createStyles, 
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  TextField,Button
-} from '@material-ui/core';
-// import { EmailIcon,SubjectIcon,ChatBubbleIcon } from '@material-ui/icons'
-import EmailIcon from '@material-ui/icons/Email';
-import SubjectIcon from '@material-ui/icons/Subject';
-import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
->>>>>>> c10cb619932e1a49d849bba2769cbfb9a7fee962:src/components/Connect/FeedbackDialog/FeedbackDialog.js
-
-import EmailIcon from "@material-ui/icons/Email";
-import SubjectIcon from "@material-ui/icons/Subject";
-import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
+  TextField,
+  Button,
+} from "@material-ui/core";
 
 const FeedbackDialog = (props) => {
   const { open, handleClose } = props;
   const classes = useStyles();
   return (
-    <form className={classes.dailogbox}>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        {/* <div className={classes.feedbacktext}> 
-            <DialogTitle id="form-dialog-title">Feedback</DialogTitle>
-        </div> */}
-        <DialogContent>
-          <div>
-            <DialogContentText className={classes.Dialoghead}>
-              Please give feedback for the greater good of the babies.
-            </DialogContentText>
-          </div>
-          <div className={classes.inputfield}>
-            <div className={classes.emailbox}>
-              <TextField
-                autoFocus
-                inputProps={{ className: classes.emailbox }}
-                label={<EmailIcon />}
-                margin="dense"
-                id="name"
-                placeholder="Email Address"
-                type="email"
-                variant="outlined"
-              />
-            </div>
-            <div className={classes.subjectbox}>
-              <TextField
-                inputProps={{ className: classes.subjectbox }}
-                autoFocus
-                margin="dense"
-                id="name"
-                placeholder="Subject"
-                label={<SubjectIcon />}
-                type="text"
-                variant="outlined"
-              />
-            </div>
-            <div className={classes.commentbox}>
-              <TextField
-                label={<ChatBubbleIcon />}
-                inputProps={{ className: classes.commentbox }}
-                placeholder="Comment"
-                autoFocus
-                margin="dense"
-                id="name"
-                placeholder="Comment"
-                type="text"
-                variant="outlined"
-              />
-            </div>
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button className={classes.cancelbutton} onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button className={classes.submitbutton} onClick={handleClose}>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </form>
+    <Dialog
+      className={classes.Dialog}
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogContentText className={classes.Dialoghead}>
+        Please give feedback for the greater good of the babies.
+      </DialogContentText>
+      <form className={classes.inputfield}>
+        <div className={classes.emailbox}>
+          <TextField
+            autoFocus
+            inputProps={{ className: classes.emailbox }}
+            label="Email Address"
+            margin="dense"
+            id="name"
+            placeholder="Email Address"
+            type="email"
+            variant="outlined"
+          />
+        </div>
+        <div className={classes.subjectbox}>
+          <TextField
+            inputProps={{ className: classes.subjectbox }}
+            autoFocus
+            margin="dense"
+            id="name"
+            placeholder="Subject"
+            label="Subject"
+            type="text"
+            variant="outlined"
+          />
+        </div>
+        <div className={classes.commentbox}>
+          <TextField
+            inputProps={{ className: classes.commentbox }}
+            autoFocus
+            placeholder="Comment"
+            margin="dense"
+            id="name"
+            label="Comment"
+            type="text"
+            variant="outlined"
+          />
+        </div>
+      </form>
+
+      <DialogActions>
+        <Button className={classes.cancelbutton} onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button className={classes.submitbutton} onClick={handleClose}>
+          Submit
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
@@ -116,19 +84,18 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: "white",
       color: "black",
       position: "relative",
-      right: "30px",
+      right: "90px",
       borderRadius: "8px",
       "&:hover": {
         backgroundColor: "#E2F3F0",
       },
     },
-
     submitbutton: {
       textTransform: "initial",
       fontSize: "16px",
       backgroundColor: "hotpink",
       position: "relative",
-      right: "10px",
+      right: "75px",
       borderRadius: "8px",
       "&:hover": {
         backgroundColor: "#fc03d7",
@@ -137,10 +104,13 @@ const useStyles = makeStyles((theme) =>
     Dialoghead: {
       color: "#00669b",
       fontSize: "20px",
+      marginTop: "20px",
+      marginLeft: "10px",
+      marginRight: "10px",
     },
     commentbox: {
       width: "300px",
-      height: "80px",
+      height: "60px",
       textAlign: "center",
     },
     subjectbox: {
@@ -152,36 +122,14 @@ const useStyles = makeStyles((theme) =>
       textAlign: "center",
     },
 
-    feedbacktext: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
     inputfield: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-around",
       alignItems: "center",
-      height: "260px",
-      width: "500px",
-      marginLeft: "20px",
-      marginTop: "10px",
-    },
-
-    emailicon: {
-      position: "absolute",
-      left: "90px",
-    },
-    subjecticon: {
-      position: "absolute",
-      left: "90px",
-    },
-    messageicon: {
-      position: "absolute",
-      left: "90px",
-    },
-    placeholder: {
-      alignItems: "center",
+      height: "200px",
+      paddingTop: "20px",
+      paddingBottom: "41px",
     },
   })
 );
