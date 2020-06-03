@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   makeStyles,
   createStyles,
@@ -9,10 +9,46 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import Input from "../../../GlobalComponents/Input";
 
 const FeedbackDialog = (props) => {
+  const [email, setEmail] = useState("");
+  const [isValid, setIsValid] = useState(false);
+  const [emailMessage, setEmailMessage] = useState("");
   const { open, handleClose } = props;
   const classes = useStyles();
+
+  const handleEmail = (e) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (e.target.value === "") {
+      setIsValid(false);
+      setEmailMessage("Email-address field is empty");
+    } else if (re.test(e.target.value)) {
+      setIsValid(true);
+      setEmailMessage(null);
+    } else {
+      setIsValid(false);
+      setEmailMessage("Email-address field is not valid");
+    }
+    setEmail(e.target.value);
+  };
+  const onSubmitHandler = () => {
+    if (emailMessage === null && isValid === true) {
+    } else if (!isValid) {
+      setEmailMessage("Email-address is empty");
+    } else if (emailMessage === "") {
+      setEmailMessage("Email-address is empty");
+    }
+  };
+  const data = [
+    {
+      label: "Emailaddress",
+      type: "email",
+      value: email,
+      onChange: handleEmail,
+      errorMessage: emailMessage,
+    },
+  ];
   return (
     <Dialog
       className={classes.Dialog}
@@ -25,16 +61,22 @@ const FeedbackDialog = (props) => {
       </DialogContentText>
       <form className={classes.inputfield}>
         <div className={classes.emailbox}>
-          <TextField
-            autoFocus
-            inputProps={{ className: classes.emailbox }}
-            label="Email Address"
-            margin="dense"
-            id="name"
-            placeholder="Email Address"
-            type="email"
-            variant="outlined"
-          />
+          {data.map((items, index) => {
+            return (
+              <TextField
+                autoFocus
+                inputProps={{ className: classes.emailbox }}
+                label="Email Address"
+                margin="dense"
+                id="name"
+                placeholder="Email Address"
+                type="email"
+                variant="outlined"
+                onChange={items.onChange}
+                errorMessage={items.errorMessage}
+              />
+            );
+          })}
         </div>
         <div className={classes.subjectbox}>
           <TextField
@@ -66,7 +108,7 @@ const FeedbackDialog = (props) => {
         <Button className={classes.cancelbutton} onClick={handleClose}>
           Cancel
         </Button>
-        <Button className={classes.submitbutton} onClick={handleClose}>
+        <Button className={classes.submitbutton} onClick={onSubmitHandler}>
           Submit
         </Button>
       </DialogActions>
