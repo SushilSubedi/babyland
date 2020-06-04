@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Baby from "../components/Baby/Baby";
 import Shop from "../components/Shop/Shop";
@@ -8,6 +8,7 @@ import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
 import Cart from "../components/Cart/Cart";
 import Logout from "../Logout/logout";
+import Account from "../components/Account/Account";
 
 const Routers = () => {
   const classes = useStyles();
@@ -23,6 +24,8 @@ const Routers = () => {
         <Route path="/Authentication" component={Authentication} />
         <Route path="/Cart" component={Cart} />
         <Route path="/logout" component={Logout} />
+        <Route path ='/Account' component={Account}/>
+        <Redirect to='/' />
       </Switch>
     </Router>
   );

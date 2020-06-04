@@ -62,7 +62,7 @@ const SignUp = (props) =>{
         if(e.target.value === ''){
             setIsValid(false);
             setPasswordMessage('Password field is empty');
-        }else if(e.target.value.length > 6 && e.target.value.length < 16 ){
+        }else if(e.target.value.length > 5 && e.target.value.length < 16 ){
             setIsValid(true);
             setPasswordMessage(null);
         }else{
@@ -96,7 +96,7 @@ const SignUp = (props) =>{
             type:'text',
             value: name,
             onChange: handleName,
-            errorMessage: nameMessage
+            errorMessage: nameMessage,
         },
         {
             label: 'Emailaddress',

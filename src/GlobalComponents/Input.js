@@ -4,7 +4,7 @@ import { makeStyles, createStyles,Typography } from '@material-ui/core';
 
 const Input = (props) =>{
     const classes = useStyles();
-    const { label,type,value,onChange,errorMessage } = props;
+    const { label,type,value,onChange,errorMessage,variant} = props;
         return(
             <div style={{padding:'6% 0%'}}>
                 <TextField
@@ -14,7 +14,6 @@ const Input = (props) =>{
                     value={value}
                     onChange={onChange}
                     className={classes.InputField}
-                    // variant= "outlined"
                 />
                 <Typography className={classes.Typography}>{errorMessage}</Typography>
             </div>

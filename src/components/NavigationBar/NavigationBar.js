@@ -12,11 +12,29 @@ import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useSelector } from "react-redux";
+import Account from '../Account/Account';
+
 
 const NavigationBar = (props) => {
+
+  const [open,setOpen] = useState(false);
+  const [anchorEl,setAnchorEl] = useState(null);
+
   const classes = useStyles();
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
+
+  const handleOpenMenu = (event) =>{
+    console.log("called");
+    setOpen(true);
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleCloseMenu = () =>{
+    setOpen(false);
+    setAnchorEl(null);
+  }
 
   return (
     <AppBar position="fixed" color="primary" elevation={0}>
@@ -54,8 +72,9 @@ const NavigationBar = (props) => {
             />
           </div>
           {token ? (
-            <Link to="/logout" style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }}>Logout</Button>
+            <Link style={{ textDecoration: "none" }}>
+              <Button classes={{ text: classes.text }} onClick={handleOpenMenu}><AccountCircleIcon fontSize="large"/></Button>
+              <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
             </Link>
           ) : (
             <Link to={"/Authentication"} style={{ textDecoration: "none" }}>
@@ -65,11 +84,9 @@ const NavigationBar = (props) => {
           {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
 
           <Link to={"/Cart"}>
-            {" "}
             <Button classes={{ text: classes.text }}>
-              {" "}
-              <ShoppingCartIcon fontSize="large" />{" "}
-            </Button>{" "}
+              <ShoppingCartIcon fontSize="large" />
+            </Button>
           </Link>
         </div>
       </div>
