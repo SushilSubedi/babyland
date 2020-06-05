@@ -27,7 +27,7 @@ const ShopCard = (props) =>{
                     <Typography variant= "h6">Rs.499</Typography>
                     <div className={classes.cartWishlist}>
                         <div>
-                           <IconButton onClick={onClickIcon}>
+                           <IconButton classes ={{root: classes.root}} onClick={onClickIcon}>
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
                         </div>
@@ -87,6 +87,9 @@ const useStyles = makeStyles(
             fontSize: '14px',
             fontWeight: '300',
             fontFamily: 'inherit'
+        },
+        root: {
+            padding: '0px'
         }
     })
 )

@@ -16,7 +16,7 @@ const useStyles = makeStyles(
     createStyles({
         ShopItems:{
             background:'red',
-            height: '637px'
+            height:'100%'
         }
     })
 )
