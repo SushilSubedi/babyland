@@ -73,15 +73,18 @@ const NavigationBar = (props) => {
           </div>
           {token ? (
             <Link style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }} onClick={handleOpenMenu}><AccountCircleIcon fontSize="large"/></Button>
+              <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
+                <AccountCircleIcon fontSize="large"/>
+              </Button>
               <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
             </Link>
           ) : (
             <Link to={"/Authentication"} style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }}>Login | Register</Button>
+              <Button classes={{ text: classes.text }}>
+                Login | Register
+              </Button>
             </Link>
           )}
-          {/* <Link to ={'/Login'}><Button color="inherit">Login/Signup</Button></Link> */}
 
           <Link to={"/Cart"}>
             <Button classes={{ text: classes.text }}>
