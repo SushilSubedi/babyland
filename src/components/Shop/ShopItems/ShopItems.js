@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import ShopCardList from './ShopCardList/ShopCardList';
 
 const ShopItems = () =>{
     return(
         <Box>
-            ShopItems,
+            <ShopCardList/>
             shopCards,
             Pagination
         </Box>
