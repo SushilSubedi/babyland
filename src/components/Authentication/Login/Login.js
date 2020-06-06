@@ -1,10 +1,12 @@
 import React,{ useState,useEffect } from 'react';
-import { Box,Paper, makeStyles, createStyles,Typography,Button,Link } from '@material-ui/core';
+import { Box,Paper, makeStyles, createStyles,Typography,Button,Link ,Snackbar} from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
 import { useDispatch,useSelector } from 'react-redux';
 import { authLogin,setAuthRedirectPath } from '../AuthRedux/action';
 import { Redirect } from 'react-router-dom';
 import Loader from '../../../GlobalComponents/Loader';
+import fire from '../../../config/fire';
+import { Alert } from '@material-ui/lab';
 
 const Login = (props) =>{
 
@@ -14,6 +16,8 @@ const Login = (props) =>{
     const [isValid,setIsValid] = useState(false);
     const [emailMessage,setEmailMessage] = useState('');
     const [passwordMessage,setPasswordMessage] = useState('');
+    const [open,setOpen] = useState(true);
+    const [passwordUpdate,setPasswordUpdate] = useState('');
 
     const dispatch = useDispatch();
 
@@ -72,6 +76,15 @@ const Login = (props) =>{
         }
     }
 
+    const handleResetPassword = () =>{
+        if(email){
+            fire.auth().sendPasswordResetEmail(email).then(setPasswordUpdate('Link is send to your email account')).catch(error =>{
+            setPasswordUpdate(error.message)});
+        } else {
+            setEmailMessage('Email-address is empty');
+        }
+    }
+
     const data = [
         {
             label: 'Emailaddress',
@@ -99,7 +112,7 @@ const Login = (props) =>{
                 <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
             </div>
             <div className={classes.ButtonLink}>
-                <Link>Forget your password?</Link>
+                <Link className={classes.link} onClick={handleResetPassword}>Forget your password?</Link>
             </div>
         </form>
     )
@@ -113,9 +126,14 @@ const Login = (props) =>{
     if(authentication){
        redirectAuth=<Redirect to ={authRedirectPath}/>
     }
+    let passwordUpdateError = null;
+    if(passwordUpdate){
+        passwordUpdateError = <Snackbar open={open} onClose={()=>setOpen(false)} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={4000}><Alert variant="filled" severity="error">{passwordUpdate}</Alert></Snackbar>
+    }
 
     return(
         <Box component={Paper} padding="2%" className={classes.loginPage}>
+            {passwordUpdateError}
            {redirectAuth}
            {form}
         </Box>
@@ -156,6 +174,9 @@ const useStyles = makeStyles(theme =>
             justifyContent:'center',
             padding:'7% 0 0 0'
         },
+        link: {
+            cursor: 'pointer'
+        }
     }))
 
 

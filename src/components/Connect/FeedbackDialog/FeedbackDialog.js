@@ -13,12 +13,18 @@ import Input from "../../../GlobalComponents/Input";
 
 const FeedbackDialog = (props) => {
   const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
   const [isValid, setIsValid] = useState(false);
   const [emailMessage, setEmailMessage] = useState("");
+  const [subjectMessage, setSubjectMessage] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const { open, handleClose } = props;
   const classes = useStyles();
 
   const handleEmail = (e) => {
+    console.log("email");
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (e.target.value === "") {
       setIsValid(false);
@@ -32,12 +38,53 @@ const FeedbackDialog = (props) => {
     }
     setEmail(e.target.value);
   };
+  const handleSubject = (e) => {
+    console.log("subject");
+    if (e.target.value === "") {
+      setIsValid(false);
+      setSubjectMessage("Subject field is empty");
+    } else if (e.target.value.length > 8 && e.target.value.length < 30) {
+      setIsValid(true);
+      setSubjectMessage(null);
+    } else {
+      setIsValid(false);
+      setSubjectMessage("Subject is not valid");
+    }
+    setSubjectMessage(e.target.value);
+  };
+  const handleMessage = (e) => {
+    console.log("message");
+    if (e.target.value === "") {
+      setIsValid(false);
+      setFeedbackMessage("Message field is empty");
+    } else if (e.target.value.length > 10 && e.target.value.length < 255) {
+      setIsValid(true);
+      setFeedbackMessage(null);
+    } else {
+      setIsValid(false);
+      setFeedbackMessage("Message is not valid");
+    }
+    setFeedbackMessage(e.target.value);
+  };
   const onSubmitHandler = () => {
-    if (emailMessage === null && isValid === true) {
+    console.log("hello");
+    if (
+      emailMessage === null &&
+      subjectMessage === null &&
+      isValid === true &&
+      feedbackMessage === null
+    ) {
+      setSubject("");
+      setEmail("");
+      setMessage("");
     } else if (!isValid) {
+      setSubjectMessage("Subject field is empty");
       setEmailMessage("Email-address is empty");
+      setFeedbackMessage("Message is empty");
     } else if (emailMessage === "") {
       setEmailMessage("Email-address is empty");
+    } else if (subjectMessage === "") {
+      setSubjectMessage("Password is empty");
     }
   };
   const data = [
@@ -47,6 +94,20 @@ const FeedbackDialog = (props) => {
       value: email,
       onChange: handleEmail,
       errorMessage: emailMessage,
+    },
+    {
+      label: "Subject",
+      type: "text",
+      value: subject,
+      onChange: handleSubject,
+      errorMessage: subjectMessage,
+    },
+    {
+      label: "Message",
+      type: "text",
+      value: message,
+      onChange: handleMessage,
+      errorMessage: feedbackMessage,
     },
   ];
   return (
@@ -61,22 +122,16 @@ const FeedbackDialog = (props) => {
       </DialogContentText>
       <form className={classes.inputfield}>
         <div className={classes.emailbox}>
-          {data.map((items, index) => {
-            return (
-              <TextField
-                autoFocus
-                inputProps={{ className: classes.emailbox }}
-                label="Email Address"
-                margin="dense"
-                id="name"
-                placeholder="Email Address"
-                type="email"
-                variant="outlined"
-                onChange={items.onChange}
-                errorMessage={items.errorMessage}
-              />
-            );
-          })}
+          <TextField
+            autoFocus
+            inputProps={{ className: classes.emailbox }}
+            label="Email Address"
+            margin="dense"
+            id="name"
+            placeholder="Email Address"
+            type="email"
+            variant="outlined"
+          />
         </div>
         <div className={classes.subjectbox}>
           <TextField
