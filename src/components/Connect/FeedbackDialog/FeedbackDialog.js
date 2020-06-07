@@ -9,7 +9,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import Input from "../../../GlobalComponents/Input";
+import Input from "../../../GlobalComponents/InputOutlined";
 
 const FeedbackDialog = (props) => {
   const [email, setEmail] = useState("");
@@ -87,6 +87,7 @@ const FeedbackDialog = (props) => {
       setSubjectMessage("Password is empty");
     }
   };
+
   const data = [
     {
       label: "Emailaddress",
@@ -108,6 +109,7 @@ const FeedbackDialog = (props) => {
       value: message,
       onChange: handleMessage,
       errorMessage: feedbackMessage,
+      height: "40px",
     },
   ];
   return (
@@ -121,42 +123,20 @@ const FeedbackDialog = (props) => {
         Please give feedback for the greater good of the babies.
       </DialogContentText>
       <form className={classes.inputfield}>
-        <div className={classes.emailbox}>
-          <TextField
-            autoFocus
-            inputProps={{ className: classes.emailbox }}
-            label="Email Address"
-            margin="dense"
-            id="name"
-            placeholder="Email Address"
-            type="email"
-            variant="outlined"
-          />
-        </div>
-        <div className={classes.subjectbox}>
-          <TextField
-            inputProps={{ className: classes.subjectbox }}
-            autoFocus
-            margin="dense"
-            id="name"
-            placeholder="Subject"
-            label="Subject"
-            type="text"
-            variant="outlined"
-          />
-        </div>
-        <div className={classes.commentbox}>
-          <TextField
-            inputProps={{ className: classes.commentbox }}
-            autoFocus
-            placeholder="Comment"
-            margin="dense"
-            id="name"
-            label="Comment"
-            type="text"
-            variant="outlined"
-          />
-        </div>
+        {data.map((items, index) => {
+          return (
+            <InputOutlined
+              className={classes.messageform}
+              key={index}
+              label={items.label}
+              type={items.type}
+              value={items.value}
+              onChange={items.onChange}
+              errorMessage={items.errorMessage}
+              outlined={true}
+            />
+          );
+        })}
       </form>
 
       <DialogActions>
@@ -218,6 +198,12 @@ const useStyles = makeStyles((theme) =>
       width: "300px",
       textAlign: "center",
     },
+    // inputform: {
+    //   height: "70px",
+    // },
+    messageform: {
+      height: "40px",
+    },
 
     inputfield: {
       display: "flex",
@@ -225,8 +211,12 @@ const useStyles = makeStyles((theme) =>
       justifyContent: "space-around",
       alignItems: "center",
       height: "200px",
-      paddingTop: "20px",
-      paddingBottom: "41px",
+      width: "100%",
+      messagebox: {
+        height: "40px",
+      },
+      // paddingTop: "20px",
+      // paddingBottom: "41px",
     },
   })
 );
