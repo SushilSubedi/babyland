@@ -9,7 +9,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import Input from "../../../GlobalComponents/InputOutlined";
+import InputOutlined from "../../../GlobalComponents/InputOutlined";
 
 const FeedbackDialog = (props) => {
   const [email, setEmail] = useState("");

@@ -106,7 +106,17 @@ const Login = (props) =>{
         <form className={classes.form}>
                 <Typography className={classes.Typography1}>Login</Typography>
                 {data.map((items,index) =>{
-                return(<Input key={index} label={items.label} type={items.type} value={items.value} onChange={items.onChange} errorMessage={items.errorMessage}/>)
+                return(
+                <Input 
+                    key={index} 
+                    label={items.label} 
+                    type={items.type} 
+                    value={items.value} 
+                    onChange={items.onChange} 
+                    errorMessage={items.errorMessage} 
+                    style={null}
+                    outlined="standard"
+                />)
                 })}
             <div className={classes.ButtonLink}>
                 <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
