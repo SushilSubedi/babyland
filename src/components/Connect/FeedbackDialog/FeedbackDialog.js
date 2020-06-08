@@ -9,7 +9,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
-import InputOutlined from "../../../GlobalComponents/InputOutlined";
+import Input from "../../../GlobalComponents/Input";
 
 const FeedbackDialog = (props) => {
   const [email, setEmail] = useState("");
@@ -42,29 +42,28 @@ const FeedbackDialog = (props) => {
     console.log("subject");
     if (e.target.value === "") {
       setIsValid(false);
-      setSubjectMessage("Subject field is empty");
+      setSubject("Subject field is empty");
     } else if (e.target.value.length > 8 && e.target.value.length < 30) {
       setIsValid(true);
-      setSubjectMessage(null);
+      setSubject(null);
     } else {
       setIsValid(false);
-      setSubjectMessage("Subject is not valid");
+      setSubject("Subject is not valid");
     }
-    setSubjectMessage(e.target.value);
   };
   const handleMessage = (e) => {
     console.log("message");
     if (e.target.value === "") {
       setIsValid(false);
-      setFeedbackMessage("Message field is empty");
+      setMessage("Message field is empty");
     } else if (e.target.value.length > 10 && e.target.value.length < 255) {
       setIsValid(true);
-      setFeedbackMessage(null);
+      setMessage(null);
     } else {
       setIsValid(false);
-      setFeedbackMessage("Message is not valid");
+      setMessage("Message is not valid");
     }
-    setFeedbackMessage(e.target.value);
+    setMessage(e.target.value);
   };
   const onSubmitHandler = () => {
     console.log("hello");
@@ -109,7 +108,6 @@ const FeedbackDialog = (props) => {
       value: message,
       onChange: handleMessage,
       errorMessage: feedbackMessage,
-      height: "40px",
     },
   ];
   return (
@@ -119,25 +117,41 @@ const FeedbackDialog = (props) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogContentText className={classes.Dialoghead}>
-        Please give feedback for the greater good of the babies.
-      </DialogContentText>
-      <form className={classes.inputfield}>
-        {data.map((items, index) => {
-          return (
-            <InputOutlined
-              className={classes.messageform}
-              key={index}
-              label={items.label}
-              type={items.type}
-              value={items.value}
-              onChange={items.onChange}
-              errorMessage={items.errorMessage}
-              outlined={true}
-            />
-          );
-        })}
-      </form>
+      <DialogContent>
+        <DialogContentText className={classes.Dialoghead}>
+          Please give feedback for the greater good of the babies.
+        </DialogContentText>
+        <form className={classes.inputfield}>
+          {data.map((items, index) => {
+            if (items.label === "Message") {
+              return (
+                <Input
+                  key={index}
+                  label={items.label}
+                  type={items.type}
+                  value={items.value}
+                  onChange={items.onChange}
+                  errorMessage={items.errorMessage}
+                  outlined="outlined"
+                />
+              );
+            } else {
+              return (
+                <Input
+                  className={classes.messageform}
+                  key={index}
+                  label={items.label}
+                  type={items.type}
+                  value={items.value}
+                  onChange={items.onChange}
+                  errorMessage={items.errorMessage}
+                  outlined="outlined"
+                />
+              );
+            }
+          })}
+        </form>
+      </DialogContent>
 
       <DialogActions>
         <Button className={classes.cancelbutton} onClick={handleClose}>
@@ -185,22 +199,7 @@ const useStyles = makeStyles((theme) =>
       marginLeft: "10px",
       marginRight: "10px",
     },
-    commentbox: {
-      width: "300px",
-      height: "60px",
-      textAlign: "center",
-    },
-    subjectbox: {
-      width: "300px",
-      textAlign: "center",
-    },
-    emailbox: {
-      width: "300px",
-      textAlign: "center",
-    },
-    // inputform: {
-    //   height: "70px",
-    // },
+
     messageform: {
       height: "40px",
     },
@@ -208,16 +207,11 @@ const useStyles = makeStyles((theme) =>
     inputfield: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-around",
       alignItems: "center",
-      height: "200px",
-      width: "100%",
-      messagebox: {
-        height: "40px",
-      },
-      // paddingTop: "20px",
-      // paddingBottom: "41px",
     },
+    // messagebox: {
+    //   height: "40px",
+    // },
   })
 );
 

@@ -27,7 +27,7 @@ const Input = (props) => {
 const useStyles = makeStyles((theme) =>
   createStyles({
     InputField: {
-      width: "100%",
+      width: " 100%",
       height: "50px",
     },
     Typography: {

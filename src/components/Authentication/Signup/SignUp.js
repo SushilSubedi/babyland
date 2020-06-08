@@ -47,21 +47,58 @@ const SignUp = (props) => {
     } else {
       setNameMessage(null);
     }
+    setName(e.target.value);
+  };
 
-    const handlePassword = (e) => {
-      if (e.target.value === "") {
-        setIsValid(false);
-        setPasswordMessage("Password field is empty");
-      } else if (e.target.value.length > 5 && e.target.value.length < 16) {
-        setIsValid(true);
-        setPasswordMessage(null);
-      } else {
-        setIsValid(false);
-        setPasswordMessage("Password is not valid");
-      }
-      setPassword(e.target.value);
-    };
+  const handleEmail = (e) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (e.target.value === "") {
+      setIsValid(false);
+      setEmailMessage("Email-address field is empty");
+    } else if (re.test(e.target.value)) {
+      setIsValid(true);
+      setEmailMessage(null);
+    } else {
+      setIsValid(false);
+      setEmailMessage("Email-address field is not valid");
+    }
     setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    if (e.target.value === "") {
+      setIsValid(false);
+      setPasswordMessage("Password field is empty");
+    } else if (e.target.value.length > 5 && e.target.value.length < 16) {
+      setIsValid(true);
+      setPasswordMessage(null);
+    } else {
+      setIsValid(false);
+      setPasswordMessage("Password is not valid");
+    }
+    setPassword(e.target.value);
+  };
+
+  const onSubmitHandler = () => {
+    if (
+      emailMessage === null &&
+      passwordMessage === null &&
+      isValid === true &&
+      nameMessage === null
+    ) {
+      dispatch(auth(email, password, name));
+      setName("");
+      setEmail("");
+      setPassword("");
+    } else if (!isValid) {
+      setPasswordMessage("Password field is empty");
+      setEmailMessage("Email-address is empty");
+      setNameMessage("Name is empty");
+    } else if (emailMessage === "") {
+      setEmailMessage("Email-address is empty");
+    } else if (passwordMessage === "") {
+      setPasswordMessage("Password is empty");
+    }
   };
 
   const data = [
@@ -100,6 +137,8 @@ const SignUp = (props) => {
             value={items.value}
             onChange={items.onChange}
             errorMessage={items.errorMessage}
+            style={null}
+            outlined="standard"
           />
         );
       })}
