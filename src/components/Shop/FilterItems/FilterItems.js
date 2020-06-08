@@ -26,7 +26,7 @@ const useStyles = makeStyles(
         FilterItems:{
             display: 'flex',
             justifyContent: 'flex-end',
-            padding:'4px 36px'
+            padding:'0px 51px'
         }
     })
 )
