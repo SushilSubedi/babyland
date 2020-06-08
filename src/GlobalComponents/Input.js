@@ -1,10 +1,13 @@
  import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, createStyles,Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
+
 
 const Input = (props) =>{
     const classes = useStyles();
-    const { label,type,value,onChange,errorMessage,variant} = props;
+    const { label,type,value,onChange,errorMessage,outlined,style } = props;
         return(
             <div style={{padding:'6% 0%'}}>
                 <TextField
@@ -14,6 +17,8 @@ const Input = (props) =>{
                     value={value}
                     onChange={onChange}
                     className={classes.InputField}
+                    style={style}
+                    variant={outlined}
                 />
                 <Typography className={classes.Typography}>{errorMessage}</Typography>
             </div>

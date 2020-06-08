@@ -1,11 +1,22 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles,createStyles,Box } from '@material-ui/core';
+import FilterDropDown from '../../../GlobalComponents/FilterDropDown'
 
-const FilterItems = () => {
+const FilterItems = (props) => {
+    const [price,setPrice] = useState('');
     const classes = useStyles();
     return(
         <Box className={classes.FilterItems}>
-            FilterItems
+            <FilterDropDown
+                value={price}
+                label= "Price"
+                onChange= {(e)=>setPrice(e.target.value)}
+                options= {[
+                    {value:'low',label:'low'},
+                    {value:'middle',label:'middle'},
+                    {value:'high',label:'high'}
+            ]}
+            />
         </Box>
     )
 }
@@ -13,7 +24,9 @@ const FilterItems = () => {
 const useStyles = makeStyles(
     createStyles({
         FilterItems:{
-            background:'yellow'
+            display: 'flex',
+            justifyContent: 'flex-end',
+            padding:'4px 36px'
         }
     })
 )

@@ -125,6 +125,8 @@ const SignUp = (props) =>{
                             value={items.value}
                             onChange={items.onChange} 
                             errorMessage={items.errorMessage}
+                            style={null} 
+                            outlined="standard"
                         />)
             })}
         <div className={classes.ButtonLink}>
