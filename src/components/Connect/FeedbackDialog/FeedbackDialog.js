@@ -8,6 +8,7 @@ import {
   DialogContentText,
   TextField,
   Button,
+  Container
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
 
@@ -122,34 +123,37 @@ const FeedbackDialog = (props) => {
           Please give feedback for the greater good of the babies.
         </DialogContentText>
         <form className={classes.inputfield}>
-          {data.map((items, index) => {
-            if (items.label === "Message") {
-              return (
-                <Input
-                  key={index}
-                  label={items.label}
-                  type={items.type}
-                  value={items.value}
-                  onChange={items.onChange}
-                  errorMessage={items.errorMessage}
-                  outlined="outlined"
-                />
-              );
-            } else {
-              return (
-                <Input
-                  className={classes.messageform}
-                  key={index}
-                  label={items.label}
-                  type={items.type}
-                  value={items.value}
-                  onChange={items.onChange}
-                  errorMessage={items.errorMessage}
-                  outlined="outlined"
-                />
-              );
-            }
-          })}
+          <Container>
+            {data.map((items, index) => {
+              if (items.label === "Message") {
+                return (
+                  <Input
+                    key={index}
+                    label={items.label}
+                    type={items.type}
+                    value={items.value}
+                    onChange={items.onChange}
+                    comment={true}
+                    errorMessage={items.errorMessage}
+                    outlined="outlined"
+                  />
+                );
+              } else {
+                return (
+                  <Input
+                    className={classes.messageform}
+                    key={index}
+                    label={items.label}
+                    type={items.type}
+                    value={items.value}
+                    onChange={items.onChange}
+                    errorMessage={items.errorMessage}
+                    outlined="outlined"
+                  />
+                );
+              }
+            })}
+          </Container>
         </form>
       </DialogContent>
 
@@ -208,10 +212,8 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-    },
-    // messagebox: {
-    //   height: "40px",
-    // },
+      padding: '0 11%'
+    }
   })
 );
 

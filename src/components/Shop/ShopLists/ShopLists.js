@@ -4,7 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import ShopItems from '../ShopItems/ShopItems';
-
+import BreadCrumb from '../BreadCrumb/BreadCrumb';
+import FilterItems from '../FilterItems/FilterItems';
 
 function a11yProps(index) {
     return {
@@ -33,16 +34,42 @@ function TabPanel(props) {
     );
   }
 
+
 const ShopLists = (props) =>{
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    const [label,setlabel] = useState('T-shirt');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        handleLabel(newValue);
     };
+
+    const handleLabel = (value) =>{
+      if(value === 0){
+        setlabel('T-Shirt')
+      }else if( value === 1){
+        setlabel("Toys")
+      }else if( value === 2){
+        setlabel('Shampoo')
+      }else if( value === 3){
+        setlabel('Cosmetic')
+      }else if( value === 4){
+        setlabel('Diapers')
+      }else if( value === 5){
+        setlabel('Pants')
+      }else if( value === 6){
+        setlabel('Pregancy Kit')
+      }
+      else{
+        setlabel('T-shirt')
+      }
+    }
 
     return(
         <Box padding="1% 0 0 0%">
+             <BreadCrumb item={label}/>
+             <FilterItems/>  
             <Box component={Paper} className={classes.root} elevation={0}>
                 <Tabs
                     orientation="vertical"
@@ -58,7 +85,7 @@ const ShopLists = (props) =>{
                     <Tab classes={{root:classes.rootTabs}} label="Cosmetic"/>
                     <Tab classes={{root:classes.rootTabs}} label="Diapers"/>
                     <Tab classes={{root:classes.rootTabs}} label="Pants" />
-                    <Tab classes={{root:classes.rootTabs}} label="Pregenacy kit"  />
+                    <Tab classes={{root:classes.rootTabs}} label="Pregenacy kit"/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     <ShopItems/>
