@@ -8,7 +8,7 @@ import {
   DialogContentText,
   TextField,
   Button,
-  Container
+  Container,
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
 
@@ -136,6 +136,7 @@ const FeedbackDialog = (props) => {
                     comment={true}
                     errorMessage={items.errorMessage}
                     outlined="outlined"
+                    className={classes.message}
                   />
                 );
               } else {
@@ -212,8 +213,11 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: '0 11%'
-    }
+      padding: "0 11%",
+    },
+    message: {
+      height: "80px",
+    },
   })
 );
 
