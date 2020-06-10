@@ -83,7 +83,7 @@ const FeedbackDialog = (props) => {
     } else if (emailMessage === "") {
       setEmailMessage("Email-address is empty");
     } else if (subjectMessage === "") {
-      setSubjectMessage("Password is empty");
+      setSubjectMessage("subject is empty");
     }
   };
 
