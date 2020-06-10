@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { makeStyles,createStyles,Box } from '@material-ui/core';
+import { makeStyles,createStyles,Box, Typography } from '@material-ui/core';
 import FilterDropDown from '../../../GlobalComponents/FilterDropDown'
 
 const FilterItems = (props) => {
@@ -7,6 +7,7 @@ const FilterItems = (props) => {
     const classes = useStyles();
     return(
         <Box className={classes.FilterItems}>
+            <Typography variant="h5" className={classes.Typography}>Shopping List:</Typography>
             <FilterDropDown
                 value={price}
                 label= "Price"
@@ -25,8 +26,12 @@ const useStyles = makeStyles(
     createStyles({
         FilterItems:{
             display: 'flex',
-            justifyContent: 'flex-end',
-            padding:'0px 51px'
+            justifyContent: 'space-between',
+            padding:'0px 51px 0 4px'
+        },
+        Typography: {
+            color:'#00669b',
+            alignSelf:'flex-end'
         }
     })
 )
