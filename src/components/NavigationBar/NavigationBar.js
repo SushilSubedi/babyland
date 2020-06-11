@@ -13,8 +13,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import Account from '../Account/Account';
+import { authCheckState } from '../Authentication/AuthRedux/action';
 
 
 const NavigationBar = (props) => {
@@ -23,10 +24,10 @@ const NavigationBar = (props) => {
   const [anchorEl,setAnchorEl] = useState(null);
 
   const classes = useStyles();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
 
   const handleOpenMenu = (event) =>{
-    console.log("called");
     setOpen(true);
     setAnchorEl(event.currentTarget)
   }
@@ -35,6 +36,10 @@ const NavigationBar = (props) => {
     setOpen(false);
     setAnchorEl(null);
   }
+
+  useEffect(()=>{
+    dispatch(authCheckState());
+  },[])
 
   return (
     <AppBar position="fixed" color="primary" elevation={0}>

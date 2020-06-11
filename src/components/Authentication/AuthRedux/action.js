@@ -72,7 +72,6 @@ export const authLogin = (email,password) => {
     return dispatch =>{
         dispatch(authStart());
         fire.auth().signInWithEmailAndPassword(email, password).then(result=>{
-            console.log("login",result);
             localStorage.setItem('token',result.user.refreshToken);
             localStorage.setItem('user',result.user.displayName);
             localStorage.setItem('userID',result.user.uid);
@@ -95,13 +94,13 @@ export const authCheckState = () =>{
     return dispatch =>{
         const token = localStorage.getItem('token');
         const user =localStorage.getItem('user');
-        console.log(token);
+        console.log(user,token)
         if(!token){
             dispatch(logout());
         } else {
             const userID = localStorage.getItem('userID');
-            dispatch(authSuccess(token,userID,user));
-            dispatch(checkAuthLogout());
+            dispatch(authSuccess(user,userID,token));
+            // dispatch(checkAuthLogout());
         }
     }
 }
