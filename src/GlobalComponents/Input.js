@@ -6,22 +6,32 @@ import createStyles from "@material-ui/core/styles/createStyles";
 
 const Input = (props) => {
   const classes = useStyles();
-  const { label, type, value, onChange, errorMessage, outlined, style,comment } = props;
+  const {
+    label,
+    type,
+    value,
+    onChange,
+    errorMessage,
+    outlined,
+    style,
+    comment,
+  } = props;
 
   let textField = (
-  <TextField
-    id="input field"
-    label={label}
-    type={type}
-    value={value}
-    onChange={onChange}
-    className={classes.InputField}
-    style={style}
-    variant={outlined}
-  />);
+    <TextField
+      id="input field"
+      label={label}
+      type={type}
+      value={value}
+      onChange={onChange}
+      className={classes.InputField}
+      style={style}
+      variant={outlined}
+    />
+  );
 
-    if(comment == true){
-      return (
+  if (comment == true) {
+    return (
       <TextField
         id="input field"
         label={label}
@@ -30,11 +40,12 @@ const Input = (props) => {
         onChange={onChange}
         className={classes.input}
         variant={outlined}
-      />)
-    }
+      />
+    );
+  }
 
   return (
-    <div style={{ padding: "6% 0%",width:'100%' }}>
+    <div style={{ padding: "6% 0%", width: "100%" }}>
       {textField}
       <Typography className={classes.Typography}>{errorMessage}</Typography>
     </div>
@@ -50,12 +61,13 @@ const useStyles = makeStyles((theme) =>
     Typography: {
       fontSize: "12px",
       color: "red",
-      marginTop:'2px'
+      marginTop: "2px",
     },
-    input:{
-      width:'100%',
-      padding: '2% 0'
-    }
+    input: {
+      width: "100%",
+      padding: "2% 0",
+      height: "70px",
+    },
   })
 );
 

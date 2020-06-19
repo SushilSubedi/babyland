@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogContentText,
   Button,
-  Container
+  Container,
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
 
@@ -43,25 +43,26 @@ const FeedbackDialog = (props) => {
     if (e.target.value === "") {
       setIsValid(false);
       setSubject("Subject field is empty");
-    } else if (e.target.value.length > 8 && e.target.value.length < 30) {
+    } else if (e.target.value.length > 5 && e.target.value.length < 30) {
       setIsValid(true);
-      setSubject(null);
+      setSubjectMessage(null);
     } else {
       setIsValid(false);
       setSubject("Subject is not valid");
     }
+    setSubject(e.target.value);
   };
   const handleMessage = (e) => {
     console.log("message");
     if (e.target.value === "") {
       setIsValid(false);
-      setMessage("Message field is empty");
-    } else if (e.target.value.length > 10 && e.target.value.length < 255) {
+      setFeedbackMessage("Message field is empty");
+    } else if (e.target.value.length > 8 && e.target.value.length < 255) {
       setIsValid(true);
-      setMessage(null);
+      setFeedbackMessage(null);
     } else {
       setIsValid(false);
-      setMessage("Message is not valid");
+      setFeedbackMessage("Message is not valid");
     }
     setMessage(e.target.value);
   };
@@ -83,7 +84,9 @@ const FeedbackDialog = (props) => {
     } else if (emailMessage === "") {
       setEmailMessage("Email-address is empty");
     } else if (subjectMessage === "") {
-      setSubjectMessage("Password is empty");
+      setSubjectMessage("subject is empty");
+    } else if (feedbackMessage === "") {
+      setFeedbackMessage("Feedback is empty");
     }
   };
 
@@ -135,6 +138,7 @@ const FeedbackDialog = (props) => {
                     comment={true}
                     errorMessage={items.errorMessage}
                     outlined="outlined"
+                    className={classes.message}
                   />
                 );
               } else {
@@ -211,8 +215,11 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: '0 11%'
-    }
+      padding: "0 11%",
+    },
+    message: {
+      height: "80px",
+    },
   })
 );
 
