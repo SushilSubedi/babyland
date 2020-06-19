@@ -1,5 +1,4 @@
 import React from "react";
-import PersonIcon from "@material-ui/icons/Person";
 import { MenuItem,Menu,createStyles,makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -30,6 +29,8 @@ const Account = (props) => {
       <Menu
         anchorReference="anchorOrigin"
         anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        keepMounted
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",

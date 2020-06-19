@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,createRef } from "react";
 import {
   makeStyles,
   createStyles,
@@ -77,12 +77,10 @@ const NavigationBar = (props) => {
             />
           </div>
           {token ? (
-            <Link style={{ textDecoration: "none" }}>
               <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
                 <AccountCircleIcon fontSize="large"/>
+                <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
               </Button>
-              <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
-            </Link>
           ) : (
             <Link to={"/Authentication"} style={{ textDecoration: "none" }}>
               <Button classes={{ text: classes.text }}>
