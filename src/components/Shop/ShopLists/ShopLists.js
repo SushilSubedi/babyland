@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{ useState, useEffect } from 'react';
 import { makeStyles,createStyles,Box,Paper, Container } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ShopItems from '../ShopItems/ShopItems';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
 import FilterItems from '../FilterItems/FilterItems';
+import fire from '../../../config/fire';
 
 function a11yProps(index) {
     return {
@@ -16,7 +17,6 @@ function a11yProps(index) {
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
     return (
       <div
         role="tabpanel"
@@ -39,11 +39,15 @@ const ShopLists = (props) =>{
     const classes = useStyles();
     const [value, setValue] = useState(0);
     const [label,setlabel] = useState('T-shirt');
+    const [img,setImg] = useState();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
         handleLabel(newValue);
     };
+
+    
+    
 
     const handleLabel = (value) =>{
       if(value === 0){

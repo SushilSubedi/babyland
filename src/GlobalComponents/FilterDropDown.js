@@ -1,8 +1,7 @@
 import React from 'react';
-import { makeStyles, createStyles,FormControl,InputLabel,Select,MenuItem } from '@material-ui/core';
+import { FormControl,InputLabel,Select,MenuItem } from '@material-ui/core';
 
 const FilterDropDown = (props) =>{
-    const classes = useStyles();
     const { options,value,onChange,label } = props;
     return(
         <FormControl style={{width:'7%'}}>
@@ -20,15 +19,5 @@ const FilterDropDown = (props) =>{
       </FormControl> 
     )
 };
-
-const useStyles = makeStyles(theme =>{
-    createStyles({
-        formControl: {
-            margin: theme.spacing(1),
-            width:'7%'
-          }
-    })
-}
-)
 
 export default FilterDropDown;

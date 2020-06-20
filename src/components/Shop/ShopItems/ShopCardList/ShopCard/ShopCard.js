@@ -1,10 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
- import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import fire from '../../../../../config/fire';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
+    const [img,setImg] = useState('');
+    const [imgUrl,setImgUrl]  = useState('');
+    let Storage = null;
 
     const classes = useStyles();
     const { name,description } = props;
@@ -15,10 +19,32 @@ const ShopCard = (props) =>{
             setIcon(false);
         }
     }
+
+    useEffect(()=>{
+        fire.database().ref().child('TShirt').once('value').then(response =>{
+            for(let i= 0; i < response.val().length; i ++ ){
+                setImg(response.val()[i].img);
+            }
+          console.log(response.val().length);
+        });
+      },[]);
+
+      const handleImg = () =>{
+        fire.storage().refFromURL(img).getDownloadURL().then((url)=>{
+                  setImgUrl(url);
+          })
+      }
+
+      useEffect(()=>{
+          if(img){
+              handleImg();
+          }
+      },[img])
+
     return(
        <Box component={Paper} className={classes.card}>
            <Container className={classes.Container}>
-                <img className={classes.img}/>
+                <img className={classes.img} src={imgUrl} alt="simple img"/>
                 <div style={{padding:'2% 0%'}}>
                     <Typography variant="h5" className={classes.Typography1}>{name}</Typography>
                     <Typography className={classes.Typography2}>{description}</Typography>
