@@ -132,7 +132,6 @@
     },
     {
       "name": " Cetaphil baby shampoo",
-      "img": "gs://babyland-2b68b.appspot.com/Shampoo/cetaphill baby shampooo.jpg ",
       "description": "Tear free, paraben free, colorant free and mineral oil free",
       "value": 800
     },
@@ -344,7 +343,7 @@
       "value": 1070
     }
   ],
-  "Pregnancy Kits": [
+  "PregnancyKit": [
     {
       "name": " Kuber Industries Pregnancy Pillow ",
       "img": "gs://babyland-2b68b.appspot.com/pregnancy kits /Kuber Industries Pregnancy Pillow.jpg",
