@@ -6,12 +6,11 @@ import fire from '../../../../../config/fire';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
-    const [img,setImg] = useState('');
     const [imgUrl,setImgUrl]  = useState('');
-    let Storage = null;
 
     const classes = useStyles();
-    const { name,description } = props;
+    const { name,description,img,price } = props;
+    
     const onClickIcon = () =>{
         if(icon === false){
             setIcon(true);
@@ -19,15 +18,6 @@ const ShopCard = (props) =>{
             setIcon(false);
         }
     }
-
-    useEffect(()=>{
-        fire.database().ref().child('TShirt').once('value').then(response =>{
-            for(let i= 0; i < response.val().length; i ++ ){
-                setImg(response.val()[i].img);
-            }
-          console.log(response.val().length);
-        });
-      },[]);
 
       const handleImg = () =>{
         fire.storage().refFromURL(img).getDownloadURL().then((url)=>{
@@ -46,11 +36,11 @@ const ShopCard = (props) =>{
            <Container className={classes.Container}>
                 <img className={classes.img} src={imgUrl} alt="simple img"/>
                 <div style={{padding:'2% 0%'}}>
-                    <Typography variant="h5" className={classes.Typography1}>{name}</Typography>
+                    <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
                     <Typography className={classes.Typography2}>{description}</Typography>
                 </div>
                 <div>
-                    <Typography variant= "h6">Rs.499</Typography>
+                    <Typography variant= "h6" style={{color:'#e85831',fontWeight:'700'}}>Rs.{price}</Typography>
                     <div className={classes.cartWishlist}>
                         <div>
                            <IconButton classes ={{root: classes.root}} onClick={onClickIcon}>
@@ -73,7 +63,7 @@ const useStyles = makeStyles(
             display: 'flex',
             justifyContent: 'column',
             width: '320px',
-            height: '320px',
+            height: '340px',
             justifyContent:'center',
             padding: '2% 1% 4% 1%',
             alignItems: 'center',
@@ -112,7 +102,8 @@ const useStyles = makeStyles(
         Typography2: {
             fontSize: '14px',
             fontWeight: '300',
-            fontFamily: 'inherit'
+            fontFamily: 'inherit',
+            color: 'cbd0d6'
         },
         root: {
             padding: '0px'
