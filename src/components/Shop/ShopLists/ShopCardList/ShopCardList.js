@@ -13,6 +13,8 @@ const ShopCartList = (props) =>{
                         <ShopCard
                             name={item.name}
                             description={item.description}
+                            price={item.value}
+                            img={item.img}
                         />
                     </Grid>
                 ))}

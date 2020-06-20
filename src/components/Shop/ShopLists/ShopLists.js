@@ -3,7 +3,6 @@ import { makeStyles,createStyles,Box,Paper, Container } from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import ShopItems from '../ShopItems/ShopItems';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
 import FilterItems from '../FilterItems/FilterItems';
 import Cosmetic from './Cosmetic';
