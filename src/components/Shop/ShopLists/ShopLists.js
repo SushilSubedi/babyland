@@ -6,7 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import ShopItems from '../ShopItems/ShopItems';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
 import FilterItems from '../FilterItems/FilterItems';
-import fire from '../../../config/fire';
+import Cosmetic from './Cosmetic';
+import Shampoo from './Shampoo';
+import PregenacyKit from './PregancyKit';
+import Diapers from './Diapers';
+import Tshirt from './Tshirt';
+import Toys from './Cosmetic';
 
 function a11yProps(index) {
     return {
@@ -92,25 +97,25 @@ const ShopLists = (props) =>{
                     <Tab classes={{root:classes.rootTabs}} label="Pregenacy kit"/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    <ShopItems/>
+                    <Tshirt/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <ShopItems/>
+                    <Toys/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <ShopItems/>
+                    <Shampoo/>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <ShopItems/>
+                    <Cosmetic/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
-                    <ShopItems/>
+                    <Diapers/>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
-                    <ShopItems/>
+                    <Diapers/>
                 </TabPanel>
                 <TabPanel value={value} index={6}>
-                    <ShopItems/>
+                    <PregenacyKit/>
                 </TabPanel>
             </Box>
        </Box>
