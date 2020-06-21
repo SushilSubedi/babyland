@@ -132,6 +132,7 @@
     },
     {
       "name": " Cetaphil baby shampoo",
+      "img": "gs://babyland-2b68b.appspot.com/Shampoo/cetaphill baby shampooo.jpg",
       "description": "Tear free, paraben free, colorant free and mineral oil free",
       "value": 800
     },
@@ -318,7 +319,7 @@
       "value": 560
     },
     {
-      "name": " Johnson's Baby Oil with Vitamin E ",
+      "name": " Johnson's Baby Oil with Vitamin E",
       "img": "gs://babyland-2b68b.appspot.com/Cosmetic/Johnson's Baby Oil with Vitamin E.jpg",
       "description": "Johnson's baby oil is formulated to spread easily on new born baby skin",
       "value": 590

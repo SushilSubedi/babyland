@@ -7,8 +7,8 @@ const Pregancykit = ( ) =>{
     let dataArray = [];
 
     useEffect(()=>{
-        fire.database().ref().child('Pregancy Kits').once('value').then(response =>{
-            for(let i= 0; i < response.val().length; i ++ ){
+        fire.database().ref().child('PregnancyKit').once('value').then(response =>{
+            for(let i= 0; i < response.val()?.length; i ++ ){
                 dataArray.push(response.val()[i]);
             }
             setData(dataArray);
