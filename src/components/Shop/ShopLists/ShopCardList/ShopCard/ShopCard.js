@@ -62,8 +62,9 @@ const useStyles = makeStyles(
         card: {
             display: 'flex',
             justifyContent: 'column',
-            width: '320px',
-            height: '340px',
+             width: '320px',
+            // height: '340px',
+            minHeight:'320px',
             justifyContent:'center',
             padding: '2% 1% 4% 1%',
             alignItems: 'center',
@@ -73,7 +74,7 @@ const useStyles = makeStyles(
         },
         img:{
             width: '150px',
-            height: '174px',
+            height: '140px',
             marginTop: '4px'
         },
         Container: {
@@ -96,7 +97,7 @@ const useStyles = makeStyles(
         },
         Typography1: {
             fontFamily:'inherit',
-            fontWeight:'500',
+            fontWeight:'700',
             color:'#00669b'
         },
         Typography2: {

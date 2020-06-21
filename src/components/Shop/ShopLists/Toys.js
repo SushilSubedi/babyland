@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import ShopCardList from './ShopCardList/ShopCardList';
 import fire from '../../../config/fire';
 

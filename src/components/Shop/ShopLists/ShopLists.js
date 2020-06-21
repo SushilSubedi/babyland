@@ -10,7 +10,8 @@ import Shampoo from './Shampoo';
 import PregenacyKit from './PregancyKit';
 import Diapers from './Diapers';
 import Tshirt from './Tshirt';
-import Toys from './Cosmetic';
+import Toys from './Toys';
+import Foods from './Foods';
 
 function a11yProps(index) {
     return {
@@ -92,29 +93,29 @@ const ShopLists = (props) =>{
                     <Tab classes={{root:classes.rootTabs}} label="Shampoo"/>
                     <Tab classes={{root:classes.rootTabs}} label="Cosmetic"/>
                     <Tab classes={{root:classes.rootTabs}} label="Diapers"/>
-                    <Tab classes={{root:classes.rootTabs}} label="Pants" />
+                    <Tab classes={{root:classes.rootTabs}} label="Foods" />
                     <Tab classes={{root:classes.rootTabs}} label="Pregenacy kit"/>
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    <Tshirt/>
+                  <Tshirt/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Toys/>
+                  <Toys/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <Shampoo/>
+                  <Shampoo/>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <Cosmetic/>
+                  <Cosmetic/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
-                    <Diapers/>
+                  <Diapers/>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
-                    <Diapers/>
+                  <Foods/>
                 </TabPanel>
                 <TabPanel value={value} index={6}>
-                    <PregenacyKit/>
+                  <PregenacyKit/>
                 </TabPanel>
             </Box>
        </Box>
