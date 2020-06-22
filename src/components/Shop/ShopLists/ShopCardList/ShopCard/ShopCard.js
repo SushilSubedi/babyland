@@ -2,11 +2,9 @@ import React,{useState,useEffect} from 'react';
 import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import fire from '../../../../../config/fire';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
-    const [imgUrl,setImgUrl]  = useState('');
 
     const classes = useStyles();
     const { name,description,img,price } = props;
@@ -19,22 +17,10 @@ const ShopCard = (props) =>{
         }
     }
 
-      const handleImg = () =>{
-        fire.storage().refFromURL(img).getDownloadURL().then((url)=>{
-                  setImgUrl(url);
-          })
-      }
-
-      useEffect(()=>{
-          if(img){
-              handleImg();
-          }
-      },[img])
-
     return(
        <Box component={Paper} className={classes.card}>
            <Container className={classes.Container}>
-                <img className={classes.img} src={imgUrl} alt="simple img"/>
+                <img className={classes.img} src={img} alt="simple img"/>
                 <div style={{padding:'2% 0%'}}>
                     <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
                     <Typography className={classes.Typography2}>{description}</Typography>

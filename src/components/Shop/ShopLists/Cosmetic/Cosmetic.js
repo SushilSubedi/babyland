@@ -2,26 +2,17 @@ import React,{useState,useEffect} from 'react';
 import ShopCardList from '../ShopCardList/ShopCardList';
 import fire from '../../../../config/fire';
 import { cosmeticHandler } from './CosmeticReducer/action';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 
 const Cosmetic = (props) =>{
-    const [data,setData] = useState([]);
-    let dataArray = [];
+    const data = useSelector(state => state.CosmeticReducer.data);
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        fire.database().ref().child('Cosmetic').once('value').then(response =>{
-            for(let i= 0; i < response.val().length; i ++ ){
-                dataArray.push(response.val()[i]);
-            }
-            setData(dataArray);
-        });
+        if(!data){
+            dispatch(cosmeticHandler());
+        }
     },[])
-
-    useEffect(()=>{
-        dispatch(cosmeticHandler());
-    },[])
-
 
 return(
     <div>
