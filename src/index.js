@@ -18,9 +18,7 @@ const store = createStore(rootReducer,composeEnhancers(applyMiddleware(thunk)));
 
 const app = (
   <Provider store={store}>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </Provider>
 );
 
