@@ -15,7 +15,6 @@ const Diapers = (props) =>{
         });
     },[])
 
-
 return(
     <div>
         <ShopCardList Data={data}/>

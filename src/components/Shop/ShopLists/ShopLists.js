@@ -5,7 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import BreadCrumb from '../BreadCrumb/BreadCrumb';
 import FilterItems from '../FilterItems/FilterItems';
-import Cosmetic from './Cosmetic';
+import Cosmetic from './Cosmetic/Cosmetic';
 import Shampoo from './Shampoo';
 import PregenacyKit from './PregancyKit';
 import Diapers from './Diapers';
