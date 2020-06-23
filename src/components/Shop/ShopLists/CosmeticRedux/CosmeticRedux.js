@@ -2,10 +2,7 @@ import * as actionType from "./action";
 
 const initialState = {
   loading: false,
-  name: "",
-  description: "",
-  img: "",
-  price: "",
+  data: [],
   error: "",
 };
 
@@ -17,27 +14,22 @@ const reducer = (state = initialState, action) => {
         error: null,
         loading: true,
       };
-
-    case actionType.COSMETIC_SUCESS:
+    case actionType.COSMETIC_SUCCESS:
       return {
         ...state,
-        name: action.name,
-        description: action.description,
-        img: action.img,
-        price: action.price,
+        user: action.user,
+        userID: action.userID,
+        refreshToken: action.refreshToken,
         loading: false,
       };
-
     case actionType.COSMETIC_FAIL:
       return {
         ...state,
         error: action.error,
         loading: false,
       };
-
     default:
       return state;
   }
 };
-
 export default reducer;

@@ -1,17 +1,10 @@
-import fire from "../../../../config/fire";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import fire from "../../../../../config/fire";
 
 export const COSMETIC_START = "COSMETIC_START";
-export const COSMETIC_SUCCESS = "COSMETIC_SUCCESS ";
+export const COSMETIC_SUCCESS = "COSMETIC_SUCCESS";
 export const COSMETIC_FAIL = "COSMETIC_FAIL";
 
-const [data, setData] = useState([]);
-let dataArray = [];
-const { name, description, img, price } = props;
-const dispatch = useDispatch();
-
-const loading = useSelector((state) => state.AuthRedux.loading);
+// function call in redux
 
 export const cosmeticStart = () => {
   return {
@@ -19,26 +12,26 @@ export const cosmeticStart = () => {
   };
 };
 
-export const cosmeticSucess = () => {
+export const cosmeticSuccess = (data) => {
+  console.log("s", data);
   return {
     type: COSMETIC_SUCCESS,
-    name: name,
-    description: description,
-    img: img,
-    price: price,
+    data: data,
   };
 };
 
-export const cosmeticFail = () => {
+export const cosmeticError = (error) => {
   return {
-    type: COSMETIC_FAIL,
+    type: cosmeticError,
     error: error,
   };
 };
 
-export const cosmetic = () => {
+export const cosmeticHandler = () => {
   return (dispatch) => {
-    dispatch(cosmeticStart(name, description, img, price));
+    dispatch(cosmeticStart());
+    let name, desc, value;
+    let data = [];
     fire
       .database()
       .ref()
@@ -46,11 +39,28 @@ export const cosmetic = () => {
       .once("value")
       .then((response) => {
         for (let i = 0; i < response.val().length; i++) {
-          dataArray.push(response.val()[i]);
-        }
-        setData(dataArray);
-      });
+          fire
+            .storage()
+            .refFromURL(response.val()[i].img)
+            .getDownloadURL()
+            .then((img) => {
+              name = response.val()[i].name;
+              desc = response.val()[i].description;
+              value = response.val()[i].value;
 
-    dispatch(authFail(error.message));
+              data.push({ name, desc, value, img });
+
+              if (i < 1) {
+                dispatch(cosmeticSuccess(data));
+              }
+            })
+            .catch((error) => {
+              dispatch(cosmeticError(error));
+            });
+        }
+      })
+      .catch((error) => {
+        dispatch(cosmeticError(error));
+      });
   };
 };
