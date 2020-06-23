@@ -8,13 +8,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.COSMETIC_START:
+    case actionType.DIAPER_START:
       return {
         ...state,
         error: null,
         loading: true,
       };
-    case actionType.COSMETIC_SUCCESS:
+    case actionType.DIAPER_SUCCESS:
       return {
         ...state,
         user: action.user,
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
         refreshToken: action.refreshToken,
         loading: false,
       };
-    case actionType.COSMETIC_FAIL:
+    case actionType.DIAPER_FAIL:
       return {
         ...state,
         error: action.error,

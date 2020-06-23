@@ -1,41 +1,41 @@
 import fire from "../../../../../config/fire";
 
-export const COSMETIC_START = "COSMETIC_START";
-export const COSMETIC_SUCCESS = "COSMETIC_SUCCESS";
-export const COSMETIC_FAIL = "COSMETIC_FAIL";
+export const DIAPER_START = "COSMETIC_START";
+export const DIAPER_SUCCESS = "COSMETIC_SUCCESS";
+export const DIAPER_FAIL = "COSMETIC_FAIL";
 
 // function call in redux
 
-export const cosmeticStart = () => {
+export const diaperStart = () => {
   return {
-    type: COSMETIC_START,
+    type: DIAPER_START,
   };
 };
 
-export const cosmeticSuccess = (data) => {
+export const diaperSuccess = (data) => {
   console.log("s", data);
   return {
-    type: COSMETIC_SUCCESS,
+    type: DIAPER_SUCCESS,
     data: data,
   };
 };
 
-export const cosmeticError = (error) => {
+export const diaperError = (error) => {
   return {
-    type: cosmeticError,
+    type: diaperError,
     error: error,
   };
 };
 
-export const cosmeticHandler = () => {
+export const diaperHandler = () => {
   return (dispatch) => {
-    dispatch(cosmeticStart());
+    dispatch(diaperStart());
     let name, desc, value;
     let data = [];
     fire
       .database()
       .ref()
-      .child("Cosmetic")
+      .child("Diaper")
       .once("value")
       .then((response) => {
         for (let i = 0; i < response.val().length; i++) {
@@ -51,16 +51,16 @@ export const cosmeticHandler = () => {
               data.push({ name, desc, value, img });
 
               if (i < 1) {
-                dispatch(cosmeticSuccess(data));
+                dispatch(diaperSuccess(data));
               }
             })
             .catch((error) => {
-              dispatch(cosmeticError(error));
+              dispatch(diaperError(error));
             });
         }
       })
       .catch((error) => {
-        dispatch(cosmeticError(error));
+        dispatch(diaperError(error));
       });
   };
 };

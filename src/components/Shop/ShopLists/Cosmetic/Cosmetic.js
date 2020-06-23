@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
 import fire from "../../../../config/fire";
-import { cosmeticHandler } from "./CosmeticReducer/action";
+import { cosmeticHandler } from "./CosmeticRedux/action";
 import { useDispatch, useSelector } from "react-redux";
 
 const Cosmetic = (props) => {
-  const data = useSelector((state) => state.CosmeticReducer.data);
+  const data = useSelector((state) => state.CosmeticRedux.data) || [];
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!data) {
-      dispatch(cosmeticHandler());
-    }
+    dispatch(cosmeticHandler());
+    console.log("run");
   }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div>
