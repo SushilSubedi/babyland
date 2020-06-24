@@ -1,8 +1,8 @@
 import fire from "../../../../../config/fire";
 
-export const DIAPER_START = "COSMETIC_START";
-export const DIAPER_SUCCESS = "COSMETIC_SUCCESS";
-export const DIAPER_FAIL = "COSMETIC_FAIL";
+export const DIAPER_START = "DIAPER_START";
+export const DIAPER_SUCCESS = "DIAPER_SUCCESS";
+export const DIAPER_FAIL = "DIAPER_FAIL";
 
 // function call in redux
 
@@ -13,7 +13,7 @@ export const diaperStart = () => {
 };
 
 export const diaperSuccess = (data) => {
-  console.log("s", data);
+  // console.log("s", data);
   return {
     type: DIAPER_SUCCESS,
     data: data,
@@ -27,11 +27,13 @@ export const diaperError = (error) => {
   };
 };
 
+let name, desc, value, img;
+
 export const diaperHandler = () => {
   return (dispatch) => {
     dispatch(diaperStart());
-    let name, desc, value;
-    let data = [];
+    const data = [];
+    const imgList = [];
     fire
       .database()
       .ref()
@@ -43,20 +45,22 @@ export const diaperHandler = () => {
             .storage()
             .refFromURL(response.val()[i].img)
             .getDownloadURL()
-            .then((img) => {
-              name = response.val()[i].name;
-              desc = response.val()[i].description;
-              value = response.val()[i].value;
-
-              data.push({ name, desc, value, img });
-
-              if (i < 1) {
-                dispatch(diaperSuccess(data));
-              }
+            .then((image) => {
+              imgList.push(image);
             })
             .catch((error) => {
               dispatch(diaperError(error));
             });
+          setTimeout(() => {
+            name = response.val()[i].name;
+            desc = response.val()[i].description;
+            value = response.val()[i].value;
+            img = imgList[i];
+            data.push({ name, desc, value, img });
+            if (i === response.val().length - 1) {
+              dispatch(diaperSuccess(data));
+            }
+          }, 3000);
         }
       })
       .catch((error) => {

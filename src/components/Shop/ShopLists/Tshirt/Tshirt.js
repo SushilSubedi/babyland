@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
-import fire from "../../../../config/fire";
+import { tshirtHandler } from "./TShirtRedux/action";
+import { useDispatch, useSelector } from "react-redux";
 
 const Tshirt = () => {
-  const [data, setData] = useState([]);
-  let dataArray = [];
+  const data = useSelector((state) => state.TShirtRedux.data) || [];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fire
-      .database()
-      .ref()
-      .child("TShirt")
-      .once("value")
-      .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          dataArray.push(response.val()[i]);
-        }
-        setData(dataArray);
-      });
+    if (data) {
+      dispatch(tshirtHandler());
+    }
   }, []);
 
   return (

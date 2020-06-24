@@ -26,12 +26,14 @@ export const cosmeticError = (error) => {
     error: error,
   };
 };
-let name, desc, value;
-let data = [];
+
+let name, desc, value, img;
+
 export const cosmeticHandler = () => {
   return (dispatch) => {
     dispatch(cosmeticStart());
-
+    const data = [];
+    const imgList = [];
     fire
       .database()
       .ref()
@@ -39,9 +41,27 @@ export const cosmeticHandler = () => {
       .once("value")
       .then((response) => {
         for (let i = 0; i < response.val().length; i++) {
-          console.log("fake", i);
+          fire
+            .storage()
+            .refFromURL(response.val()[i].img)
+            .getDownloadURL()
+            .then((image) => {
+              imgList.push(image);
+            })
+            .catch((error) => {
+              dispatch(cosmeticError(error));
+            });
+          setTimeout(() => {
+            name = response.val()[i].name;
+            desc = response.val()[i].description;
+            value = response.val()[i].value;
+            img = imgList[i];
+            data.push({ name, desc, value, img });
+            if (i === response.val().length - 1) {
+              dispatch(cosmeticSuccess(data));
+            }
+          }, 3000);
         }
-        // console.log("oye", data);
       })
       .catch((error) => {
         dispatch(cosmeticError(error));
@@ -51,20 +71,3 @@ export const cosmeticHandler = () => {
 
 // export const imgHandler =(nam,description,val,image)=>{
 //   return {
-
-//     // fire.storage().refFromURL(image).getDownloadURL().then((img) => {
-//         name = nam
-//         desc = description
-//         value = val
-
-//         data.push({ nam, description, val, img });
-//         console.log("img", img);
-
-//       })
-//       .catch((error) => {
-//         dispatch(cosmeticError(error));
-//       });
-//       dispatch(cosmeticSuccess(data));
-
-//   }
-// }

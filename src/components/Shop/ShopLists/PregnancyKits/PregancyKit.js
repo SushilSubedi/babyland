@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
-import fire from "../../../../config/fire";
+import { pregnancykitHandler } from "./PregnancykitsRedux/action";
+import { useDispatch, useSelector } from "react-redux";
 
-const Pregancykit = () => {
-  const [data, setData] = useState([]);
-  let dataArray = [];
+const Pregancykit = (props) => {
+  const data = useSelector((state) => state.PregnancyKitsRedux.data) || [];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fire
-      .database()
-      .ref()
-      .child("PregnancyKit")
-      .once("value")
-      .then((response) => {
-        for (let i = 0; i < response.val()?.length; i++) {
-          dataArray.push(response.val()[i]);
-        }
-        setData(dataArray);
-      });
+    if (data) {
+      dispatch(pregnancykitHandler());
+    }
   }, []);
 
   return (

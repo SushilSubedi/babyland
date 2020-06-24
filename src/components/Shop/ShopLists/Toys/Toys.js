@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
-import fire from "../../../../config/fire";
+import { toyHandler } from "./ToysRedux/action";
+import { useDispatch, useSelector } from "react-redux";
 
 const Toys = (props) => {
-  const [data, setData] = useState([]);
-  let dataArray = [];
+  const data = useSelector((state) => state.ToyRedux.data) || [];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fire
-      .database()
-      .ref()
-      .child("Toys")
-      .once("value")
-      .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          dataArray.push(response.val()[i]);
-        }
-        setData(dataArray);
-      });
+    if (data) {
+      dispatch(toyHandler());
+    }
   }, []);
 
   return (

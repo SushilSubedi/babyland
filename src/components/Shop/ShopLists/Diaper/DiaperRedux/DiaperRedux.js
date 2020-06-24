@@ -17,9 +17,7 @@ const reducer = (state = initialState, action) => {
     case actionType.DIAPER_SUCCESS:
       return {
         ...state,
-        user: action.user,
-        userID: action.userID,
-        refreshToken: action.refreshToken,
+        data: action.data,
         loading: false,
       };
     case actionType.DIAPER_FAIL:

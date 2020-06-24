@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
-import fire from "../../../../config/fire";
 import { cosmeticHandler } from "./CosmeticRedux/action";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,13 +8,10 @@ const Cosmetic = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(cosmeticHandler());
-    console.log("run");
-  }, []);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+    if(data){
+      dispatch(cosmeticHandler());
+    }
+  },[]);
 
   return (
     <div>
