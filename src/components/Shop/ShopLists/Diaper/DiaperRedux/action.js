@@ -5,7 +5,6 @@ export const DIAPER_SUCCESS = "DIAPER_SUCCESS";
 export const DIAPER_FAIL = "DIAPER_FAIL";
 
 // function call in redux
-
 export const diaperStart = () => {
   return {
     type: DIAPER_START,
@@ -22,7 +21,7 @@ export const diaperSuccess = (data) => {
 
 export const diaperError = (error) => {
   return {
-    type: diaperError,
+    type: DIAPER_FAIL,
     error: error,
   };
 };
