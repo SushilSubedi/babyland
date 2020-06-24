@@ -36,12 +36,13 @@ export const cosmeticHandler = () => {
         let data = []
         fire.database().ref().child('Cosmetic').once('value').then(response =>{
            for(let i = 0; i < response.val().length; i ++ ){
+               console.log(i<"i")
             fire.storage().refFromURL(response.val()[i].img).getDownloadURL().then(img => {
 
                 name = response.val()[i].name;
                 desc = response.val()[i].description;
                 value = response.val()[i].value;
-
+                console.log(img);
                 data.push({name,desc,value,img});
 
                 if(i < 1){

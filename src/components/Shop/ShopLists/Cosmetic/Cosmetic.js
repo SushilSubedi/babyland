@@ -5,7 +5,7 @@ import { cosmeticHandler } from './CosmeticReducer/action';
 import { useDispatch,useSelector } from 'react-redux';
 
 const Cosmetic = (props) =>{
-    const data = useSelector(state => state.CosmeticReducer.data);
+    const data = useSelector(state => state.CosmeticRedux.data);
     const dispatch = useDispatch();
 
     useEffect(()=>{
