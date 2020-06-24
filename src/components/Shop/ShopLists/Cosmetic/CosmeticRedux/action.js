@@ -40,7 +40,6 @@ export const cosmeticHandler = () => {
       .then((response) => {
         for (let i = 0; i < response.val().length; i++) {
           console.log("fake", i);
-          
         }
         // console.log("oye", data);
       })
@@ -50,24 +49,22 @@ export const cosmeticHandler = () => {
   };
 };
 
+// export const imgHandler =(nam,description,val,image)=>{
+//   return {
 
-export const imgHandler =(nam,description,val,image)=>{
-  return {
-   
-    fire.storage().refFromURL(image).getDownloadURL().then((img) => {
-        name = nam
-        desc = description
-        value = val
+//     // fire.storage().refFromURL(image).getDownloadURL().then((img) => {
+//         name = nam
+//         desc = description
+//         value = val
 
-        data.push({ nam, description, val, img });
-        console.log("img", img);
+//         data.push({ nam, description, val, img });
+//         console.log("img", img);
 
-       
-      })
-      .catch((error) => {
-        dispatch(cosmeticError(error));
-      });
-      dispatch(cosmeticSuccess(data));
+//       })
+//       .catch((error) => {
+//         dispatch(cosmeticError(error));
+//       });
+//       dispatch(cosmeticSuccess(data));
 
-  }
-}
+//   }
+// }
