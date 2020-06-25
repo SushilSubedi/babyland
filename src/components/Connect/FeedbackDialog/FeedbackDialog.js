@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   makeStyles,
   createStyles,
@@ -24,7 +25,6 @@ const FeedbackDialog = (props) => {
   const classes = useStyles();
 
   const handleEmail = (e) => {
-    console.log("email");
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (e.target.value === "") {
       setIsValid(false);
@@ -39,21 +39,20 @@ const FeedbackDialog = (props) => {
     setEmail(e.target.value);
   };
   const handleSubject = (e) => {
-    console.log("subject");
     if (e.target.value === "") {
       setIsValid(false);
-      setSubject("Subject field is empty");
+      setSubjectMessage("Subject field is empty");
     } else if (e.target.value.length > 5 && e.target.value.length < 30) {
       setIsValid(true);
       setSubjectMessage(null);
     } else {
       setIsValid(false);
-      setSubject("Subject is not valid");
+      setSubjectMessage("Subject is not valid");
     }
     setSubject(e.target.value);
   };
+
   const handleMessage = (e) => {
-    console.log("message");
     if (e.target.value === "") {
       setIsValid(false);
       setFeedbackMessage("Message field is empty");
@@ -67,7 +66,6 @@ const FeedbackDialog = (props) => {
     setMessage(e.target.value);
   };
   const onSubmitHandler = () => {
-    console.log("hello");
     if (
       emailMessage === null &&
       subjectMessage === null &&
@@ -79,8 +77,8 @@ const FeedbackDialog = (props) => {
       setMessage("");
     } else if (!isValid) {
       setSubjectMessage("Subject field is empty");
-      setEmailMessage("Email-address is empty");
-      setFeedbackMessage("Message is empty");
+      setEmailMessage("Email-address field is empty");
+      setFeedbackMessage("Message field is empty");
     } else if (emailMessage === "") {
       setEmailMessage("Email-address is empty");
     } else if (subjectMessage === "") {
@@ -135,7 +133,6 @@ const FeedbackDialog = (props) => {
                     type={items.type}
                     value={items.value}
                     onChange={items.onChange}
-                    comment={true}
                     errorMessage={items.errorMessage}
                     outlined="outlined"
                     className={classes.message}

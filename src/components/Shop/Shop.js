@@ -1,12 +1,12 @@
-import React from 'react';
-import ShopLists from './ShopLists/ShopLists';
+import React from "react";
+import ShopLists from "./ShopLists/ShopLists";
 
-const Shop = () =>{
-    return(
-        <div>
-            <ShopLists/>
-        </div>
-    )
-}
+const Shop = () => {
+  return (
+    <div>
+      <ShopLists />
+    </div>
+  );
+};
 
 export default Shop;

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -16,7 +16,6 @@ const ShopCard = (props) =>{
             setIcon(false);
         }
     }
-
     return(
        <Box component={Paper} className={classes.card}>
            <Container className={classes.Container}>
