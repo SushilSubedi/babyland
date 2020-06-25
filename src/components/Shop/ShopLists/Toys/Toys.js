@@ -8,7 +8,7 @@ const Toys = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data) {
+    if (data.length === 0) {
       dispatch(toyHandler());
     }
   }, []);

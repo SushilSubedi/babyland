@@ -27,7 +27,7 @@ export const shampooError = (error) => {
   };
 };
 
-let name, desc, value, img;
+let name, description, value, img;
 
 export const shampooHandler = () => {
   return (dispatch) => {
@@ -41,11 +41,7 @@ export const shampooHandler = () => {
       .once("value")
       .then((response) => {
         for (let i = 0; i < response.val().length; i++) {
-          fire
-            .storage()
-            .refFromURL(response.val()[i].img)
-            .getDownloadURL()
-            .then((image) => {
+          fire.storage().refFromURL(response.val()[i].img).getDownloadURL().then((image) => {
               imgList.push(image);
             })
             .catch((error) => {
@@ -53,11 +49,11 @@ export const shampooHandler = () => {
             });
           setTimeout(() => {
             name = response.val()[i].name;
-            desc = response.val()[i].description;
+            description = response.val()[i].description;
             value = response.val()[i].value;
             img = imgList[i];
-            data.push({ name, desc, value, img });
-            if (i === response.val().length - 1) {
+            data.push({ name, description, value, img });
+            if (i === (response.val().length - 1)) {
               dispatch(shampooSuccess(data));
             }
           }, 3000);

@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 const Diapers = (props) => {
   const data = useSelector((state) => state.ShampooRedux.data) || [];
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (data) {
+    if (data.length === 0) {
       dispatch(shampooHandler());
     }
   }, []);

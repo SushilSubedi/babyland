@@ -27,7 +27,7 @@ export const tshirtError = (error) => {
   };
 };
 
-let name, desc, value, img;
+let name, description, value, img;
 
 export const tshirtHandler = () => {
   return (dispatch) => {
@@ -53,10 +53,10 @@ export const tshirtHandler = () => {
             });
           setTimeout(() => {
             name = response.val()[i].name;
-            desc = response.val()[i].description;
+            description = response.val()[i].description;
             value = response.val()[i].value;
             img = imgList[i];
-            data.push({ name, desc, value, img });
+            data.push({ name, description, value, img });
             if (i === response.val().length - 1) {
               dispatch(tshirtSuccess(data));
             }

@@ -27,7 +27,7 @@ export const cosmeticError = (error) => {
   };
 };
 
-let name, desc, value, img;
+let name, description, value, img;
 
 export const cosmeticHandler = () => {
   return (dispatch) => {
@@ -53,11 +53,11 @@ export const cosmeticHandler = () => {
             });
           setTimeout(() => {
             name = response.val()[i].name;
-            desc = response.val()[i].description;
+            description = response.val()[i].description;
             value = response.val()[i].value;
             img = imgList[i];
-            data.push({ name, desc, value, img });
-            if (i === response.val().length - 1) {
+            data.push({ name, description, value, img });
+            if (i === (response.val().length - 1)) {
               dispatch(cosmeticSuccess(data));
             }
           }, 3000);
