@@ -22,7 +22,7 @@ export const cosmeticSuccess = (data) => {
 
 export const cosmeticError = (error) => {
   return {
-    type: cosmeticError,
+    type: COSMETIC_FAIL,
     error: error,
   };
 };

@@ -8,7 +8,7 @@ const Cosmetic = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(data){
+    if(data.length === 0){
       dispatch(cosmeticHandler());
     }
   },[]);

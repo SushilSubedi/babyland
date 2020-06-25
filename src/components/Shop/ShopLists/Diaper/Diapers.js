@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
-import fire from "../../../../config/fire";
-import { diaperHandler } from "./DiaperRedux/action";
+import { DiaperHandler } from "./DiaperRedux/action";
 import { useDispatch, useSelector } from "react-redux";
 const Diapers = (props) => {
-  const data = useSelector((state) => state.DiaperReducer.data);
+  const data = useSelector((state) => state.DiaperReducer.data) || [];
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!data) {
-      dispatch(diaperHandler());
+    if (data.length === 0) {
+      dispatch(DiaperHandler());
     }
-  }, []);
+  },[]);
 
   return (
     <div>
