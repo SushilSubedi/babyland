@@ -1,4 +1,5 @@
 import fire from "../../../../../config/fire";
+import { imageUrlHandler } from "../../Shampoo/ShampooRedux/action";
 
 export const TOY_START = " TOY_START";
 export const TOY_SUCCESS = " TOY_SUCCESS";
@@ -27,8 +28,6 @@ export const toyError = (error) => {
   };
 };
 
-let name, description, value, img;
-
 export const toyHandler = () => {
   return (dispatch) => {
     dispatch(toyStart());
@@ -40,28 +39,30 @@ export const toyHandler = () => {
       .child("Toys")
       .once("value")
       .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          fire
-            .storage()
-            .refFromURL(response.val()[i].img)
-            .getDownloadURL()
-            .then((image) => {
-              imgList.push(image);
+        response.val().forEach((element) => {
+          const promise = imageUrlHandler(element.img)
+            .then((url) => {
+              return url;
             })
             .catch((error) => {
               dispatch(toyError(error));
             });
-          setTimeout(() => {
-            name = response.val()[i].name;
-            description = response.val()[i].description;
-            value = response.val()[i].value;
-            img = imgList[i];
-            data.push({ name, description, value, img });
-            if (i === response.val().length - 1) {
-              dispatch(toySuccess(data));
-            }
-          }, 3000);
-        }
+          imgList.push(promise);
+          Promise.all(imgList)
+            .then((items) => {
+              const dataCollection = {
+                name: element.name,
+                description: element.description,
+                value: element.value,
+                img: items[items.length - 1],
+              };
+              data.push(dataCollection);
+              if (data.length === response.val().length) {
+                dispatch(toySuccess(data));
+              }
+            })
+            .catch((error) => dispatch(toyError(error)));
+        });
       })
       .catch((error) => {
         dispatch(toyError(error));

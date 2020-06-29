@@ -1,4 +1,5 @@
 import fire from "../../../../../config/fire";
+import { imageUrlHandler } from "../../Shampoo/ShampooRedux/action";
 
 export const DIAPER_START = "DIAPER_START";
 export const DIAPER_SUCCESS = "DIAPER_SUCCESS";
@@ -26,8 +27,6 @@ export const diaperError = (error) => {
   };
 };
 
-let name, description, value, img;
-
 export const diaperHandler = () => {
   return (dispatch) => {
     dispatch(diaperStart());
@@ -39,28 +38,30 @@ export const diaperHandler = () => {
       .child("Diaper")
       .once("value")
       .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          fire
-            .storage()
-            .refFromURL(response.val()[i].img)
-            .getDownloadURL()
-            .then((image) => {
-              imgList.push(image);
+        response.val().forEach((element) => {
+          const promise = imageUrlHandler(element.img)
+            .then((url) => {
+              return url;
             })
             .catch((error) => {
               dispatch(diaperError(error));
             });
-          setTimeout(() => {
-            name = response.val()[i].name;
-            description = response.val()[i].description;
-            value = response.val()[i].value;
-            img = imgList[i];
-            data.push({ name, description, value, img });
-            if (i === response.val().length - 1) {
-              dispatch(diaperSuccess(data));
-            }
-          }, 3000);
-        }
+          imgList.push(promise);
+          Promise.all(imgList)
+            .then((items) => {
+              const dataCollection = {
+                name: element.name,
+                description: element.description,
+                value: element.value,
+                img: items[items.length - 1],
+              };
+              data.push(dataCollection);
+              if (data.length === response.val().length) {
+                dispatch(diaperSuccess(data));
+              }
+            })
+            .catch((error) => dispatch(diaperError(error)));
+        });
       })
       .catch((error) => {
         dispatch(diaperError(error));

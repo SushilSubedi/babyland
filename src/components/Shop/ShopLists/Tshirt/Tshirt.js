@@ -3,12 +3,12 @@ import ShopCardList from "../ShopCardList/ShopCardList";
 import { tshirtHandler } from "./TShirtRedux/action";
 import { useDispatch, useSelector } from "react-redux";
 
-const Tshirt = () => {
+const Tshirt = (props) => {
   const data = useSelector((state) => state.TShirtRedux.data) || [];
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data) {
+    if (data.length === 0) {
       dispatch(tshirtHandler());
     }
   }, []);

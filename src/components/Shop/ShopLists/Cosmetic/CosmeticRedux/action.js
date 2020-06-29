@@ -1,4 +1,5 @@
 import fire from "../../../../../config/fire";
+import { imageUrlHandler } from "../../Shampoo/ShampooRedux/action";
 
 export const COSMETIC_START = "COSMETIC_START";
 export const COSMETIC_SUCCESS = "COSMETIC_SUCCESS";
@@ -27,8 +28,6 @@ export const cosmeticError = (error) => {
   };
 };
 
-let name, description, value, img;
-
 export const cosmeticHandler = () => {
   return (dispatch) => {
     dispatch(cosmeticStart());
@@ -40,34 +39,33 @@ export const cosmeticHandler = () => {
       .child("Cosmetic")
       .once("value")
       .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          fire
-            .storage()
-            .refFromURL(response.val()[i].img)
-            .getDownloadURL()
-            .then((image) => {
-              imgList.push(image);
+        response.val().forEach((element) => {
+          const promise = imageUrlHandler(element.img)
+            .then((url) => {
+              return url;
             })
             .catch((error) => {
               dispatch(cosmeticError(error));
             });
-          setTimeout(() => {
-            name = response.val()[i].name;
-            description = response.val()[i].description;
-            value = response.val()[i].value;
-            img = imgList[i];
-            data.push({ name, description, value, img });
-            if (i === (response.val().length - 1)) {
-              dispatch(cosmeticSuccess(data));
-            }
-          }, 3000);
-        }
+          imgList.push(promise);
+          Promise.all(imgList)
+            .then((items) => {
+              const dataCollection = {
+                name: element.name,
+                description: element.description,
+                value: element.value,
+                img: items[items.length - 1],
+              };
+              data.push(dataCollection);
+              if (items.length === response.val().length) {
+                dispatch(cosmeticSuccess(data));
+              }
+            })
+            .catch((error) => dispatch(cosmeticError(error)));
+        });
       })
       .catch((error) => {
         dispatch(cosmeticError(error));
       });
   };
 };
-
-// export const imgHandler =(nam,description,val,image)=>{
-//   return {

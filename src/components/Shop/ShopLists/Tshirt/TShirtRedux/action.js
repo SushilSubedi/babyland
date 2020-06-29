@@ -1,4 +1,5 @@
 import fire from "../../../../../config/fire";
+import { imageUrlHandler } from "../../Shampoo/ShampooRedux/action";
 
 export const TSHIRT_START = "TSHIRT_START";
 export const TSHIRT_SUCCESS = "TSHIRT_SUCCESS";
@@ -27,41 +28,42 @@ export const tshirtError = (error) => {
   };
 };
 
-let name, description, value, img;
-
 export const tshirtHandler = () => {
   return (dispatch) => {
     dispatch(tshirtStart());
+
     const data = [];
-    const imgList = [];
+    const imglist = [];
     fire
       .database()
       .ref()
       .child("TShirt")
       .once("value")
       .then((response) => {
-        for (let i = 0; i < response.val().length; i++) {
-          fire
-            .storage()
-            .refFromURL(response.val()[i].img)
-            .getDownloadURL()
-            .then((image) => {
-              imgList.push(image);
+        response.val().forEach((element) => {
+          const promise = imageUrlHandler(element.img)
+            .then((url) => {
+              return url;
             })
             .catch((error) => {
               dispatch(tshirtError(error));
             });
-          setTimeout(() => {
-            name = response.val()[i].name;
-            description = response.val()[i].description;
-            value = response.val()[i].value;
-            img = imgList[i];
-            data.push({ name, description, value, img });
-            if (i === response.val().length - 1) {
-              dispatch(tshirtSuccess(data));
-            }
-          }, 3000);
-        }
+          imglist.push(promise);
+          Promise.all(imglist)
+            .then((items) => {
+              const dataCollection = {
+                name: element.name,
+                description: element.description,
+                value: element.value,
+                img: items[items.length - 1],
+              };
+              data.push(dataCollection);
+              if (data.length === response.val().length) {
+                dispatch(tshirtSuccess(data));
+              }
+            })
+            .catch((err) => dispatch(tshirtError(err)));
+        });
       })
       .catch((error) => {
         dispatch(tshirtError(error));
