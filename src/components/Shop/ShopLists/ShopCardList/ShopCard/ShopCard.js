@@ -46,7 +46,7 @@ const useStyles = makeStyles(
     createStyles({
         card: {
             display: 'flex',
-            justifyContent: 'column',
+            flowDirection: 'column',
              width: '320px',
             // height: '340px',
             minHeight:'320px',

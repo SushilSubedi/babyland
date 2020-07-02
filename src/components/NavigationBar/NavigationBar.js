@@ -28,8 +28,14 @@ const NavigationBar = (props) => {
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
 
   const handleOpenMenu = (event) =>{
-    setOpen(true);
+    if(!open){
+      setOpen(true);
     setAnchorEl(event.currentTarget)
+    } else {
+      setOpen(false);
+    setAnchorEl(null);
+    }
+    
   }
 
   const handleCloseMenu = () =>{

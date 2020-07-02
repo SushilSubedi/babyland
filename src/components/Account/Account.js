@@ -8,15 +8,15 @@ const Account = (props) => {
   const data = [
     {
     name: `MyProfile`,
-      link: '/Myprofile'
+      link: '/Profile'
     },
     {
       name: 'My wishlist',
-      link: '/Mywishlist'
+      link: '/Wishlist'
     },
     {
       name: 'My Order',
-      link: '/MyOrder'
+      link: '/Order'
     },
     {
       name: 'Logout',
@@ -27,7 +27,6 @@ const Account = (props) => {
   return (
     <div>
       <Menu
-        anchorReference="anchorOrigin"
         anchorEl={anchorEl}
         getContentAnchorEl={null}
         keepMounted
@@ -43,7 +42,11 @@ const Account = (props) => {
          onClose={handleClose}
       >
         {data.map((list,index) =>{
-          return (<Link className={classes.Link} key={index} to={list.link}><MenuItem >{list.name}</MenuItem></Link>)
+          return (
+          <Link className={classes.Link} key={index} to={list.link}>
+            <MenuItem onClick={handleClose}>{list.name}</MenuItem>
+            </Link>
+            )
         })}
       </Menu>
     </div>
