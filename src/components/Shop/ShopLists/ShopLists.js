@@ -128,11 +128,12 @@ const useStyles = makeStyles((theme) =>
     root: {
       backgroundColor: theme.palette.background.paper,
       display: "flex",
-      height: 350,
+      height: 350
     },
     tabs: {
       border: `1px solid ${theme.palette.divider}`,
       width: "70%",
+      maxWidth: '500px'
     },
     rootTabs: {
       maxWidth: "600px",

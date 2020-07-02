@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
 import { diaperHandler } from "./DiaperRedux/action";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from '../../../../GlobalComponents/Loader';
+
 const Diapers = (props) => {
   const data = useSelector((state) => state.DiaperRedux.data) || [];
   const dispatch = useDispatch();
@@ -11,9 +13,16 @@ const Diapers = (props) => {
       dispatch(diaperHandler());
     }
   }, []);
+  
+  let shoplist = <ShopCardList Data={data} />
+  
+  if(data.length === 0){
+    shoplist = <Loader/>
+  }
+ 
   return (
     <div>
-      <ShopCardList Data={data} />
+        {shoplist}
     </div>
   );
 };

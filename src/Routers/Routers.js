@@ -1,27 +1,30 @@
-import React from "react";
+import React,{lazy} from "react";
 import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Baby from "../components/Baby/Baby";
 import Shop from "../components/Shop/Shop";
-import Authentication from "../components/Authentication/Authentication";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
 import Cart from "../components/Cart/Cart";
-import Logout from "../Logout/logout";
-import Account from "../components/Account/Account";
-import WishList from "../components/Account/Wishlist/Wishlist";
 import { useSelector } from 'react-redux';
 
 const Routers = () => {
   const classes = useStyles();
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
 
+
+  let ayscAuth = lazy(() => import('../components/Authentication/Authentication'));
+  let ayscWishlist = lazy(() => import('../components/Account/Wishlist/Wishlist'));
+  let ayscAccount = lazy(() => import('../components/Account/Account'));
+  let ayscLogout = lazy(() => import('../Logout/logout'));
+
+
   let switchs = (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/Baby" component={Baby} />
         <Route path="/shop" component={Shop} />
-        <Route path="/Authentication" component={Authentication} />
+        <Route path="/Authentication" component={ayscAuth} />
         <Route path="/Cart" component={Cart} />
         <Redirect to='/'/>
       </Switch>
@@ -33,9 +36,9 @@ const Routers = () => {
         <Route path="/" exact component={Home} />
         <Route path="/Baby" component={Baby} />
         <Route path="/shop" component={Shop} />
-        <Route path="/logout" component={Logout} />
-        <Route path ='/Account' component={Account}/>
-        <Route path = '/Wishlist' component={WishList}/>
+        <Route path="/logout" component={ayscLogout} />
+        <Route path ='/Account' component={ayscAccount}/>
+        <Route path = '/Wishlist' component={ayscWishlist}/>
         <Route path="/Cart" component={Cart} />
         <Redirect to='/'/>
       </Switch>

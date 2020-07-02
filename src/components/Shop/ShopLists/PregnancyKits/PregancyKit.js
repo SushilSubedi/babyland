@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
 import { pregnancykitHandler } from "./PregnancykitsRedux/action";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from '../../../../GlobalComponents/Loader';
 
 const Pregancykit = (props) => {
   const data = useSelector((state) => state.PregnancyKitsRedux.data) || [];
@@ -13,9 +14,15 @@ const Pregancykit = (props) => {
     }
   }, []);
 
+  let shoplist = <ShopCardList Data={data} />
+  
+  if(data.length === 0){
+    shoplist = <Loader/>
+  }
+ 
   return (
     <div>
-      <ShopCardList Data={data} />
+        {shoplist}
     </div>
   );
 };
