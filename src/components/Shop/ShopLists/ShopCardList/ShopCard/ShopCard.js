@@ -38,8 +38,31 @@ const ShopCard = (props) =>{
 
     };
 
-    //important stuff
+    //important
+//     const dataRetireve = () =>{
+//         const userId = localStorage.getItem('userID');
+//         const cartData = [];
+//         fire.database().ref(`/cart/${userId}`).on("value",(snapshort)=>{
+//             const data = snapshort.val();
+//             //abstract keys from a object
+//             const keys = Object.keys(data);
+//             console.log("key",keys);
+//             keys.forEach(key =>{
+//                 const dataCollection = {
+//                     name: data[key].name,
+//                     description: data[key].description,
+//                     value: data[key].value,
+//                     img: data[key].img
+//                 }
+//                 cartData.push(cartData);
+//                 console.log(cartData);
+//             })
+//         })
+//     }
 
+//    useEffect(()=> {
+//     dataRetireve();
+//    },[])
 
     return(
        <Box component={Paper} className={classes.card}>
