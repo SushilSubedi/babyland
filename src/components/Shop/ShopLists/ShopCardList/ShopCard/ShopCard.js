@@ -26,9 +26,10 @@ const ShopCard = (props) =>{
         const newPostKey = fire.database().ref().child(cartWishlist).push().key;
         const updateData = {};
         const data = {
+            postId: newPostKey,
             name: name,
             description: description,
-            value: price,
+            value: value,
             img: img
         }
         updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
@@ -36,6 +37,9 @@ const ShopCard = (props) =>{
         return fire.database().ref().update(updateData);
 
     };
+
+    //important stuff
+
 
     return(
        <Box component={Paper} className={classes.card}>
