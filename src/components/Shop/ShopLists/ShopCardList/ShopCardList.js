@@ -5,6 +5,7 @@ import ShopCard from './ShopCard/ShopCard';
 
 const ShopCartList = (props) =>{
     const { Data } = props;
+
     return(
         <Grid item md={12}>
             <Grid container>
@@ -15,6 +16,7 @@ const ShopCartList = (props) =>{
                             description={item.description}
                             price={item.value}
                             img={item.img}
+                            identifer={item.id}
                         />
                     </Grid>
                 ))}

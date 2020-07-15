@@ -19,7 +19,7 @@ const WishList = () => {
                 value: data[k].value,
                 img: data[k].img
                }
-               cartData.push(dataCollection)
+               cartData.push(dataCollection);
            }
         })
     }
