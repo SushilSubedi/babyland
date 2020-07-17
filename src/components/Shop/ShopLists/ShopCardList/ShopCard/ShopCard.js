@@ -4,7 +4,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import fire from '../../../../../config/fire';
 import { Alert } from '@material-ui/lab';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { fetchWishlistData } from '../../../../Account/Wishlist/WishlistRedux/action'
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
@@ -13,7 +14,11 @@ const ShopCard = (props) =>{
     const classes = useStyles();
     const { name,description,img,price,identifer } = props;
     const token = useSelector(state => state.AuthRedux.refreshToken) || [];
+    const cartData = useSelector(state => state.WishlistRedux.data) || [];
+    const dispatch = useDispatch();
     
+
+
     const onClickIcon = (cartWishlist,img,name,description,value) =>{
         if(icon === false){
             setIcon(true);
@@ -23,7 +28,6 @@ const ShopCard = (props) =>{
         }
         
     }
-    
 
     const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
         if(token.length !== 0){
@@ -43,7 +47,6 @@ const ShopCard = (props) =>{
             }
             setOpenToolTip(true);
             updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
-    
             return fire.database().ref().update(updateData);
         }
     };
