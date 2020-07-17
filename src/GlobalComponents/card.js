@@ -36,14 +36,6 @@ const Card = (props) => {
 
             />
           </div>
-          
-          <Button
-              variant="contained"
-              className={classes.button}>
-                                            
-              Checkout
-          </Button>  
-
                                                           
                                                 
                                               
@@ -66,7 +58,7 @@ const useStyles = makeStyles(
       card: {
           display: 'flex',
           justifyContent: 'column',
-          width: '460px',
+          width: '600px',
           height: '435px',
           minHeight: '320px',
           padding: '2% 1% 4% 1%',
@@ -75,6 +67,9 @@ const useStyles = makeStyles(
           boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)',
           marginLeft: "300px",  
           
+      },
+      Container:{
+        width:"410px",
       },
       
       itemslist:{
@@ -86,7 +81,7 @@ const useStyles = makeStyles(
           fontSize:"20px",
           color:'black',
           positon:"relative",
-          top:"280px",
+          top:"380px",
           right:"30px",
           fontFamily:"sans-serif",
           backgroundColor:'#d21f3c',
@@ -98,47 +93,15 @@ const useStyles = makeStyles(
           
 
       },
-      price:{
-          display:"flex",
-          justifyContent:"space-around",
-          position:"absolute",
-          bottom:"762px",
-          fontSize:"22px",
-          left:"900px",
-          color:'black',
-      },
-      button:{
-          display:"flex",
-          position:"relative",
-          right:"110px",
-          top:"400px",
-          color:'black',
-          fontSize:"22px",
-          fontFamily:"sans-serif",
-          backgroundColor:'pink',
-          textTransform:'initial',
-          fontSize:"20px",
-          '&:hover': {
-              backgroundColor:'hotpink'
-          }
-      },
-      total:{
-          display:"flex",
-          justifyContent:"space-around",
-          position:"absolute",
-          bottom:"762px",
-          right:"400px",
-          fontSize:"22px",
-          color:'black',
-           
-      },
       
+     
+           
       quantity:{
           fontSize:"18px",
           color:'black',
           position:"relative",
-          top:"280px",
-          left:"187px",
+          top:"380px",
+          left:"100px",
           fontFamily:"sans-serif",
           backgroundColor:'#eb6123',
           textTransform:'initial',
@@ -152,8 +115,8 @@ const useStyles = makeStyles(
 
       select:{
         position:"relative",
-        top:"320px",
-        left:"160px",
+        top:"430px",
+        left:"30px",
 
       }
       

@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   makeStyles,
   createStyles,
   Box,
-  Paper,
-  Container,
+  Paper
 } from "@material-ui/core";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import BreadCrumb from "../BreadCrumb/BreadCrumb";
-import FilterItems from "../FilterItems/FilterItems";
 import Cosmetic from "../ShopLists/Cosmetic/Cosmetic";
 import Shampoo from "../ShopLists/Shampoo/Shampoo";
 import PregenacyKit from "../ShopLists/PregnancyKits/PregancyKit";
@@ -49,7 +47,6 @@ const ShopLists = (props) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [label, setlabel] = useState("T-shirt");
-  const [img, setImg] = useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,7 +76,7 @@ const ShopLists = (props) => {
   return (
     <Box padding="1% 0 0 0%">
       <BreadCrumb item={label} />
-      <FilterItems />
+      <Typography variant="h5" className={classes.Typography}>Shopping List:</Typography>
       <Box component={Paper} className={classes.root} elevation={0}>
         <Tabs
           orientation="vertical"
@@ -128,15 +125,21 @@ const useStyles = makeStyles((theme) =>
     root: {
       backgroundColor: theme.palette.background.paper,
       display: "flex",
-      height: 350,
+      height: 350
     },
     tabs: {
       border: `1px solid ${theme.palette.divider}`,
       width: "70%",
+      maxWidth: '500px'
     },
     rootTabs: {
       maxWidth: "600px",
     },
+    Typography: {
+      color:'#00669b',
+      alignSelf:'flex-end',
+      padding: '10px 0'
+  }
   })
 );
 

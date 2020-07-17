@@ -4,13 +4,13 @@ import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, Ic
 
 import Card from '../../GlobalComponents/card';
 import Items from './allitems';
-import Total from './Total';
+
 
 
 
 const Cart = (props) => {
     const classes = useStyles();
-    // const [quantity, setQuantity] = useState('');
+
 
     return (
         <div >
@@ -25,8 +25,12 @@ const Cart = (props) => {
             </Box>
             <div className={classes.cart}>
                 <Card />
-                <Items />
-                <Total />
+                <div className={classes.items}>
+                    <Items />
+                </div>
+
+
+
 
             </div>
 
@@ -45,15 +49,18 @@ const useStyles = makeStyles(
     createStyles({
         cart: {
             width: "1200px",
-            // border: "5px ",
             padding: "40px",
             margin: "3% 0% 0% 8%",
             display: "flex",
-            justifyContent: "space-around",
-
-
+            justifyContent: "space-evenly ",
 
         },
+
+        items: {
+            marginLeft: "520px"
+
+        },
+
 
 
     })

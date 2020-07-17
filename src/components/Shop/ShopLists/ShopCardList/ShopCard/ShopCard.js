@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import fire from '../../../../../config/fire';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
@@ -9,13 +10,33 @@ const ShopCard = (props) =>{
     const classes = useStyles();
     const { name,description,img,price } = props;
     
-    const onClickIcon = () =>{
+    const onClickIcon = (cartWishlist,img,name,description,value) =>{
         if(icon === false){
             setIcon(true);
+            AddToCardWishlistHandler(cartWishlist,img,name,description,value);
         }else{
             setIcon(false);
         }
+        
     }
+    
+
+    const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
+        const userId = localStorage.getItem('userID');
+        const newPostKey = fire.database().ref().child(cartWishlist).push().key;
+        const updateData = {};
+        const data = {
+            name: name,
+            description: description,
+            value: price,
+            img: img
+        }
+        updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
+
+        return fire.database().ref().update(updateData);
+
+    };
+
     return(
        <Box component={Paper} className={classes.card}>
            <Container className={classes.Container}>
@@ -28,12 +49,12 @@ const ShopCard = (props) =>{
                     <Typography variant= "h6" style={{color:'#e85831',fontWeight:'700'}}>Rs.{price}</Typography>
                     <div className={classes.cartWishlist}>
                         <div>
-                           <IconButton classes ={{root: classes.root}} onClick={onClickIcon}>
+                           <IconButton classes ={{root: classes.root}} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
                         </div>
                         <div>
-                            <Button className={classes.button}>Add to cart</Button>
+                            <Button className={classes.button} onClick={()=>AddToCardWishlistHandler("cart",img,name,description,price)}>Add to cart</Button>
                         </div>
                     </div>
                 </div>
@@ -46,7 +67,7 @@ const useStyles = makeStyles(
     createStyles({
         card: {
             display: 'flex',
-            justifyContent: 'column',
+            flowDirection: 'column',
              width: '320px',
             // height: '340px',
             minHeight:'320px',

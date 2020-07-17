@@ -43,8 +43,7 @@ export const pregnancykitHandler = () => {
           const promise = imageUrlHandler(element.img)
             .then((url) => {
               return url;
-            })
-            .catch((error) => {
+            }).catch((error) => {
               dispatch(pregnancykitError(error));
             });
           imgList.push(promise);
@@ -60,11 +59,9 @@ export const pregnancykitHandler = () => {
               if (data.length === response.val().length) {
                 dispatch(pregnancykitSuccess(data));
               }
-            })
-            .catch((error) => dispatch(pregnancykitError(error)));
+            }).catch((error) => dispatch(pregnancykitError(error)));
         });
-      })
-      .catch((error) => {
+      }).catch((error) => {
         dispatch(pregnancykitError(error));
       });
   };
