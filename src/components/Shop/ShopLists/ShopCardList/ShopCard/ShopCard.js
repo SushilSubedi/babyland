@@ -1,15 +1,24 @@
 import React,{useState, useEffect} from 'react';
-import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton } from '@material-ui/core';
+import { makeStyles,createStyles,Box, Container, Typography,Paper, Button,IconButton,Snackbar } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import fire from '../../../../../config/fire';
+import { Alert } from '@material-ui/lab';
+import { useSelector,useDispatch } from 'react-redux';
+import { fetchWishlistData } from '../../../../Account/Wishlist/WishlistRedux/action'
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
-
+    const [OpenToolTip,setOpenToolTip] = useState(false);
+    const [label,setLabel] = useState('');
     const classes = useStyles();
-    const { name,description,img,price } = props;
+    const { name,description,img,price,identifer } = props;
+    const token = useSelector(state => state.AuthRedux.refreshToken) || [];
+    const cartData = useSelector(state => state.WishlistRedux.data) || [];
+    const dispatch = useDispatch();
     
+
+
     const onClickIcon = (cartWishlist,img,name,description,value) =>{
         if(icon === false){
             setIcon(true);
@@ -19,23 +28,29 @@ const ShopCard = (props) =>{
         }
         
     }
-    
 
     const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
-        const userId = localStorage.getItem('userID');
-        const newPostKey = fire.database().ref().child(cartWishlist).push().key;
-        const updateData = {};
-        const data = {
-            name: name,
-            description: description,
-            value: price,
-            img: img
+        if(token.length !== 0){
+            setLabel(cartWishlist);  
+            const userId = localStorage.getItem('userID');
+            const newPostKey = fire.database().ref().child(cartWishlist).push().key;
+            const updateData = {};
+            const data = {
+                postId: newPostKey,
+                name: name,
+                description: description,
+                value: value,
+                img: img,
+                id: identifer,
+                quantity: 1,
+                cartWishlist: cartWishlist 
+            }
+            setOpenToolTip(true);
+            updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
+            return fire.database().ref().update(updateData);
         }
-        updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
-
-        return fire.database().ref().update(updateData);
-
     };
+
 
     return(
        <Box component={Paper} className={classes.card}>
@@ -55,6 +70,7 @@ const ShopCard = (props) =>{
                         </div>
                         <div>
                             <Button className={classes.button} onClick={()=>AddToCardWishlistHandler("cart",img,name,description,price)}>Add to cart</Button>
+                            <Snackbar open={OpenToolTip} onClose={()=>setOpenToolTip(false)} anchorOrigin={{vertical:'bottom',horizontal:'left'}} autoHideDuration={4000}><Alert variant="filled" severity="success" style={{background:'black'}}>Item is added to your {label}</Alert></Snackbar>
                         </div>
                     </div>
                 </div>

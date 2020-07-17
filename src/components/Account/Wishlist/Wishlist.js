@@ -1,26 +1,26 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { createStyles,makeStyles } from '@material-ui/core';
+import { fetchWishlistData } from './WishlistRedux/action';
+import { useDispatch } from 'react-redux';
 
-const WishList = () => {
-    const classes = useStyles();
+const WishList = (props) => {
+    // const classes = useStyles();
+    const dispatch = useDispatch();
+
+   useEffect(()=> {
+    dispatch(fetchWishlistData());
+   },[])
     return(
         <div>
-            n   oifnqoiNRFOasA
-
-            ASGLK;NASFKNAS
-            ASLSKNFASKSF
-            ASFLKNLFALKSF
-            ASFNASLSF
-            LKLAKSNFA
 
         </div>
     )
 }
 
-const useStyles = makeStyles(theme =>
-    createStyles({
+// const useStyles = makeStyles(theme =>
+//     createStyles({
 
-    }))
+//     }))
 
 
 export default WishList;

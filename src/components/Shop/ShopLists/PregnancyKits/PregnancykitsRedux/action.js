@@ -54,6 +54,7 @@ export const pregnancykitHandler = () => {
                 description: element.description,
                 value: element.value,
                 img: items[items.length - 1],
+                id:element.id
               };
               data.push(dataCollection);
               if (data.length === response.val().length) {

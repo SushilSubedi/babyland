@@ -7,6 +7,10 @@ import PregnancyKitsRedux from "../components/Shop/ShopLists/PregnancyKits/Pregn
 import ShampooRedux from "../components/Shop/ShopLists/Shampoo/ShampooRedux/ShampooRedux";
 import ToyRedux from "../components/Shop/ShopLists/Toys/ToysRedux/ToysRedux";
 import TShirtRedux from "../components/Shop/ShopLists/Tshirt/TShirtRedux/TShirtRedux";
+import WishlistRedux from '../components/Account/Wishlist/WishlistRedux/WishlistRedux';
+
+
+
 const rootReducer = combineReducers({
   AuthRedux,
   CosmeticRedux,
@@ -16,6 +20,7 @@ const rootReducer = combineReducers({
   ShampooRedux,
   ToyRedux,
   TShirtRedux,
+  WishlistRedux,
 });
 
 export default rootReducer;

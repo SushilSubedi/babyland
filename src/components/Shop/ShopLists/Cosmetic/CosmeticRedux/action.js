@@ -55,6 +55,7 @@ export const cosmeticHandler = () => {
                 description: element.description,
                 value: element.value,
                 img: items[items.length - 1],
+                id:element.id
               };
               data.push(dataCollection);
               if (items.length === response.val().length) {
