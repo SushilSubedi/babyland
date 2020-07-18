@@ -32,10 +32,10 @@ const ShopCard = (props) =>{
     }
 
     useEffect(() => {
-        if(cartData){
+        if(element !== undefined){
             setLoading(false);
         }
-    },[cartData]);
+    },[element]);
 
     const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
         if(token.length !== 0){
