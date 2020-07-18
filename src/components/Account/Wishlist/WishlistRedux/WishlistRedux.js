@@ -21,8 +21,8 @@ const reducer = (state = initialState,action) =>{
                 loading:false
             }
         case actionType.WISHLIST_UPDATE:
-            const updateData = state.data.slice();
-                updateData.push(action.updatedData)
+            const updateData = [...state.data];
+            updateData.push(action.updatedData);
             return {
                 ...state,
                 data: updateData,

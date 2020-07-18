@@ -5,16 +5,18 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import fire from '../../../../../config/fire';
 import { Alert } from '@material-ui/lab';
 import { useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
     const [OpenToolTip,setOpenToolTip] = useState(false);
+    const [loading,setLoading] = useState(false);
     const [label,setLabel] = useState('');
     const classes = useStyles();
     const { name,description,img,price,identifer } = props;
     const token = useSelector(state => state.AuthRedux.refreshToken) || [];
     const cartData = useSelector(state => state.WishlistRedux.data) || [];
-    const loading = useSelector(state => state.WishlistRedux.loading) || [];
+    const loadings = useSelector(state => state.WishlistRedux.loading) || [];
 
     const element = cartData.find(element => element.id === identifer);
 
@@ -22,14 +24,22 @@ const ShopCard = (props) =>{
         if(icon === false){
             setIcon(true);
             AddToCardWishlistHandler(cartWishlist,img,name,description,value);
-        }else{
-            setIcon(false);
         }
+        // else{
+        //     setIcon(false);
+        // }
         
     }
 
+    useEffect(() => {
+        if(cartData){
+            setLoading(false);
+        }
+    },[cartData]);
+
     const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
         if(token.length !== 0){
+            setLoading(true)
             setLabel(cartWishlist);  
             const userId = localStorage.getItem('userID');
             if(element === undefined){
@@ -52,6 +62,11 @@ const ShopCard = (props) =>{
         }
     };
 
+    useEffect(() => {
+        if(element !== undefined ){
+            setIcon(true)
+        }
+    },[element])
 
     return(
        <Box component={Paper} className={classes.card}>
@@ -69,10 +84,11 @@ const ShopCard = (props) =>{
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
                         </div>
-                        <div>
-                            {element === undefined ? <Button className={classes.button} onClick={()=>AddToCardWishlistHandler("cart",img,name,description,price)}>Add to cart</Button>:
-                                <Button disabled>Added</Button>
+                        <div style={{position:'relative'}}>
+                            {element === undefined ? <Button className={classes.button} disabled={loading} onClick={()=>AddToCardWishlistHandler("cart",img,name,description,price)}>Add to cart</Button>:
+                                <Button disabled style={{cursor: 'none'}}>Added</Button>
                             }
+                            {loading === true  && <CircularProgress className={classes.loader}/> }
                             <Snackbar open={OpenToolTip} onClose={()=>setOpenToolTip(false)} anchorOrigin={{vertical:'bottom',horizontal:'left'}} autoHideDuration={4000}><Alert variant="filled" severity="success" style={{background:'black'}}>Item is added to your {label}</Alert></Snackbar>
                         </div>
                     </div>
@@ -119,6 +135,14 @@ const useStyles = makeStyles(
             "&:hover":{
                 backgroundColor:'#fc03d7'
             }
+        },
+        loader: {
+            position: 'absolute',
+            top: '5px',
+            left: '31%',
+            color:'white',
+            width: '30px !important',
+            height:'30px !important'
         },
         Typography1: {
             fontFamily:'inherit',

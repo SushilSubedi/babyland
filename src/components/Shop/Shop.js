@@ -17,6 +17,5 @@ const Shop = () => {
       <ShopLists />
     </div>
   );
-};
-
+}
 export default Shop;

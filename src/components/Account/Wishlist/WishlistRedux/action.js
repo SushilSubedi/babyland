@@ -28,7 +28,8 @@ export const wishlistSuccess = (data) => {
 
 export const fetchWishlistData = () =>{
     return (dispatch) => {
-        dispatch(wishlistStart());
+        try {
+            dispatch(wishlistStart());
         const userId = localStorage.getItem('userID');
         const cartData = [];
         fire.database().ref(`/cart/${userId}`).on("value",(snapshort)=>{
@@ -49,26 +50,31 @@ export const fetchWishlistData = () =>{
                         }
                         if(keys.length === cartData.length){
                             dispatch(wishlistSuccess(cartData));
-                        }else {
+
+                        } else {
                             const k = keys[keys.length - 1]
-                            dispatch(updateData(data[k].name,data[k].description,data[k].value,data[k].img,data[k].id));
+                            const dataCollections={
+                               name: data[k].name,
+                               description: data[k].description,
+                                value:data[k].value,
+                                img: data[k].img,
+                                id: data[k].id
+                            }
+                            dispatch(updateData(dataCollections));
                     }
                 }
           
         })
+        }catch(error){
+            dispatch(wishlistError(error));
+        }
+        
     }
 }
 
-const updateData = (name,description,value,img,id) => {
-    const dataCollection ={
-        name: name,
-        description:description,
-        value: value,
-        img: img,
-        id: id
-       }
+const updateData = (updatedData) => {
     return {
         type: WISHLIST_UPDATE,
-        updatedData: dataCollection
+        updatedData: updatedData
     }
 }
