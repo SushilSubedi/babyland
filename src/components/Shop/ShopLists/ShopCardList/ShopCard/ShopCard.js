@@ -4,8 +4,9 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import fire from '../../../../../config/fire';
 import { Alert } from '@material-ui/lab';
-import { useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import DialogBox from '../../../../../GlobalComponents/DialogBox';
+import { useHistory } from 'react-router-dom';
 
 const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
@@ -13,10 +14,11 @@ const ShopCard = (props) =>{
     const [loading,setLoading] = useState(false);
     const [wishlistLoading,setWishlistLoading] = useState(false)
     const [label,setLabel] = useState('');
+    const [openDialog,setOpenDialog] = useState(false);
     const classes = useStyles();
+    const history = useHistory();
 
     const { name,description,img,price,identifer,Token,WishlistData,CartData } = props;
-
     
     const wishlistData = WishlistData;
     const token = Token;
@@ -73,8 +75,17 @@ const ShopCard = (props) =>{
                 updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
                 return fire.database().ref().update(updateData);
             }
+        }else{
+            setOpenDialog(true);
         }
     };
+
+    const DialogCloseHandler = () =>{
+        setOpenDialog(false)
+    }
+    const HandleAuthNavigation = () =>{
+        history.push('/Authentication')
+    }
 
     useEffect(() => {
         if(wishlistElement !== undefined ){
@@ -94,7 +105,7 @@ const ShopCard = (props) =>{
                     <Typography variant= "h6" style={{color:'#e85831',fontWeight:'700'}}>Rs.{price}</Typography>
                     <div className={classes.cartWishlist}>
                         <div style={{position: 'relative'}}>
-                            <IconButton classes ={{root: classes.root}} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
+                            <IconButton classes ={{root: classes.root}} disabled={wishlistElement} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
                             { wishlistLoading === true  && <CircularProgress className={classes.loader}/> }
@@ -108,6 +119,13 @@ const ShopCard = (props) =>{
                         </div>
                     </div>
                 </div>
+                <DialogBox
+                    open={openDialog}
+                    handleClose={DialogCloseHandler}
+                    DialogTitles= {"LOGIN REQUIRED"}
+                    DialogContents= {"Placing a order will required signIn,Would you like to login first?"}
+                    handleNavigation= {HandleAuthNavigation}
+                />
            </Container>
        </Box>
     )
