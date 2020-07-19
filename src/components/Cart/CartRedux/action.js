@@ -1,38 +1,38 @@
-import fire from '../../../../config/fire';
+import fire from '../../../config/fire';
 
-export const WISHLIST_START = "WISHLIST_START";
-export const WISHLIST_SUCCESS = "WISHLIST_SUCCESS";
-export const WISHLIST_FAIL = "WISHLIST_FAIL";
-export const WISHLIST_UPDATE = "WISHLIST_UPDATE";
+export const CART_START = "CART_START";
+export const CART_SUCCESS = "CART_SUCCESS";
+export const CART_FAIL = "CART_FAIL";
+export const CART_UPDATE = "CART_UPDATE";
 
 
-export const wishlistStart = () => {
+export const cartStart = () => {
     return{
-        type: WISHLIST_START
+        type: CART_START
     }
 }
 
-export const wishlistError =  (error) => {
+export const cartError =  (error) => {
     return {
-        type: WISHLIST_FAIL,
+        type: CART_FAIL,
         error: error
     }
 }
 
-export const wishlistSuccess = (data) => {
+export const cartSuccess = (data) => {
     return {
-        type: WISHLIST_SUCCESS,
+        type: CART_SUCCESS,
         data: data
     }
 }
 
-export const fetchWishlistData = () =>{
+export const fetchcartData = () =>{
     return (dispatch) => {
         try {
-            dispatch(wishlistStart());
+            dispatch(cartStart());
         const userId = localStorage.getItem('userID');
-        const wishlistData = [];
-        fire.database().ref(`/wishlist/${userId}`).on("value",(snapshort)=>{
+        const cartData = [];
+        fire.database().ref(`/cart/${userId}`).on("value",(snapshort)=>{
             const data = snapshort.val();
             //abstract keys from an object
             if(snapshort.val() !== null){
@@ -46,10 +46,10 @@ export const fetchWishlistData = () =>{
                          img: data[k].img,
                          id: data[k].id
                         }
-                        wishlistData.push(dataCollection);
+                        cartData.push(dataCollection);
                         }
-                        if(keys.length === wishlistData.length){
-                            dispatch(wishlistSuccess(wishlistData));
+                        if(keys.length === cartData.length){
+                            dispatch(cartSuccess(cartData));
 
                         } else {
                             const k = keys[keys.length - 1]
@@ -66,7 +66,7 @@ export const fetchWishlistData = () =>{
           
         })
         }catch(error){
-            dispatch(wishlistError(error));
+            dispatch(cartError(error));
         }
         
     }
@@ -74,7 +74,7 @@ export const fetchWishlistData = () =>{
 
 const updateData = (updatedData) => {
     return {
-        type: WISHLIST_UPDATE,
+        type: CART_UPDATE,
         updatedData: updatedData
     }
 }

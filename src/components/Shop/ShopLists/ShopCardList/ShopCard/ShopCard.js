@@ -11,14 +11,18 @@ const ShopCard = (props) =>{
     const [icon,setIcon] = useState(false);
     const [OpenToolTip,setOpenToolTip] = useState(false);
     const [loading,setLoading] = useState(false);
+    const [wishlistLoading,setWishlistLoading] = useState(false)
     const [label,setLabel] = useState('');
     const classes = useStyles();
-    const { name,description,img,price,identifer } = props;
-    const token = useSelector(state => state.AuthRedux.refreshToken) || [];
-    const cartData = useSelector(state => state.WishlistRedux.data) || [];
-    const loadings = useSelector(state => state.WishlistRedux.loading) || [];
 
+    const { name,description,img,price,identifer,Token,WishlistData,CartData } = props;
+
+    
+    const wishlistData = WishlistData;
+    const token = Token;
+    const cartData = CartData;
     const element = cartData.find(element => element.id === identifer);
+    const wishlistElement = wishlistData.find(element => element.id === identifer);
 
     const onClickIcon = (cartWishlist,img,name,description,value) =>{
         if(icon === false){
@@ -37,12 +41,22 @@ const ShopCard = (props) =>{
         }
     },[element]);
 
+    useEffect(() => {
+        if(wishlistElement !== undefined){
+            setWishlistLoading(false);
+        }
+    },[wishlistElement]);
+
     const AddToCardWishlistHandler = (cartWishlist,img,name,description,value) => {
         if(token.length !== 0){
-            setLoading(true)
+            if(cartWishlist === 'cart'){
+                setLoading(true)
+            }else if(cartWishlist === 'wishlist'){
+                setWishlistLoading(true)
+            }
             setLabel(cartWishlist);  
             const userId = localStorage.getItem('userID');
-            if(element === undefined){
+            if(element === undefined || wishlistElement === undefined){
                 const newPostKey = fire.database().ref().child(cartWishlist).push().key;
                 const updateData = {};
                 const data = {
@@ -63,10 +77,10 @@ const ShopCard = (props) =>{
     };
 
     useEffect(() => {
-        if(element !== undefined ){
+        if(wishlistElement !== undefined ){
             setIcon(true)
         }
-    },[element])
+    },[wishlistElement])
 
     return(
        <Box component={Paper} className={classes.card}>
@@ -79,10 +93,11 @@ const ShopCard = (props) =>{
                 <div>
                     <Typography variant= "h6" style={{color:'#e85831',fontWeight:'700'}}>Rs.{price}</Typography>
                     <div className={classes.cartWishlist}>
-                        <div>
-                           <IconButton classes ={{root: classes.root}} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
+                        <div style={{position: 'relative'}}>
+                            <IconButton classes ={{root: classes.root}} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
+                            { wishlistLoading === true  && <CircularProgress className={classes.loader}/> }
                         </div>
                         <div style={{position:'relative'}}>
                             {element === undefined ? <Button className={classes.button} disabled={loading} onClick={()=>AddToCardWishlistHandler("cart",img,name,description,price)}>Add to cart</Button>:
