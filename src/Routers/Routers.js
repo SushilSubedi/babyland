@@ -1,7 +1,7 @@
-import React,{lazy} from "react";
-import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
+import React, { lazy } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../components/Home/Home";
-import Baby from "../components/Baby/Baby";
+
 import Shop from "../components/Shop/Shop";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
@@ -20,27 +20,27 @@ const Routers = () => {
 
 
   let switchs = (
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Baby" component={Baby} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/Authentication" component={ayscAuth} />
-        <Route path="/Cart" component={Cart} />
-        <Redirect to='/'/>
-      </Switch>
+    <Switch>
+      <Route path="/" exact component={Home} />
+
+      <Route path="/shop" component={Shop} />
+      <Route path="/Authentication" component={ayscAuth} />
+      <Route path="/Cart" component={Cart} />
+      <Redirect to='/' />
+    </Switch>
   );
 
-  if(token){
+  if (token) {
     switchs = (
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/Baby" component={Baby} />
+
         <Route path="/shop" component={Shop} />
         <Route path="/logout" component={ayscLogout} />
-        <Route path ='/Account' component={ayscAccount}/>
-        <Route path = '/Wishlist' component={ayscWishlist}/>
+        <Route path='/Account' component={ayscAccount} />
+        <Route path='/Wishlist' component={ayscWishlist} />
         <Route path="/Cart" component={Cart} />
-        <Redirect to='/'/>
+        <Redirect to='/' />
       </Switch>
     )
   }
@@ -49,7 +49,7 @@ const Routers = () => {
       <div className={classes.mainPage}>
         <NavigationBar />
       </div>
-        {switchs}
+      {switchs}
     </Router>
   );
 };

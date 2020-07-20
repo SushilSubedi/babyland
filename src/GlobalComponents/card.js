@@ -1,52 +1,58 @@
 import React, { useState } from 'react';
 
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, MenuItem, FormControl, InputLabel, Select } from '@material-ui/core';
-import FilterDropDown from './FilterDropDown';
+
+
 
 
 const Card = (props) => {
   const classes = useStyles();
-  const [quantity, setQuantity] = useState('');
+
+
+  const { name, age, description, img, price } = props;
 
   return (
     <Box component={Paper} className={classes.card}>
       <Container className={classes.Container}>
 
-        <div style={{ padding: '2% 0%' }}>
-          <Typography variant="h6" className={classes.Typography1}>name</Typography>
-          <Typography className={classes.Typography2}>description</Typography>
-        </div>
         <div>
-          <Typography variant="h6" style={{ color: '#e85831', fontWeight: '700' }}>Rs</Typography>
-          <div className={classes.cartWishlist}>
-            <div>
+
+
+          <img className={classes.img} src={img} alt="simple img" />
+
+          <div style={{ padding: '2% 0%' }}>
+            <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
+            <Typography className={classes.Typography2}>{description}</Typography>
+          </div>
+          <div>
+            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '700' }}>Rs{price}</Typography>
+            <div className={classes.cartWishlist}>
+
+              <div>
+                <Button className={classes.remove} > remove</Button>
+
+              </div>
+              <FormControl variant="filled" className={classes.formControl}>
+                <InputLabel htmlFor="filled-age-native-simple">Qty</InputLabel>
+                <Select
+
+
+                >
+                  <option aria-label="None" value="" />
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                </Select>
+              </FormControl>
+
 
             </div>
-            <div>
-              <Button className={classes.remove} > remove</Button>
-
-            </div>
-            <FormControl required className={classes.formControl}>
-              <InputLabel id="demo-simple-select-required-label">Qty</InputLabel>
-              <Select
-                labelId="demo-simple-select-required-label"
-                id="demo-simple-select-required"
-                // value={age}
-                // onChange={handleChange}
-                className={classes.selectEmpty}
-              >
-                <MenuItem value="">
-
-                </MenuItem>
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-              </Select>
-
-            </FormControl>
-
           </div>
         </div>
+
       </Container>
     </Box>
   )
@@ -105,7 +111,7 @@ const useStyles = makeStyles(
     },
     formControl: {
       position: "relative",
-      top: "120px",
+      top: "130px",
       left: "200px"
 
     }

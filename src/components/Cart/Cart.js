@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton } from '@material-ui/core';
 
 import Card from '../../GlobalComponents/card';
 import Items from './allitems';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchcartData } from "./CartRedux/action";
 
 
 
 
 const Cart = (props) => {
     const classes = useStyles();
+    const { Data } = props;
+    const dispatch = useDispatch();
+    const cartData = useSelector(state => state.CartRedux.data) || [];
+
+
+
+    useEffect(() => {
+        if (cartData.length === 0) {
+            dispatch(fetchcartData());
+        }
+    }, [cartData]);
 
 
     return (
@@ -19,12 +32,19 @@ const Cart = (props) => {
 
 
                 <Typography variant="h5">
-                    Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charger will be free.
+                    Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
                     </Typography>
 
             </Box>
             <div className={classes.cart}>
-                <Card />
+                {cartData.map((item, index) => (
+                    <Card
+                        CartData={cartData}
+                        name={item.name}
+                        description={item.description}
+                        price={item.value}
+                        img={item.img} />
+                ))}
                 <div className={classes.items}>
                     <Items />
                 </div>
