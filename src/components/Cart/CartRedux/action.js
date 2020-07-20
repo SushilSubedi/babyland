@@ -26,7 +26,7 @@ export const cartSuccess = (data) => {
     }
 }
 
-export const fetchcartData = () =>{
+export const fetchCartData = () =>{
     return (dispatch) => {
         try {
             dispatch(cartStart());
@@ -35,20 +35,22 @@ export const fetchcartData = () =>{
         fire.database().ref(`/cart/${userId}`).on("value",(snapshort)=>{
             const data = snapshort.val();
             //abstract keys from an object
+            const DataArray = Object.assign([],data);
             if(snapshort.val() !== null){
                 const keys = Object.keys(data);
-                    for(let i = 0; i < keys.length; i++){
-                        const k = keys[i];
-                        const dataCollection ={
-                         name: data[k].name,
-                         description: data[k].description,
-                         value: data[k].value,
-                         img: data[k].img,
-                         id: data[k].id
-                        }
-                        cartData.push(dataCollection);
-                        }
-                        if(keys.length === cartData.length){
+                        // console.log("p",keys.length/ === .length)
+                        if(keys.length === DataArray.length){
+                            for(let i = 0; i < keys.length; i++){
+                                const k = keys[i];
+                                const dataCollection ={
+                                 name: data[k].name,
+                                 description: data[k].description,
+                                 value: data[k].value,
+                                 img: data[k].img,
+                                 id: data[k].id
+                                }
+                                cartData.push(dataCollection);
+                                }
                             dispatch(cartSuccess(cartData));
 
                         } else {
@@ -60,6 +62,7 @@ export const fetchcartData = () =>{
                                 img: data[k].img,
                                 id: data[k].id
                             }
+                            console.log("s",dataCollections);
                             dispatch(updateData(dataCollections));
                     }
                 }

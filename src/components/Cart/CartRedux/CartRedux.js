@@ -21,7 +21,7 @@ const reducer = (state = initialState,action) =>{
                 loading:false
             }
         case actionType.CART_UPDATE:
-            const updateData = [...state.data];
+            const updateData = (state.data).slice();
             updateData.push(action.updatedData);
             return {
                 ...state,

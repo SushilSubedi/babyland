@@ -35,34 +35,35 @@ export const fetchWishlistData = () =>{
         fire.database().ref(`/wishlist/${userId}`).on("value",(snapshort)=>{
             const data = snapshort.val();
             //abstract keys from an object
+            const DataArray = Object.assign([],data);
             if(snapshort.val() !== null){
                 const keys = Object.keys(data);
-                    for(let i = 0; i < keys.length; i++){
-                        const k = keys[i];
-                        const dataCollection ={
-                         name: data[k].name,
-                         description: data[k].description,
-                         value: data[k].value,
-                         img: data[k].img,
-                         id: data[k].id
-                        }
-                        wishlistData.push(dataCollection);
-                        }
-                        if(keys.length === wishlistData.length){
-                            dispatch(wishlistSuccess(wishlistData));
-
-                        } else {
-                            const k = keys[keys.length - 1]
-                            const dataCollections={
-                               name: data[k].name,
-                               description: data[k].description,
-                                value:data[k].value,
+                    if(keys.length === DataArray.length){
+                        for(let i = 0; i < keys.length; i++){
+                            const k = keys[i];
+                            const dataCollection ={
+                                name: data[k].name,
+                                description: data[k].description,
+                                value: data[k].value,
                                 img: data[k].img,
                                 id: data[k].id
                             }
-                            dispatch(updateData(dataCollections));
-                    }
+                                wishlistData.push(dataCollection);
+                            }
+                        dispatch(wishlistSuccess(wishlistData));
+
+                    } else {
+                        const k = keys[keys.length - 1]
+                        const dataCollections={
+                            name: data[k].name,
+                            description: data[k].description,
+                            value:data[k].value,
+                            img: data[k].img,
+                            id: data[k].id
+                        }
+                        dispatch(updateData(dataCollections));
                 }
+            }
           
         })
         }catch(error){
