@@ -105,7 +105,7 @@ const ShopCard = (props) =>{
                     <Typography variant= "h6" style={{color:'#e85831',fontWeight:'700'}}>Rs.{price}</Typography>
                     <div className={classes.cartWishlist}>
                         <div style={{position: 'relative'}}>
-                            <IconButton classes ={{root: classes.root}} disabled={wishlistElement} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
+                            <IconButton classes ={{root: classes.root}} disabled={wishlistLoading} onClick={() =>onClickIcon("wishlist",img,name,description,price)}>
                             {!icon ? <FavoriteBorderIcon color= "primary" fontSize= "large"/> : <FavoriteIcon color= "primary" fontSize="large"/>}
                             </IconButton>
                             { wishlistLoading === true  && <CircularProgress className={classes.loader}/> }
