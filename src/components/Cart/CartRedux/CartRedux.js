@@ -8,19 +8,19 @@ const initialState = {
 
 const reducer = (state = initialState,action) =>{
     switch(action.type){
-        case actionType.WISHLIST_START:
+        case actionType.CART_START:
             return{
                 ...state,
                 error: null,
                 loading: true
             }
-        case actionType.WISHLIST_SUCCESS:
+        case actionType.CART_SUCCESS:
             return{
                 ...state,
                 data:action.data,
                 loading:false
             }
-        case actionType.WISHLIST_UPDATE:
+        case actionType.CART_UPDATE:
             const updateData = [...state.data];
             updateData.push(action.updatedData);
             return {
@@ -28,7 +28,7 @@ const reducer = (state = initialState,action) =>{
                 data: updateData,
                 loading: false
             }
-        case actionType.WISHLIST_FAIL:
+        case actionType.CART_FAIL:
             return{
                 ...state,
                 error: action.error,

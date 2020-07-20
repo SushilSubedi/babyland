@@ -6,9 +6,10 @@ import { useDispatch,useSelector } from 'react-redux';
 const Shop = () => {
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state.WishlistRedux.data) || [];
+  const AuthData = useSelector((state) => state.AuthRedux.userID) || [];
   
   useEffect(() => {
-    if(cartData.length  === 0){
+    if(cartData.length  === 0 && AuthData.length === 0){
       dispatch(fetchWishlistData());
     }
   },[cartData])
@@ -17,6 +18,5 @@ const Shop = () => {
       <ShopLists />
     </div>
   );
-};
-
+}
 export default Shop;

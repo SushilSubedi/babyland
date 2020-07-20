@@ -8,6 +8,7 @@ import ShampooRedux from "../components/Shop/ShopLists/Shampoo/ShampooRedux/Sham
 import ToyRedux from "../components/Shop/ShopLists/Toys/ToysRedux/ToysRedux";
 import TShirtRedux from "../components/Shop/ShopLists/Tshirt/TShirtRedux/TShirtRedux";
 import WishlistRedux from '../components/Account/Wishlist/WishlistRedux/WishlistRedux';
+import CartRedux from '../components/Cart/CartRedux/CartRedux';
 
 
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   ToyRedux,
   TShirtRedux,
   WishlistRedux,
+  CartRedux,
 });
 
 export default rootReducer;
