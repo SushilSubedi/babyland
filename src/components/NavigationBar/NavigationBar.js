@@ -6,6 +6,9 @@ import {
   AppBar,
   Toolbar,
   fade,
+  Tabs,
+  Tab
+
 } from "@material-ui/core";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
@@ -15,8 +18,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useSelector,useDispatch } from "react-redux";
 import Account from '../Account/Account';
+import NavigationItem from './NavigationItem/NavigationItem';
 import { authCheckState } from '../Authentication/AuthRedux/action';
-
 
 const NavigationBar = (props) => {
 
@@ -56,50 +59,47 @@ const NavigationBar = (props) => {
               <img src={logo} alt="logo" className={classes.logo} />
             </Link>
           </div>
-          <Link to={"/"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Home</Button>
-          </Link>
-          <Link to={"/Shop"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Shop</Button>
-          </Link>
-          <Link to={"/Baby"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Baby</Button>
-          </Link>
-
-          {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}
+          <NavigationItem to={"/"} exact>
+            Home
+          </NavigationItem>
+          <NavigationItem to={"/Shop"}>
+              Shop
+          </NavigationItem>
+          <NavigationItem to={"/Baby"}>
+            Baby
+          </NavigationItem>
         </Toolbar>
-        <div style={{ display: "flex" }}>
+        <Toolbar className={classes.SearchBox}>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
+        </Toolbar>
+
+        <div style={{ display: "flex" }}>
           {token ? (
               <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
                 <AccountCircleIcon fontSize="large"/>
                 <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
               </Button>
           ) : (
-            <Link to={"/Authentication"} style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }}>
-                Login | Register
-              </Button>
-            </Link>
+            <NavigationItem to={"/Authentication"}>
+                Login|Register
+            </NavigationItem>
           )}
 
-          <Link to={"/Cart"}>
-            <Button classes={{ text: classes.text }}>
+          <NavigationItem to={"/Cart"}>
               <ShoppingCartIcon fontSize="large" />
-            </Button>
-          </Link>
+          </NavigationItem>
         </div>
       </div>
     </AppBar>
@@ -113,7 +113,13 @@ const useStyles = makeStyles((theme) =>
       height: "54px",
       justifyContent: "space-between",
       alignItems: "center",
+      flexGrow: '1',
       padding: "0% 8%",
+    },
+    SearchBox: {
+      width:'100%',
+      display: 'flex',
+      justifyContent: 'flex-end'
     },
     text: {
       padding: "6px 11px",
@@ -148,6 +154,7 @@ const useStyles = makeStyles((theme) =>
     },
     inputRoot: {
       color: "inherit",
+      height: '47px'
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
