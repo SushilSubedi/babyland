@@ -38,7 +38,7 @@ const SignUp = (props) => {
     if (authRedirectPath !== null) {
       dispatch(setAuthRedirectPath("/"));
     }
-  }, []);
+  }, [authRedirectPath]);
 
   const handleName = (e) => {
     if (e.target.value === "") {
