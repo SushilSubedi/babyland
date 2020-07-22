@@ -16,12 +16,11 @@ const Footer = () =>{
         
         <Box className={classes.Footer}>
           <div className={classes.blog} >
-            <babylogo/>
             <Typography  className={classes.bloghead}>Babyland.com</Typography>
             <Typography className={classes.blogtext}>We aim to provide the best of the products and brands at the most reasonable prices with the unforgettable online shopping experience, and prompt customer service. We have set a benchmark to provide customers with a virtual physical store's shopping experience; online, without the trouble of moving around the city  heavy traffic and locating stores that may or may not meet your requirements at the end of the day. </Typography>
           </div>
           <div className={classes.copyright}>
-            Copyright 2020 Babyland.com
+            Copyright@2020 Babyland.com
           </div>
           <div className={classes.contact}>
             <div  >
@@ -35,18 +34,18 @@ const Footer = () =>{
             <div className={classes.contactus }>
                 <Typography className={classes.contactustext}>Contact US</Typography>
               <div className={classes.icons}>
-                <Typography className={classes.text}>
+                <div className={classes.text}>
                   <EmailIcon color='secondary' className={classes.emailicon}/>
                   <Typography >Email:info@babyland.com</Typography>
-                </Typography> 
-                <Typography  className={classes.text}>
+                </div> 
+                <div  className={classes.text}>
                   <PhoneIcon   color='secondary' className={classes.phoneicon}/>
                   <Typography style={{bottom:'30px', position:'relative'}}>Phone:9824490359</Typography>
-                </Typography>
-                <Typography  className={classes.text}>
+                </div>
+                <div  className={classes.text}>
                   <LocationOnIcon  color='secondary' className={classes.addressicon}/>
                   <Typography style={{position:'relative',bottom:'58px'}}> Address:kathmandu</Typography>
-               </Typography>
+               </div>
               </div>
             </div>
           </div>
