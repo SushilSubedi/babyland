@@ -1,58 +1,60 @@
 import React, { useState, useEffect } from 'react';
+import { Grid } from '@material-ui/core';
 
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton } from '@material-ui/core';
 
-import Card from '../../GlobalComponents/card';
+
 import Items from './allitems';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchcartData } from "./CartRedux/action";
-
+import { fetchCartData } from "./CartRedux/action";
+import CardList from './CardList';
 
 
 
 const Cart = (props) => {
     const classes = useStyles();
-    const { Data } = props;
+
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
+    useEffect(() => {
+        console.log("hello", cartData);
 
+    }, [cartData]);
 
     useEffect(() => {
         if (cartData.length === 0) {
-            dispatch(fetchcartData());
+            dispatch(fetchCartData());
         }
     }, [cartData]);
 
 
     return (
-        <div >
+        <div className={classes.cart} >
+            <div>
+                <Box component={Paper} className={classes.notice}>
 
-            <Box component={Paper} className={classes.cart}>
 
-
-                <Typography variant="h5">
-                    Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
+                    <Typography variant="h5">
+                        Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
                     </Typography>
 
-            </Box>
-            <div className={classes.cart}>
-                {cartData.map((item, index) => (
-                    <Card
-                        CartData={cartData}
-                        name={item.name}
-                        description={item.description}
-                        price={item.value}
-                        img={item.img} />
-                ))}
-                <div className={classes.items}>
-                    <Items />
-                </div>
-
-
-
-
+                </Box>
             </div>
+            <div className={classes.items}>
+                <Items />
+            </div>
+
+            <div className={classes.CardList}>
+                <CardList />
+            </div>
+
+
+
+
+
+
+
 
         </div>
 
@@ -67,20 +69,39 @@ const Cart = (props) => {
 
 const useStyles = makeStyles(
     createStyles({
-        cart: {
+        notice: {
             width: "1200px",
-            padding: "40px",
-            margin: "3% 0% 0% 8%",
+            padding: "60px",
+            margin: "3% 0% 6% 8%",
+
+
+
+        },
+        cart: {
             display: "flex",
-            justifyContent: "space-evenly ",
+            flexDirection: 'column',
+
+            justifyContent: "space-between",
+            width: "900px"
+
 
         },
 
         items: {
-            marginLeft: "520px"
+            position: "absolute",
+            left: "1300px",
+            top: "330px",
+
 
         },
+        CardList: {
+            display: "flex",
+            width: "1200px",
+            // height: "600px",
+            justifyContent: "space-between",
+            margin: "1% 5% 22% 5%"
 
+        }
 
 
     })
