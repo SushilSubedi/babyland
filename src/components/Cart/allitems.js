@@ -3,9 +3,15 @@ import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui
 import { makeStyles, createStyles }
   from '@material-ui/core/styles';
 
-const allitems = () => {
+
+const allitems = (props) => {
 
   const classes = UseStyles();
+  const { CartData } = props;
+
+
+
+
 
   return (
     <Box component={Paper} className={classes.box}>
@@ -15,11 +21,13 @@ const allitems = () => {
 
         </div>
         <Divider variant="middle" />
+        {CartData.map((item, index) => (
+          <div className={classes.Items}>
+            <Typography style={{ position: "relative", right: "40px" }} >{item.name} </Typography>
+            <Typography style={{ position: "relative", right: "45px" }}> RS{item.value}</Typography>
 
-        <div className={classes.Items}>
-          <Typography  >Items Price</Typography>
-
-        </div>
+          </div>
+        ))}
 
         <div className={classes.Delivery}>
           <Typography  >Delivery Price</Typography>
@@ -62,7 +70,7 @@ const UseStyles = makeStyles(
       flexDirection: "row",
       justifyContent: "space-evenly",
       color: "#00669b",
-      wordSpacing: "25px"
+      wordSpacing: "90px"
 
 
     },
@@ -70,7 +78,7 @@ const UseStyles = makeStyles(
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
-      wordSpacing: "38px",
+
       position: "relative",
       right: "6px",
       fontSize: "5px",

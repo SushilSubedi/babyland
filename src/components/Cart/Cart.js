@@ -17,10 +17,7 @@ const Cart = (props) => {
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
-    useEffect(() => {
-        console.log("hello", cartData);
 
-    }, [cartData]);
 
     useEffect(() => {
         if (cartData.length === 0) {
@@ -41,9 +38,13 @@ const Cart = (props) => {
 
                 </Box>
             </div>
+
             <div className={classes.items}>
-                <Items />
+                <Items
+
+                    CartData={cartData} />
             </div>
+
 
             <div className={classes.CardList}>
                 <CardList />
@@ -99,7 +100,7 @@ const useStyles = makeStyles(
             width: "1200px",
             // height: "600px",
             justifyContent: "space-between",
-            margin: "1% 5% 22% 5%"
+            margin: "1% 5% 5% 5%"
 
         }
 

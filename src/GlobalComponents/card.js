@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4),
     overflow: "hidden",
 
-
+    marginTop: "9%",
     minHeight: '320px',
     justifyContent: 'center',
     padding: '2% 1% 4% 1%',
