@@ -6,6 +6,7 @@ const NavigationItem = (props) => {
     return(
         <div className={classes.NavigationItem}>
             <NavLink
+                style={props.icon ? {padding: '0px 10px 0px 10px '}: null}
                 activeClassName={classes.active}
                 exact= {props.exact}
                 to= {props.to}

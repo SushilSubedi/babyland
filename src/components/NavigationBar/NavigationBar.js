@@ -85,7 +85,7 @@ const NavigationBar = (props) => {
             </div>
         </Toolbar>
 
-        <div style={{ display: "flex" }}>
+        <div>
           {token ? (
               <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
                 <AccountCircleIcon fontSize="large"/>
@@ -93,14 +93,13 @@ const NavigationBar = (props) => {
               </Button>
           ) : (
             <NavigationItem to={"/Authentication"}>
-                Login|Register
+                Authentication
             </NavigationItem>
           )}
-
-          <NavigationItem to={"/Cart"}>
-              <ShoppingCartIcon fontSize="large" />
-          </NavigationItem>
         </div>
+        <NavigationItem icon to={"/Cart"}>
+              <ShoppingCartIcon style={{paddingTop:'8px'}} fontSize="large"/>
+        </NavigationItem>
       </div>
     </AppBar>
   );
