@@ -15,7 +15,6 @@ const HomeBlog = () => {
             </div>
             <div style={{ paddingBottom: '2%' }}>
                 <img src={baby} className={classes.img} alt="babysrc" />
-                {/* <p>hey there bro!</p> */}
             </div>
         </Box>
     )

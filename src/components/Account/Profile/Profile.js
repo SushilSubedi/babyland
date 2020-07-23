@@ -7,6 +7,7 @@ const Profile = ()=> {
 
     const changeNameHandler = () => {
         console.log("hey,There")
+        setName("");
     }
 
 return(
@@ -58,7 +59,7 @@ return(
                     </div>
                 </Box>
                 <Box>
-                    <Box className={classes.profile} style={{borderBottom: 'none'}} padding="2% 5%">
+                    <Box className={classes.profile} padding="2% 5%">
                         <div className={classes.fullAddress}>
                             <Typography className={classes.Typography}>Full-Address</Typography>
                             <div className={classes.address}>
@@ -111,6 +112,15 @@ return(
                             <Button className={classes.button}>Update</Button>
                         </div>
                     </Box>
+                </Box>
+                <Box className={classes.profile}  padding="2% 0%" style={{borderBottom: 'none'}}>
+                <div className={classes.typo}>
+                        <Typography className={classes.Typography}>My Order</Typography>
+                        <Typography>No order is placed yet.</Typography>   
+                    </div>
+                    <div className={classes.linkDiv}>
+                        
+                    </div>
                 </Box>
             </Box>
         </Container>
