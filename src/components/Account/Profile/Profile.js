@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Box,makeStyles,createStyles, Container,Paper,TextField,Avatar,Typography,Button } from '@material-ui/core';
+import { Box,makeStyles,createStyles, Container,Paper,TextField,Avatar,Typography,Button,Link } from '@material-ui/core';
 
 const Profile = ()=> {
     const classes = useStyles();
@@ -12,32 +12,107 @@ const Profile = ()=> {
 return(
     <Box  padding ='6% 2%'>
         <Container>
-            <Box component={Paper} className={classes.profile}>
-            <div className={classes.input}>
-                <TextField
-                    id= " input field"
-                    label = "Full Name"
-                    type= "text"
-                    value= {name}
-                    onChange= {changeNameHandler}
-                    className={classes.InputField}
-                />
-                <TextField
-                    id= " input field"
-                    label = "UserID"
-                    type= "text"
-                    value= {name}
-                    onChange= {changeNameHandler}
-                    className={classes.InputField}
-                />
-            </div>
-            <div className={classes.FullAvatar}>
-                <Typography className={classes.Typography}>AVATAR</Typography>
-                <Avatar alt="My profile" className={classes.Avatar} src={null}/>
-                <Button className={classes.Button}>
-                    UPLOAD
-                </Button>
-            </div>
+            <Box component={Paper} padding='2% 8% 2% 4%'>
+                <div className={classes.profile}>
+                    <div className={classes.input}>
+                        <TextField
+                            id= " input field"
+                            label = "Full Name"
+                            type= "text"
+                            value= {name}
+                            onChange= {changeNameHandler}
+                            className={classes.InputField}
+                        />
+                        <TextField
+                            id= " input field 1"
+                            label = "UserID"
+                            type= "text"
+                            value= {name}
+                            onChange= {changeNameHandler}
+                            className={classes.InputField}
+                        />
+                    </div>
+                    <div className={classes.FullAvatar}>
+                        <Typography className={classes.Typography}>AVATAR</Typography>
+                        <Avatar alt="My profile" className={classes.Avatar} src={null}/>
+                        <Button className={classes.Button}>
+                            UPLOAD
+                        </Button>
+                    </div>
+                </div>
+                <Box className={classes.profile} padding="2% 0%">
+                    <div className={classes.typo}>
+                        <Typography className={classes.Typography}>Email Address</Typography>
+                        <Typography>Your email address is testify@com</Typography>   
+                    </div>
+                    <div className={classes.linkDiv}>
+                        <Link className={classes.Link}>Change</Link>
+                    </div>
+                </Box>
+                <Box className={classes.profile} padding="2% 0%">
+                <div className={classes.typo}>
+                        <Typography className={classes.Typography}>Password</Typography>
+                    </div>
+                    <div className={classes.linkDiv}>
+                        <Link className={classes.Link}>Change</Link>
+                    </div>
+                </Box>
+                <Box>
+                    <Box className={classes.profile} padding="2% 0">
+                        <div style={{width: '65%',padding: '0 7%'}}>
+                            <Typography className={classes.Typography}>Full-Address</Typography>
+                            <div className={classes.address}>
+                                <TextField
+                                    id= " input field 2"
+                                    label = "Street-Address"
+                                    type= "text"
+                                    value= {name}
+                                    onChange= {changeNameHandler}
+                                    className={classes.AddressField}
+                                />
+                                <TextField
+                                    id= " input field 3"
+                                    label = "Address-Line2"
+                                    type= "text"
+                                    value= {name}
+                                    onChange= {changeNameHandler}
+                                    className={classes.AddressField}
+                                />
+                            
+                            </div>
+                            <div style={{display: 'flex'}}>
+                                <TextField
+                                    id= " input field 4"
+                                    label = "city"
+                                    type= "text"
+                                    value= {name}
+                                    onChange= {changeNameHandler}
+                                    className={classes.smallField}
+                                />
+                                <TextField
+                                    id= " input field 4"
+                                    label = "Zip Code"
+                                    type= "text"
+                                    value= {name}
+                                    onChange= {changeNameHandler}
+                                    className={classes.smallField}
+                                />
+                            </div>
+                              <TextField
+                                id= " input field 4"
+                                label = "Phone number"
+                                type= "number"
+                                value= {name}
+                                onChange= {changeNameHandler}
+                                className={classes.AddressField}
+                            />
+                            <Link className={classes.Link}>Change</Link>
+                        </div>
+                        <div>
+                         
+                        </div>
+                    </Box>
+                </Box>
             </Box>
         </Container>
     </Box>
@@ -51,6 +126,19 @@ const useStyles = makeStyles(theme =>
             height: "50px",
             margin: 'inherit'
           },
+          smallField: {
+            width: '20%',
+            marginRight: '2%'
+          },
+          AddressField: {
+            width: '90%',
+            height: '50px',
+            margin: '0% 2% 0 0'
+          },
+          address: {
+            display: 'flex',
+            justifyContent:'space-around',
+          },
           input: {
                 display: 'grid',
                 width:'40%',
@@ -60,11 +148,6 @@ const useStyles = makeStyles(theme =>
             width: "140px",
             height: "140px",
             margin:'4% 0'
-          },
-          profile: {
-              display: 'flex',
-              justifyContent: 'space-around',
-              padding: '2% 4%'
           },
           Button: {
               width: '90px',
@@ -84,7 +167,26 @@ const useStyles = makeStyles(theme =>
             fontSize: '22px',
             fontFamily: 'inherit',
             fontWeight: '500',
-            color: '#00669b'
+            color: '#00669b',
+            padding: '2% 0%'
+          },
+          profile: {
+            display: 'flex',
+            justifyContent: 'space-around',
+            borderBottom: '1px solid #f5e4e4',
+            padding: '2% 0'
+          },
+          Link: {
+              cursor: 'pointer',
+              alignSelf: 'center'
+          },
+          typo: {
+              width: '44%'
+          },
+          linkDiv: {
+           width: '7%',
+           alignSelf: 'center',
+           paddingTop: '1%'   
           }
     })
 )
