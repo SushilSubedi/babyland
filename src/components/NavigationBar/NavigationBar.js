@@ -6,8 +6,6 @@ import {
   AppBar,
   Toolbar,
   fade,
-  Tabs,
-  Tab
 
 } from "@material-ui/core";
 import logo from "./logo.png";

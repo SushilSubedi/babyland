@@ -62,7 +62,6 @@ export const fetchCartData = () =>{
                                 img: data[k].img,
                                 id: data[k].id
                             }
-                            console.log("s",dataCollections);
                             dispatch(updateData(dataCollections));
                     }
                 }
