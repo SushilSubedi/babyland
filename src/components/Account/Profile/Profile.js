@@ -13,7 +13,7 @@ return(
     <Box  padding ='6% 2%'>
         <Container>
             <Box component={Paper} padding='2% 8% 2% 4%'>
-                <div className={classes.profile}>
+                <Box className={classes.profile} padding= "2% 0">
                     <div className={classes.input}>
                         <TextField
                             id= " input field"
@@ -39,11 +39,11 @@ return(
                             UPLOAD
                         </Button>
                     </div>
-                </div>
+                </Box>
                 <Box className={classes.profile} padding="2% 0%">
                     <div className={classes.typo}>
                         <Typography className={classes.Typography}>Email Address</Typography>
-                        <Typography>Your email address is testify@com</Typography>   
+                        <Typography>Your email address is testify@test.com</Typography>   
                     </div>
                     <div className={classes.linkDiv}>
                         <Link className={classes.Link}>Change</Link>
@@ -58,8 +58,8 @@ return(
                     </div>
                 </Box>
                 <Box>
-                    <Box className={classes.profile} padding="2% 0">
-                        <div style={{width: '65%',padding: '0 7%'}}>
+                    <Box className={classes.profile} style={{borderBottom: 'none'}} padding="2% 5%">
+                        <div className={classes.fullAddress}>
                             <Typography className={classes.Typography}>Full-Address</Typography>
                             <div className={classes.address}>
                                 <TextField
@@ -83,7 +83,7 @@ return(
                             <div style={{display: 'flex'}}>
                                 <TextField
                                     id= " input field 4"
-                                    label = "city"
+                                    label = "City"
                                     type= "text"
                                     value= {name}
                                     onChange= {changeNameHandler}
@@ -92,7 +92,7 @@ return(
                                 <TextField
                                     id= " input field 4"
                                     label = "Zip Code"
-                                    type= "text"
+                                    type= "number"
                                     value= {name}
                                     onChange= {changeNameHandler}
                                     className={classes.smallField}
@@ -106,10 +106,9 @@ return(
                                 onChange= {changeNameHandler}
                                 className={classes.AddressField}
                             />
-                            <Link className={classes.Link}>Change</Link>
                         </div>
-                        <div>
-                         
+                        <div className={classes.buttonDiv}>
+                            <Button className={classes.button}>Update</Button>
                         </div>
                     </Box>
                 </Box>
@@ -138,6 +137,10 @@ const useStyles = makeStyles(theme =>
           address: {
             display: 'flex',
             justifyContent:'space-around',
+          },
+          fullAddress:{
+            width: '65%',
+            padding: '0 4% 0 6%'
           },
           input: {
                 display: 'grid',
@@ -174,7 +177,6 @@ const useStyles = makeStyles(theme =>
             display: 'flex',
             justifyContent: 'space-around',
             borderBottom: '1px solid #f5e4e4',
-            padding: '2% 0'
           },
           Link: {
               cursor: 'pointer',
@@ -187,6 +189,18 @@ const useStyles = makeStyles(theme =>
            width: '7%',
            alignSelf: 'center',
            paddingTop: '1%'   
+          },
+          button: {
+            width: '90px',
+            height:'40px',
+            background: 'hotpink',
+            "&:hover": {
+                backgroundColor:'#fc03d7'
+            }
+          },
+          buttonDiv: {
+              alignSelf: 'flex-end',
+              width: '17%'
           }
     })
 )
