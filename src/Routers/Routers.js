@@ -42,7 +42,7 @@ const Routers = () => {
         <Route path = '/Wishlist' component={ayscWishlist}/>
         <Route path = '/Profile' component={ayscProfile}/>
         <Route path="/Cart" component={Cart} />
-        <Redirect to='/' />
+        {/* <Redirect to='/' /> */}
       </Switch>
     )
   }
