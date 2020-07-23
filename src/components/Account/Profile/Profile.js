@@ -1,9 +1,25 @@
-import React,{useState} from 'react';
-import { Box,makeStyles,createStyles, Container,Paper,TextField,Avatar,Typography,Button,Link } from '@material-ui/core';
+import React,{ useState } from 'react';
+import { 
+    Box,
+    makeStyles,
+    createStyles,
+    Container,
+    Paper,
+    TextField,
+    Avatar,
+    Typography,
+    Button,
+    Link 
+} from '@material-ui/core';
+
+import { useSelector  } from 'react-redux';
 
 const Profile = ()=> {
     const classes = useStyles();
     const [name,setName] = useState('');
+    const user = useSelector(state => state.AuthRedux.user) || [];
+    const userID = useSelector(state => state.AuthRedux.userID) || [];
+    const email = useSelector(state => state.AuthRedux.email) || [];
 
     const changeNameHandler = () => {
         console.log("hey,There")
@@ -20,15 +36,14 @@ return(
                             id= " input field"
                             label = "Full Name"
                             type= "text"
-                            value= {name}
-                            onChange= {changeNameHandler}
+                            value= {user}
                             className={classes.InputField}
                         />
                         <TextField
                             id= " input field 1"
                             label = "UserID"
                             type= "text"
-                            value= {name}
+                            value= {userID}
                             onChange= {changeNameHandler}
                             className={classes.InputField}
                         />
@@ -44,7 +59,7 @@ return(
                 <Box className={classes.profile} padding="2% 0%">
                     <div className={classes.typo}>
                         <Typography className={classes.Typography}>Email Address</Typography>
-                        <Typography>Your email address is testify@test.com</Typography>   
+                        <Typography>Your email address is {email}</Typography>   
                     </div>
                     <div className={classes.linkDiv}>
                         <Link className={classes.Link}>Change</Link>

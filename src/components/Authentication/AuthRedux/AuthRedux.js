@@ -5,6 +5,7 @@ const initialState = {
     user:'',
     userID:'',
     error:'',
+    email:'',
     refreshToken: null,
     authRedirectPath:'/'
 }
@@ -23,6 +24,7 @@ const reducer = (state = initialState,action) =>{
                 user: action.user,
                 userID: action.userID,
                 refreshToken: action.refreshToken,
+                email: action.email,
                 loading:false
             }
         case actionType.AUTH_FAIL:
