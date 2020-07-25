@@ -3,7 +3,8 @@ import fire from '../../../../config/fire';
 export const PROFILE_START = 'PROFILE_START';
 export const PROFILE_PIC = 'PROFILE_PIC';
 export const PROFILE_FAIL = 'PROFILE_FAIL';
-export const PROFILE_ADDRESS = 'PROFILE_ADDRESS'
+export const PROFILE_ADDRESS = 'PROFILE_ADDRESS';
+export const PROFILE_EMAIL_VERIFY = 'PROFILE_EMAIL_VERIFY';
 
 export const profileStart = () => {
     return {
@@ -29,6 +30,13 @@ export const profileAddress = (address) => {
     return {
         type: PROFILE_ADDRESS,
         address:address
+    }
+}
+
+export const profileEmailVerify = (emailVerified) => {
+    return {
+        type: PROFILE_EMAIL_VERIFY,
+        emailVerified: emailVerified
     }
 }
 
@@ -79,7 +87,7 @@ export const updatedAddressHandle = (streetAddress,addressLine,city,zipCode,phon
         const updateData = {};
         const data = {
             streetAddress: streetAddress,
-            AddressLine: addressLine,
+            addressLine: addressLine,
             city: city,
             zipCode: zipCode,
             phoneNumber: phoneNumber
@@ -111,3 +119,14 @@ export const fetchAddressHandler = () => {
     }
 }
 
+export const checkEmailVerify = () => {
+    return (dispatch) =>{
+        fire.auth().onAuthStateChanged(firebaseUser => {
+            if(firebaseUser){
+                if(firebaseUser.emailVerified){
+                    dispatch(profileEmailVerify(true));
+                }
+            }
+        })
+    }
+}

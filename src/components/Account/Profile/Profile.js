@@ -16,7 +16,7 @@ import fire from '../../../config/fire';
 import { Alert } from '@material-ui/lab';
 
 import { useSelector,useDispatch  } from 'react-redux';
-import { uploadImgHandle,profilePicDownload,updatedAddressHandle,fetchAddressHandler } from './ProfileRedux/action';
+import { uploadImgHandle,profilePicDownload,updatedAddressHandle,fetchAddressHandler,checkEmailVerify } from './ProfileRedux/action';
 
 const Profile = ()=> {
     const classes = useStyles();
@@ -34,6 +34,7 @@ const Profile = ()=> {
     const email = useSelector(state => state.AuthRedux.email) || [];
     const img = useSelector(state => state.ProfileRedux.Img) || '';
     const address = useSelector(state => state.ProfileRedux.address) || [];
+    const emailVerified = useSelector(state => state.ProfileRedux.emailVerified) || false ;
 
     const dispatch = useDispatch();
 
@@ -62,6 +63,9 @@ const Profile = ()=> {
         }
         if(address.length === 0){
             dispatch(fetchAddressHandler())  
+        }
+        if(emailVerified === false){
+            dispatch(checkEmailVerify())
         }
     },[])
 
@@ -147,7 +151,11 @@ return(
                         <Typography>Your email address is {email}</Typography>   
                     </div>
                     <div className={classes.linkDiv}>
-                        <Link onClick={VerifyEmailHandler} className={classes.Link}>Verify</Link>
+                        {emailVerified === false ?
+                            <Link onClick={VerifyEmailHandler} className={classes.Link}>Verify</Link>:
+                            <Button style={{color: 'black'}}>Verified</Button>
+                        }
+                        
                     </div>
                 </Box>
                 <Box className={classes.profile} padding="2% 0%">

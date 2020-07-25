@@ -7,7 +7,7 @@ const Account = (props) => {
   const { open, handleClose,anchorEl } = props;
   const data = [
     {
-    name: `MyProfile`,
+    name: `My Profile`,
       link: '/Profile'
     },
     {

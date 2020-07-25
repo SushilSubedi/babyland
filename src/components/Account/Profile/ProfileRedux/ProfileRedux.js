@@ -3,7 +3,9 @@ import * as actionType from './action';
 const initialState = {
     loading: false,
     error: '',
-    Img: ''
+    Img: '',
+    address: [],
+    emailVerified: false
 }
 
 const reducer = (state = initialState,action) =>{
@@ -25,7 +27,12 @@ const reducer = (state = initialState,action) =>{
                 ...state,
                 address: action.address,
                 loading: false
-            }    
+            }
+        case actionType.PROFILE_EMAIL_VERIFY:
+            return {
+                ...state,
+                emailVerified: action.emailVerified
+            }        
         case actionType.PROFILE_FAIL:
             return{
                 ...state,
