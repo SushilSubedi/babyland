@@ -9,7 +9,7 @@ import ToyRedux from "../components/Shop/ShopLists/Toys/ToysRedux/ToysRedux";
 import TShirtRedux from "../components/Shop/ShopLists/Tshirt/TShirtRedux/TShirtRedux";
 import WishlistRedux from '../components/Account/Wishlist/WishlistRedux/WishlistRedux';
 import CartRedux from '../components/Cart/CartRedux/CartRedux';
-
+import ProfileRedux from '../components/Account/Profile/ProfileRedux/ProfileRedux';
 
 
 const rootReducer = combineReducers({
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
   TShirtRedux,
   WishlistRedux,
   CartRedux,
+  ProfileRedux
 });
 
 export default rootReducer;

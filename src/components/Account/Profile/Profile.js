@@ -15,50 +15,40 @@ import {
 import fire from '../../../config/fire';
 import { Alert } from '@material-ui/lab';
 
-import { useSelector  } from 'react-redux';
+import { useSelector,useDispatch  } from 'react-redux';
+import { uploadImgHandle,profilePicDownload,updatedAddressHandle,fetchAddressHandler } from './ProfileRedux/action';
 
 const Profile = ()=> {
     const classes = useStyles();
-    const [name,setName] = useState('');
     const [update,setUpdate] = useState(false);
     const [open,setOpen] = useState(false);
-    const [img,setImg] = useState('');
     const [uploadImg,setUploadImg] = useState('');
+    const [streetAddress,setStreetAddress] = useState('');
+    const [addressLine,setAddressLine] = useState('');
+    const [city,setCity] = useState('');
+    const [zipCode,setZipCode] = useState('');
+    const [phoneNumber,setPhoneNumber] = useState('');
+
     const user = useSelector(state => state.AuthRedux.user) || [];
     const userID = useSelector(state => state.AuthRedux.userID) || [];
     const email = useSelector(state => state.AuthRedux.email) || [];
+    const img = useSelector(state => state.ProfileRedux.Img) || '';
+    const address = useSelector(state => state.ProfileRedux.address) || [];
+
+    const dispatch = useDispatch();
+
 
 
     const UploadImgHandler = () => {
         if(uploadImg){
-            fire.auth().onAuthStateChanged(firebaseUser => {
-                if(firebaseUser){
-                    fire.storage().ref('users/'+ userID +'/profile.jpg').put(uploadImg).then(result =>{
-                        const updateData = {};
-                        const data = {
-                            userID: userID,
-                            profile: true
-                        }
-                        updateData[`/ProfilePic/` + userID ] = data;
-                        fire.database().ref().update(updateData).then(updated =>{
-                            profileDownloadHandler();
-                        });
-                    })
-                }
-            })
+            dispatch(uploadImgHandle(uploadImg));
         }
     }
 
-    
-    const profileDownloadHandler = () => {
-        fire.database().ref(`/ProfilePic/${userID}`).once('value',snapshot => {
-            if(snapshot.val().userID === userID){
-                fire.storage().ref('users/'+ userID + '/profile.jpg').getDownloadURL().then(url => {
-                    setImg(url);
-                }).catch(error => console.log(error))
-            }
-        })
+    const updateAddressHandler = () => {
+      dispatch(updatedAddressHandle(streetAddress,addressLine,city,zipCode,phoneNumber))
     }
+
 
     useEffect(() => {
         if(uploadImg){
@@ -67,16 +57,14 @@ const Profile = ()=> {
     },[uploadImg]);
 
     useEffect(() => {
-        profileDownloadHandler();
+        if(img === ''){
+            dispatch(profilePicDownload());          
+        }
+        if(address.length === 0){
+            dispatch(fetchAddressHandler())  
+        }
     },[])
 
-
-    const changeNameHandler = () => {
-
-    }
-
-    // const imageDownload = () => {
-    // }
 
     const VerifyEmailHandler = () =>{
         try{
@@ -179,16 +167,17 @@ return(
                                     id= " input field 2"
                                     label = "Street-Address"
                                     type= "text"
-                                    value= {name}
-                                    onChange= {changeNameHandler}
+                                    value= {address?.streetAddress || ''}
+                                    onChange= {(e) => setStreetAddress(e.target.value)}
                                     className={classes.AddressField}
                                 />
+                                
                                 <TextField
                                     id= " input field 3"
                                     label = "Address-Line2"
                                     type= "text"
-                                    value= {name}
-                                    onChange= {changeNameHandler}
+                                    value= {address?.addressLine || ''}
+                                    onChange= {(e) => setAddressLine(e.target.value)}
                                     className={classes.AddressField}
                                 />
                             
@@ -198,16 +187,16 @@ return(
                                     id= " input field 4"
                                     label = "City"
                                     type= "text"
-                                    value= {name}
-                                    onChange= {changeNameHandler}
+                                    value= {address?.city || ''}
+                                    onChange= {(e) => setCity(e.target.value)}
                                     className={classes.smallField}
                                 />
                                 <TextField
                                     id= " input field 4"
                                     label = "Zip Code"
                                     type= "number"
-                                    value= {name}
-                                    onChange= {changeNameHandler}
+                                    value= {address?.zipCode || ''}
+                                    onChange= {(e)=> setZipCode(e.target.value)}
                                     className={classes.smallField}
                                 />
                             </div>
@@ -215,13 +204,13 @@ return(
                                 id= " input field 4"
                                 label = "Phone number"
                                 type= "number"
-                                value= {name}
-                                onChange= {changeNameHandler}
+                                value= {address?.phoneNumber || ''}
+                                onChange= {(e) => setPhoneNumber(e.target.value)}
                                 className={classes.AddressField}
                             />
                         </div>
                         <div className={classes.buttonDiv}>
-                            <Button className={classes.button}>Update</Button>
+                            <Button onClick={updateAddressHandler} className={classes.button}>Update</Button>
                         </div>
                     </Box>
                 </Box>
