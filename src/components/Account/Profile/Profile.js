@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { 
     Box,
     makeStyles,
@@ -9,27 +9,112 @@ import {
     Avatar,
     Typography,
     Button,
-    Link 
+    Link,
+    Snackbar
 } from '@material-ui/core';
+import fire from '../../../config/fire';
+import { Alert } from '@material-ui/lab';
 
 import { useSelector  } from 'react-redux';
 
 const Profile = ()=> {
     const classes = useStyles();
     const [name,setName] = useState('');
+    const [update,setUpdate] = useState(false);
+    const [open,setOpen] = useState(false);
+    const [img,setImg] = useState('');
+    const [uploadImg,setUploadImg] = useState('');
     const user = useSelector(state => state.AuthRedux.user) || [];
     const userID = useSelector(state => state.AuthRedux.userID) || [];
     const email = useSelector(state => state.AuthRedux.email) || [];
 
+
+    const UploadImgHandler = () => {
+        if(uploadImg){
+            fire.auth().onAuthStateChanged(firebaseUser => {
+                if(firebaseUser){
+                    fire.storage().ref('users/'+ userID +'/profile.jpg').put(uploadImg).then(result =>{
+                        const updateData = {};
+                        const data = {
+                            userID: userID,
+                            profile: true
+                        }
+                        updateData[`/ProfilePic/` + userID ] = data;
+                        fire.database().ref().update(updateData).then(updated =>{
+                            profileDownloadHandler();
+                        });
+                    })
+                }
+            })
+        }
+    }
+
+    
+    const profileDownloadHandler = () => {
+        fire.database().ref(`/ProfilePic/${userID}`).once('value',snapshot => {
+            if(snapshot.val().userID === userID){
+                fire.storage().ref('users/'+ userID + '/profile.jpg').getDownloadURL().then(url => {
+                    setImg(url);
+                }).catch(error => console.log(error))
+            }
+        })
+    }
+
+    useEffect(() => {
+        if(uploadImg){
+            UploadImgHandler();
+        }
+    },[uploadImg]);
+
+    useEffect(() => {
+        profileDownloadHandler();
+    },[])
+
+
     const changeNameHandler = () => {
-        console.log("hey,There")
-        setName("");
+
+    }
+
+    // const imageDownload = () => {
+    // }
+
+    const VerifyEmailHandler = () =>{
+        try{
+            fire.auth().onAuthStateChanged(firebaseUser => {
+                if (firebaseUser) {
+                    if (firebaseUser.emailVerified) {
+                        update('Email is already verified')
+                    }
+                    else {
+                    setUpdate('Email verification link send to your email address');
+                    firebaseUser.sendEmailVerification();
+                    }
+                
+                }
+                
+                })
+        }catch(error){
+            setUpdate(error);
+        }
+    }
+
+    const changePasswordHandler = () =>{
+        fire.auth().sendPasswordResetEmail(email).then(
+            setUpdate('Link is send to your email account'),
+            setOpen(true)
+            ).catch(error =>{
+            setUpdate(error.message)});
+    }
+    let updateMessage = null;
+    if(update){
+        updateMessage = <Snackbar open={open} onClose={()=>setOpen(false)} anchorOrigin={{vertical:'top',horizontal:'center'}} autoHideDuration={4000}><Alert variant="filled" severity="error">{update}</Alert></Snackbar>
     }
 
 return(
     <Box  padding ='6% 2%'>
         <Container>
             <Box component={Paper} padding='2% 8% 2% 4%'>
+                {updateMessage}
                 <Box className={classes.profile} padding= "2% 0">
                     <div className={classes.input}>
                         <TextField
@@ -44,16 +129,28 @@ return(
                             label = "UserID"
                             type= "text"
                             value= {userID}
-                            onChange= {changeNameHandler}
                             className={classes.InputField}
                         />
                     </div>
                     <div className={classes.FullAvatar}>
                         <Typography className={classes.Typography}>AVATAR</Typography>
-                        <Avatar alt="My profile" className={classes.Avatar} src={null}/>
-                        <Button className={classes.Button}>
-                            UPLOAD
-                        </Button>
+                        <Avatar alt="My profile" className={classes.Avatar} src={img}/>
+                        <div className={classes.root}>
+                        <input
+                            accept="image/*"
+                            style={{display:'none'}}
+                            id="contained-button-file"
+                            // value={uploadImg}
+                            onChange={(e)=>setUploadImg(e.target.files[0])}
+                            type="file"
+                        />
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" disableElevation={true} onClick={UploadImgHandler} className={classes.Button} component="span">
+                            Upload
+                            </Button>
+                        </label>
+                        
+                        </div>
                     </div>
                 </Box>
                 <Box className={classes.profile} padding="2% 0%">
@@ -62,7 +159,7 @@ return(
                         <Typography>Your email address is {email}</Typography>   
                     </div>
                     <div className={classes.linkDiv}>
-                        <Link className={classes.Link}>Change</Link>
+                        <Link onClick={VerifyEmailHandler} className={classes.Link}>Verify</Link>
                     </div>
                 </Box>
                 <Box className={classes.profile} padding="2% 0%">
@@ -70,7 +167,7 @@ return(
                         <Typography className={classes.Typography}>Password</Typography>
                     </div>
                     <div className={classes.linkDiv}>
-                        <Link className={classes.Link}>Change</Link>
+                        <Link onClick={changePasswordHandler} className={classes.Link}>Change</Link>
                     </div>
                 </Box>
                 <Box>

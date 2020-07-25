@@ -56,6 +56,7 @@ export const auth = (email, password, name) => {
         result.user.updateProfile({
           displayName: name,
         });
+        console.log("profile",result);
         localStorage.setItem("token", result.user.refreshToken);
         localStorage.setItem("user", result.user.displayName);
         localStorage.setItem("userID", result.user.uid);
@@ -80,6 +81,7 @@ export const authLogin = (email, password) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log("profile",result.user.photoURL);
         localStorage.setItem("token", result.user.refreshToken);
         localStorage.setItem("user", result.user.displayName);
         localStorage.setItem("userID", result.user.uid);
