@@ -44,40 +44,51 @@ export const uploadImgHandle = (uploadImg) => {
     return (dispatch) => {
         dispatch(profileStart())
         const userID = localStorage.getItem('userID');
-            fire.auth().onAuthStateChanged(firebaseUser => {
-                if(firebaseUser){
-                    fire.storage().ref('users/'+ userID +'/profile.jpg').put(uploadImg).then(result =>{
-                        const updateData = {};
-                        const data = {
-                            userID: userID,
-                            profile: true
-                        }
-                        updateData[`/ProfilePic/` + userID ] = data;
-                        fire.database().ref().update(updateData).then(updated =>{
-                            profilePicDownload();
-                        });
-                    })
-                }
-            })   
+            if(uploadImg !== null){
+                fire.auth().onAuthStateChanged(firebaseUser => {
+                    if(firebaseUser){
+                        fire.storage().ref('users/'+ userID +'/profile.jpg').put(uploadImg).then(result =>{
+                            const updateData = {};
+                            const data = {
+                                userID: userID,
+                                profile: true
+                            }
+                            updateData[`/ProfilePic/` + userID ] = data;
+                            fire.database().ref().update(updateData).then(val => {
+                                profilePicDownload().then((url) => {
+                                    dispatch(profileImg(url))
+                                }).catch(error => {
+                                    dispatch(profileError(error))
+                                });
+                            });
+                        })
+                    }
+                }) 
+            }else {
+                profilePicDownload().then((url) => {
+                    dispatch(profileImg(url))
+                }).catch(error => {
+                    dispatch(profileError(error))
+                });
+            }  
     }
 }
 
 
 
  export const profilePicDownload = () => {
-     return (dispatch) =>{
-            dispatch(profileStart());
+     return new Promise((resolve,reject) => {
         const userID = localStorage.getItem('userID');
         fire.database().ref(`/ProfilePic/${userID}`).once('value',snapshot => {
-            if(snapshot.val().userID === userID){
+            if(snapshot.exists()){
                 fire.storage().ref('users/'+ userID + '/profile.jpg').getDownloadURL().then(url => {
-                    dispatch(profileImg(url));
+                    resolve(url)
                 }).catch(error => {
-                    dispatch(profileError(error));
+                    reject(error);
                 })
             }
         })
-     }
+     })
 }
 
 
@@ -108,7 +119,7 @@ export const fetchAddressHandler = () => {
                 const data = snapshot.val();
                 const address = {
                     streetAddress: data.streetAddress,
-                    AddressLine: data.addressLine,
+                    addressLine: data.addressLine,
                     city: data.city,
                     zipCode: data.zipCode,
                     phoneNumber: data.phoneNumber

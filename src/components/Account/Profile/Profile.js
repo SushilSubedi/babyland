@@ -16,13 +16,13 @@ import fire from '../../../config/fire';
 import { Alert } from '@material-ui/lab';
 
 import { useSelector,useDispatch  } from 'react-redux';
-import { uploadImgHandle,profilePicDownload,updatedAddressHandle,fetchAddressHandler,checkEmailVerify } from './ProfileRedux/action';
+import { uploadImgHandle,updatedAddressHandle,fetchAddressHandler,checkEmailVerify } from './ProfileRedux/action';
 
 const Profile = ()=> {
     const classes = useStyles();
     const [update,setUpdate] = useState(false);
     const [open,setOpen] = useState(false);
-    const [uploadImg,setUploadImg] = useState('');
+    const [uploadImg,setUploadImg] = useState(null);
     const [streetAddress,setStreetAddress] = useState('');
     const [addressLine,setAddressLine] = useState('');
     const [city,setCity] = useState('');
@@ -39,36 +39,44 @@ const Profile = ()=> {
     const dispatch = useDispatch();
 
 
-
-    const UploadImgHandler = () => {
-        if(uploadImg){
-            dispatch(uploadImgHandle(uploadImg));
-        }
-    }
-
     const updateAddressHandler = () => {
       dispatch(updatedAddressHandle(streetAddress,addressLine,city,zipCode,phoneNumber))
     }
 
 
     useEffect(() => {
-        if(uploadImg){
-            UploadImgHandler();
+        if(uploadImg !== null && uploadImg !== img){
+            dispatch(uploadImgHandle(uploadImg));
         }
     },[uploadImg]);
 
     useEffect(() => {
-        if(img === ''){
-            dispatch(profilePicDownload());          
-        }
-        if(address.length === 0){
-            dispatch(fetchAddressHandler())  
-        }
         if(emailVerified === false){
             dispatch(checkEmailVerify())
         }
+    },[emailVerified])
+
+    useEffect(() => {
+        if(address.length === 0){
+            dispatch(fetchAddressHandler())  
+        }
     },[])
 
+    useEffect(() => {
+        if(img === '' && uploadImg === null){
+            dispatch(uploadImgHandle(uploadImg));          
+        }
+    },[])
+
+    useEffect(() => {
+        if(address.length !== 0) {
+            setStreetAddress(address.streetAddress);
+            setAddressLine(address.addressLine);
+            setCity(address.city);
+            setZipCode(address.zipCode);
+            setPhoneNumber(address.phoneNumber);
+        }
+    },[address])
 
     const VerifyEmailHandler = () =>{
         try{
@@ -137,7 +145,9 @@ return(
                             type="file"
                         />
                         <label htmlFor="contained-button-file">
-                            <Button variant="contained" disableElevation={true} onClick={UploadImgHandler} className={classes.Button} component="span">
+                            <Button variant="contained" disableElevation={true} onClick={() => {
+                                uploadImg !== '' && dispatch(uploadImgHandle(uploadImg))
+                            }} className={classes.Button} component="span">
                             Upload
                             </Button>
                         </label>
@@ -153,7 +163,7 @@ return(
                     <div className={classes.linkDiv}>
                         {emailVerified === false ?
                             <Link onClick={VerifyEmailHandler} className={classes.Link}>Verify</Link>:
-                            <Button style={{color: 'black'}}>Verified</Button>
+                            <Button style={{color: 'black'}} disabled={true}>Verified</Button>
                         }
                         
                     </div>
@@ -175,8 +185,8 @@ return(
                                     id= " input field 2"
                                     label = "Street-Address"
                                     type= "text"
-                                    value= {address?.streetAddress || ''}
-                                    onChange= {(e) => setStreetAddress(e.target.value)}
+                                    value= {streetAddress}
+                                    onChange= {(e) => {setStreetAddress(e.target.value)}}
                                     className={classes.AddressField}
                                 />
                                 
@@ -184,7 +194,7 @@ return(
                                     id= " input field 3"
                                     label = "Address-Line2"
                                     type= "text"
-                                    value= {address?.addressLine || ''}
+                                    value= {addressLine}
                                     onChange= {(e) => setAddressLine(e.target.value)}
                                     className={classes.AddressField}
                                 />
@@ -195,7 +205,7 @@ return(
                                     id= " input field 4"
                                     label = "City"
                                     type= "text"
-                                    value= {address?.city || ''}
+                                    value= {city}
                                     onChange= {(e) => setCity(e.target.value)}
                                     className={classes.smallField}
                                 />
@@ -203,7 +213,7 @@ return(
                                     id= " input field 4"
                                     label = "Zip Code"
                                     type= "number"
-                                    value= {address?.zipCode || ''}
+                                    value= {zipCode}
                                     onChange= {(e)=> setZipCode(e.target.value)}
                                     className={classes.smallField}
                                 />
@@ -212,7 +222,7 @@ return(
                                 id= " input field 4"
                                 label = "Phone number"
                                 type= "number"
-                                value= {address?.phoneNumber || ''}
+                                value= {phoneNumber}
                                 onChange= {(e) => setPhoneNumber(e.target.value)}
                                 className={classes.AddressField}
                             />
