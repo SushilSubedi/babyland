@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
 
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton } from '@material-ui/core';
 
@@ -27,37 +26,32 @@ const Cart = (props) => {
 
 
     return (
-        <div className={classes.cart} >
+        <div >
+
             <div>
-                <Box component={Paper} className={classes.notice}>
-
-
+                <Box component={Paper} className={classes.message}>
                     <Typography variant="h5">
                         Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
-                    </Typography>
+                        </Typography>
 
                 </Box>
             </div>
+            <div className={classes.cart}>
+                <div className={classes.CardList}>
+                    <CardList />
+                </div>
+                <div className={classes.items}>
+                    <Items
 
-            <div className={classes.items}>
-                <Items
+                        CartData={cartData} />
 
-                    CartData={cartData} />
+
+                </div>
+
+
             </div>
-
-
-            <div className={classes.CardList}>
-                <CardList />
-            </div>
-
-
-
-
-
-
-
-
         </div>
+
 
 
 
@@ -70,39 +64,36 @@ const Cart = (props) => {
 
 const useStyles = makeStyles(
     createStyles({
-        notice: {
-            width: "1200px",
-            padding: "60px",
-            margin: "3% 0% 6% 8%",
+        message: {
+            width: "1175px",
+            padding: "3% 2% 2% 4%",
+            margin: "3% 8% 0% 2%"
+
 
 
 
         },
         cart: {
+
             display: "flex",
-            flexDirection: 'column',
-
-            justifyContent: "space-between",
-            width: "900px"
-
-
+            flexDirection: "row",
+            justifyContent: "space-between"
         },
 
         items: {
-            position: "absolute",
-            left: "1300px",
-            top: "330px",
-
+            width: "fit-content",
+            marginLeft: "auto",
+            marginTop: "4% 6% 0% 0%"
 
         },
         CardList: {
             display: "flex",
             width: "1200px",
-            // height: "600px",
             justifyContent: "space-between",
-            margin: "1% 5% 5% 5%"
+            margin: "2% 2% 1% 3%"
 
-        }
+
+        },
 
 
     })
