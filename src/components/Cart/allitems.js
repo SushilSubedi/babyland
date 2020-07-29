@@ -11,8 +11,8 @@ const allitems = (props) => {
 
   const total = (CartData) => {
     let s = 0;
-    for (var i = 0; i < CartData.length; i++) {
-      s = s + CartData[i];
+    for (var i = 0; i < CartData.value.length; i++) {
+      s = s + CartData.value[i];
       console.log("h", s);
     }
 
