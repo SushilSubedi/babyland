@@ -9,6 +9,16 @@ const allitems = (props) => {
   const classes = UseStyles();
   const { CartData } = props;
 
+  const total = (CartData) => {
+    let s = 0;
+    for (var i = 0; i < CartData.length; i++) {
+      s = s + CartData[i];
+      console.log("h", s);
+    }
+
+  }
+
+
 
 
 
@@ -32,7 +42,7 @@ const allitems = (props) => {
 
         <div className={classes.Delivery}>
           <Typography  >Delivery </Typography>
-          <Typography  > price</Typography>
+          <Typography  > {total}</Typography>
 
         </div>
 
