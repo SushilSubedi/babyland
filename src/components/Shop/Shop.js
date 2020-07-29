@@ -17,7 +17,7 @@ const Shop = () => {
     if(cartData.length  === 0 && AuthData.length === 0){
       dispatch(fetchCartData());
     }
-  },[cartData,wishlistData])
+  },[cartData,wishlistData,dispatch,AuthData.length])
   return (
     <div>
       <ShopLists />

@@ -25,7 +25,7 @@ const ImageSlider = () => {
       <div className="slide-container">
         <Zoom {...zoomOutProperties}>
           {
-            images.map((each, index) => <img key={index} style={{height:'520px', width:'100%'}} src={each} />)
+            images.map((each, index) => <img key={index} style={{height:'520px', width:'100%'}} alt="img slider" src={each} />)
           }
         </Zoom>
       </div>

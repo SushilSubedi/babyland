@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
 import { tshirtHandler } from "./TShirtRedux/action";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ const Tshirt = (props) => {
   const dispatch = useDispatch();
   const [price,setPrice] = useState('');
   const [Data,setData] = useState([]);
+
 
   useEffect(() => {
     if (data.length === 0) {

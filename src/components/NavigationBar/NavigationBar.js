@@ -1,4 +1,4 @@
-import React, { useState, useEffect,createRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   createStyles,
@@ -46,7 +46,7 @@ const NavigationBar = (props) => {
 
   useEffect(()=>{
     dispatch(authCheckState());
-  },[])
+  },[dispatch])
 
   return (
     <AppBar position="fixed" color="primary" elevation={0}>

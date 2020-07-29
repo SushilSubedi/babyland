@@ -3,12 +3,12 @@ import { Redirect } from 'react-router-dom';
 import { logout } from '../components/Authentication/AuthRedux/action';
 import { useDispatch } from 'react-redux';
 
-const Logout = (props) => {
+const Logout = () => {
     const dispatch = useDispatch();
 
     useEffect(() =>{
         dispatch(logout());
-    },[])
+    },[dispatch])
 
     return <Redirect to ='/' />
 }
