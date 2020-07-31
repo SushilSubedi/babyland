@@ -66,6 +66,7 @@ createStyles({
         boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)',
         position:'relative',
         border: '1px solid rgba(0,0,0,0.1)',
+        transition: 'all 0.3s ease-out',
         "&:hover":{
             transform: 'translate(-5px,-20px)'
         }

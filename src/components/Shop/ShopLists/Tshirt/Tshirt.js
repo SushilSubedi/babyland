@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import ShopCardList from "../ShopCardList/ShopCardList";
 import { tshirtHandler } from "./TShirtRedux/action";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const Tshirt = (props) => {
     if (data.length === 0) {
       dispatch(tshirtHandler());
     }
-  }, []);
+  },[]);
 
   useEffect(()=>{
     setData(data);

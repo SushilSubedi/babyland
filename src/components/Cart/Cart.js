@@ -30,8 +30,6 @@ const Cart = (props) => {
         <div className={classes.cart} >
             <div>
                 <Box component={Paper} className={classes.notice}>
-
-
                     <Typography variant="h5">
                         Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
                     </Typography>
