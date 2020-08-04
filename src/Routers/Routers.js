@@ -23,7 +23,6 @@ const Routers = () => {
   let switchs = (
     <Switch>
       <Route path="/" exact component={Home} />
-
       <Route path="/shop" component={Shop} />
       <Route path="/Authentication" component={ayscAuth} />
       <Route path="/Cart" component={Cart} />
@@ -35,7 +34,6 @@ const Routers = () => {
     switchs = (
       <Switch>
         <Route path="/" exact component={Home} />
-
         <Route path="/shop" component={Shop} />
         <Route path="/logout" component={ayscLogout} />
         <Route path ='/Account' component={ayscAccount}/>
