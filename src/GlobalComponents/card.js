@@ -28,7 +28,9 @@ const Card = (props) => {
 
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel htmlFor="filled-age-native-simple">Qty</InputLabel>
-                <Select>
+                <Select
+                  
+                >
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>

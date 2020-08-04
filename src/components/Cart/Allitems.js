@@ -7,23 +7,28 @@ import { makeStyles, createStyles }
 const Allitems = (props) => {
 
   const classes = UseStyles();
-  const [total, settotal] = useState("");
+  const [total, setTotal] = useState(null);
+  const [updatePrice,setUpdatePrice] = useState(null);
   const { CartData } = props;
 
 
+const datastore = () => {
+  for(let i = 0; i < CartData.length; i ++) {
+    setTotal(prevState =>  prevState = prevState + CartData[i].value);
+}
+}
 
-  CartData.forEach(item => {
-    settotal((prevState) => prevState = prevState + item.value
-    )
-
-  });
-
-  useEffect(() => {
-
-    console.log("total", total);
-  }, [total]);
+useEffect(() => {
+  datastore();
+},[])
 
 
+useEffect(() => {
+  if(total < 2000 && total !== null) {
+    const price = total + 500;
+    setUpdatePrice(price);
+  }
+}, [total]);
 
 
   return (
@@ -45,22 +50,21 @@ const Allitems = (props) => {
 
         <div className={classes.Delivery}>
           <Typography  >Delivery </Typography>
-          <Typography  > {total}</Typography>
-
+          {total < 2000  ? <Typography  >500</Typography> : <Typography>No charge</Typography>}
         </div>
 
         <Divider variant="middle" />
 
         <div className={classes.Total}>
           <Typography style={{ fontSize: "20px" }}>Total </Typography>
-          <Typography style={{ fontSize: "20px" }}>price </Typography>
+
+          <Typography style={{ fontSize: "20px" }}>{total < 2000 ? updatePrice : total} </Typography>
 
         </div>
 
         <Button
           variant="contained"
           className={classes.button}>
-
           Checkout
         </Button>
 
