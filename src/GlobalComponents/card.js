@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const Card = (props) => {
   const classes = useStyles();
-  const { name, description, img, price } = props;
+  const { name, description, img, price, } = props;
 
   return (
     <Box component={Paper} className={classes.card}>
@@ -29,7 +29,7 @@ const Card = (props) => {
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel htmlFor="filled-age-native-simple">Qty</InputLabel>
                 <Select
-                  
+
                 >
                   <option value={1}>1</option>
                   <option value={2}>2</option>
