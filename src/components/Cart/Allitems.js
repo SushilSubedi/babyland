@@ -1,34 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles }
   from '@material-ui/core/styles';
 
 
-const allitems = (props) => {
+const Allitems = (props) => {
 
   const classes = UseStyles();
+  const [total, settotal] = useState("");
   const { CartData } = props;
 
 
 
-  const price = CartData.forEach(item => {
-    total = item.value
+  CartData.forEach(item => {
+    settotal((prevState) => prevState = prevState + item.value
+    )
 
   });
 
-  console.log(price);
+  useEffect(() => {
 
-
-  const total = (CartData) => {
-    let s = 0;
-    for (var i = 0; i < CartData.value.length; i++) {
-      s = s + CartData.value[i];
-
-    }
-
-  }
-
-
+    console.log("total", total);
+  }, [total]);
 
 
 
@@ -146,4 +139,4 @@ const UseStyles = makeStyles(
 
 
 
-export default allitems;
+export default Allitems;

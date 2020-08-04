@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton } from '@material-ui/core';
 
 
-import Items from './allitems';
+import Items from './Allitems';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData } from "./CartRedux/action";
 import CardList from './CardList';
