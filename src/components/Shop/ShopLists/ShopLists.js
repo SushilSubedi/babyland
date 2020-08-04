@@ -17,12 +17,6 @@ import Tshirt from "../ShopLists/Tshirt/Tshirt";
 import Toys from "../ShopLists/Toys/Toys";
 import Foods from "../ShopLists/Foods/Foods";
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

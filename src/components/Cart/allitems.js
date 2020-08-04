@@ -9,11 +9,21 @@ const allitems = (props) => {
   const classes = UseStyles();
   const { CartData } = props;
 
+
+
+  const price = CartData.forEach(item => {
+    total = item.value
+
+  });
+
+  console.log(price);
+
+
   const total = (CartData) => {
     let s = 0;
     for (var i = 0; i < CartData.value.length; i++) {
       s = s + CartData.value[i];
-      console.log("h", s);
+
     }
 
   }

@@ -117,12 +117,6 @@ const Footer = () =>{
          addressicon:{
            position:'relative',
            right:'29px',
-         },
-         addressicon:{
-           position:'relative',
-           right:'29px',
-           bottom:'27px',
-
          }
 
     }));

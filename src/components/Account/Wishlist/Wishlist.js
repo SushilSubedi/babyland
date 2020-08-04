@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { createStyles,makeStyles } from '@material-ui/core';
+// import { createStyles,makeStyles } from '@material-ui/core';
 import { fetchWishlistData } from './WishlistRedux/action';
 import { useDispatch } from 'react-redux';
 
@@ -9,7 +9,7 @@ const WishList = (props) => {
 
    useEffect(()=> {
     dispatch(fetchWishlistData());
-   },[])
+   },[dispatch])
     return(
         <div>
 

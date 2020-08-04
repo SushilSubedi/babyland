@@ -10,7 +10,7 @@ const Input = (props) => {
 
   let textField = (
     <TextField
-      id="input field"
+      id = {`${label}`}
       label={label}
       type={type}
       value={value}
