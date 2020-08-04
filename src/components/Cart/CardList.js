@@ -9,8 +9,9 @@ const CardList = (props) => {
 
   const cartData = useSelector(state => state.CartRedux.data) || [];
 
+
   return (
-    <div style={{ flexGrow: "1" }}>
+    <div >
       <Grid container >
         {cartData.map((item, index) => (
           <Grid item md={4} key={index} spacing={3}>

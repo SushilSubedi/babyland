@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles }
   from '@material-ui/core/styles';
 
 
-const allitems = (props) => {
+const Allitems = (props) => {
 
   const classes = UseStyles();
+  const [total, settotal] = useState("");
   const { CartData } = props;
 
+
+
+  CartData.forEach(item => {
+    settotal((prevState) => prevState = prevState + item.value
+    )
+
+  });
+
+  useEffect(() => {
+
+    console.log("total", total);
+  }, [total]);
 
 
 
@@ -23,23 +36,27 @@ const allitems = (props) => {
         <Divider variant="middle" />
         {CartData.map((item, index) => (
           <div className={classes.Items}>
-            <Typography style={{ position: "relative", right: "40px" }} >{item.name} </Typography>
-            <Typography style={{ position: "relative", right: "45px" }}> RS{item.value}</Typography>
+            <Typography  >{item.name} </Typography>
+            <Typography > RS{item.value}</Typography>
 
           </div>
         ))}
 
+
         <div className={classes.Delivery}>
-          <Typography  >Delivery Price</Typography>
+          <Typography  >Delivery </Typography>
+          <Typography  > {total}</Typography>
 
         </div>
 
         <Divider variant="middle" />
 
         <div className={classes.Total}>
-          <Typography style={{ fontSize: "20px" }}>Total Price</Typography>
+          <Typography style={{ fontSize: "20px" }}>Total </Typography>
+          <Typography style={{ fontSize: "20px" }}>price </Typography>
 
         </div>
+
         <Button
           variant="contained"
           className={classes.button}>
@@ -56,8 +73,10 @@ const allitems = (props) => {
 const UseStyles = makeStyles(
   createStyles({
     box: {
-      width: "500px",
-      height: "300px"
+      width: "450px",
+      maxheight: "900px",
+      minWidth: "100px",
+      minHeight: "300px"
     },
     container: {
       display: "flex",
@@ -70,7 +89,7 @@ const UseStyles = makeStyles(
       flexDirection: "row",
       justifyContent: "space-evenly",
       color: "#00669b",
-      wordSpacing: "90px"
+      wordSpacing: "80px"
 
 
     },
@@ -78,9 +97,6 @@ const UseStyles = makeStyles(
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
-
-      position: "relative",
-      right: "6px",
       fontSize: "5px",
       marginTop: "20px"
     },
@@ -88,28 +104,20 @@ const UseStyles = makeStyles(
     Delivery: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
-      wordSpacing: "20px",
+      justifyContent: "space-around",
       fontSize: "5px",
-      position: "relative",
-      right: "6px",
       marginTop: "20px"
     },
 
     Total: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
-      wordSpacing: "30px",
-      position: "relative",
-      right: "6px",
+      justifyContent: "space-around",
       marginTop: "20px",
       color: "rgb(232, 88, 49)",
     },
     button: {
-      position: "relative",
-      left: "140px",
-      top: "50px",
+      margin: "8% 0% 3% 25%",
       width: "150px",
       color: 'black',
       fontFamily: "sans-serif",
@@ -131,4 +139,4 @@ const UseStyles = makeStyles(
 
 
 
-export default allitems;
+export default Allitems;
