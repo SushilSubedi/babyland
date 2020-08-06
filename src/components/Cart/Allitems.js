@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles }
   from '@material-ui/core/styles';
@@ -12,15 +12,16 @@ const Allitems = (props) => {
   const { CartData } = props;
 
 
-const datastore = () => {
-  for(let i = 0; i < CartData.length; i ++) {
-    setTotal(prevState =>  prevState = prevState + CartData[i].value);
-}
-}
+
 
 useEffect(() => {
+  const datastore = () => {
+    for(let i = 0; i < CartData.length; i ++) {
+      setTotal(prevState =>  prevState = prevState + CartData[i].value);
+  }
+  }
   datastore();
-},[])
+},[CartData])
 
 
 useEffect(() => {
@@ -40,7 +41,7 @@ useEffect(() => {
         </div>
         <Divider variant="middle" />
         {CartData.map((item, index) => (
-          <div className={classes.Items}>
+          <div className={classes.Items} key={index}>
             <Typography  >{item.name} </Typography>
             <Typography > RS{item.value}</Typography>
 

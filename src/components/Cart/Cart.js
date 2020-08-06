@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { makeStyles, createStyles, Box, Typography } from '@material-ui/core';
 import Allitems from './Allitems';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData } from "./CartRedux/action";

@@ -35,22 +35,22 @@ export const fetchCartData = () =>{
         fire.database().ref(`/cart/${userId}`).on("value",(snapshort)=>{
             const data = snapshort.val();
             //abstract keys from an object
-            const DataArray = Object.assign([],data);
+            // const DataArray = Object.assign([],data);
             if(snapshort.val() !== null){
                 const keys = Object.keys(data);
                         // console.log("p",keys.length/ === .length)
-                        if(keys.length === DataArray.length){
-                            for(let i = 0; i < keys.length; i++){
-                                const k = keys[i];
-                                const dataCollection ={
-                                 name: data[k].name,
-                                 description: data[k].description,
-                                 value: data[k].value,
-                                 img: data[k].img,
-                                 id: data[k].id
-                                }
-                                cartData.push(dataCollection);
-                                }
+                        for(let i = 0; i < keys.length; i++){
+                            const k = keys[i];
+                            const dataCollection ={
+                             name: data[k].name,
+                             description: data[k].description,
+                             value: data[k].value,
+                             img: data[k].img,
+                             id: data[k].id
+                            }
+                            cartData.push(dataCollection);
+                            }
+                        if(keys.length === cartData.length){
                             dispatch(cartSuccess(cartData));
 
                         } else {
