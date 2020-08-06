@@ -24,13 +24,14 @@ const Cart = (props) => {
 
     return (
         <div>
-            <div>
-                <Box className={classes.message}>
-                    <Typography variant="h5">
-                        Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
-                    </Typography>
-                </Box>
-            </div>
+            <Container maxWidth="xl">
+                <div>
+                    <Box className={classes.message}>
+                        <Typography variant="h5">
+                            Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
+                        </Typography>
+                    </Box>
+                </div>
                 <div className={classes.cart}>
                     <div className={classes.CardList}>
                         <CardList />
@@ -42,8 +43,9 @@ const Cart = (props) => {
 
 
                     </div>
-                
-            </div>
+
+                </div>
+            </Container>
         </div>
 
 
@@ -69,12 +71,12 @@ const useStyles = makeStyles(
 
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between"
+            justifyContent: "space-around"
         },
 
         items: {
             width: "fit-content",
-            marginLeft: "auto",
+            // marginLeft: "auto",
             marginTop: "4% 6% 0% 0%"
 
         },
