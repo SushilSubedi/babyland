@@ -11,10 +11,10 @@ const CardList = (props) => {
 
 
   return (
-    <div >
-      <Grid container >
+    <Grid item md={12} >
+      <Grid container spacing={3} >
         {cartData.map((item, index) => (
-          <Grid item md={4} key={index} spacing={3}>
+          <Grid item md={4} key={index}>
             <Card
               name={item.name}
               description={item.description}
@@ -27,7 +27,7 @@ const CardList = (props) => {
 
       </Grid >
 
-    </div>
+    </Grid>
   )
 }
 

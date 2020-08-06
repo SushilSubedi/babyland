@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles }
   from '@material-ui/core/styles';
@@ -12,15 +12,16 @@ const Allitems = (props) => {
   const { CartData } = props;
 
 
-const datastore = () => {
-  for(let i = 0; i < CartData.length; i ++) {
-    setTotal(prevState =>  prevState = prevState + CartData[i].value);
-}
-}
+
 
 useEffect(() => {
+  const datastore = () => {
+    for(let i = 0; i < CartData.length; i ++) {
+      setTotal(prevState =>  prevState = prevState + CartData[i].value);
+  }
+  }
   datastore();
-},[])
+},[CartData])
 
 
 useEffect(() => {
@@ -35,17 +36,19 @@ useEffect(() => {
     <Box component={Paper} className={classes.box}>
       <Container className={classes.container}>
         <div className={classes.Header}>
-          <Typography style={{ fontSize: "20px" }}>Items Price</Typography>
-
+          <Typography style={{ fontSize: "20px" }}>Items </Typography>
+          <Typography style={{ fontSize: "20px" }}>Price</Typography>
         </div>
         <Divider variant="middle" />
+        <div style={{textAlign:'center'}}>
         {CartData.map((item, index) => (
-          <div className={classes.Items}>
+          <div className={classes.Items} key={index}>
             <Typography  >{item.name} </Typography>
             <Typography > RS{item.value}</Typography>
 
           </div>
         ))}
+        </div>
 
 
         <div className={classes.Delivery}>
@@ -91,18 +94,19 @@ const UseStyles = makeStyles(
     Header: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
+      justifyContent: "space-between",
+      width: "77%",
+    marginLeft: "4%",
       color: "#00669b",
       wordSpacing: "80px"
 
 
     },
     Items: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-around",
+      display:'grid',
+      gridTemplateColumns: '1fr 1fr',
       fontSize: "5px",
-      marginTop: "20px"
+      marginTop: "15px"
     },
 
     Delivery: {
@@ -110,7 +114,7 @@ const UseStyles = makeStyles(
       flexDirection: "row",
       justifyContent: "space-around",
       fontSize: "5px",
-      marginTop: "20px"
+      marginTop: "15px"
     },
 
     Total: {
