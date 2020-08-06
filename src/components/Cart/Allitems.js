@@ -65,11 +65,7 @@ useEffect(() => {
 
         </div>
 
-        <Button
-          variant="contained"
-          className={classes.button}>
-          Checkout
-        </Button>
+          <div className={classes.buttonDiv}> <Button variant="contained"className={classes.button}>Checkout</Button></div>
 
       </Container>
     </Box>
@@ -124,8 +120,11 @@ const UseStyles = makeStyles(
       marginTop: "20px",
       color: "rgb(232, 88, 49)",
     },
+    buttonDiv: {
+      textAlign: "center",
+      padding: "6%"
+    },
     button: {
-      margin: "8% 0% 3% 25%",
       width: "150px",
       color: 'black',
       fontFamily: "sans-serif",
