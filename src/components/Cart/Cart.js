@@ -19,7 +19,7 @@ const Cart = (props) => {
         if (cartData.length === 0) {
             dispatch(fetchCartData());
         }
-    }, [cartData]);
+    }, [cartData,dispatch]);
 
 
     return (

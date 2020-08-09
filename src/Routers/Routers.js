@@ -17,7 +17,8 @@ const Routers = () => {
   let ayscWishlist = lazy(() => import('../components/Account/Wishlist/Wishlist'));
   let ayscAccount = lazy(() => import('../components/Account/Account'));
   let ayscLogout = lazy(() => import('../Logout/logout'));
-  let ayscProfile = lazy(() => import('../components/Account/Profile/Profile'))
+  let ayscProfile = lazy(() => import('../components/Account/Profile/Profile'));
+  let ayscOrder = lazy(() => import('../components/Account/Order/Order'))
 
 
   let switchs = (
@@ -39,6 +40,7 @@ const Routers = () => {
         <Route path ='/Account' component={ayscAccount}/>
         <Route path = '/Wishlist' component={ayscWishlist}/>
         <Route path = '/Profile' component={ayscProfile}/>
+        <Route path = '/Order' component={ayscOrder}/>
         <Route path="/Cart" component={Cart} />
         <Redirect to='/' />
       </Switch>
