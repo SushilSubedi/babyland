@@ -39,6 +39,7 @@ const Payment = () => {
                             const order = await actions.order.capture();
                             console.log("paypal",order);
                             setPaidFor(true);
+                            alert("payment successful");
                         },
                         onError: err => {
                             setError(err);
