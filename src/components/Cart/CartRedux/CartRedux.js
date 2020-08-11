@@ -28,21 +28,18 @@ const reducer = (state = initialState, action) => {
                 data: updateData,
                 loading: false
             }
+        case actionType.CART_DELETE:
+            const duplicateData = (state.data).slice();
+            const DeletedData = duplicateData.filter(item => item.postId !== action.postId)
+            return {
+                ...state,
+                data: DeletedData
+            }
         case actionType.CART_FAIL:
             return {
                 ...state,
                 error: action.error,
                 loading: false
-            }
-
-        case actionType.CART_DELETE:
-            const duplicateData = (state.data).slice();
-            duplicateData.filter(item => item.id !== action.id)
-            console.log("updatedata", duplicateData);
-            return {
-                ...state,
-                data: duplicateData,
-
             }
         default:
             return state

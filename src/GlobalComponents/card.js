@@ -10,12 +10,11 @@ const Card = (props) => {
   const classes = useStyles();
   const { name, description, img, price, PostId, id } = props;
   const dispatch = useDispatch();
+  
   const deletedata = () => {
     const userId = localStorage.getItem('userID');
-    console.log("userid", userId, PostId);
-
     fire.database().ref(`/cart/${userId}/${PostId}`).set(null).then(doc =>
-      dispatch(cartDeleteData(id))
+      dispatch(cartDeleteData(PostId))
     )
 
   }

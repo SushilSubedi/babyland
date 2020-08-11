@@ -71,10 +71,10 @@ export const cartUpdateData = (updatedData) => {
     }
 }
 
-export const cartDeleteData = (id) => {
+export const cartDeleteData = (postId) => {
     return {
         type: CART_DELETE,
-        id: id
+        postId: postId
     }
 }
 
