@@ -46,7 +46,8 @@ export const fetchCartData = () =>{
                              description: data[k].description,
                              value: data[k].value,
                              img: data[k].img,
-                             id: data[k].id
+                             id: data[k].id,
+                             postId: data[k].postId
                             }
                             cartData.push(dataCollection);
                             }
@@ -60,7 +61,8 @@ export const fetchCartData = () =>{
                                description: data[k].description,
                                 value:data[k].value,
                                 img: data[k].img,
-                                id: data[k].id
+                                id: data[k].id,
+                                postId: data[k].postId
                             }
                             dispatch(updateData(dataCollections));
                     }
