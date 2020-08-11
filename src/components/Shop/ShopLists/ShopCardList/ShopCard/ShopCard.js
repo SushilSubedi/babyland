@@ -18,7 +18,7 @@ const ShopCard = (props) => {
     const classes = useStyles();
     const history = useHistory();
 
-    const { name, description, img, price, identifer, Token, WishlistData, CartData, postId } = props;
+    const { name, description, img, price, identifer, Token, WishlistData, CartData } = props;
 
     const wishlistData = WishlistData;
     const token = Token;

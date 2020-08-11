@@ -21,10 +21,9 @@ const ShopCartList = (props) => {
                             price={item.value}
                             img={item.img}
                             identifer={item.id}
-                            token={token}
-                            wishlistData={wishlistData}
-                            cartData={cartData}
-
+                            Token={token}
+                            WishlistData={wishlistData}
+                            CartData={cartData}
                         />
                     </Grid>
                 ))}

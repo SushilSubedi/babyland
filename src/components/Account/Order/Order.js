@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles,TextField } from '@material-ui/core';
+import { makeStyles, TextField } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Payment from './Payment';
+// import Payment from './Payment';
 
 
 
@@ -45,49 +45,49 @@ export default function HorizontalLabelPositionBelowStepper() {
   };
 
   return (
-    <Box padding= "4% 2% 5%" className={classes.root}>
-        {
-           activeStep === 0 ? 
-           <div className={classes.fullAddress}>
-           <Typography className={classes.Typography}>Full-Address</Typography>
-           <div className={classes.address}>
-               <TextField
-                   id= " input field 2"
-                   label = "Street-Address"
-                   type= "text"
-                   className={classes.AddressField}
-               />
-               
-               <TextField
-                   id= " input field 3"
-                   label = "Address-Line2"
-                   type= "text"
-                   className={classes.AddressField}
-               />
-           
-           </div>
-           <div style={{display: 'flex'}}>
-               <TextField
-                   id= " input field 4"
-                   label = "City"
-                   type= "text"
-                   className={classes.smallField}
-               />
-               <TextField
-                   id= " input field 4"
-                   label = "Zip Code"
-                   type= "number"
-                   className={classes.smallField}
-               />
-           </div>
-             <TextField
-               id= " input field 4"
-               label = "Phone number"
-               type= "number"
-               className={classes.AddressField}
-           />
-       </div>: activeStep === 1 ? <Payment/>: null 
-        }
+    <Box padding="4% 2% 5%" className={classes.root}>
+      {
+        activeStep === 0 ?
+          <div className={classes.fullAddress}>
+            <Typography className={classes.Typography}>Full-Address</Typography>
+            <div className={classes.address}>
+              <TextField
+                id=" input field 2"
+                label="Street-Address"
+                type="text"
+                className={classes.AddressField}
+              />
+
+              <TextField
+                id=" input field 3"
+                label="Address-Line2"
+                type="text"
+                className={classes.AddressField}
+              />
+
+            </div>
+            <div style={{ display: 'flex' }}>
+              <TextField
+                id=" input field 4"
+                label="City"
+                type="text"
+                className={classes.smallField}
+              />
+              <TextField
+                id=" input field 4"
+                label="Zip Code"
+                type="number"
+                className={classes.smallField}
+              />
+            </div>
+            <TextField
+              id=" input field 4"
+              label="Phone number"
+              type="number"
+              className={classes.AddressField}
+            />
+          </div> : null
+      }
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -102,54 +102,54 @@ export default function HorizontalLabelPositionBelowStepper() {
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
+              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <div>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
+                <Button variant="contained" color="primary" onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </Box>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-    },
-    backButton: {
-      marginRight: theme.spacing(1),
+  root: {
+    width: '100%',
+  },
+  backButton: {
+    marginRight: theme.spacing(1),
 
-    },
-    instructions: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-    fullAddress:{
-        width: '65%',
-        padding: '0 4% 0 6%'
-      },
-      AddressField: {
-        width: '50%',
-        height: '50px',
-        margin: '0% 2% 0 0'
-      },
-      address: {
-        display: 'flex',
-        justifyContent:'space-around',
-      },
-      smallField: {
-        width: '20%',
-        marginRight: '2%'
-      },
-  }));
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  fullAddress: {
+    width: '65%',
+    padding: '0 4% 0 6%'
+  },
+  AddressField: {
+    width: '50%',
+    height: '50px',
+    margin: '0% 2% 0 0'
+  },
+  address: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+  smallField: {
+    width: '20%',
+    marginRight: '2%'
+  },
+}));

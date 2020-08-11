@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-promise": "^4.2.1",
     "redux-devtools": "^3.5.0"
   }
 }
