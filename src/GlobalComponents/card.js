@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import { makeStyles, createStyles, Box, Container, Typography, Paper, FormControl, InputLabel, Select } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import fire from "../config/fire";
+import { cartDeleteData } from "../components/Cart/CartRedux/action";
+import { useDispatch } from "react-redux";
 
 
 const Card = (props) => {
   const classes = useStyles();
-  const { name, description, img, price, PostId } = props;
-
+  const { name, description, img, price, PostId, id } = props;
+  const dispatch = useDispatch();
   const deletedata = () => {
     const userId = localStorage.getItem('userID');
     console.log("userid", userId, PostId);
 
-    return fire.database().ref(`/cart/${userId}/${PostId}`).set(null)
+    fire.database().ref(`/cart/${userId}/${PostId}`).set(null).then(doc =>
+      dispatch(cartDeleteData(id))
+    )
 
   }
 

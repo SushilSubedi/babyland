@@ -6,19 +6,19 @@ const initialState = {
     data: []
 }
 
-const reducer = (state = initialState,action) =>{
-    switch(action.type){
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
         case actionType.CART_START:
-            return{
+            return {
                 ...state,
                 error: null,
                 loading: true
             }
         case actionType.CART_SUCCESS:
-            return{
+            return {
                 ...state,
-                data:action.data,
-                loading:false
+                data: action.data,
+                loading: false
             }
         case actionType.CART_UPDATE:
             const updateData = (state.data).slice();
@@ -29,13 +29,23 @@ const reducer = (state = initialState,action) =>{
                 loading: false
             }
         case actionType.CART_FAIL:
-            return{
+            return {
                 ...state,
                 error: action.error,
-                loading:false
-            }  
+                loading: false
+            }
+
+        case actionType.CART_DELETE:
+            const duplicateData = (state.data).slice();
+            duplicateData.filter(item => item.id !== action.id)
+            console.log("updatedata", duplicateData);
+            return {
+                ...state,
+                data: duplicateData,
+
+            }
         default:
-            return state            
+            return state
     }
 }
 export default reducer;

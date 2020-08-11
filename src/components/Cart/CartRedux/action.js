@@ -33,7 +33,7 @@ export const fetchCartData = () => {
             dispatch(cartStart());
             const userId = localStorage.getItem('userID');
             const cartData = [];
-            fire.database().ref(`/cart/${userId}`).on("value", (snapshort) => {
+            fire.database().ref(`/cart/${userId}`).once("value", (snapshort) => {
                 const data = snapshort.val();
                 //abstract keys from an object
                 // const DataArray = Object.assign([],data);
@@ -52,21 +52,8 @@ export const fetchCartData = () => {
                         }
                         cartData.push(dataCollection);
                     }
-                    if (keys.length === cartData.length) {
-                        dispatch(cartSuccess(cartData));
+                    dispatch(cartSuccess(cartData));
 
-                    } else {
-                        const k = keys[keys.length - 1]
-                        const dataCollections = {
-                            name: data[k].name,
-                            description: data[k].description,
-                            value: data[k].value,
-                            img: data[k].img,
-                            id: data[k].id,
-                            postId: data[k].postId
-                        }
-                        dispatch(updateData(dataCollections));
-                    }
                 }
 
             })
@@ -77,9 +64,17 @@ export const fetchCartData = () => {
     }
 }
 
-const updateData = (updatedData) => {
+export const cartUpdateData = (updatedData) => {
     return {
         type: CART_UPDATE,
         updatedData: updatedData
     }
 }
+
+export const cartDeleteData = (id) => {
+    return {
+        type: CART_DELETE,
+        id: id
+    }
+}
+

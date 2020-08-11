@@ -7,15 +7,14 @@ import CardList from './CardList';
 
 
 
+
 const Cart = (props) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
-    useEffect(() => {
-        console.log("cartdata",cartData);
-    },[cartData])
+
 
     useEffect(() => {
         if (cartData.length === 0) {
@@ -36,8 +35,7 @@ const Cart = (props) => {
                 </div>
                 <div className={classes.cart}>
                     <div className={classes.CardList}>
-                        <CardList
-                        />
+                        <CardList />
                     </div>
                     <div className={classes.items}>
                         <Allitems
