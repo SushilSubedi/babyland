@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const Card = (props) => {
   const classes = useStyles();
   const { name, description, img, price, } = props;
-
+  
   return (
     <Box component={Paper} className={classes.card}>
         <Container className={classes.Container}>
