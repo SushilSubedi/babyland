@@ -7,6 +7,8 @@ import { Alert } from '@material-ui/lab';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DialogBox from '../../../../../GlobalComponents/DialogBox';
 import { useHistory } from 'react-router-dom';
+import { cartUpdateData } from '../../../../Cart/CartRedux/action';
+import { useDispatch} from 'react-redux';
 
 const ShopCard = (props) => {
     const [icon, setIcon] = useState(false);
@@ -17,6 +19,7 @@ const ShopCard = (props) => {
     const [openDialog, setOpenDialog] = useState(false);
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const { name, description, img, price, identifer, Token, WishlistData, CartData } = props;
 
@@ -73,7 +76,9 @@ const ShopCard = (props) => {
                 }
                 setOpenToolTip(true);
                 updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
-                return fire.database().ref().update(updateData);
+                fire.database().ref().update(updateData).then(doc => {
+                    dispatch(cartUpdateData(data));
+                });
             }
         } else {
             setOpenDialog(true);

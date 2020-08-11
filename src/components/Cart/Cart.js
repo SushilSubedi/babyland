@@ -13,15 +13,13 @@ const Cart = (props) => {
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
-    useEffect(() => {
-        console.log("cartdata",cartData);
-    },[cartData])
+
 
     useEffect(() => {
         if (cartData.length === 0) {
             dispatch(fetchCartData());
         }
-    }, [cartData, dispatch]);
+    }, [cartData,dispatch]);
 
 
     return (
@@ -36,8 +34,7 @@ const Cart = (props) => {
                 </div>
                 <div className={classes.cart}>
                     <div className={classes.CardList}>
-                        <CardList
-                        />
+                        <CardList />
                     </div>
                     <div className={classes.items}>
                         <Allitems
