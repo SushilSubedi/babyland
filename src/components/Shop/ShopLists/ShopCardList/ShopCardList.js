@@ -4,16 +4,16 @@ import ShopCard from './ShopCard/ShopCard';
 import { useSelector } from 'react-redux';
 
 
-const ShopCartList = (props) =>{
+const ShopCartList = (props) => {
     const { Data } = props;
     const token = useSelector(state => state.AuthRedux.refreshToken) || [];
     const wishlistData = useSelector(state => state.WishlistRedux.data) || [];
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
-    return(
+    return (
         <Grid item md={12}>
             <Grid container>
-                {Data.map((item,index) => (
+                {Data.map((item, index) => (
                     <Grid item md={4} key={index}>
                         <ShopCard
                             name={item.name}
@@ -21,9 +21,10 @@ const ShopCartList = (props) =>{
                             price={item.value}
                             img={item.img}
                             identifer={item.id}
-                            Token={token}
-                            WishlistData={wishlistData}
-                            CartData={cartData}
+                            token={token}
+                            wishlistData={wishlistData}
+                            cartData={cartData}
+
                         />
                     </Grid>
                 ))}

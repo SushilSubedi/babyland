@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import Card from '../../GlobalComponents/card';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,9 @@ const CardList = (props) => {
 
 
   const cartData = useSelector(state => state.CartRedux.data) || [];
+  useEffect(() => {
+    console.log("cartdata", cartData);
+  }, [cartData]);
 
 
   return (
@@ -20,6 +23,7 @@ const CardList = (props) => {
               description={item.description}
               price={item.value}
               img={item.img}
+              postId={item.postId}
 
             />
           </Grid >
