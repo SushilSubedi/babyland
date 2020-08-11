@@ -23,7 +23,7 @@ const CardList = (props) => {
               description={item.description}
               price={item.value}
               img={item.img}
-              postId={item.postId}
+              PostId={item.postId}
 
             />
           </Grid >

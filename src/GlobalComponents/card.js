@@ -8,18 +8,11 @@ const Card = (props) => {
   const classes = useStyles();
   const { name, description, img, price, PostId } = props;
 
-  // useEffect(() => {
-  //   console.log("postId", PostId);
-  // }, [PostId]);
-
-
-
-  const deletedata = (PostId) => {
+  const deletedata = () => {
     const userId = localStorage.getItem('userID');
+    console.log("userid", userId, PostId);
 
-    fire.database().ref(`/cart/${userId}/${PostId}`).set(null);
-
-
+    return fire.database().ref(`/cart/${userId}/${PostId}`).set(null)
 
   }
 

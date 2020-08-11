@@ -13,7 +13,9 @@ const Cart = (props) => {
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
 
-
+    useEffect(() => {
+        console.log("cartdata",cartData);
+    },[cartData])
 
     useEffect(() => {
         if (cartData.length === 0) {
