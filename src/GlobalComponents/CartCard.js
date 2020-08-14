@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const CartCard = (props) => {
   const classes = useStyles();
-  const { name, description, img, price, PostId, id } = props;
+  const { name, description, img, price, PostId, id,quantity } = props;
   const dispatch = useDispatch();
   const [quantityValue, setQuantityValue] = useState(1);
 
@@ -19,22 +19,34 @@ const CartCard = (props) => {
     fire.database().ref(`/cart/${userId}/${PostId}`).set(null).then(doc =>
       dispatch(cartDeleteData(PostId))
     )
-
   }
-
-
 
   const quantityData = (e) => {
     setQuantityValue(e)
-    const properties = { name: name, description: description, img: img, value: price, postId: PostId, id: id }
+    const properties = { 
+      name: name,
+      description: description,
+      img: img,
+      value: price,
+      postId: PostId,
+      id: id,
+      quantity: e
+    };
     const userId = localStorage.getItem('userID');
     fire.database().ref(`/cart/${userId}/${PostId}`).set(properties).then(doc =>
       dispatch(cartQuantityData(properties))
     )
-
-
-
   }
+
+  useEffect(() => {
+    if(quantity > 1) {
+      setQuantityValue(quantity);
+    }
+  },[quantityValue,quantity])
+
+  useEffect(() => {
+    console.log("quantity",quantity);
+  },[quantity])
 
   return (
     <Box component={Paper} className={classes.card}>
@@ -57,7 +69,7 @@ const CartCard = (props) => {
 
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel htmlFor="filled-age-native-simple">Qty</InputLabel>
-                <Select onChange={(e) => quantityData(e.target.value)} value={quantityValue}
+                <Select onChange={(e) => quantityData(e.target.value)} value={quantity}
                   inputProps={{
                     id: '1234',
                   }}

@@ -33,17 +33,12 @@ const reducer = (state = initialState, action) => {
             }
         case actionType.CART_QUANTITY:
             const duplicatedData = (state.data).slice();
-            const indexFinder = duplicatedData.findIndex(item => item.PostId === action.updatedvalue.PostId);
-            console.log("duplicate previous", duplicatedData);
-            console.log("postid", action.updatedvalue);
-            console.log("indexfinder", indexFinder);
+            const indexFinder = duplicatedData.findIndex(item => item.id === (action.updatedvalue.id));
+            // console.log("indexfinder", indexFinder);
             duplicatedData.splice(indexFinder, 1, action.updatedvalue);
-            console.log("data", state.data);
-            console.log("duplicatedata", duplicatedData);
-
             return {
                 ...state,
-                data: action.updatedData
+                data: duplicatedData
 
             }
         case actionType.CART_DELETE:

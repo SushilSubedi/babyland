@@ -7,13 +7,6 @@ import { useSelector } from 'react-redux';
 const CardList = (props) => {
   const cartData = useSelector(state => state.CartRedux.data) || [];
 
-  useEffect(() => {
-    console.log("cartdata", cartData);
-
-  }, [cartData]);
-
-
-
   return (
     <Grid item md={12} >
       <Grid container spacing={3} >
@@ -26,7 +19,7 @@ const CardList = (props) => {
               img={item.img}
               PostId={item.postId}
               id={item.id}
-
+              quantity={item.quantity}
             />
           </Grid >
         ))}

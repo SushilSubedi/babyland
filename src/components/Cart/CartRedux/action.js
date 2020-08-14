@@ -50,7 +50,8 @@ export const fetchCartData = () => {
                             value: data[k].value,
                             img: data[k].img,
                             id: data[k].id,
-                            postId: data[k].postId
+                            postId: data[k].postId,
+                            quantity: data[k].quantity
                         }
                         cartData.push(dataCollection);
                     }
