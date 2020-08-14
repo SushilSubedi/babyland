@@ -6,6 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Payment from './Payment';
 // import Payment from './Payment';
 
 
@@ -86,7 +87,7 @@ export default function HorizontalLabelPositionBelowStepper() {
               type="number"
               className={classes.AddressField}
             />
-          </div> : null
+          </div> : activeStep === 1 ? <Payment/> : null
       }
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
