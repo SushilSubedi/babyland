@@ -1,21 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, createStyles, Box, Container, Typography, Paper, FormControl, InputLabel, Select } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import fire from "../config/fire";
 import { cartDeleteData } from "../components/Cart/CartRedux/action";
 import { useDispatch } from "react-redux";
+import { cartQuantityData } from "../components/Cart/CartRedux/action";
+import MenuItem from '@material-ui/core/MenuItem';
 
-
-const Card = (props) => {
+const CartCard = (props) => {
   const classes = useStyles();
   const { name, description, img, price, PostId, id } = props;
   const dispatch = useDispatch();
-  
+  const [quantityValue, setQuantityValue] = useState(1);
+
+
   const deletedata = () => {
     const userId = localStorage.getItem('userID');
     fire.database().ref(`/cart/${userId}/${PostId}`).set(null).then(doc =>
       dispatch(cartDeleteData(PostId))
     )
+
+  }
+
+
+
+  const quantityData = (e) => {
+    setQuantityValue(e)
+    const properties = { name: name, description: description, img: img, value: price, postId: PostId, id: id }
+    const userId = localStorage.getItem('userID');
+    fire.database().ref(`/cart/${userId}/${PostId}`).set(properties).then(doc =>
+      dispatch(cartQuantityData(properties))
+    )
+
+
 
   }
 
@@ -40,14 +57,21 @@ const Card = (props) => {
 
               <FormControl variant="filled" className={classes.formControl}>
                 <InputLabel htmlFor="filled-age-native-simple">Qty</InputLabel>
-                <Select
-
+                <Select onChange={(e) => quantityData(e.target.value)} value={quantityValue}
+                  inputProps={{
+                    id: '1234',
+                  }}
                 >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
+                  <MenuItem value={1}>1</MenuItem>
+                  <MenuItem value={2}>2</MenuItem>
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={4}>4</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={6}>6</MenuItem>
+                  <MenuItem value={7}>7</MenuItem>
+                  <MenuItem value={8}>8</MenuItem>
+                  <MenuItem value={9}>9</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
                 </Select>
               </FormControl>
 
@@ -126,4 +150,4 @@ const useStyles = makeStyles((theme) =>
 )
 
 
-export default Card; 
+export default CartCard;
