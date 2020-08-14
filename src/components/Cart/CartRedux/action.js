@@ -1,10 +1,12 @@
 import fire from '../../../config/fire';
 
+
 export const CART_START = "CART_START";
 export const CART_SUCCESS = "CART_SUCCESS";
 export const CART_FAIL = "CART_FAIL";
 export const CART_UPDATE = "CART_UPDATE";
 export const CART_DELETE = "CART_DELETE";
+export const CART_QUANTITY = "CART_QUANTITY";
 
 
 export const cartStart = () => {
@@ -75,6 +77,13 @@ export const cartDeleteData = (postId) => {
     return {
         type: CART_DELETE,
         postId: postId
+    }
+}
+
+export const cartQuantityData = (updatedvalue) => {
+    return {
+        type: CART_QUANTITY,
+        updatedvalue: updatedvalue
     }
 }
 
