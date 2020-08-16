@@ -44,10 +44,6 @@ const CartCard = (props) => {
     }
   },[quantityValue,quantity])
 
-  useEffect(() => {
-    console.log("quantity",quantity);
-  },[quantity])
-
   return (
     <Box component={Paper} className={classes.card}>
       <Container className={classes.Container}>

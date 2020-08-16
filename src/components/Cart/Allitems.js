@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
-import { makeStyles, createStyles }
-  from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import Checkout from './Checkout/Checkout';
 
 
 const Allitems = (props) => {
@@ -10,8 +10,7 @@ const Allitems = (props) => {
   const [total, setTotal] = useState(null);
   const [updatePrice,setUpdatePrice] = useState(null);
   const { CartData } = props;
-
-
+  const [open,setOpen] = useState(false);
 
 
 useEffect(() => {
@@ -31,6 +30,17 @@ useEffect(() => {
   }
 }, [total]);
 
+const handleClose = () => {
+  setOpen(false);
+}
+
+const handleCheckOut = () => {
+  if(!open){
+    setOpen(true)
+  }else {
+    setOpen(false)
+  }
+}
 
   return (
     <Box component={Paper} className={classes.box}>
@@ -65,9 +75,12 @@ useEffect(() => {
 
         </div>
 
-          <div className={classes.buttonDiv}> <Button variant="contained"className={classes.button}>Checkout</Button></div>
-
+          <div className={classes.buttonDiv}> <Button variant="contained"className={classes.button} onClick={handleCheckOut}>Checkout</Button></div>
       </Container>
+      <Checkout
+        open={open}
+        handleClose={handleClose}
+      />
     </Box>
 
   )
