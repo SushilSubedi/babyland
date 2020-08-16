@@ -2,45 +2,52 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Checkout from './Checkout/Checkout';
+import CartCard from '../../GlobalComponents/CartCard';
 
 
 const Allitems = (props) => {
 
   const classes = UseStyles();
   const [total, setTotal] = useState(null);
-  const [updatePrice,setUpdatePrice] = useState(null);
+  const [updatePrice, setUpdatePrice] = useState(null);
   const { CartData } = props;
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
 
-useEffect(() => {
-  const datastore = () => {
-    for(let i = 0; i < CartData.length; i ++) {
-      setTotal(prevState =>  prevState = prevState + CartData[i].value);
+  useEffect(() => {
+    const datastore = () => {
+      for (let i = 0; i < CartData.length; i++) {
+        if (CartData[i].quantity = 1) {
+          setTotal(prevState => prevState = prevState + CartData[i].value);
+
+        } else if (CartData[i].quantity > 1) {
+          setTotal(prevState => prevState = prevState + (CartData[i].value * CartData[i].quantity))
+        }
+
+      }
+    }
+    datastore();
+  }, [CartData])
+
+
+  useEffect(() => {
+    if (total < 2000 && total !== null) {
+      const price = total + 500;
+      setUpdatePrice(price);
+    }
+  }, [total]);
+
+  const handleClose = () => {
+    setOpen(false);
   }
+
+  const handleCheckOut = () => {
+    if (!open) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
   }
-  datastore();
-},[CartData])
-
-
-useEffect(() => {
-  if(total < 2000 && total !== null) {
-    const price = total + 500;
-    setUpdatePrice(price);
-  }
-}, [total]);
-
-const handleClose = () => {
-  setOpen(false);
-}
-
-const handleCheckOut = () => {
-  if(!open){
-    setOpen(true)
-  }else {
-    setOpen(false)
-  }
-}
 
   return (
     <Box component={Paper} className={classes.box}>
@@ -50,20 +57,20 @@ const handleCheckOut = () => {
           <Typography style={{ fontSize: "20px" }}>Price</Typography>
         </div>
         <Divider variant="middle" />
-        <div style={{textAlign:'center'}}>
-        {CartData.map((item, index) => (
-          <div className={classes.Items} key={index}>
-            <Typography  >{item.name} </Typography>
-            <Typography > RS{item.value}</Typography>
+        <div style={{ textAlign: 'center' }}>
+          {CartData.map((item, index) => (
+            <div className={classes.Items} key={index}>
+              <Typography  >{item.name} </Typography>
+              <Typography > RS{item.value}{`x ${item.quantity}`}</Typography>
 
-          </div>
-        ))}
+            </div>
+          ))}
         </div>
 
 
         <div className={classes.Delivery}>
           <Typography  >Delivery </Typography>
-          {total < 2000  ? <Typography  >500</Typography> : <Typography>No charge</Typography>}
+          {total < 2000 ? <Typography  >500</Typography> : <Typography>No charge</Typography>}
         </div>
 
         <Divider variant="middle" />
@@ -75,7 +82,7 @@ const handleCheckOut = () => {
 
         </div>
 
-          <div className={classes.buttonDiv}> <Button variant="contained"className={classes.button} onClick={handleCheckOut}>Checkout</Button></div>
+        <div className={classes.buttonDiv}> <Button variant="contained" className={classes.button} onClick={handleCheckOut}>Checkout</Button></div>
       </Container>
       <Checkout
         open={open}
@@ -105,14 +112,14 @@ const UseStyles = makeStyles(
       flexDirection: "row",
       justifyContent: "space-between",
       width: "77%",
-    marginLeft: "4%",
+      marginLeft: "4%",
       color: "#00669b",
       wordSpacing: "80px"
 
 
     },
     Items: {
-      display:'grid',
+      display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       fontSize: "5px",
       marginTop: "15px"

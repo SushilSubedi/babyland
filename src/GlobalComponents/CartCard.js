@@ -9,9 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const CartCard = (props) => {
   const classes = useStyles();
-  const { name, description, img, price, PostId, id,quantity } = props;
+  const { name, description, img, price, PostId, id, quantity } = props;
   const dispatch = useDispatch();
   const [quantityValue, setQuantityValue] = useState(1);
+
+
 
 
   const deletedata = () => {
@@ -23,7 +25,7 @@ const CartCard = (props) => {
 
   const quantityData = (e) => {
     setQuantityValue(e)
-    const properties = { 
+    const properties = {
       name: name,
       description: description,
       img: img,
@@ -39,10 +41,10 @@ const CartCard = (props) => {
   }
 
   useEffect(() => {
-    if(quantity > 1) {
+    if (quantity > 1) {
       setQuantityValue(quantity);
     }
-  },[quantityValue,quantity])
+  }, [quantityValue, quantity])
 
   return (
     <Box component={Paper} className={classes.card}>
