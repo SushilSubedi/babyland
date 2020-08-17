@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Checkout from './Checkout/Checkout';
-import CartCard from '../../GlobalComponents/CartCard';
-
 
 const Allitems = (props) => {
 
@@ -15,20 +13,25 @@ const Allitems = (props) => {
 
 
   useEffect(() => {
-    const datastore = () => {
-      for (let i = 0; i < CartData.length; i++) {
-        if (CartData[i].quantity = 1) {
-          setTotal(prevState => prevState = prevState + CartData[i].value);
-
-        } else if (CartData[i].quantity > 1) {
-          setTotal(prevState => prevState = prevState + (CartData[i].value * CartData[i].quantity))
-        }
-
-      }
+    function clear(){
+      return new Promise((resolve,reject) => {
+        resolve(setTotal(null));
+        reject(!total.length)
+      })
     }
-    datastore();
+    clear().then(result => {
+      const datastore = () => {
+          for (let i = 0; i < CartData.length; i++) {
+            setTotal(prevState => prevState = prevState + (CartData[i].value * CartData[i].quantity));
+            }
+      }
+      datastore();
+    }).catch(error =>{
+      throw error;
+    })
+  
+    // console.log("card",CartData)
   }, [CartData])
-
 
   useEffect(() => {
     if (total < 2000 && total !== null) {
@@ -61,7 +64,7 @@ const Allitems = (props) => {
           {CartData.map((item, index) => (
             <div className={classes.Items} key={index}>
               <Typography  >{item.name} </Typography>
-              <Typography > RS{item.value}{`x ${item.quantity}`}</Typography>
+              <Typography > RS{item.value}{` x ${item.quantity}`}</Typography>
 
             </div>
           ))}
@@ -78,7 +81,7 @@ const Allitems = (props) => {
         <div className={classes.Total}>
           <Typography style={{ fontSize: "20px" }}>Total </Typography>
 
-          <Typography style={{ fontSize: "20px" }}>{total < 2000 ? updatePrice : total} </Typography>
+          <Typography style={{ fontSize: "20px" }}>Rs {total < 2000 ? updatePrice : total} </Typography>
 
         </div>
 
