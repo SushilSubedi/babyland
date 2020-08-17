@@ -1,12 +1,14 @@
 import React from 'react';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles, TextField,Dialog,Box } from '@material-ui/core';
+import { makeStyles, TextField,Dialog,Box, Container, Paper } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Payment from './Payment';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -59,7 +61,7 @@ return (
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
     >
-        <Box>
+        <Box style={{margin:'8px 0'}}>
         {
         activeStep === 0 ?
           <div className={classes.fullAddress}>
@@ -100,16 +102,29 @@ return (
               type="number"
               className={classes.AddressField}
             />
-          </div> : activeStep === 1 ? <Payment/> : null
+          </div> : activeStep === 1 ? <Payment/> : (
+              <Container className={classes.container}>
+                    <Box component={Paper} className={classes.orderCard}>
+                      <CheckCircleIcon style={{fontSize:'64px',color:'#18ed9c',alignSelf:'center'}}/>
+                      <Typography style={{textAlign:'center',color:'white'}}>ORDER PLACED!</Typography>
+                      <Typography style={{textAlign:'center',color:'#18ed9c'}}>Payment Successful<ThumbUpIcon style={{fontSize:'16px',color:'#d4ed18',marginLeft:'4px'}}/></Typography>
+                      <div style={{margin:'4px 0'}}>
+                        <Typography style={{textAlign:'center',color:'white'}} >Amount:</Typography>
+                        <Typography style={{color:'#ff6952',textAlign:'center'}}>RS 450</Typography>
+                      </div>
+
+                    </Box>
+              </Container>
+          )
       }
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper style={{margin:"inherit"}} activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <div>
+      <div style={{margin:"inherit"}}>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>All steps completed</Typography>
@@ -132,6 +147,7 @@ return (
               </div>
             </div>
           )}
+          <Button style={{float:'right'}} onClick={handleClose}>Cancel</Button>
       </div>
         </Box>
 
@@ -143,9 +159,20 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
     },
+    orderCard: {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: ' rgba(0, 0, 0, 0.6)',
+      width:'250px',
+      height:'210px'
+    },  
+    container: {
+      display:'flex',
+      justifyContent:'center'
+    },  
     paper: {
         width:'800px',
-        height:'500px'
+        height:'465px'
     },  
     backButton: {
       marginRight: theme.spacing(1),
@@ -157,7 +184,8 @@ const useStyles = makeStyles((theme) => ({
     },
     fullAddress: {
       width: '65%',
-      padding: '0 4% 0 6%'
+      padding: '0 4% 0 6%',
+      margin:'inherit'
     },
     AddressField: {
       width: '50%',

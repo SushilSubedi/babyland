@@ -13,9 +13,7 @@ const Cart = (props) => {
 
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
-
-
-
+    
     useEffect(() => {
         if (cartData.length === 0) {
             dispatch(fetchCartData());

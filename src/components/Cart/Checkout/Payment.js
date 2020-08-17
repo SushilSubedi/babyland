@@ -1,5 +1,6 @@
 import React,{ useState,useEffect,useRef } from 'react';
 import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
 
 const Payment = () => {
     const [paidFor,setPaidFor] = useState(false);
@@ -49,7 +50,8 @@ const Payment = () => {
 
 
  return(
-     <div>
+     <div style={{padding:'4px 10%'}}>
+         <Container>
          {error && <div>Uh oh, an error occurred! {error.message}</div>}
          {
              paidFor ? (
@@ -64,6 +66,7 @@ const Payment = () => {
              )
 
          }
+         </Container>
      </div>
  )   
 }

@@ -16,7 +16,7 @@ const theme = createMuiTheme({
     overrides: {
       MuiButton: {
         root: {
-          color: 'white',
+          color: 'Black',
           // backgroundColor:'hotpink',
           fontSize:'14px'
           // '&:hover': {
