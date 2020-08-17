@@ -86,7 +86,7 @@ const NavigationBar = (props) => {
         <div>
           {token ? (
               <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
-                <AccountCircleIcon fontSize="large"/>
+                <AccountCircleIcon fontSize="large" style={{color:'white'}}/>
                 <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
               </Button>
           ) : (
