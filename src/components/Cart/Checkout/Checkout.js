@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles, TextField,Dialog,Box, Container, Paper } from '@material-ui/core';
+import { makeStyles, TextField,Dialog,Box, Container, Paper,Snackbar } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Payment from './Payment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import { Alert } from '@material-ui/lab';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -35,12 +36,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const Checkout = (props) => {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
+    const [streetAddress,setStreetAddress] = useState('');
+    const [addressLine,setAddressLine] = useState('');
+    const [city,setCity] = useState('');
+    const [zipCode,setZipCode] = useState('');
+    const [phoneNumber,setPhoneNumber] = useState('');
+    // const [opens,setOpens] = useState(false);
     const steps = getSteps();
+    let message = null;
     const { open,handleClose } = props;
-  
+
     const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      if(streetAddress !== '' && addressLine !== '' && city !== '' && zipCode !== '' && phoneNumber !== '' ){
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      }
     };
   
     const handleBack = () => {
@@ -62,61 +72,72 @@ return (
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
     >
+      {message}
         <Box style={{margin:'8px 0'}}>
         {
-        activeStep === 0 ?
-          <div className={classes.fullAddress}>
-            <Typography className={classes.Typography}>Full-Address</Typography>
-            <div className={classes.address}>
-              <TextField
-                id=" input field 2"
-                label="Street-Address"
-                type="text"
-                className={classes.AddressField}
-              />
+          activeStep === 0 ?
+            <div className={classes.fullAddress}>
+              <Typography variant="h6" className={classes.Typography}>Full-Address:</Typography>
+              <div className={classes.address}>
+                <TextField
+                  id=" input field 2"
+                  label="Street-Address"
+                  type="text"
+                  className={classes.AddressField}
+                  value={streetAddress}
+                  onChange= {(e) => {setStreetAddress(e.target.value)}}
+                />
 
-              <TextField
-                id=" input field 3"
-                label="Address-Line2"
-                type="text"
-                className={classes.AddressField}
-              />
+                <TextField
+                  id=" input field 3"
+                  label="Address-Line2"
+                  type="text"
+                  value={addressLine}
+                  className={classes.AddressField}
+                  onChange= {(e) => setAddressLine(e.target.value)}
+                />
 
-            </div>
-            <div style={{ display: 'flex' }}>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <TextField
+                  id=" input field 4"
+                  label="City"
+                  type="text"
+                  value={city}
+                  onChange= {(e) => setCity(e.target.value)}
+                  className={classes.smallField}
+                />
+                <TextField
+                  id=" input field 4"
+                  label="Zip Code"
+                  type="number"
+                  value={zipCode}
+                  onChange= {(e)=> setZipCode(e.target.value)}
+                  className={classes.smallField}
+                />
+              </div>
               <TextField
                 id=" input field 4"
-                label="City"
-                type="text"
-                className={classes.smallField}
-              />
-              <TextField
-                id=" input field 4"
-                label="Zip Code"
+                label="Phone number"
                 type="number"
-                className={classes.smallField}
+                value={phoneNumber}
+                onChange= {(e) => setPhoneNumber(e.target.value)}
+                className={classes.AddressField}
               />
-            </div>
-            <TextField
-              id=" input field 4"
-              label="Phone number"
-              type="number"
-              className={classes.AddressField}
-            />
-          </div> : activeStep === 1 ? <Payment/> : (
-              <Container className={classes.container}>
-                    <Box component={Paper} className={classes.orderCard}>
-                      <CheckCircleIcon className={classes.icon}/>
-                      <Typography className={classes.order}>ORDER PLACED!</Typography>
-                      <Typography className={classes.payment}>Payment Successful<ThumbUpIcon className={classes.icon2}/></Typography>
-                      <div style={{margin:'4px 0'}}>
-                        <Typography className={classes.order} >Amount:</Typography>
-                        <Typography className={classes.price}>RS 450</Typography>
-                      </div>
+            </div> : activeStep === 1 ? <Payment/> : (
+                <Container className={classes.container}>
+                      <Box component={Paper} className={classes.orderCard}>
+                        <CheckCircleIcon className={classes.icon}/>
+                        <Typography className={classes.order}>ORDER PLACED!</Typography>
+                        <Typography className={classes.payment}>Payment Successful<ThumbUpIcon className={classes.icon2}/></Typography>
+                        <div style={{margin:'4px 0'}}>
+                          <Typography className={classes.order} >Amount:</Typography>
+                          <Typography className={classes.price}>RS 450</Typography>
+                        </div>
 
-                    </Box>
-              </Container>
-          )
+                      </Box>
+                </Container>
+            )
       }
       <Stepper style={{margin:"inherit"}} activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
