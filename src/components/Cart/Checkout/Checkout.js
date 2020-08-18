@@ -49,6 +49,7 @@ const Checkout = (props) => {
   
     const handleReset = () => {
       setActiveStep(0);
+      handleClose();
     };
 return (
     <Dialog
@@ -105,12 +106,12 @@ return (
           </div> : activeStep === 1 ? <Payment/> : (
               <Container className={classes.container}>
                     <Box component={Paper} className={classes.orderCard}>
-                      <CheckCircleIcon style={{fontSize:'64px',color:'#18ed9c',alignSelf:'center'}}/>
-                      <Typography style={{textAlign:'center',color:'white'}}>ORDER PLACED!</Typography>
-                      <Typography style={{textAlign:'center',color:'#18ed9c'}}>Payment Successful<ThumbUpIcon style={{fontSize:'16px',color:'#d4ed18',marginLeft:'4px'}}/></Typography>
+                      <CheckCircleIcon className={classes.icon}/>
+                      <Typography className={classes.order}>ORDER PLACED!</Typography>
+                      <Typography className={classes.payment}>Payment Successful<ThumbUpIcon className={classes.icon2}/></Typography>
                       <div style={{margin:'4px 0'}}>
-                        <Typography style={{textAlign:'center',color:'white'}} >Amount:</Typography>
-                        <Typography style={{color:'#ff6952',textAlign:'center'}}>RS 450</Typography>
+                        <Typography className={classes.order} >Amount:</Typography>
+                        <Typography className={classes.price}>RS 450</Typography>
                       </div>
 
                     </Box>
@@ -127,8 +128,8 @@ return (
       <div style={{margin:"inherit"}}>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Typography className={classes.instructions}>All process is done!</Typography>
+            <Button onClick={handleReset}>Completed</Button>
           </div>
         ) : (
             <div>
@@ -147,7 +148,7 @@ return (
               </div>
             </div>
           )}
-          <Button style={{float:'right'}} onClick={handleClose}>Cancel</Button>
+          <Button className={classes.cancel} onClick={handleClose}>Cancel</Button>
       </div>
         </Box>
 
@@ -158,6 +159,36 @@ return (
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
+    },
+    icon2: {
+      fontSize:'16px',
+      color:'#d4ed18',
+      marginLeft:'4px'
+    },
+    price: {
+      color:'#ff6952',
+      textAlign:'center'
+    },
+    payment: {
+      textAlign:'center',
+      color:'#18ed9c'
+    },  
+    icon: {
+      fontSize:'64px',
+      color:'#18ed9c',
+      alignSelf:'center'
+    },
+    order:{
+      textAlign:'center',
+      color:'white'
+    },
+    cancel: {
+      float:'right',
+      width: "70px",
+      textTransform: "initial",
+      height: "40px",
+      marginRight: "8%",
+      background: "#b3bdb8"
     },
     orderCard: {
       display: 'flex',
