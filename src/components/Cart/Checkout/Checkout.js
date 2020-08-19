@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import Slide from '@material-ui/core/Slide';
-import { makeStyles, TextField,Dialog,Box, Container, Paper,Snackbar } from '@material-ui/core';
+import { makeStyles, TextField,Dialog,Box, Container, Paper } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Payment from './Payment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import { Alert } from '@material-ui/lab';
+// import { Alert } from '@material-ui/lab';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -44,7 +44,7 @@ const Checkout = (props) => {
     const [phoneNumber,setPhoneNumber] = useState('');
     // const [opens,setOpens] = useState(false);
     const steps = getSteps();
-    let message = null;
+    // let message = null;
     const { open,handleClose } = props;
 
     const handleNext = () => {
@@ -72,7 +72,6 @@ return (
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
     >
-      {message}
         <Box style={{margin:'8px 0'}}>
         {
           activeStep === 0 ?

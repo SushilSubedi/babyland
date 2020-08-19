@@ -1,6 +1,7 @@
 import React,{ useState,useEffect,useRef } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
+import axios from 'axios';
 
 const Payment = () => {
     const [paidFor,setPaidFor] = useState(false);
@@ -15,44 +16,52 @@ const Payment = () => {
     }
 
    
-    useEffect(() => {
-        function pay(){
-            window.paypal.Buttons({
-                createOrder: (data,actions) => {
-                    return actions.order.create({
-                        purchase_units: [
-                            {
-                            description : product.description,
-                            amount : {
-                                currency_code: 'INR',
-                                value:product.price
-                            }
-                        }
-                        ]
-                    })
-                },
-                onApprove: async (data,actions) => {
-                    const order = await actions.order.capture();
-                    console.log("paypal",order);
-                    setPaidFor(true);
-                },
-                onError: err => {
-                    setError(err);
-                    console.error("erros1",err);
-                    },
-            })
-            .render(paypalRef.current); 
-        }
+    // useEffect(() => {
+    //     function pay(){
+    //         window.paypal.Buttons({
+    //             createOrder: (data,actions) => {
+    //                 return actions.order.create({
+    //                     purchase_units: [
+    //                         {
+    //                         description : product.description,
+    //                         amount : {
+    //                             currency_code: 'INR',
+    //                             value:product.price
+    //                         }
+    //                     }
+    //                     ]
+    //                 })
+    //             },
+    //             onApprove: async (data,actions) => {
+    //                 const order = await actions.order.capture();
+    //                 console.log("paypal",order); 
+    //                 setPaidFor(true);
+    //             },
+    //             onError: err => {
+    //                 setError(err);
+    //                 console.error("erros1",err);
+    //                 },
+    //         })
+    //         .render(paypalRef.current); 
+    //     }
         
-        pay();
+    //     pay();
     
-    },[product.description, product.price]);
+    // },[product.description, product.price]);
+
+
+    const paymentHandler = () => {
+        axios.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/pay',{total:200}).then(res => {
+            console.log("s",res)
+            window.open(res.data)
+        })
+    }
 
 
  return(
      <div style={{padding:'4px 10%'}}>
          <Container>
-         {error && <div>Uh oh, an error occurred! {error.message}</div>}
+         {/* {error && <div>Uh oh, an error occurred! {error.message}</div>}
          {
              paidFor ? (
                  <div>
@@ -60,12 +69,13 @@ const Payment = () => {
                 </div>
              ): (
                  <div>
-                     <div ref = {paypalRef}/>
+                     <div ref = {paypalRef}/> */}
                      {/* <Button ref={paypalRef} className={classes.button}></Button> */}
-                </div>
+                {/* </div>
              )
 
-         }
+         } */}
+         <button onClick={paymentHandler}>PayPal</button>
          </Container>
      </div>
  )   

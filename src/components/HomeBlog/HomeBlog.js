@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme =>
         button: {
             backgroundColor: 'hotpink',
             textTransform: 'initial',
+            color:'white',
             fontSize: '16px',
             "&:hover": {
                 backgroundColor: '#fc03d7'
