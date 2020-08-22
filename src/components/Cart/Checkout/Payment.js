@@ -15,53 +15,47 @@ const Payment = () => {
         description: 'product is on sale'
     }
 
-   
-    // useEffect(() => {
-    //     function pay(){
-    //         window.paypal.Buttons({
-    //             createOrder: (data,actions) => {
-    //                 return actions.order.create({
-    //                     purchase_units: [
-    //                         {
-    //                         description : product.description,
-    //                         amount : {
-    //                             currency_code: 'INR',
-    //                             value:product.price
-    //                         }
-    //                     }
-    //                     ]
-    //                 })
-    //             },
-    //             onApprove: async (data,actions) => {
-    //                 const order = await actions.order.capture();
-    //                 console.log("paypal",order); 
-    //                 setPaidFor(true);
-    //             },
-    //             onError: err => {
-    //                 setError(err);
-    //                 console.error("erros1",err);
-    //                 },
-    //         })
-    //         .render(paypalRef.current); 
-    //     }
-        
-    //     pay();
-    
-    // },[product.description, product.price]);
-
-
-    const paymentHandler = () => {
-        axios.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/pay',{total:200}).then(res => {
-            console.log("s",res)
-            window.open(res.data)
-        })
-    }
+    useEffect(() => {
+        function pay(){
+            window.paypal.Button.render({
+                env: 'sandbox', // Or 'production'
+                // Set up the payment:
+                style: {
+                    height: 50,
+                },
+                // 1. Add a payment callback
+                payment: function(data, actions) {
+                  // 2. Make a request to your server
+                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/pay',{total:200})
+                    .then(function(res) {
+                      // 3. Return res.id from the response
+                      return res;
+                    });
+                },
+                // Execute the payment:
+                // 1. Add an onAuthorize callback
+                onAuthorize: function(data, actions) {
+                  // 2. Make a request to your server
+                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/success',{
+                      total:200,
+                      paymentID: data.paymentID,
+                      payerID: data.payerID
+                  })
+                    .then(function(res) {
+                      // 3. Show the buyer a confirmation message.
+                      return res;
+                    });
+                }
+              }, '#paypal-button-container');
+        }
+        pay();
+    },[])
 
 
  return(
      <div style={{padding:'4px 10%'}}>
          <Container>
-         {/* {error && <div>Uh oh, an error occurred! {error.message}</div>}
+         {error && <div>Uh oh, an error occurred! {error.message}</div>}
          {
              paidFor ? (
                  <div>
@@ -69,13 +63,12 @@ const Payment = () => {
                 </div>
              ): (
                  <div>
-                     <div ref = {paypalRef}/> */}
-                     {/* <Button ref={paypalRef} className={classes.button}></Button> */}
-                {/* </div>
+                    <div id="paypal-button-container"></div>
+                </div>
              )
 
-         } */}
-         <button onClick={paymentHandler}>PayPal</button>
+         }
+         {/* <button onClick={paymentHandler}>PayPal</button> */}
          </Container>
      </div>
  )   

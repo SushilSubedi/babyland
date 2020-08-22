@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req,res, next) => {
-  res.header('Access-Control-Allow-Origin', "*"); //This is used to give access to every host in our browser
+  res.header('Access-Control-Allow-Origin', "http://localhost:3000/"); //This is used to give access to every host in our browser
   res.header('Access-Control-Allow-Header','Origin','X-Request-with','Content-Type','Accept','Authorization');
   //This is use for giving request to every request from the client.
   if(req.method === 'OPTIONS') {
@@ -67,8 +67,8 @@ app.post('/pay', (req, res) => {
           "payment_method": "paypal"
       },
       "redirect_urls": {
-        "return_url": `${req.protocol}://${req.get('host')}/success`,
-        "cancel_url": `${req.protocol}://${req.get('host')}/cancel`,
+        "return_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/success`,
+        "cancel_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/cancel`,
       },
       "transactions": [
           {
@@ -101,7 +101,7 @@ paypal.payment.create(payReq, (error, payment) => {
   } else {
       for(let i = 0;i < payment.links.length;i++){
         if(payment.links[i].rel === 'approval_url'){
-          res.send(payment.links[i].href);
+          res.send(payment.id);
         }
       }
   }
@@ -110,21 +110,21 @@ paypal.payment.create(payReq, (error, payment) => {
 });
 
 
-app.get('/success', (req, res) => {
-  const payerId = req.query.PayerID;
-  const paymentId = req.query.paymentId;
+app.post('/success', (req, res) => {
+    const paymentID = req.body.paymentID;
+    const payerID = req.body.payerID;
 
   const execute_payment_json = {
-    "payer_id": payerId,
+    "payer_id": payerID,
     "transactions": [{
         "amount": {
             "currency": "INR",
-            "total": "25.00"
+            "total": `${req.body.total}`
         }
     }]
   };
 
-  paypal.payment.execute(paymentId, execute_payment_json, (error, payment) => {
+  paypal.payment.execute(paymentID, execute_payment_json, (error, payment) => {
     if (error) {
         console.log(error.response);
         throw error;
