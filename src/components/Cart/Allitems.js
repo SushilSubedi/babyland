@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Box, Container, Divider, Paper, Button } from '@material-ui/core';
+
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Checkout from './Checkout/Checkout';
 
@@ -13,23 +14,23 @@ const Allitems = (props) => {
 
 
   useEffect(() => {
-    function clear(){
-      return new Promise((resolve,reject) => {
+    function clear() {
+      return new Promise((resolve, reject) => {
         resolve(setTotal(null));
         reject(!total.length)
       })
     }
     clear().then(result => {
       const datastore = () => {
-          for (let i = 0; i < CartData.length; i++) {
-            setTotal(prevState => prevState = prevState + (CartData[i].value * CartData[i].quantity));
-            }
+        for (let i = 0; i < CartData.length; i++) {
+          setTotal(prevState => prevState = prevState + (CartData[i].value * CartData[i].quantity));
+        }
       }
       datastore();
-    }).catch(error =>{
+    }).catch(error => {
       throw error;
     })
-  
+
     // console.log("card",CartData)
   }, [CartData])
 
