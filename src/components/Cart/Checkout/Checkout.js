@@ -45,7 +45,10 @@ const Checkout = (props) => {
     // const [opens,setOpens] = useState(false);
     const steps = getSteps();
     // let message = null;
-    const { open,handleClose } = props;
+    const { open,handleClose,price } = props;
+
+
+    
 
     const handleNext = () => {
       if(streetAddress !== '' && addressLine !== '' && city !== '' && zipCode !== '' && phoneNumber !== '' ){
@@ -123,7 +126,9 @@ return (
                 onChange= {(e) => setPhoneNumber(e.target.value)}
                 className={classes.AddressField}
               />
-            </div> : activeStep === 1 ? <Payment/> : (
+            </div> : activeStep === 1 ? 
+            <Payment/>
+             : (
                 <Container className={classes.container}>
                       <Box component={Paper} className={classes.orderCard}>
                         <CheckCircleIcon className={classes.icon}/>
@@ -131,9 +136,8 @@ return (
                         <Typography className={classes.payment}>Payment Successful<ThumbUpIcon className={classes.icon2}/></Typography>
                         <div style={{margin:'4px 0'}}>
                           <Typography className={classes.order} >Amount:</Typography>
-                          <Typography className={classes.price}>RS 450</Typography>
+                          <Typography className={classes.price}>Rs{price}</Typography>
                         </div>
-
                       </Box>
                 </Container>
             )
@@ -223,7 +227,7 @@ const useStyles = makeStyles((theme) => ({
     },  
     paper: {
         width:'800px',
-        height:'465px'
+        maxHeight:'465px'
     },  
     backButton: {
       marginRight: theme.spacing(1),
