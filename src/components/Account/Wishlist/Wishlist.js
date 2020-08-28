@@ -3,10 +3,9 @@ import { makeStyles, createStyles, Box, Container, Typography, Paper, Button } f
 import { fetchWishlistData } from './WishlistRedux/action';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Grid } from '@material-ui/core';
+
 
 const WishList = (props) => {
-    // const classes = useStyles();
     const dispatch = useDispatch();
     const { name, description, img, price } = props;
     const classes = useStyles();
@@ -16,30 +15,42 @@ const WishList = (props) => {
     }, [dispatch])
     return (
         <div>
+            <div>
+                <Box>
+                    <Typography>
+                        Wishlist
+                    </Typography>
+                </Box>
 
-            <Box component={Paper} className={classes.card}>
-                <Container className={classes.Container}>
-                    <img className={classes.img} src={img} alt="simple img" />
+            </div>
 
-                    <div style={{ padding: '2% 0%' }}>
-                        <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
-                        <Typography className={classes.Typography2}>{description}</Typography>
-                    </div>
+            <div>
+                <Box component={Paper} className={classes.card}>
+                    <Container className={classes.Container}>
+                        <img className={classes.img} src={img} alt="simple img" />
 
-                    <div>
-                        <Typography variant="h6" style={{ color: '#e85831', fontWeight: '700' }}>Rs{price}</Typography>
-
-                        <div className={classes.features}>
-                            <div style={{ marginTop: "5%" }}>
-                                <DeleteIcon className={classes.remove} />
-                            </div>
-
-                            <Button className={classes.addtocart}>Addtocart</Button>
-
+                        <div style={{ padding: '2% 0%' }}>
+                            <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
+                            <Typography className={classes.Typography2}>{description}</Typography>
                         </div>
-                    </div>
-                </Container>
-            </Box>
+
+                        <div>
+                            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '700' }}>Rs{price}</Typography>
+
+                            <div className={classes.features}>
+                                <div style={{ marginTop: "5%" }}>
+                                    <DeleteIcon className={classes.remove} />
+                                </div>
+
+                                <Button className={classes.addtocart}>Addtocart</Button>
+
+                            </div>
+                        </div>
+                    </Container>
+                </Box>
+
+
+            </div>
 
 
         </div>
