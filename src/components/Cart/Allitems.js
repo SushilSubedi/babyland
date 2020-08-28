@@ -91,6 +91,7 @@ const Allitems = (props) => {
       <Checkout
         open={open}
         handleClose={handleClose}
+        price={total > 2000 ? total : updatePrice}
       />
     </Box>
 

@@ -1,32 +1,27 @@
-import React,{ useState,useEffect,useRef } from 'react';
+import React,{ useState,useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
 import axios from 'axios';
 
-const Payment = () => {
+const Payment = (props) => {
     const [paidFor,setPaidFor] = useState(false);
     // const [loaded,setLoaded] = useState(false);
     const [error,setError] = useState(null);
-    const paypalRef = useRef();
-
-    const product = {
-        name: 'testing product',
-        price: 480,
-        description: 'product is on sale'
-    }
+    const [prices,setPrices] = useState(null);
+    // const { price,line1,line2,city,phone,pincode } = props;
 
     useEffect(() => {
         function pay(){
             window.paypal.Button.render({
                 env: 'sandbox', // Or 'production'
                 // Set up the payment:
-                style: {
-                    height: 50,
-                },
                 // 1. Add a payment callback
-                payment: function(data, actions) {
+                payment: function async(data, actions) {
                   // 2. Make a request to your server
-                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/pay',{total:200})
+                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/pay',{
+                      total: 2300
+
+                    })
                     .then(function(res) {
                       // 3. Return res.id from the response
                       return res;
@@ -36,13 +31,14 @@ const Payment = () => {
                 // 1. Add an onAuthorize callback
                 onAuthorize: function(data, actions) {
                   // 2. Make a request to your server
-                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/widgets/success',{
-                      total:200,
+                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/success',{
+                      total:  2300,
                       paymentID: data.paymentID,
                       payerID: data.payerID
                   })
                     .then(function(res) {
                       // 3. Show the buyer a confirmation message.
+                      setPaidFor(true)
                       return res;
                     });
                 }
@@ -62,7 +58,8 @@ const Payment = () => {
                      <Typography variant="h1">Congrs your payment successful</Typography>
                 </div>
              ): (
-                 <div>
+                 <div style={{display:'flex',width:'100%',flexDirection:'column'}}>
+                     <Typography variant="h6" style={{ fontFamily: 'inherit',fontWeight: '500',color: '#00669b'}}>we provide a secure and safe way for payment</Typography>
                     <div id="paypal-button-container"></div>
                 </div>
              )

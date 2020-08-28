@@ -4,7 +4,6 @@ const functions = require('firebase-functions');
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 const paypal = require('paypal-rest-sdk');
-const cors = require('cors')({origin:true});
 
 const admin = require("firebase-admin");
 const express = require('express');
@@ -17,84 +16,78 @@ paypal.configure({
     client_secret:"EKyUX0s7uRAHOI45RQ3QxMcjUxDW2gSKT5PmtXQXxb4C6Luu2jeBTOpmW2UZzbLNXxLNLjlGHyZYgjLN"
 })
 
-// app.use(cors({ origin: true }));
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req,res, next) => {
-  res.header('Access-Control-Allow-Origin', "http://localhost:3000/"); //This is used to give access to every host in our browser
+  res.header('Access-Control-Allow-Origin', "*"); //This is used to give access to every host in our browser
   res.header('Access-Control-Allow-Header','Origin','X-Request-with','Content-Type','Accept','Authorization');
   //This is use for giving request to every request from the client.
   if(req.method === 'OPTIONS') {
       //this is used for giving different put get request so that client used it
-      res.header('Access-Control-Allow-Header','PUT','GET','POST','DELETE','PATCH');
+      res.header('Access-Control-Allow-Header','POST');
       return res.status(200).json({})
 
   }
  return next();
 })
 
+app.post('/order', (req,res) => {
+    const transactions = JSON.stringify({
+        amount: 420,
+        currency:'INR'
+    })
+    paypal.order
+    res.status(200).send(transactions);
+})
+
 app.post('/pay', (req, res) => {
-//   const create_payment_json = json.stringify({
-//     "intent": "sale",
-//     "payer": {
-//         "payment_method": "paypal"
-//     },
-//     "redirect_urls": {
-//       return_url: `${req.protocol}://${req.get('host')}/process`,
-//       cancel_url: `${req.protocol}://${req.get('host')}/cancel`
-//     },
-//     "transactions": [{
-//         "item_list": {
-//             "items": [{
-//                 "name": "Red Sox Hat",
-//                 "sku": "001",
-//                 "price": "25.00",
-//                 "currency": "USD",
-//                 "quantity": 1
-//             }]
-//         },
-//         "amount": {
-//             "currency": "USD",
-//             "total": `${req.body.total}`
-//         },
-//         "description": "Hat for the best team ever"
-//     }]
-// });
-     const payReq = {
-      "intent": "sale",
-      "payer": {
-          "payment_method": "paypal"
-      },
-      "redirect_urls": {
-        "return_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/success`,
-        "cancel_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/cancel`,
-      },
-      "transactions": [
-          {
-              "amount": {
-                  "currency": "INR",
-                  "total": `${req.body.total}`,
-                  "details": {
-                      "shipping": "10.00",
-                      "subtotal": "190.00"
-                  }
-              },
-              "item_list": {
-                  "items": [
-                      {
-                          "name": "Foto 1",
-                          "currency": "INR",
-                          "sku": "123",
-                          "quantity": "1",
-                          "price": "190.00"
+    const payReq = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+          "return_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/success`,
+          "cancel_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/cancel`,
+        },
+        "transactions": [
+            {
+                "amount": {
+                    "currency": "INR",
+                    "total": `${req.body.total}`,
+                    "details": {
+                        "shipping": "10.00",
+                        "subtotal": "190.00"
+                    }
+                },
+                "item_list": {
+                    "items": [
+                        {
+                            "name": "Foto 1",
+                            "currency": "INR",
+                            "sku": "123",
+                            "quantity": "1",
+                            "price": "190.00"
+                        }
+                    ],
+                    "shipping_address": {
+                        "recipient_name": "Brian Robinson",
+                        "line1": "4th Floor",
+                        "line2": "kaskdsa",
+                        "city": "San Jose",
+                        "state": "CA",
+                        "phone": "011862212345678",
+                        "postal_code": "95131",
+                        "country_code": "US"
                       }
-                  ]
-              },
-              "description": "Payment description"
-          }
-      ]
-      }
+                },
+                "description": "Payment description"
+            }
+        ]
+        }
+  
 paypal.payment.create(payReq, (error, payment) => {
   if (error) {
       throw error;
@@ -138,7 +131,12 @@ app.post('/success', (req, res) => {
 app.get('/cancel', (req, res) => res.send('Cancelled'));
 
 
-exports.widgets = functions.https.onRequest(app);
+exports.app = functions.https.onRequest(app);
+
+
+
+
+
 // exports.pay = functions.https.onRequest((req,res) => {
 //   return cors(req, res, () => {
 //     // ...  

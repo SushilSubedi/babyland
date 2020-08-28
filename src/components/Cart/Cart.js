@@ -10,7 +10,6 @@ import CardList from './CardList';
 
 const Cart = (props) => {
     const classes = useStyles();
-
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
     
