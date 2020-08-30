@@ -77,7 +77,9 @@ const ShopCard = (props) => {
                 setOpenToolTip(true);
                 updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
                 fire.database().ref().update(updateData).then(doc => {
-                    dispatch(cartUpdateData(data));
+                    if(cartWishlist === 'cart'){
+                        dispatch(cartUpdateData(data));
+                    }
                 });
             }
         } else {
