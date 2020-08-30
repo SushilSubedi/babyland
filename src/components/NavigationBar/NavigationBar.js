@@ -14,39 +14,39 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Account from '../Account/Account';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { authCheckState } from '../Authentication/AuthRedux/action';
 
 const NavigationBar = (props) => {
 
-  const [open,setOpen] = useState(false);
-  const [anchorEl,setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
 
-  const handleOpenMenu = (event) =>{
-    if(!open){
+  const handleOpenMenu = (event) => {
+    if (!open) {
       setOpen(true);
-    setAnchorEl(event.currentTarget)
+      setAnchorEl(event.currentTarget)
     } else {
       setOpen(false);
-    setAnchorEl(null);
+      setAnchorEl(null);
     }
-    
+
   }
 
-  const handleCloseMenu = () =>{
+  const handleCloseMenu = () => {
     setOpen(false);
     setAnchorEl(null);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(authCheckState());
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <AppBar position="fixed" color="primary" elevation={0}>
@@ -61,7 +61,7 @@ const NavigationBar = (props) => {
             Home
           </NavigationItem>
           <NavigationItem to={"/Shop"}>
-              Shop
+            Shop
           </NavigationItem>
           <NavigationItem to={"/Baby"}>
             Baby
@@ -69,34 +69,34 @@ const NavigationBar = (props) => {
         </Toolbar>
         <Toolbar className={classes.SearchBox}>
           <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
+            <div className={classes.searchIcon}>
+              <SearchIcon />
             </div>
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
+          </div>
         </Toolbar>
 
         <div>
           {token ? (
-              <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
-                <AccountCircleIcon fontSize="large" style={{color:'white'}}/>
-                <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
-              </Button>
+            <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
+              <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+              <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl} />
+            </Button>
           ) : (
-            <NavigationItem to={"/Authentication"}>
+              <NavigationItem to={"/Authentication"}>
                 Authentication
-            </NavigationItem>
-          )}
+              </NavigationItem>
+            )}
         </div>
         <NavigationItem icon to={"/Cart"}>
-              <ShoppingCartIcon style={{paddingTop:'8px'}} fontSize="large"/>
+          <ShoppingCartIcon style={{ paddingTop: '8px' }} fontSize="large" />
         </NavigationItem>
       </div>
     </AppBar>
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) =>
       padding: "0% 8%",
     },
     SearchBox: {
-      width:'100%',
+      width: '100%',
       display: 'flex',
       justifyContent: 'flex-end'
     },

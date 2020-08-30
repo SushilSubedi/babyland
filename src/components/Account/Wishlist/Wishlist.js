@@ -2,58 +2,60 @@ import React, { useEffect } from 'react';
 import { makeStyles, createStyles, Box, Container, Typography, Paper, Button } from '@material-ui/core';
 import { fetchWishlistData } from './WishlistRedux/action';
 import { useDispatch } from 'react-redux';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { useSelector } from 'react-redux';
+
 
 
 const WishList = (props) => {
     const dispatch = useDispatch();
-    const { name, description, img, price } = props;
+
     const classes = useStyles();
+
+    const wishlistData = useSelector(state => state.WishlistRedux.data) || [];
 
     useEffect(() => {
         dispatch(fetchWishlistData());
     }, [dispatch])
+
     return (
-        <div>
-            <div>
-                <Box>
-                    <Typography>
-                        Wishlist
+        <Box padding="5% 2% 0% 2%">
+            <Container>
+                <div>
+                    <Typography className={classes.wishlisttext}>
+                        WishList
                     </Typography>
-                </Box>
+                </div>
 
-            </div>
+                <div>
+                    {wishlistData.map((item, index) => (
+                        <Box component={Paper} className={classes.card}>
+                            <Container className={classes.Container}>
+                                <div>
+                                    <img className={classes.img} src={item.img} alt="simple img" />
 
-            <div>
-                <Box component={Paper} className={classes.card}>
-                    <Container className={classes.Container}>
-                        <img className={classes.img} src={img} alt="simple img" />
-
-                        <div style={{ padding: '2% 0%' }}>
-                            <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
-                            <Typography className={classes.Typography2}>{description}</Typography>
-                        </div>
-
-                        <div>
-                            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '700' }}>Rs{price}</Typography>
-
-                            <div className={classes.features}>
-                                <div style={{ marginTop: "5%" }}>
-                                    <DeleteIcon className={classes.remove} />
                                 </div>
 
-                                <Button className={classes.addtocart}>Addtocart</Button>
+                                <div className={classes.details}>
 
-                            </div>
-                        </div>
-                    </Container>
-                </Box>
+                                    <Typography variant="h6" className={classes.Typography1}>{item.name}</Typography>
+                                    <Typography className={classes.Typography2}>{item.description}</Typography>
+                                    <Typography variant="h6" style={{ color: '#e85831', fontWeight: '1000', fontSize: "30px" }}>Rs{item.value}</Typography>
+
+                                    <div className={classes.buttons}>
+                                        <Button className={classes.remove} >Remove</Button>
+                                        <Button className={classes.addtocart}>Addtocart</Button>
+                                    </div>
+                                </div>
+                            </Container>
+                        </Box>
+                    ))}
+                </div>
+            </Container>
+        </Box >
 
 
-            </div>
 
 
-        </div>
     )
 }
 
@@ -61,13 +63,14 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         card: {
             display: 'flex',
-            flowDirection: 'column',
-            width: '320px',
+
+            width: '700px',
             flexWrap: "wrap",
             overflow: "hidden",
 
             marginTop: "9%",
-            minHeight: '320px',
+            marginLeft: "25%",
+            minHeight: '200px',
             justifyContent: 'center',
             padding: '2% 1% 4% 1%',
             alignItems: 'center',
@@ -76,49 +79,75 @@ const useStyles = makeStyles((theme) =>
             boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)'
         },
         img: {
-            width: '150px',
-            height: '140px',
+            width: '200px',
+            height: '300px',
             marginTop: '4px'
         },
         Container: {
             textAlign: 'center',
+            display: "flex",
+            flexDirection: "row",
 
         },
-        features: {
-            display: 'flex',
-            justifyContent: 'space-between'
-        },
+
+
         addtocart: {
             padding: '2%',
-            width: '94px',
-            height: '38px',
+            width: '130px',
+            height: '50px',
             backgroundColor: 'hotpink',
             color: 'white',
             textTransform: 'initial',
+            marginLeft: "50px",
             "&:hover": {
                 backgroundColor: '#fc03d7'
             }
         },
         Typography1: {
             fontFamily: 'inherit',
-            fontWeight: '700',
-            color: '#00669b'
+            fontWeight: '900',
+            color: '#00669b',
+            fontSize: "35px",
+            marginBottom: "15px",
         },
         Typography2: {
-            fontSize: '14px',
-            fontWeight: '300',
+            fontSize: '25px',
+            fontWeight: '400',
             fontFamily: 'inherit',
-            color: 'cbd0d6'
+            color: 'cbd0d6',
+            marginBottom: "10px",
         },
         remove: {
-            fontSize: "35px",
-            color: "#a6a1a1",
-
+            padding: '2%',
+            width: '130px',
+            height: '50px',
+            backgroundColor: '#808080',
+            color: 'white',
+            marginRight: "50px",
+            textTransform: 'initial',
             "&:hover": {
-                color: "red"
+                backgroundColor: 'red'
             }
 
-        }
+        },
+
+        wishlisttext: {
+            fontSize: "25px",
+            color: "blue",
+            marginLeft: "50%"
+        },
+
+        details: {
+            display: "flex",
+            flexDirection: "column",
+
+        },
+        buttons: {
+            display: "inline-block",
+            marginTop: "70px",
+
+
+        },
 
 
     })
