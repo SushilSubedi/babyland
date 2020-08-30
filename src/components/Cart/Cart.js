@@ -4,6 +4,7 @@ import Allitems from './Allitems';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData } from "./CartRedux/action";
 import CardList from './CardList';
+import Loader from '../../GlobalComponents/Loader';
 
 
 
@@ -23,26 +24,30 @@ const Cart = (props) => {
     return (
         <div>
             <Container maxWidth="xl">
+                {cartData.length === 0 ? <Loader/>:
                 <div>
-                    <Box className={classes.message}>
-                        <Typography variant="h5">
-                            Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
-                        </Typography>
-                    </Box>
-                </div>
-                <div className={classes.cart}>
-                    <div className={classes.CardList}>
-                        <CardList />
+                    <div>
+                        <Box className={classes.message}>
+                            <Typography variant="h5">
+                                Dear costumer we hereby notice you that,if  the price of the items is above RS2000 delivery charge will be free.
+                            </Typography>
+                        </Box>
                     </div>
-                    <div className={classes.items}>
-                        <Allitems
+                    <div className={classes.cart}>
+                        <div className={classes.CardList}>
+                            <CardList />
+                        </div>
+                        <div className={classes.items}>
+                            <Allitems
 
-                            CartData={cartData} />
+                                CartData={cartData} />
 
+
+                        </div>
 
                     </div>
-
                 </div>
+                }
             </Container>
         </div>
 
