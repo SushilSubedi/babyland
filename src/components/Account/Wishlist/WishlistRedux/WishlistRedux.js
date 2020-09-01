@@ -6,19 +6,20 @@ const initialState = {
     data: []
 }
 
-const reducer = (state = initialState,action) =>{
-    switch(action.type){
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
         case actionType.WISHLIST_START:
-            return{
+            return {
                 ...state,
                 error: null,
                 loading: true
             }
         case actionType.WISHLIST_SUCCESS:
-            return{
+            console.log("action", action.data);
+            return {
                 ...state,
-                data:action.data,
-                loading:false
+                data: action.data,
+                loading: false
             }
         case actionType.WISHLIST_UPDATE:
             const updateData = (state.data).slice();
@@ -29,13 +30,13 @@ const reducer = (state = initialState,action) =>{
                 loading: false
             }
         case actionType.WISHLIST_FAIL:
-            return{
+            return {
                 ...state,
                 error: action.error,
-                loading:false
-            }  
+                loading: false
+            }
         default:
-            return state            
+            return state
     }
 }
 export default reducer;

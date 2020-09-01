@@ -7,12 +7,12 @@ export const WISHLIST_UPDATE = "WISHLIST_UPDATE";
 
 
 export const wishlistStart = () => {
-    return{
+    return {
         type: WISHLIST_START
     }
 }
 
-export const wishlistError =  (error) => {
+export const wishlistError = (error) => {
     return {
         type: WISHLIST_FAIL,
         error: error
@@ -26,54 +26,45 @@ export const wishlistSuccess = (data) => {
     }
 }
 
-export const fetchWishlistData = () =>{
+export const fetchWishlistData = () => {
     return (dispatch) => {
         try {
             dispatch(wishlistStart());
-        const userId = localStorage.getItem('userID');
-        const wishlistData = [];
-        fire.database().ref(`/wishlist/${userId}`).on("value",(snapshort)=>{
-            const data = snapshort.val();
-            //abstract keys from an object
-            const DataArray = Object.assign([],data);
-            if(snapshort.val() !== null){
-                const keys = Object.keys(data);
-                    if(keys.length === DataArray.length){
-                        for(let i = 0; i < keys.length; i++){
-                            const k = keys[i];
-                            const dataCollection ={
-                                name: data[k].name,
-                                description: data[k].description,
-                                value: data[k].value,
-                                img: data[k].img,
-                                id: data[k].id
-                            }
-                                wishlistData.push(dataCollection);
-                            }
-                        dispatch(wishlistSuccess(wishlistData));
-
-                    } else {
-                        const k = keys[keys.length - 1]
-                        const dataCollections={
+            const userId = localStorage.getItem('userID');
+            const wishlistData = [];
+            fire.database().ref(`/wishlist/${userId}`).once("value", (snapshort) => {
+                const data = snapshort.val();
+                //abstract keys from an object
+                // const DataArray = Object.assign([],data);
+                if (snapshort.val() !== null) {
+                    const keys = Object.keys(data);
+                    // console.log("p",keys.length/ === .length)
+                    for (let i = 0; i < keys.length; i++) {
+                        const k = keys[i];
+                        const dataCollection = {
                             name: data[k].name,
                             description: data[k].description,
-                            value:data[k].value,
+                            value: data[k].value,
                             img: data[k].img,
-                            id: data[k].id
+                            id: data[k].id,
+                            postId: data[k].postId,
+                            quantity: data[k].quantity
                         }
-                        dispatch(updateData(dataCollections));
+                        wishlistData.push(dataCollection);
+                    }
+                    dispatch(wishlistSuccess(wishlistData));
+
                 }
-            }
-          
-        })
-        }catch(error){
+
+            })
+        } catch (error) {
             dispatch(wishlistError(error));
         }
-        
+
     }
 }
 
-const updateData = (updatedData) => {
+export const wishlistUpdateData = (updatedData) => {
     return {
         type: WISHLIST_UPDATE,
         updatedData: updatedData
