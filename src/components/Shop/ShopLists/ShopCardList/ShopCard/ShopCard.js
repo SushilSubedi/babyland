@@ -9,6 +9,7 @@ import DialogBox from '../../../../../GlobalComponents/DialogBox';
 import { useHistory } from 'react-router-dom';
 import { cartUpdateData } from '../../../../Cart/CartRedux/action';
 import { useDispatch} from 'react-redux';
+import { wishlistUpdateData } from '../../../../Account/Wishlist/WishlistRedux/action';
 
 const ShopCard = (props) => {
     const [icon, setIcon] = useState(false);
@@ -71,14 +72,15 @@ const ShopCard = (props) => {
                     value: value,
                     img: img,
                     id: identifer,
-                    quantity: 1,
-                    cartWishlist: cartWishlist
+                    quantity: 1
                 }
                 setOpenToolTip(true);
                 updateData[`/${cartWishlist}/` + userId + '/' + newPostKey] = data;
                 fire.database().ref().update(updateData).then(doc => {
                     if(cartWishlist === 'cart'){
                         dispatch(cartUpdateData(data));
+                    }else if(cartWishlist === 'wishlist') {
+                        dispatch(wishlistUpdateData(data));
                     }
                 });
             }

@@ -6,7 +6,7 @@ import { fetchCartData } from '../../Cart/CartRedux/action';
 import WishlistCard from './WishlistCard';
 
 
-const WishList = (props) => {
+const WishList = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const cartData = useSelector(state => state.CartRedux.data) || [];
@@ -22,10 +22,6 @@ const WishList = (props) => {
         }
 
     }, [dispatch])
-
-    useEffect(() => {
-        console.log("data", wishlistData);
-    }, [])
 
     return (
         <Box padding="5% 2% 0% 2%">
@@ -44,7 +40,6 @@ const WishList = (props) => {
                             description={item.description}
                             price={item.value}
                             img={item.img}
-                            PostId={item.postId}
                             identifer={item.id}
                             quantity={item.quantity}
                         />

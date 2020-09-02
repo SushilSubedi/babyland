@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, createStyles, Box, Container, Typography, Paper, Button, IconButton, Snackbar } from '@material-ui/core';
+import { makeStyles, createStyles, Box, Container, Typography, Paper, Button} from '@material-ui/core';
 import fire from "../../../config/fire";
 import { useDispatch, useSelector } from 'react-redux';
-import { wishlistUpdateData } from './WishlistRedux/action';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { cartUpdateData } from '../../Cart/CartRedux/action';
 
 const WishlistCard = (props) => {
+  
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  const { name, description, img, price, identifer, quantity } = props;
+
+  const { name, description, img, price, identifer } = props;
+
   const cartData = useSelector(state => state.CartRedux.data) || [];
   const element = cartData.find(element => element.id === identifer);
   const dispatch = useDispatch();
 
 
-  const addtocart = () => {
+  const addtocart = (name,description,price,img) => {
+    console.log(name,description,price,img);
     const userId = localStorage.getItem('userID');
-    const newPostKey = fire.database().ref().child("wishlist").push().key;
+    const newPostKey = fire.database().ref().child("cart").push().key;
     const updateData = {};
     const data = {
       postId: newPostKey,
@@ -23,17 +28,21 @@ const WishlistCard = (props) => {
       description: description,
       value: price,
       img: img,
-
-      quantity: quantity,
+      id: identifer,
+      quantity: 1
 
     }
-
-    updateData[`/wishlist/` + userId + '/' + newPostKey] = data;
+    updateData[`/cart/` + userId + '/' + newPostKey] = data;
     fire.database().ref().update(updateData).then(doc => {
-      dispatch(wishlistUpdateData());
-
+      dispatch(cartUpdateData(data));
     })
   }
+
+  useEffect(() => {
+    if (element !== undefined) {
+        setLoading(false);
+    }
+  }, [element]);
 
   return (
     <div>
@@ -53,9 +62,13 @@ const WishlistCard = (props) => {
 
             <div className={classes.buttons}>
               <Button className={classes.remove} >Remove</Button>
+              <div style={{position:'relative'}}>
               {element === undefined ?
-                <Button className={classes.addtocart} disable={loading} onClick={addtocart}>Addtocart</Button> :
-                <Button disable style={{ cursor: "none" }}>Added</Button>}
+                <Button className={classes.addtocart} disabled={loading} onClick={() =>addtocart(name,description,price,img)}>Addtocart</Button> :
+                <Button disabled style={{ cursor: "none" }}>Added</Button>}
+                {loading === true && <CircularProgress className={classes.loader} />}
+              </div>
+             
             </div>
           </div>
         </Container>
@@ -98,8 +111,14 @@ const useStyles = makeStyles((theme) =>
       flexDirection: "row",
 
     },
-
-
+    loader: {
+      position: 'absolute',
+      top: '5px',
+      left: '31%',
+      color: 'white',
+      width: '30px !important',
+      height: '30px !important'
+  },
     addtocart: {
       padding: '2%',
       width: '130px',
