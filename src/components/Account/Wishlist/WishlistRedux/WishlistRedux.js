@@ -35,6 +35,14 @@ const reducer = (state = initialState, action) => {
                 error: action.error,
                 loading: false
             }
+
+        case actionType.WISHLIST_DELETE:
+            const duplicateData = (state.data).slice();
+            const DeletedData = duplicateData.filter(item => item.postId !== action.postId)
+            return {
+                ...state,
+                data: DeletedData
+            }
         default:
             return state
     }
