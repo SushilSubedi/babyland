@@ -12,10 +12,25 @@ const Payment = (props) => {
     const { price,line1,line2,city,phone,postalCode } = props;
 
     const cartData = useSelector(state => state.CartRedux.data) || [];
-    const user = localStorage.getItem('user')
+    const user = localStorage.getItem('user');
+    const itemList = [];
 
     useEffect(() => {
         console.log(cartData,"cartData")
+        if(cartData.length){
+            for(let i = 0;i < cartData.length;i++) {
+                const item = {
+                    name: cartData[i].name,
+                    currency:'INR',
+                    sku:cartData[i].id,
+                    quantity:cartData[i].quantity,
+                    price:cartData[i].value * cartData[i].quantity
+                }
+                itemList.push(item)
+            }
+            console.log(itemList)
+        }
+
     },[cartData])
 
 
@@ -38,9 +53,12 @@ const Payment = (props) => {
                                   amount: {
                                         total:price,
                                         currency: "INR",
+                                        details: {
+                                            shipping:0,
+                                            subtotal:price
+                                        }
                                   },
-                                  item_list: {
-                                    items: cartData,                  
+                                  item_list: {                 
                                       shipping_address: {
                                             recipient_name: user,
                                             line1: line1,
@@ -65,16 +83,12 @@ const Payment = (props) => {
                       .then(function (paymentDetails) {
                         // Show a confirmation using the details from paymentDetails
                         // Then listen for a click on your confirm button
-                            console.log("p",paymentDetails)
-                        document.querySelector('#paypal-button-container')
-                          .addEventListener('click', function () {
                             // Execute the payment
                             return actions.payment.execute()
                               .then(function () {
                                 // Show a success page to the buyer
                                 setPaidFor(true);
                               });
-                          });
                       });
                   },
                   onError: function (err) {
