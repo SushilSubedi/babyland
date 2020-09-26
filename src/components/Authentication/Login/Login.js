@@ -175,6 +175,7 @@ const useStyles = makeStyles(theme =>
             backgroundColor:'hotpink',
             textTransform:'initial',
             fontSize:'16px',
+            color:'white',
             "&:hover": {
                 backgroundColor:'#fc03d7'
             }

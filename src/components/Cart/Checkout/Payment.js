@@ -1,14 +1,17 @@
 import React,{ useState,useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
-import axios from 'axios';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import axios from 'axios';
 
 const Payment = (props) => {
     const [paidFor,setPaidFor] = useState(false);
     // const [loaded,setLoaded] = useState(false);
     const [error,setError] = useState(null);
     const [prices,setPrices] = useState(null);
-    // const { price,line1,line2,city,phone,pincode } = props;
+    const { price } = props;
 
     useEffect(() => {
         function pay(){
@@ -18,8 +21,11 @@ const Payment = (props) => {
                 // 1. Add a payment callback
                 payment: function async(data, actions) {
                   // 2. Make a request to your server
+                  
+                  console.log("price",price)
+
                   return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/pay',{
-                      total: 2300
+                      total: 420
 
                     })
                     .then(function(res) {
@@ -32,7 +38,7 @@ const Payment = (props) => {
                 onAuthorize: function(data, actions) {
                   // 2. Make a request to your server
                   return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/success',{
-                      total:  2300,
+                      total:  420,
                       paymentID: data.paymentID,
                       payerID: data.payerID
                   })
@@ -60,11 +66,21 @@ const Payment = (props) => {
              ): (
                  <div style={{display:'flex',width:'100%',flexDirection:'column'}}>
                      <Typography variant="h6" style={{ fontFamily: 'inherit',fontWeight: '500',color: '#00669b'}}>we provide a secure and safe way for payment</Typography>
+                     <Typography style={{fontFamily:'inherit',color:'black'}}>Online Payment:</Typography>
                     <div id="paypal-button-container"></div>
+                    <FormControl component="fieldset">
+                        <FormControlLabel
+                            value="end"
+                            control={<Checkbox color="primary" />}
+                            label="Cash On Delivery"
+                            labelPlacement="end"
+                        />
+                    </FormControl>
                 </div>
              )
 
          }
+         
          {/* <button onClick={paymentHandler}>PayPal</button> */}
          </Container>
      </div>

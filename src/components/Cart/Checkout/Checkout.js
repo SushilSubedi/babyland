@@ -127,7 +127,9 @@ return (
                 className={classes.AddressField}
               />
             </div> : activeStep === 1 ? 
-            <Payment/>
+            <Payment
+              price={price}
+            />
              : (
                 <Container className={classes.container}>
                       <Box component={Paper} className={classes.orderCard}>
