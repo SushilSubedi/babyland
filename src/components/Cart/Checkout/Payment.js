@@ -4,50 +4,85 @@ import { Container } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Payment = (props) => {
     const [paidFor,setPaidFor] = useState(false);
-    // const [loaded,setLoaded] = useState(false);
     const [error,setError] = useState(null);
-    const [prices,setPrices] = useState(null);
-    const { price } = props;
+    const { price,line1,line2,city,phone,postalCode } = props;
+
+    const cartData = useSelector(state => state.CartRedux.data) || [];
+    const user = localStorage.getItem('user')
+
+    useEffect(() => {
+        console.log(cartData,"cartData")
+    },[cartData])
+
 
     useEffect(() => {
         function pay(){
             window.paypal.Button.render({
                 env: 'sandbox', // Or 'production'
+                client: {
+                    sandbox: "AS43awnsEbh6ueuE4g_3gQmBohsQgvFBeLOkjl3gjHgAvyzsQK1EWGIZatUhKqewmuRvNOHRp7CaqyYn"
+                },
                 // Set up the payment:
                 // 1. Add a payment callback
-                payment: function async(data, actions) {
+                payment: function (data, actions) {
                   // 2. Make a request to your server
-                  
-                  console.log("price",price)
 
-                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/pay',{
-                      total: 420
-
-                    })
-                    .then(function(res) {
-                      // 3. Return res.id from the response
-                      return res;
-                    });
+                  return actions.payment.create({
+                      payment: {
+                          transactions: [
+                              {
+                                  amount: {
+                                        total:price,
+                                        currency: "INR",
+                                  },
+                                  item_list: {
+                                    items: cartData,                  
+                                      shipping_address: {
+                                            recipient_name: user,
+                                            line1: line1,
+                                            line2: line2,
+                                            city:city,
+                                            state:city,
+                                            phone:phone,
+                                            postal_code:postalCode,
+                                            country_code: "IN"
+                                        }
+                                  }
+                              },
+                          ]
+                      }
+                  });
                 },
                 // Execute the payment:
                 // 1. Add an onAuthorize callback
-                onAuthorize: function(data, actions) {
-                  // 2. Make a request to your server
-                  return actions.request.post('http://localhost:5001/babyland-2b68b/us-central1/app/success',{
-                      total:  420,
-                      paymentID: data.paymentID,
-                      payerID: data.payerID
-                  })
-                    .then(function(res) {
-                      // 3. Show the buyer a confirmation message.
-                      setPaidFor(true)
-                      return res;
-                    });
-                }
+                onAuthorize: function (data, actions) {
+                    // Get the payment details
+                    return actions.payment.get()
+                      .then(function (paymentDetails) {
+                        // Show a confirmation using the details from paymentDetails
+                        // Then listen for a click on your confirm button
+                            console.log("p",paymentDetails)
+                        document.querySelector('#paypal-button-container')
+                          .addEventListener('click', function () {
+                            // Execute the payment
+                            return actions.payment.execute()
+                              .then(function () {
+                                // Show a success page to the buyer
+                                setPaidFor(true);
+                              });
+                          });
+                      });
+                  },
+                  onError: function (err) {
+                    // Show an error page here, when an error occurs
+                    setError(err);
+                    console.log(err);
+                  }
+                 
               }, '#paypal-button-container');
         }
         pay();

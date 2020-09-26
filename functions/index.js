@@ -10,11 +10,7 @@ const express = require('express');
 const app = express();
 admin.initializeApp();
 //config your environment
-paypal.configure({
-    mode: 'sandbox',
-    client_id: "AS43awnsEbh6ueuE4g_3gQmBohsQgvFBeLOkjl3gjHgAvyzsQK1EWGIZatUhKqewmuRvNOHRp7CaqyYn",
-    client_secret:"EKyUX0s7uRAHOI45RQ3QxMcjUxDW2gSKT5PmtXQXxb4C6Luu2jeBTOpmW2UZzbLNXxLNLjlGHyZYgjLN"
-})
+
 
 // app.use(cors());
 app.use(express.json());
@@ -33,30 +29,23 @@ app.use((req,res, next) => {
  return next();
 })
 
-app.post('/order', (req,res) => {
-    const transactions = JSON.stringify({
-        amount: 420,
-        currency:'INR'
-    })
-    paypal.order
-    res.status(200).send(transactions);
-})
 
 app.post('/pay', (req, res) => {
+    // const prices = await req.body.price
     const payReq = {
         "intent": "sale",
         "payer": {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/success`,
-          "cancel_url": `${req.protocol}://${req.get('host')}/babyland-2b68b/us-central1/cancel`,
+          "return_url": `http://localhost:5001/babyland-2b68b/us-central1/app/success`,
+          "cancel_url": `http://localhost:5001/babyland-2b68b/us-central1/app/cancel`,
         },
         "transactions": [
             {
                 "amount": {
                     "currency": "INR",
-                    "total": `${req.body.total}`,
+                    "total": `200`,
                     "details": {
                         "shipping": "10.00",
                         "subtotal": "190.00"
@@ -79,6 +68,7 @@ app.post('/pay', (req, res) => {
         }
   
 paypal.payment.create(payReq, (error, payment) => {
+    // console.log(prices,"Psa")
   if (error) {
       throw error;
   } else {
@@ -93,16 +83,17 @@ paypal.payment.create(payReq, (error, payment) => {
 });
 
 
-app.post('/success', (req, res) => {
+app.post('/success', async(req, res) => {
     const paymentID = req.body.paymentID;
     const payerID = req.body.payerID;
 
+    const prices = await req.body.price
   const execute_payment_json = {
-    "payer_id": payerID,
+    "payer_id":`${payerID}`,
     "transactions": [{
         "amount": {
             "currency": "INR",
-            "total": `${req.body.total}`
+            "total": `${prices}`
         }
     }]
   };

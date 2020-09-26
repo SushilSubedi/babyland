@@ -129,6 +129,12 @@ return (
             </div> : activeStep === 1 ? 
             <Payment
               price={price}
+              line1={streetAddress}
+              line2={addressLine}
+              city={city}
+              phone={phoneNumber}
+              postalCode={zipCode}
+              
             />
              : (
                 <Container className={classes.container}>
