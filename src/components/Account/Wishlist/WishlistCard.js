@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, createStyles, Box, Container, Typography, Paper, Button} from '@material-ui/core';
+import { makeStyles, createStyles, Box, Container, Typography, Paper, Button } from '@material-ui/core';
 import fire from "../../../config/fire";
 import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { cartUpdateData } from '../../Cart/CartRedux/action';
+import { wishlistDeleteData } from '../Wishlist/WishlistRedux/action';
 
 const WishlistCard = (props) => {
-  
+
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
-  const { name, description, img, price, identifer } = props;
+  const { name, description, img, price, identifer, PostId } = props;
 
   const cartData = useSelector(state => state.CartRedux.data) || [];
   const element = cartData.find(element => element.id === identifer);
   const dispatch = useDispatch();
 
+  const deletedata = () => {
+    const userId = localStorage.getItem('userID');
+    fire.database().ref(`/wishlist/${userId}/${PostId}`).set(null).then(doc =>
+      dispatch(wishlistDeleteData(PostId))
+    )
+  }
 
-  const addtocart = (name,description,price,img) => {
-    console.log(name,description,price,img);
+
+  const addtocart = (name, description, price, img) => {
+    console.log(name, description, price, img);
     const userId = localStorage.getItem('userID');
     const newPostKey = fire.database().ref().child("cart").push().key;
     const updateData = {};
@@ -40,7 +48,7 @@ const WishlistCard = (props) => {
 
   useEffect(() => {
     if (element !== undefined) {
-        setLoading(false);
+      setLoading(false);
     }
   }, [element]);
 
@@ -58,17 +66,21 @@ const WishlistCard = (props) => {
 
             <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
             <Typography className={classes.Typography2}>{description}</Typography>
-            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '1000', fontSize: "30px" }}>Rs{price}</Typography>
+            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '1000', fontSize: "25px" }}>Rs{price}</Typography>
 
             <div className={classes.buttons}>
-              <Button className={classes.remove} >Remove</Button>
-              <div style={{position:'relative'}}>
-              {element === undefined ?
-                <Button className={classes.addtocart} disabled={loading} onClick={() =>addtocart(name,description,price,img)}>Addtocart</Button> :
-                <Button disabled style={{ cursor: "none" }}>Added</Button>}
+              <div>
+                <Button className={classes.remove} onClick={deletedata} >Remove</Button>
+
+              </div>
+
+              <div style={{ position: 'relative' }}>
+                {element === undefined ?
+                  <Button className={classes.addtocart} disabled={loading} onClick={() => addtocart(name, description, price, img)}>Addtocart</Button> :
+                  <Button disabled style={{ cursor: "none" }}>Added</Button>}
                 {loading === true && <CircularProgress className={classes.loader} />}
               </div>
-             
+
             </div>
           </div>
         </Container>
@@ -86,23 +98,21 @@ const useStyles = makeStyles((theme) =>
     card: {
       display: 'flex',
 
-      width: '700px',
+      width: '570px',
       flexWrap: "wrap",
       overflow: "hidden",
-
       marginTop: "9%",
-      marginLeft: "25%",
-      minHeight: '200px',
+      minHeight: '160px',
       justifyContent: 'center',
-      padding: '2% 1% 4% 1%',
+      padding: '2% 9% 4% 1%',
       alignItems: 'center',
 
       border: '1px solid rgba(0,0,0,0.1)',
       boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)'
     },
     img: {
-      width: '200px',
-      height: '300px',
+      width: '150px',
+      height: '180px',
       marginTop: '4px'
     },
     Container: {
@@ -118,13 +128,14 @@ const useStyles = makeStyles((theme) =>
       color: 'white',
       width: '30px !important',
       height: '30px !important'
-  },
+    },
     addtocart: {
       padding: '2%',
       width: '130px',
       height: '50px',
       backgroundColor: 'hotpink',
       color: 'white',
+
       textTransform: 'initial',
       marginLeft: "50px",
       "&:hover": {
@@ -135,15 +146,18 @@ const useStyles = makeStyles((theme) =>
       fontFamily: 'inherit',
       fontWeight: '900',
       color: '#00669b',
-      fontSize: "35px",
+      fontSize: "25px",
       marginBottom: "15px",
+
     },
     Typography2: {
-      fontSize: '25px',
+      fontSize: '20px',
       fontWeight: '400',
       fontFamily: 'inherit',
       color: 'cbd0d6',
       marginBottom: "10px",
+      height: "85px ",
+
     },
     remove: {
       padding: '2%',
@@ -159,11 +173,7 @@ const useStyles = makeStyles((theme) =>
 
     },
 
-    wishlisttext: {
-      fontSize: "25px",
-      color: "blue",
-      marginLeft: "50%"
-    },
+
 
     details: {
       display: "flex",
@@ -171,8 +181,12 @@ const useStyles = makeStyles((theme) =>
 
     },
     buttons: {
-      display: "inline-block",
-      marginTop: "70px",
+      width: "450px",
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "35px",
+
+
 
 
     },

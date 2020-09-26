@@ -4,6 +4,7 @@ export const WISHLIST_START = "WISHLIST_START";
 export const WISHLIST_SUCCESS = "WISHLIST_SUCCESS";
 export const WISHLIST_FAIL = "WISHLIST_FAIL";
 export const WISHLIST_UPDATE = "WISHLIST_UPDATE";
+export const WISHLIST_DELETE = "WISHLIST_DELETE";
 
 
 export const wishlistStart = () => {
@@ -64,9 +65,17 @@ export const fetchWishlistData = () => {
     }
 }
 
+export const wishlistDeleteData = (postId) => {
+    return {
+        type: WISHLIST_DELETE,
+        postId: postId
+    }
+}
+
 export const wishlistUpdateData = (updatedData) => {
     return {
         type: WISHLIST_UPDATE,
         updatedData: updatedData
     }
 }
+
