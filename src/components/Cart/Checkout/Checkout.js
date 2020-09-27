@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Payment from './Payment';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import CheckoutContext from './CheckoutContextAPI/CheckoutContext';
 // import { Alert } from '@material-ui/lab';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -42,6 +43,8 @@ const Checkout = (props) => {
     const [city,setCity] = useState('');
     const [zipCode,setZipCode] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
+    const [payment,setPayment] = useState(false);
+    const pay = { payment,setPayment }
     // const [opens,setOpens] = useState(false);
     const steps = getSteps();
     // let message = null;
@@ -52,7 +55,14 @@ const Checkout = (props) => {
 
     const handleNext = () => {
       if(streetAddress !== '' && addressLine !== '' && city !== '' && zipCode !== '' && phoneNumber !== '' ){
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if(activeStep === 2){
+          if(payment){
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          }
+        }else {
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
+
       }
     };
   
@@ -65,7 +75,8 @@ const Checkout = (props) => {
       handleClose();
     };
 return (
-    <Dialog
+  <CheckoutContext.Provider value={pay}>
+      <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
@@ -133,8 +144,7 @@ return (
               line2={addressLine}
               city={city}
               phone={phoneNumber}
-              postalCode={zipCode}
-              
+              postalCode={zipCode}  
             />
              : (
                 <Container className={classes.container}>
@@ -185,6 +195,8 @@ return (
         </Box>
 
     </Dialog>
+
+  </CheckoutContext.Provider>
 )
 }
 

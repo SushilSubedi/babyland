@@ -1,14 +1,17 @@
-import React,{ useState,useEffect } from 'react';
+import React,{ useState,useEffect, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Container, makeStyles,createStyles } from '@material-ui/core';
 import { useSelector,useDispatch } from 'react-redux';
 import fire from '../../../config/fire';
 import { orderUpdateData } from '../../Account/Order/OrderRedux/action';
+import CheckoutContext from './CheckoutContextAPI/CheckoutContext';
 
 const Payment = (props) => {
     const classes = useStyles();
     const [paidFor,setPaidFor] = useState(false);
     const [error,setError] = useState(null);
+
+    const { payment,setPayment } = useContext(CheckoutContext);
 
     const { price,line1,line2,city,phone,postalCode } = props;
 
@@ -66,10 +69,12 @@ const Payment = (props) => {
                         // Show a confirmation using the details from paymentDetails
                             // Execute the payment
                             order(paymentDetails);
+
                             return actions.payment.execute()
                               .then(function () {
                                 // Show a success page to the buyer
                                 setPaidFor(true);
+                                setPayment(true)
                               });
                       });
                   },
