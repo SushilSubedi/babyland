@@ -247,8 +247,8 @@ const useStyles = makeStyles((theme) => ({
     },
     fullAddress: {
       width: '65%',
-      padding: '0 4% 0 6%',
-      margin:'inherit'
+      padding: '6px 0% 0 2%',
+      margin:'auto'
     },
     AddressField: {
       width: '50%',

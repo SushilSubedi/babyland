@@ -8,7 +8,6 @@ const initialState = {
 }
 
 
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionType.CART_START:

@@ -1,38 +1,20 @@
 import React,{ useState,useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Container } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { useSelector } from 'react-redux';
+import { Container, makeStyles,createStyles } from '@material-ui/core';
+import { useSelector,useDispatch } from 'react-redux';
+import fire from '../../../config/fire';
+import { orderUpdateData } from '../../Account/Order/OrderRedux/action';
 
 const Payment = (props) => {
+    const classes = useStyles();
     const [paidFor,setPaidFor] = useState(false);
     const [error,setError] = useState(null);
+
     const { price,line1,line2,city,phone,postalCode } = props;
 
+    const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];
     const user = localStorage.getItem('user');
-    const itemList = [];
-
-    useEffect(() => {
-        console.log(cartData,"cartData")
-        if(cartData.length){
-            for(let i = 0;i < cartData.length;i++) {
-                const item = {
-                    name: cartData[i].name,
-                    currency:'INR',
-                    sku:cartData[i].id,
-                    quantity:cartData[i].quantity,
-                    price:cartData[i].value * cartData[i].quantity
-                }
-                itemList.push(item)
-            }
-            console.log(itemList)
-        }
-
-    },[cartData])
-
 
     useEffect(() => {
         function pay(){
@@ -82,8 +64,8 @@ const Payment = (props) => {
                     return actions.payment.get()
                       .then(function (paymentDetails) {
                         // Show a confirmation using the details from paymentDetails
-                        // Then listen for a click on your confirm button
                             // Execute the payment
+                            order(paymentDetails);
                             return actions.payment.execute()
                               .then(function () {
                                 // Show a success page to the buyer
@@ -94,7 +76,6 @@ const Payment = (props) => {
                   onError: function (err) {
                     // Show an error page here, when an error occurs
                     setError(err);
-                    console.log(err);
                   }
                  
               }, '#paypal-button-container');
@@ -103,37 +84,57 @@ const Payment = (props) => {
     },[])
 
 
+    function order(paymentDetails) {
+        const userId = localStorage.getItem('userID')
+        const newPostKey = fire.database().ref().child('Order').push().key;
+        const updateData = {};
+
+        const data = {
+            paymentDetails: paymentDetails,
+            orderItem: cartData
+        }
+        updateData[`/Order/` + userId + '/' + newPostKey] = data;
+        fire.database().ref().update(updateData).then(doc => {
+            dispatch(orderUpdateData(data))
+        });
+}
+
+
  return(
-     <div style={{padding:'4px 10%'}}>
+     <div className={classes.root}>
          <Container>
          {error && <div>Uh oh, an error occurred! {error.message}</div>}
          {
              paidFor ? (
-                 <div>
-                     <Typography variant="h1">Congrs your payment successful</Typography>
+                 <div style={{textAlign:'center'}}>
+                     <Typography className={classes.Typography} variant="h5">Congrs your payment successful</Typography>
                 </div>
              ): (
-                 <div style={{display:'flex',width:'100%',flexDirection:'column'}}>
-                     <Typography variant="h6" style={{ fontFamily: 'inherit',fontWeight: '500',color: '#00669b'}}>we provide a secure and safe way for payment</Typography>
-                     <Typography style={{fontFamily:'inherit',color:'black'}}>Online Payment:</Typography>
-                    <div id="paypal-button-container"></div>
-                    <FormControl component="fieldset">
-                        <FormControlLabel
-                            value="end"
-                            control={<Checkbox color="primary" />}
-                            label="Cash On Delivery"
-                            labelPlacement="end"
-                        />
-                    </FormControl>
+                 <div style={{textAlign:'center'}}>
+                    <Typography variant="h6" classes={classes.Typography}>we provide a secure and safe way for payment</Typography>
+                    <div id="paypal-button-container" style={{margin:'2% 0'}}></div>
                 </div>
              )
 
          }
-         
-         {/* <button onClick={paymentHandler}>PayPal</button> */}
          </Container>
      </div>
  )   
 }
+
+const useStyles = makeStyles(theme => 
+    createStyles({
+        root: {
+            padding:'4px 10%'
+        },
+        Typography: {
+            fontFamily: 'inherit',
+            fontWeight: '500',
+            color: '#00669b',
+            textAlign:'center',
+            paddingTop:'4%'
+        }
+
+    }))
 
 export default Payment;
