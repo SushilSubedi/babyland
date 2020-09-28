@@ -21,7 +21,7 @@ export const orderFail = (error) => {
 
 export const orderSuccess = (data) => {
     return {
-        type: ORDER_START,
+        type: ORDER_SUCCESS,
         data:data
     }
 }
@@ -42,18 +42,12 @@ export const fetchOrder = () => {
                     for (let i = 0; i < keys.length; i++) {
                         const k = keys[i];
                         const dataCollection = {
-                            name: data[k].name,
-                            description: data[k].description,
-                            value: data[k].value,
-                            img: data[k].img,
-                            id: data[k].id,
-                            postId: data[k].postId,
-                            quantity: data[k].quantity
+                            orderItem : data[k].orderItem,
+                            paymentDetails: data[k].paymentDetails
                         }
                         orderData.push(dataCollection);
                     }
                     dispatch(orderSuccess(orderData));
-
                 }
 
             })

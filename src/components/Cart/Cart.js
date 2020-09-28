@@ -9,7 +9,7 @@ import Loader from '../../GlobalComponents/Loader';
 
 
 
-const Cart = (props) => {
+const Cart = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const cartData = useSelector(state => state.CartRedux.data) || [];

@@ -7,6 +7,7 @@ import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
 import Cart from "../components/Cart/Cart";
 import { useSelector } from 'react-redux';
+import Loader from '../GlobalComponents/Loader';
 
 const Routers = () => {
   const classes = useStyles();
@@ -27,6 +28,7 @@ const Routers = () => {
       <Route path="/shop" component={Shop} />
       <Route path="/Authentication" component={ayscAuth} />
       <Route path="/Cart" component={Cart} />
+      <Route path="/Baby" component={Loader} />
       <Redirect to='/' />
     </Switch>
   );
@@ -36,6 +38,7 @@ const Routers = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
+      <Route path="/Baby" component={Loader} />
         <Route path="/logout" component={ayscLogout} />
         <Route path ='/Account' component={ayscAccount}/>
         <Route path = '/Wishlist' component={ayscWishlist}/>
