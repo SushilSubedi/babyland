@@ -25,7 +25,7 @@ const Connect = (props) => {
   const classes = useStyles();
 
   return (
-    <Box component={Paper} elavation={0} className={classes.connect}>
+    <Box className={classes.connect}>
       <div className={classes.feedback}>
         <Button onClick={handleOpen} className={classes.button}>
           Feedback here
