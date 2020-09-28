@@ -1,6 +1,6 @@
 import React,{ useState,useEffect, useContext } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { Container, makeStyles,createStyles } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 import { useSelector,useDispatch } from 'react-redux';
 import fire from '../../../config/fire';
 import { orderUpdateData } from '../../Account/Order/OrderRedux/action';
@@ -11,7 +11,7 @@ const Payment = (props) => {
     const [paidFor,setPaidFor] = useState(false);
     const [error,setError] = useState(null);
 
-    const { payment,setPayment } = useContext(CheckoutContext);
+    const { setPayment } = useContext(CheckoutContext);
 
     const { price,line1,line2,city,phone,postalCode } = props;
 
@@ -86,23 +86,21 @@ const Payment = (props) => {
               }, '#paypal-button-container');
         }
         pay();
+        function order(paymentDetails) {
+            const userId = localStorage.getItem('userID')
+            const newPostKey = fire.database().ref().child('Order').push().key;
+            const updateData = {};
+    
+            const data = {
+                paymentDetails: paymentDetails,
+                orderItem: cartData
+            }
+            updateData[`/Order/` + userId + '/' + newPostKey] = data;
+            fire.database().ref().update(updateData).then(doc => {
+                dispatch(orderUpdateData(data))
+            });
+    }
     },[])
-
-
-    function order(paymentDetails) {
-        const userId = localStorage.getItem('userID')
-        const newPostKey = fire.database().ref().child('Order').push().key;
-        const updateData = {};
-
-        const data = {
-            paymentDetails: paymentDetails,
-            orderItem: cartData
-        }
-        updateData[`/Order/` + userId + '/' + newPostKey] = data;
-        fire.database().ref().update(updateData).then(doc => {
-            dispatch(orderUpdateData(data))
-        });
-}
 
 
  return(
@@ -116,7 +114,7 @@ const Payment = (props) => {
                 </div>
              ): (
                  <div style={{textAlign:'center'}}>
-                    <Typography variant="h6" classes={classes.Typography}>we provide a secure and safe way for payment</Typography>
+                    <Typography variant="h6" className={classes.Typography}>we provide a secure and safe way for payment</Typography>
                     <div id="paypal-button-container" style={{margin:'2% 0'}}></div>
                 </div>
              )
@@ -127,19 +125,17 @@ const Payment = (props) => {
  )   
 }
 
-const useStyles = makeStyles(theme => 
-    createStyles({
-        root: {
-            padding:'4px 10%'
-        },
-        Typography: {
-            fontFamily: 'inherit',
-            fontWeight: '500',
-            color: '#00669b',
-            textAlign:'center',
-            paddingTop:'4%'
-        }
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding:'4px 10%'
+    },
+    Typography: {
+        fontFamily: 'inherit',
+        fontWeight: '500',
+        color: '#00669b',
+        textAlign:'center',
+        paddingTop:'4%'
+    }
 
-    }))
-
+}))   
 export default Payment;

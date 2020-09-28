@@ -43,6 +43,7 @@ const Checkout = (props) => {
     const [city,setCity] = useState('');
     const [zipCode,setZipCode] = useState('');
     const [phoneNumber,setPhoneNumber] = useState('');
+
     const [payment,setPayment] = useState(false);
     const pay = { payment,setPayment }
     // const [opens,setOpens] = useState(false);
@@ -55,7 +56,7 @@ const Checkout = (props) => {
 
     const handleNext = () => {
       if(streetAddress !== '' && addressLine !== '' && city !== '' && zipCode !== '' && phoneNumber !== '' ){
-        if(activeStep === 2){
+        if(activeStep === 1){
           if(payment){
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
           }
@@ -193,9 +194,7 @@ return (
           <Button className={classes.cancel} onClick={handleClose}>Cancel</Button>
       </div>
         </Box>
-
     </Dialog>
-
   </CheckoutContext.Provider>
 )
 }
