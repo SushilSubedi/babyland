@@ -57,21 +57,20 @@ const WishlistCard = (props) => {
 
       <Box component={Paper} className={classes.card}>
         <Container className={classes.Container}>
+
           <div>
             <img className={classes.img} src={img} alt="simple img" />
-
           </div>
 
-          <div className={classes.details}>
-
+          <div>
             <Typography variant="h6" className={classes.Typography1}>{name}</Typography>
             <Typography className={classes.Typography2}>{description}</Typography>
-            <Typography variant="h6" style={{ color: '#e85831', fontWeight: '1000', fontSize: "25px" }}>Rs{price}</Typography>
+            <Typography variant="h6"  className={classes.price}>Rs{price}</Typography>
 
             <div className={classes.buttons}>
+
               <div>
                 <Button className={classes.remove} onClick={deletedata} >Remove</Button>
-
               </div>
 
               <div style={{ position: 'relative' }}>
@@ -101,25 +100,28 @@ const useStyles = makeStyles((theme) =>
       width: '570px',
       flexWrap: "wrap",
       overflow: "hidden",
-      marginTop: "9%",
       minHeight: '160px',
       justifyContent: 'center',
       padding: '2% 9% 4% 1%',
       alignItems: 'center',
-
-      border: '1px solid rgba(0,0,0,0.1)',
+      borderRadius:'4px',
+      marginTop:'8%',
       boxShadow: '0 3px 20px 0 rgba(0, 0, 0, 0.11)'
     },
     img: {
       width: '150px',
-      height: '180px',
+      height: '160px',
       marginTop: '4px'
     },
     Container: {
       textAlign: 'center',
       display: "flex",
       flexDirection: "row",
-
+    },
+    price: {
+      color: '#e85831',
+      fontWeight: '600',
+      fontSize: "20px"
     },
     loader: {
       position: 'absolute',
@@ -144,25 +146,24 @@ const useStyles = makeStyles((theme) =>
     },
     Typography1: {
       fontFamily: 'inherit',
-      fontWeight: '900',
+      fontWeight: '700',
       color: '#00669b',
       fontSize: "25px",
       marginBottom: "15px",
 
     },
     Typography2: {
-      fontSize: '20px',
+      fontSize: '15px',
       fontWeight: '400',
       fontFamily: 'inherit',
       color: 'cbd0d6',
       marginBottom: "10px",
-      height: "85px ",
 
     },
     remove: {
       padding: '2%',
-      width: '130px',
-      height: '50px',
+      width: '100px',
+      height: '40px',
       backgroundColor: '#808080',
       color: 'white',
       marginRight: "50px",
@@ -172,23 +173,11 @@ const useStyles = makeStyles((theme) =>
       }
 
     },
-
-
-
-    details: {
-      display: "flex",
-      flexDirection: "column",
-
-    },
     buttons: {
       width: "450px",
       display: "flex",
       justifyContent: "center",
-      marginTop: "35px",
-
-
-
-
+      marginTop: "20px",
     },
 
 

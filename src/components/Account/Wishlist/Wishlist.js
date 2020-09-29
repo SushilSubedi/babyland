@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCartData } from '../../Cart/CartRedux/action';
 import WishlistCard from './WishlistCard';
 import { Grid } from '@material-ui/core';
-
+import Loading from '../../../GlobalComponents/Loader';
 
 const WishList = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const cartData = useSelector(state => state.CartRedux.data) || [];
     const wishlistData = useSelector(state => state.WishlistRedux.data) || [];
+    const loading = useSelector(state => state.WishlistRedux.loading);
 
     useEffect(() => {
         if (wishlistData.length === 0) {
@@ -22,20 +23,21 @@ const WishList = () => {
             dispatch(fetchCartData());
         }
 
-    }, [dispatch])
+    }, [dispatch,wishlistData,cartData])
 
     return (
-        <Box padding="5% 3% 0% 12%" style={{ marginLeft: "3%" }} >
-            <div style={{}}>
-                <div>
-                    <Typography className={classes.wishlisttext}>
-                        WishList
-                    </Typography>
-                </div>
-
-                <div style={{ marginRight: "7%", marginBottom: "12%" }}>
-                    <Grid item md={12} >
-                        <Grid container direction="row" >
+        <Box>
+            {
+                loading === true ? <Loading/>
+                :
+                <Box padding="5% 3% 0% 6%">
+                    <div>
+                        <Typography className={classes.wishlisttext}>
+                            Wishlist
+                        </Typography>
+                    </div>
+                    <Grid item md={12}>
+                        <Grid container>
                             {wishlistData.map((item, index) => (
                                 <Grid item md={6} key={index}>
                                     <WishlistCard
@@ -47,31 +49,25 @@ const WishList = () => {
                                         identifer={item.id}
                                         quantity={item.quantity}
                                         PostId={item.postId}
-
                                     />
                                 </Grid>
                             ))}
                         </Grid>
                     </Grid>
-                </div>
-            </div>
-        </Box >
-
-
-
-
+                </Box >
+            }
+        </Box>
     )
 }
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         wishlisttext: {
-            fontSize: "30px",
+            fontSize: "27px",
             color: "blue",
-            marginLeft: "40%",
+            textAlign:'center',
+            paddingRight:'8%'
         },
-
-
 
     }))
 

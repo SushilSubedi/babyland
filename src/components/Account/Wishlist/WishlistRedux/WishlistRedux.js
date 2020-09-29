@@ -15,7 +15,6 @@ const reducer = (state = initialState, action) => {
                 loading: true
             }
         case actionType.WISHLIST_SUCCESS:
-            console.log("action", action.data);
             return {
                 ...state,
                 data: action.data,
