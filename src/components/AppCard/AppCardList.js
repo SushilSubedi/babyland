@@ -9,7 +9,7 @@ import walkytalky  from '../../Asset/ImageSlider/walkytalky.jpg';
 
 const Data = [
     {
-        name:'Baby Bed Fence',
+        name:'Baby Protection',
         src:babyfence,
         description:'Protective bed fence for babies.Perfect for kid bed,solid wood bed,kid bed,thick mattresses bed,and any large-size beds. '
     },
@@ -19,9 +19,9 @@ const Data = [
         description:'BabySuit for newly born babies.Like T-shirts, infant bodysuits come in a wide variety of designs.'
     },
     {
-        name:'Baby Walker',
+        name:'Toy',
         src:walkytalky,
-        description:"Baby Walker with Adjustable Height and Push Handle Bar.Sturdy design to support and nurture baby's first steps. ",
+        description:"Baby Walker with Adjustable Height and Push Handle Bar.Sturdy design to support and nurture baby's first steps  and many more",
     },
     
     

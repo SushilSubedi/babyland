@@ -86,6 +86,7 @@ const Payment = (props) => {
               }, '#paypal-button-container');
         }
         pay();
+        
         function order(paymentDetails) {
             const userId = localStorage.getItem('userID')
             const newPostKey = fire.database().ref().child('Order').push().key;

@@ -69,10 +69,6 @@ const useStyles = makeStyles((theme) =>
             paddingRight:'8%'
         },
 
-    }))
-
-
-
-
+}))
 
 export default WishList;
