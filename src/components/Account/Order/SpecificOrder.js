@@ -1,5 +1,7 @@
 import { createStyles, makeStyles,Box,Typography, Paper, Grid } from '@material-ui/core';
 import React from 'react';
+import Moment from 'react-moment';
+
 
 const SpecificOrder = (props) => {
     const classes = useStyles();
@@ -25,8 +27,8 @@ const SpecificOrder = (props) => {
                         </div>
                     </div>
                     <div style={{width:'24%'}}>
-                        <Typography className={classes.title} variant="h5">Time</Typography>
-                        <Typography variant="h6" className={classes.data}>{Time}</Typography>
+                        <Typography className={classes.title} variant="h5">Time:</Typography>
+                        <Typography variant="h6" className={classes.data}><Moment format='MMMM Do YYYY, h:mm:ss a'>{Time}</Moment></Typography>
                     </div>
                 </Box>
                 <Box padding="1% 0%">

@@ -19,10 +19,6 @@ const Order = () => {
         }
     },[order,dispatch])
 
-    useEffect(() => {
-        console.log("order",order);
-    },[order])
-
     return (
         <div className={classes.root}>
             {
