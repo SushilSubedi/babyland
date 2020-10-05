@@ -194,8 +194,7 @@ const useStyles = makeStyles(
         Typography2: {
             fontSize: '14px',
             fontWeight: '300',
-            fontFamily: 'inherit',
-            color: 'cbd0d6'
+            fontFamily: 'inherit'
         },
         root: {
             padding: '0px'

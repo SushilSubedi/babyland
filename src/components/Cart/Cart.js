@@ -5,14 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCartData } from "./CartRedux/action";
 import CardList from './CardList';
 import Loader from '../../GlobalComponents/Loader';
-
-
+import ShopAlert from '../../GlobalComponents/ShopAlert';
 
 
 const Cart = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const cartData = useSelector(state => state.CartRedux.data) || [];
+    const cartData = useSelector(state => state.CartRedux.data);
+    const loading = useSelector(state => state.CartRedux.loading);
+    const userId = localStorage.getItem('userID');
     
     useEffect(() => {
         if (cartData.length === 0) {
@@ -20,11 +21,20 @@ const Cart = () => {
         }
     }, [cartData, dispatch]);
 
+    useEffect(() => {
+        console.log(userId)
+    },[userId])
+
+    console.log(userId)
 
     return (
         <div>
             <Container maxWidth="xl">
-                {cartData.length === 0 ? <Loader/>:
+                { 
+                userId === null ? <ShopAlert component="Cart"/>:
+                    loading === true ? <Loader/>:
+                    cartData.length === 0 ? <ShopAlert component="Cart"/>
+                    :
                 <div>
                     <div>
                         <Box className={classes.message}>

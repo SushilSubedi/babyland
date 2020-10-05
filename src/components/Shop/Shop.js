@@ -3,6 +3,7 @@ import ShopLists from "./ShopLists/ShopLists";
 import { fetchWishlistData } from '../Account/Wishlist/WishlistRedux/action';
 import { fetchCartData } from '../Cart/CartRedux/action';
 import { useDispatch,useSelector } from 'react-redux';
+import Footer from '../Footer/footer';
 
 const Shop = () => {
   const dispatch = useDispatch();

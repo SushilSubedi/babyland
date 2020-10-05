@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, createStyles, Box, Container, Typography, Paper, FormControl, InputLabel, Select } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import fire from "../config/fire";
-import { cartDeleteData } from "../components/Cart/CartRedux/action";
+import fire from "../../config/fire";
+import { cartDeleteData } from "./CartRedux/action";
 import { useDispatch } from "react-redux";
-import { cartQuantityData } from "../components/Cart/CartRedux/action";
+import { cartQuantityData } from "./CartRedux/action";
 import MenuItem from '@material-ui/core/MenuItem';
 
 const CartCard = (props) => {

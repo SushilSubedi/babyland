@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import CartCard from '../../GlobalComponents/CartCard';
+import CartCard from './CartCard';
 import { useSelector } from 'react-redux';
 
 

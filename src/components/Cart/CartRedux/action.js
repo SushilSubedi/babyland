@@ -62,7 +62,6 @@ export const fetchCartData = () => {
         } catch (error) {
             dispatch(cartError(error));
         }
-
     }
 }
 
