@@ -35,10 +35,6 @@ const ShopCard = (props) => {
             setIcon(true);
             AddToCardWishlistHandler(cartWishlist, img, name, description, value);
         }
-        // else{
-        //     setIcon(false);
-        // }
-
     }
 
     useEffect(() => {
@@ -92,6 +88,7 @@ const ShopCard = (props) => {
     const DialogCloseHandler = () => {
         setOpenDialog(false)
     }
+    
     const HandleAuthNavigation = () => {
         history.push('/Authentication')
     }

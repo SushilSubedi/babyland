@@ -35,7 +35,10 @@ const useStyles = makeStyles(theme =>
             fontSize: "17px",
             textTransform: "initial",
             margin: "2%",
-            borderRadius:'10px'
+            borderRadius:'10px',
+            "&:hover": {
+                background:'pink'
+            }
         },
         Typography: {
             color:'#858f87',

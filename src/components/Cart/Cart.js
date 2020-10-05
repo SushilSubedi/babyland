@@ -16,16 +16,10 @@ const Cart = () => {
     const userId = localStorage.getItem('userID');
     
     useEffect(() => {
-        if (cartData.length === 0) {
+        if (cartData === undefined && userId) {
             dispatch(fetchCartData());
         }
-    }, [cartData, dispatch]);
-
-    useEffect(() => {
-        console.log(userId)
-    },[userId])
-
-    console.log(userId)
+    }, [cartData, dispatch,userId]);
 
     return (
         <div>
@@ -49,9 +43,7 @@ const Cart = () => {
                         </div>
                         <div className={classes.items}>
                             <Allitems
-
                                 CartData={cartData} />
-
 
                         </div>
 

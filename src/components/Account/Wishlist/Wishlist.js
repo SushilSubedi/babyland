@@ -6,29 +6,34 @@ import { fetchCartData } from '../../Cart/CartRedux/action';
 import WishlistCard from './WishlistCard';
 import { Grid } from '@material-ui/core';
 import Loading from '../../../GlobalComponents/Loader';
+import ShopAlert from '../../../GlobalComponents/ShopAlert';
 
 const WishList = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const cartData = useSelector(state => state.CartRedux.data) || [];
-    const wishlistData = useSelector(state => state.WishlistRedux.data) || [];
+    const wishlistData = useSelector(state => state.WishlistRedux.data);
     const loading = useSelector(state => state.WishlistRedux.loading);
+    const userId = localStorage.getItem('userID');
+
 
     useEffect(() => {
-        if (wishlistData.length === 0) {
+        if (wishlistData.length === 0 && userId) {
             dispatch(fetchWishlistData());
 
         }
-        if (cartData.length === 0) {
+        if (cartData.length === 0 && userId) {
             dispatch(fetchCartData());
         }
 
-    }, [dispatch,wishlistData,cartData])
+    }, [dispatch,wishlistData,cartData,userId])
 
     return (
         <Box>
-            {
-                loading === true ? <Loading/>
+            { 
+                userId === null ? <ShopAlert component="wishlist"/> :
+                loading === true ? <Loading/>:
+                wishlistData.length === 0 ? <ShopAlert component="Wishlist"/>
                 :
                 <Box padding="5% 3% 0% 6%">
                     <div>

@@ -54,8 +54,11 @@ export const fetchCartData = () => {
                         }
                         cartData.push(dataCollection);
                     }
+                    console.log(cartData)
                     dispatch(cartSuccess(cartData));
 
+                }else {
+                    dispatch(cartSuccess(cartData));
                 }
 
             })

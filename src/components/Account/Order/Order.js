@@ -4,13 +4,13 @@ import { useSelector,useDispatch } from'react-redux';
 import  { fetchOrder } from './OrderRedux/action';
 import Loader from '../../../GlobalComponents/Loader';
 import SpecificOrder from './SpecificOrder';
+import ShopAlert from '../../../GlobalComponents/ShopAlert';
 
 
 const Order = () => {
     const classes = useStyles();
-
     const dispatch = useDispatch();
-    const order = useSelector(state => state.OrderRedux.data) || [];
+    const order = useSelector(state => state.OrderRedux.data);
     const loading = useSelector(state => state.OrderRedux.loading);
 
     useEffect(() => {
@@ -24,6 +24,8 @@ const Order = () => {
             {
                 loading === true ? 
                 <Loader/>
+                :
+                order.length === 0 ? <ShopAlert component="Order"/>
                 :
                 <Box>
                     <Container className={classes.Container}>

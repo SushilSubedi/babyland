@@ -54,7 +54,8 @@ export const fetchWishlistData = () => {
                         wishlistData.push(dataCollection);
                     }
                     dispatch(wishlistSuccess(wishlistData));
-
+                } else {
+                    dispatch(wishlistSuccess(wishlistData))
                 }
 
             })

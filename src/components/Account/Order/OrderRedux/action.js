@@ -34,8 +34,6 @@ export const fetchOrder = () => {
             const orderData = [];
             fire.database().ref(`/Order/${userId}`).once("value", (snapshort) => {
                 const data = snapshort.val();
-                //abstract keys from an object
-                // const DataArray = Object.assign([],data);
                 if (snapshort.val() !== null) {
                     const keys = Object.keys(data);
                     // console.log("p",keys.length/ === .length)
@@ -48,6 +46,8 @@ export const fetchOrder = () => {
                         orderData.push(dataCollection);
                     }
                     dispatch(orderSuccess(orderData));
+                }else {
+                    dispatch(orderSuccess(orderData))
                 }
 
             })
