@@ -6,6 +6,7 @@ import {
   createStyles,
   Typography,
   Button,
+  CircularProgress
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +14,7 @@ import { Redirect } from "react-router-dom";
 import { auth, setAuthRedirectPath } from "../AuthRedux/action";
 import Loader from "../../../GlobalComponents/Loader";
 
-const SignUp = (props) => {
+const SignUp = () => {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -87,9 +88,6 @@ const SignUp = (props) => {
       nameMessage === null
     ) {
       dispatch(auth(email, password, name));
-      setName("");
-      setEmail("");
-      setPassword("");
     } else if (!isValid) {
       setPasswordMessage("Password field is empty");
       setEmailMessage("Email-address is empty");
@@ -143,16 +141,13 @@ const SignUp = (props) => {
         );
       })}
       <div className={classes.ButtonLink}>
-        <Button className={classes.button} onClick={onSubmitHandler}>
+        <Button className={classes.button} disabled={loading} onClick={onSubmitHandler}>
           Submit
         </Button>
+        {loading === true && <CircularProgress className={classes.loader} />}
       </div>
     </form>
   );
-
-  if (loading) {
-    form = <Loader />;
-  }
 
   let redirectAuth = null;
   if (authentication) {
@@ -200,6 +195,7 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       justifyContent: "center",
       padding: "7% 0 0 0",
+      position:'relative'
     },
     icon: {
       position: "absolute",
@@ -210,6 +206,14 @@ const useStyles = makeStyles((theme) =>
       height: "80px",
       width: "80px",
     },
+    loader: {
+      position: 'absolute',
+      top: '23px',
+      left: '43%',
+      color: 'white',
+      width: '30px !important',
+      height: '30px !important'
+  },
   })
 );
 

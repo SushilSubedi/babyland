@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react';
-import { Box,Paper, makeStyles, createStyles,Typography,Button,Link ,Snackbar} from '@material-ui/core';
+import { Box,Paper, makeStyles, createStyles,Typography,Button,Link ,Snackbar,CircularProgress} from '@material-ui/core';
 import Input from '../../../GlobalComponents/Input';
 import { useDispatch,useSelector } from 'react-redux';
 import { authLogin,setAuthRedirectPath } from '../AuthRedux/action';
@@ -64,8 +64,6 @@ const Login = (props) =>{
     const onSubmitHandler = () =>{
         if(emailMessage === null && passwordMessage === null && isValid === true){
             dispatch(authLogin(email,password));
-            setEmail('');
-            setPassword('');
         }else if(!isValid){
             setPasswordMessage('Password field is empty');
             setEmailMessage('Email-address is empty');
@@ -106,30 +104,27 @@ const Login = (props) =>{
         <form className={classes.form}>
                 <Typography className={classes.Typography1}>Login</Typography>
                 {data.map((items,index) =>{
-                return(
-                <Input 
-                    key={index} 
-                    label={items.label} 
-                    type={items.type} 
-                    value={items.value} 
-                    onChange={items.onChange} 
-                    errorMessage={items.errorMessage} 
-                    style={null}
-                    outlined="standard"
-                />)
+                    return(
+                    <Input 
+                        key={index} 
+                        label={items.label} 
+                        type={items.type} 
+                        value={items.value} 
+                        onChange={items.onChange} 
+                        errorMessage={items.errorMessage} 
+                        style={null}
+                        outlined="standard"
+                    />)
                 })}
             <div className={classes.ButtonLink}>
-                <Button className={classes.button} onClick={onSubmitHandler}>Submit</Button>
+                <Button className={classes.button} disabled={loading} onClick={onSubmitHandler}>Submit</Button>
+                {loading === true && <CircularProgress className={classes.loader} />}
             </div>
             <div className={classes.ButtonLink}>
                 <Link className={classes.link} onClick={handleResetPassword}>Forget your password?</Link>
             </div>
         </form>
     )
-
-    if(loading) {
-        form = <Loader/>
-    };
 
     
     let redirectAuth=null;
@@ -183,11 +178,20 @@ const useStyles = makeStyles(theme =>
         ButtonLink: {
             display:'flex',
             justifyContent:'center',
-            padding:'7% 0 0 0'
+            padding:'7% 0 0 0',
+            position:'relative'
         },
         link: {
             cursor: 'pointer'
-        }
+        },
+        loader: {
+            position: 'absolute',
+            top: '23px',
+            left: '43%',
+            color: 'white',
+            width: '30px !important',
+            height: '30px !important'
+        },
     }))
 
 
