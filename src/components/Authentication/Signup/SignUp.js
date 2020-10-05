@@ -38,7 +38,7 @@ const SignUp = (props) => {
     if (authRedirectPath !== null) {
       dispatch(setAuthRedirectPath("/"));
     }
-  }, []);
+  }, [authRedirectPath,dispatch]);
 
   const handleName = (e) => {
     if (e.target.value === "") {
@@ -51,7 +51,7 @@ const SignUp = (props) => {
   };
 
   const handleEmail = (e) => {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (e.target.value === "") {
       setIsValid(false);
       setEmailMessage("Email-address field is empty");
@@ -191,6 +191,7 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: "hotpink",
       textTransform: "initial",
       fontSize: "16px",
+      color:'white',
       "&:hover": {
         backgroundColor: "#fc03d7",
       },

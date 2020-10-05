@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   makeStyles,
   createStyles,
@@ -6,9 +7,8 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  TextField,
   Button,
-  Container
+  Container,
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
 
@@ -25,8 +25,7 @@ const FeedbackDialog = (props) => {
   const classes = useStyles();
 
   const handleEmail = (e) => {
-    console.log("email");
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (e.target.value === "") {
       setIsValid(false);
       setEmailMessage("Email-address field is empty");
@@ -40,34 +39,33 @@ const FeedbackDialog = (props) => {
     setEmail(e.target.value);
   };
   const handleSubject = (e) => {
-    console.log("subject");
     if (e.target.value === "") {
       setIsValid(false);
-      setSubject("Subject field is empty");
-    } else if (e.target.value.length > 8 && e.target.value.length < 30) {
+      setSubjectMessage("Subject field is empty");
+    } else if (e.target.value.length > 5 && e.target.value.length < 30) {
       setIsValid(true);
-      setSubject(null);
+      setSubjectMessage(null);
     } else {
       setIsValid(false);
-      setSubject("Subject is not valid");
+      setSubjectMessage("Subject is not valid");
     }
+    setSubject(e.target.value);
   };
+
   const handleMessage = (e) => {
-    console.log("message");
     if (e.target.value === "") {
       setIsValid(false);
-      setMessage("Message field is empty");
-    } else if (e.target.value.length > 10 && e.target.value.length < 255) {
+      setFeedbackMessage("Message field is empty");
+    } else if (e.target.value.length > 8 && e.target.value.length < 255) {
       setIsValid(true);
-      setMessage(null);
+      setFeedbackMessage(null);
     } else {
       setIsValid(false);
-      setMessage("Message is not valid");
+      setFeedbackMessage("Message is not valid");
     }
     setMessage(e.target.value);
   };
   const onSubmitHandler = () => {
-    console.log("hello");
     if (
       emailMessage === null &&
       subjectMessage === null &&
@@ -79,12 +77,14 @@ const FeedbackDialog = (props) => {
       setMessage("");
     } else if (!isValid) {
       setSubjectMessage("Subject field is empty");
-      setEmailMessage("Email-address is empty");
-      setFeedbackMessage("Message is empty");
+      setEmailMessage("Email-address field is empty");
+      setFeedbackMessage("Message field is empty");
     } else if (emailMessage === "") {
       setEmailMessage("Email-address is empty");
     } else if (subjectMessage === "") {
-      setSubjectMessage("Password is empty");
+      setSubjectMessage("subject is empty");
+    } else if (feedbackMessage === "") {
+      setFeedbackMessage("Feedback is empty");
     }
   };
 
@@ -133,9 +133,9 @@ const FeedbackDialog = (props) => {
                     type={items.type}
                     value={items.value}
                     onChange={items.onChange}
-                    comment={true}
                     errorMessage={items.errorMessage}
                     outlined="outlined"
+                    className={classes.message}
                   />
                 );
               } else {
@@ -212,8 +212,11 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: '0 11%'
-    }
+      padding: "0 11%",
+    },
+    message: {
+      height: "80px",
+    },
   })
 );
 

@@ -6,6 +6,7 @@ import {
   AppBar,
   Toolbar,
   fade,
+
 } from "@material-ui/core";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
@@ -13,28 +14,39 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Account from '../Account/Account';
-
+import NavigationItem from './NavigationItem/NavigationItem';
+import { authCheckState } from '../Authentication/AuthRedux/action';
 
 const NavigationBar = (props) => {
 
-  const [open,setOpen] = useState(false);
-  const [anchorEl,setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
 
-  const handleOpenMenu = (event) =>{
-    console.log("called");
-    setOpen(true);
-    setAnchorEl(event.currentTarget)
+  const handleOpenMenu = (event) => {
+    if (!open) {
+      setOpen(true);
+      setAnchorEl(event.currentTarget)
+    } else {
+      setOpen(false);
+      setAnchorEl(null);
+    }
+
   }
 
-  const handleCloseMenu = () =>{
+  const handleCloseMenu = () => {
     setOpen(false);
     setAnchorEl(null);
   }
+
+  useEffect(() => {
+    dispatch(authCheckState());
+  }, [dispatch])
 
   return (
     <AppBar position="fixed" color="primary" elevation={0}>
@@ -45,19 +57,17 @@ const NavigationBar = (props) => {
               <img src={logo} alt="logo" className={classes.logo} />
             </Link>
           </div>
-          <Link to={"/"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Home</Button>
-          </Link>
-          <Link to={"/Shop"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Shop</Button>
-          </Link>
-          <Link to={"/Baby"} style={{ textDecoration: "none" }}>
-            <Button classes={{ text: classes.text }}>Baby</Button>
-          </Link>
-
-          {/* <Link to ={'/Hair'}><Button color="inherit" classes={{text:classes.text}}>Hair</Button></Link> */}
+          <NavigationItem to={"/"} exact>
+            Home
+          </NavigationItem>
+          <NavigationItem to={"/Shop"}>
+            Shop
+          </NavigationItem>
+          <NavigationItem to={"/Baby"}>
+            Baby
+          </NavigationItem>
         </Toolbar>
-        <div style={{ display: "flex" }}>
+        <Toolbar className={classes.SearchBox}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -71,27 +81,23 @@ const NavigationBar = (props) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          {token ? (
-            <Link style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
-                <AccountCircleIcon fontSize="large"/>
-              </Button>
-              <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl}/>
-            </Link>
-          ) : (
-            <Link to={"/Authentication"} style={{ textDecoration: "none" }}>
-              <Button classes={{ text: classes.text }}>
-                Login | Register
-              </Button>
-            </Link>
-          )}
+        </Toolbar>
 
-          <Link to={"/Cart"}>
-            <Button classes={{ text: classes.text }}>
-              <ShoppingCartIcon fontSize="large" />
+        <div>
+          {token ? (
+            <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
+              <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+              <Account open={open} handleClose={handleCloseMenu} anchorEl={anchorEl} />
             </Button>
-          </Link>
+          ) : (
+              <NavigationItem to={"/Authentication"}>
+                Authentication
+              </NavigationItem>
+            )}
         </div>
+        <NavigationItem icon to={"/Cart"}>
+          <ShoppingCartIcon style={{ paddingTop: '8px' }} fontSize="large" />
+        </NavigationItem>
       </div>
     </AppBar>
   );
@@ -104,7 +110,13 @@ const useStyles = makeStyles((theme) =>
       height: "54px",
       justifyContent: "space-between",
       alignItems: "center",
+      flexGrow: '1',
       padding: "0% 8%",
+    },
+    SearchBox: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-end'
     },
     text: {
       padding: "6px 11px",
@@ -139,6 +151,7 @@ const useStyles = makeStyles((theme) =>
     },
     inputRoot: {
       color: "inherit",
+      height: '47px'
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),

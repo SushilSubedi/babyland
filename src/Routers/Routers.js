@@ -1,32 +1,60 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route,Redirect } from "react-router-dom";
+import React, { lazy } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "../components/Home/Home";
-import Baby from "../components/Baby/Baby";
 import Shop from "../components/Shop/Shop";
-import Authentication from "../components/Authentication/Authentication";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
 import Cart from "../components/Cart/Cart";
-import Logout from "../Logout/logout";
-import Account from "../components/Account/Account";
+import { useSelector } from 'react-redux';
+import Loader from '../GlobalComponents/Loader';
+// import ShopAlert from '../GlobalComponents/ShopAlert';
 
 const Routers = () => {
   const classes = useStyles();
+  const token = useSelector((state) => state.AuthRedux.refreshToken !== null);
+
+
+  let ayscAuth = lazy(() => import('../components/Authentication/Authentication'));
+  let ayscWishlist = lazy(() => import('../components/Account/Wishlist/Wishlist'));
+  let ayscAccount = lazy(() => import('../components/Account/Account'));
+  let ayscLogout = lazy(() => import('../Logout/logout'));
+  let ayscProfile = lazy(() => import('../components/Account/Profile/Profile'));
+  let ayscOrder = lazy(() => import('../components/Account/Order/Order'))
+
+
+  let switchs = (
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/shop" component={Shop} />
+      <Route path="/Authentication" component={ayscAuth} />
+      <Route path="/Cart" component={Cart} />
+      <Route path="/Baby" component={Loader} />
+      <Redirect to='/' />
+    </Switch>
+  );
+
+  if (token) {
+    switchs = (
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/shop" component={Shop} />
+        <Route path="/Baby" component={Loader} />
+        <Route path="/logout" component={ayscLogout} />
+        <Route path ='/Account' component={ayscAccount}/>
+        <Route path = '/Wishlist' component={ayscWishlist}/>
+        <Route path = '/Profile' component={ayscProfile}/>
+        <Route path = '/Order' component={ayscOrder}/>
+        <Route path="/Cart" component={Cart} />
+        <Redirect to='/' />
+      </Switch>
+    )
+  }
   return (
     <Router>
       <div className={classes.mainPage}>
         <NavigationBar />
       </div>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Baby" component={Baby} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/Authentication" component={Authentication} />
-        <Route path="/Cart" component={Cart} />
-        <Route path="/logout" component={Logout} />
-        <Route path ='/Account' component={Account}/>
-        <Redirect to='/' />
-      </Switch>
+      {switchs}
     </Router>
   );
 };

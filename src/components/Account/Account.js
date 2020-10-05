@@ -1,5 +1,4 @@
 import React from "react";
-import PersonIcon from "@material-ui/icons/Person";
 import { MenuItem,Menu,createStyles,makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -8,16 +7,16 @@ const Account = (props) => {
   const { open, handleClose,anchorEl } = props;
   const data = [
     {
-    name: `MyProfile`,
-      link: '/Myprofile'
+    name: `My Profile`,
+      link: '/Profile'
     },
     {
       name: 'My wishlist',
-      link: '/Mywishlist'
+      link: '/Wishlist'
     },
     {
       name: 'My Order',
-      link: '/MyOrder'
+      link: '/Order'
     },
     {
       name: 'Logout',
@@ -28,8 +27,9 @@ const Account = (props) => {
   return (
     <div>
       <Menu
-        anchorReference="anchorOrigin"
         anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        keepMounted
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",
@@ -42,7 +42,11 @@ const Account = (props) => {
          onClose={handleClose}
       >
         {data.map((list,index) =>{
-          return (<Link className={classes.Link} key={index} to={list.link}><MenuItem >{list.name}</MenuItem></Link>)
+          return (
+          <Link className={classes.Link} key={index} to={list.link}>
+            <MenuItem onClick={handleClose}>{list.name}</MenuItem>
+            </Link>
+            )
         })}
       </Menu>
     </div>
