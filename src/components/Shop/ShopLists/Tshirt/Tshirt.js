@@ -46,7 +46,7 @@ const Tshirt = (props) => {
   let shoplist = (<div><FilterItems valued={price} onchanged={(e)=> setPrice(e.target.value)}/><ShopCardList Data={Data} /></div>)
   
   if(data.length === 0){
-    shoplist = <Loader/>
+    shoplist =(<div style={{width:'900px'}}><Loader/></div>)
   }
 
  useEffect(()=>{

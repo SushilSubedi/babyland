@@ -45,7 +45,7 @@ const Toys = (props) => {
   }
 
   if(data.length === 0){
-    shoplist = <Loader/>
+    shoplist = (<div style={{width:'900px'}}><Loader/></div>)
   }
 
   useEffect(()=>{

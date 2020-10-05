@@ -43,7 +43,8 @@ const Cart = () => {
                         </div>
                         <div className={classes.items}>
                             <Allitems
-                                CartData={cartData} />
+                                CartData={cartData}
+                            />
 
                         </div>
 
