@@ -1,15 +1,22 @@
 import React from 'react';
 import { Box, makeStyles, createStyles, Typography, Button } from '@material-ui/core';
 import baby from '../../Asset/baby.jpg';
+import { useHistory } from 'react-router-dom';
 
 const HomeBlog = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const NavigationHandler = () => {
+        history.push('/Blog');
+    }
+
     return (
         <Box className={classes.Blog} >
             <div style={{ alignSelf: 'center' }}>
                 <Typography variant="h5" className={classes.Typography1}>BECAUSE ORDINARY WON’T DO.</Typography>
                 <Typography className={classes.Typography2}>The arrival of a baby calls for a celebration. Finding the right gift to mark this occasion is a lot more than about welcoming the new arrival, it is about marveling at the miracle of life. Celebrate it with our curated gift hampers.</Typography>
-                <Button className={classes.button}>
+                <Button className={classes.button} onClick={NavigationHandler}>
                     Discover More
                 </Button>
             </div>

@@ -63,8 +63,11 @@ const NavigationBar = (props) => {
           <NavigationItem to={"/Shop"}>
             Shop
           </NavigationItem>
-          <NavigationItem to={"/Baby"}>
-            Baby
+          <NavigationItem to={"/Blog"}>
+            Blog
+          </NavigationItem>
+          <NavigationItem to={"/AboutUS"}>
+            AboutUS
           </NavigationItem>
         </Toolbar>
         <Toolbar className={classes.SearchBox}>

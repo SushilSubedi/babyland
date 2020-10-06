@@ -6,7 +6,9 @@ import NavigationBar from "../components/NavigationBar/NavigationBar";
 import { makeStyles, createStyles } from "@material-ui/core";
 import Cart from "../components/Cart/Cart";
 import { useSelector } from 'react-redux';
-import Loader from '../GlobalComponents/Loader';
+// import Loader from '../GlobalComponents/Loader';
+import Blog from "../components/Blog/Blog";
+import AboutUs from "../components/AboutUs/AboutUs";
 // import ShopAlert from '../GlobalComponents/ShopAlert';
 
 const Routers = () => {
@@ -28,7 +30,8 @@ const Routers = () => {
       <Route path="/shop" component={Shop} />
       <Route path="/Authentication" component={ayscAuth} />
       <Route path="/Cart" component={Cart} />
-      <Route path="/Baby" component={Loader} />
+      <Route path="/AboutUS" component={AboutUs} />
+      <Route path="/Blog" component={Blog} />
       <Redirect to='/' />
     </Switch>
   );
@@ -38,7 +41,8 @@ const Routers = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/shop" component={Shop} />
-        <Route path="/Baby" component={Loader} />
+        <Route path="/Blog" component={Blog} />
+        <Route path="/AboutUS" component={AboutUs} />
         <Route path="/logout" component={ayscLogout} />
         <Route path ='/Account' component={ayscAccount}/>
         <Route path = '/Wishlist' component={ayscWishlist}/>
