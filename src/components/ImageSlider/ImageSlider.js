@@ -30,7 +30,7 @@ const ImageSlider = () => {
           {
             data.map((item,index) => (
               <div style={{position:'relative'}}>
-                  <img key={index} style={item.img === babe ? {height:'520px',width:'150%'} : {height:'400px', width:'100%'}} alt="img slider" src={item.img} />
+                  <img key={index} style={item.img === babe ? {height:'520px',width:'150%'} : {height:'520px', width:'100%'}} alt="img slider" src={item.img} />
                   <div className={item.className}>
                     <Typography variant="h5" className={classes.Typography}>we would like to shop more with our great deal</Typography>
                     <Button className={classes.Button}>shop</Button>
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme =>
   createStyles({
     mother: {
         position: 'absolute',
-        bottom:'45%',
+        bottom:'35%',
         right:'10%'
     },
     slide: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme =>
     },
     toychild: {
       position: 'absolute',
-      bottom:'35%',
+      bottom:'20%',
       left:'10%'
     },
     babe: {
@@ -68,11 +68,18 @@ const useStyles = makeStyles(theme =>
       paddingBottom:'2%'
     },
     Button: {
-      background:'hotpink',
-      width:'120px',
+      background:'#373b38',
+      width:'130px',
+      textTransform:'initial',
+      borderRadius:'9px',
       height:'50px',
       color:'white',
-      textAlign:'center'
+      fontSize:'18px',
+      textAlign:'center',
+      letterSpacing:'2px',
+      "&:hover": {
+        background:'#5b635d'
+      }
     }
   }))
 export default ImageSlider;
