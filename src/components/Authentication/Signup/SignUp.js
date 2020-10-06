@@ -12,7 +12,7 @@ import Input from "../../../GlobalComponents/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { auth, setAuthRedirectPath } from "../AuthRedux/action";
-import Loader from "../../../GlobalComponents/Loader";
+// import Loader from "../../../GlobalComponents/Loader";
 
 const SignUp = () => {
   const classes = useStyles();

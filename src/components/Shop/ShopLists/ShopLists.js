@@ -48,22 +48,23 @@ const ShopLists = (props) => {
   };
 
   const handleLabel = (value) => {
-    if (value === 0) {
-      setlabel("T-Shirt");
-    } else if (value === 1) {
-      setlabel("Toys");
-    } else if (value === 2) {
-      setlabel("Shampoo");
-    } else if (value === 3) {
-      setlabel("Cosmetic");
-    } else if (value === 4) {
-      setlabel("Diapers");
-    } else if (value === 5) {
-      setlabel("Pants");
-    } else if (value === 6) {
-      setlabel("Pregancy Kit");
-    } else {
-      setlabel("T-shirt");
+    switch(value) {
+      case 0 : 
+      return setlabel("T-shirt");
+      case 1 : 
+      return setlabel("Toys");
+      case 2 : 
+      return setlabel("Shampoo");
+      case 3 : 
+      return setlabel("Cosmetic");
+      case 4 : 
+      return setlabel("Diaper");
+      case 5 : 
+      return setlabel("Panrs");
+      case 6 : 
+      return setlabel("Pregancy Kit");
+      default:
+        return setlabel("T-shirt");
     }
   };
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from '../../../../GlobalComponents/Loader';
 import FilterItems from '../../FilterItems/FilterItems';
 
-const Tshirt = (props) => {
+const Tshirt = () => {
   const data = useSelector((state) => state.TShirtRedux.data) || [];
   const dispatch = useDispatch();
   const [price,setPrice] = useState('');

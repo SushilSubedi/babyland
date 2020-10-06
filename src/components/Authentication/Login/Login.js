@@ -4,7 +4,7 @@ import Input from '../../../GlobalComponents/Input';
 import { useDispatch,useSelector } from 'react-redux';
 import { authLogin,setAuthRedirectPath } from '../AuthRedux/action';
 import { Redirect } from 'react-router-dom';
-import Loader from '../../../GlobalComponents/Loader';
+// import Loader from '../../../GlobalComponents/Loader';
 import fire from '../../../config/fire';
 import { Alert } from '@material-ui/lab';
 

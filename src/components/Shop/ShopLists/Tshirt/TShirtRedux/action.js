@@ -34,18 +34,11 @@ export const tshirtHandler = () => {
 
     const data = [];
     const imglist = [];
-    fire
-      .database()
-      .ref()
-      .child("TShirt")
-      .once("value")
-      .then((response) => {
+    fire.database().ref().child("TShirt").once("value").then((response) => {
         response.val().forEach((element) => {
-          const promise = imageUrlHandler(element.img)
-            .then((url) => {
+          const promise = imageUrlHandler(element.img).then((url) => {
               return url;
-            })
-            .catch((error) => {
+            }).catch((error) => {
               dispatch(tshirtError(error));
             });
           imglist.push(promise);
