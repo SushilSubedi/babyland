@@ -82,6 +82,10 @@ const SpecificOrder = (props) => {
                                 <Typography className={classes.data}>{zipCode}</Typography>
                             </div>
                        </div>
+                       <div className={classes.address}>
+                                <Typography className={classes.title}>Delivery:</Typography>
+                                <Typography style={{color:'#e85831'}} className={classes.data}>3-4 days</Typography>
+                       </div>
                     </div>
                 </Box>
             </Box>
@@ -98,6 +102,7 @@ const SpecificOrder = (props) => {
                                     <img className={classes.img} src={item.img} alt="alt"/>
                                     <div>
                                         <Typography className={classes.name}>{item.name}</Typography>
+                                        <Typography className={classes.data}>Qty: {item.quantity}</Typography>
                                         <Typography className={classes.price}>Rs.{item.value}</Typography>
                                     </div>
                                 </Box> 
