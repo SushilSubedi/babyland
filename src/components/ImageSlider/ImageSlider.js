@@ -29,8 +29,8 @@ const ImageSlider = () => {
         <Zoom {...zoomOutProperties}>
           {
             data.map((item,index) => (
-              <div style={{position:'relative'}}>
-                  <img key={index} style={item.img === babe ? {height:'520px',width:'150%'} : {height:'520px', width:'100%'}} alt="img slider" src={item.img} />
+              <div key={index} style={{position:'relative'}}>
+                  <img style={item.img === babe ? {height:'520px',width:'150%'} : {height:'520px', width:'100%'}} alt="img slider" src={item.img} />
                   <div className={item.className}>
                     <Typography variant="h5" className={classes.Typography}>we would like to shop more with our great deal</Typography>
                     <Button className={classes.Button}>shop</Button>
