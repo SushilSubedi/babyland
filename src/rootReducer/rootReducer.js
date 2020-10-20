@@ -11,6 +11,7 @@ import WishlistRedux from '../components/Account/Wishlist/WishlistRedux/Wishlist
 import CartRedux from '../components/Cart/CartRedux/CartRedux';
 import ProfileRedux from '../components/Account/Profile/ProfileRedux/ProfileRedux';
 import OrderRedux from "../components/Account/Order/OrderRedux/OrderRedux";
+import DeveloperRedux from '../components/AboutUs/Developer/DeveloperRedux/DeveloperRedux';
 
 
 const rootReducer = combineReducers({
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   WishlistRedux,
   CartRedux,
   ProfileRedux,
-  OrderRedux
+  OrderRedux,
+  DeveloperRedux
 });
 
 export default rootReducer;

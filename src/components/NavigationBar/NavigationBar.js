@@ -67,7 +67,7 @@ const NavigationBar = (props) => {
             Blog
           </NavigationItem>
           <NavigationItem to={"/AboutUS"}>
-            AboutUS
+            About US
           </NavigationItem>
         </Toolbar>
         <Toolbar className={classes.SearchBox}>

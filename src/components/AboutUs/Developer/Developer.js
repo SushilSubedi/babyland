@@ -25,7 +25,7 @@ const Developer = (props) => {
                         <div className={classes.follow}>
                             <div className={classes.icon}><Link color="secondary" href={link.facebook} target="blank"><FacebookIcon/></Link></div>
                             <div className={classes.icon}><Link color="secondary" href={link.twitter} target="blank"><TwitterIcon/></Link></div>
-                            <div className={classes.icon}><Link color="secondary"><InstagramIcon/></Link></div>
+                            <div className={classes.icon}><Link color="secondary" href={link.instagram} target="blank"><InstagramIcon/></Link></div>
                             <div className={classes.icon}><Link color="secondary" href={link.linkedin} target="blank"><LinkedInIcon/></Link></div>
                         </div>
                     </CardContent>
