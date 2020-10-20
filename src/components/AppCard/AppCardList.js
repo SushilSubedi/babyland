@@ -27,7 +27,7 @@ const Data = [
     
 ]
 
-const AppCardList = (props) =>{
+const AppCardList = () =>{
 return(
     <Grid item md={12}>
         <Grid container>

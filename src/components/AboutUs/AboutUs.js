@@ -19,7 +19,6 @@ const AboutUs = () => {
             dispatch(developer());
         }
     },[dispatch])
-
  
     return (
         <Box padding="3% 1%">

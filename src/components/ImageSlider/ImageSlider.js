@@ -4,6 +4,7 @@ import toychild from '../../Asset/ImageSlider/toychild.jpg';
 import mother from '../../Asset/ImageSlider/mother.jpg';
 import babe from '../../Asset/ImageSlider/babe.jpg';
 import { makeStyles,createStyles,Typography,Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 // import classes from '*.module.css';
  
 const zoomOutProperties = {
@@ -17,12 +18,17 @@ const zoomOutProperties = {
  
 const ImageSlider = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   const data = [
-    {img:babe,className:classes.babe},
-    {img:mother,className:classes.mother},
-    {img:toychild,className:classes.toychild},
+    {img:babe,className:classes.babe, typo:'Pick the product of your desire with exclusive discount',button:'Shop'},
+    {img:mother,className:classes.mother,typo:'Read about how you could care best for your child', button:'Blog'},
+    {img:toychild,className:classes.toychild,typo:'Checkout your product and enjoy our exclusive product', button:'Cart'},
   ]
+
+  const handleNavigation = (nav) => {
+    history.push(`/${nav}`)
+  }
 
     return (
       <div className={classes.slide}>
@@ -32,8 +38,8 @@ const ImageSlider = () => {
               <div key={index} style={{position:'relative'}}>
                   <img style={item.img === babe ? {height:'520px',width:'150%'} : {height:'520px', width:'100%'}} alt="img slider" src={item.img} />
                   <div className={item.className}>
-                    <Typography variant="h5" className={classes.Typography}>we would like to shop more with our great deal</Typography>
-                    <Button className={classes.Button}>shop</Button>
+                    <Typography variant="h5" className={classes.Typography}>{item.typo}</Typography>
+                    <Button className={classes.Button} onClick={() => handleNavigation(item.button)}>{item.button}</Button>
                   </div>
               </div>
             ))
