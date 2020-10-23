@@ -9,7 +9,7 @@ const classes = useStyles();
 const history = useHistory();
 
 const handleNavigation = () => {
-    history.push(`/${navigate}`)
+    history.push(`/Shop`);
 }
 
 return(

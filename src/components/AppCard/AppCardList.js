@@ -10,19 +10,19 @@ const Data = [
         name:'Nutrition Food',
         src:Food,
         description:'Discover the best weaning foods to feed your baby. See top finger foods for babies and get tips on feeding your baby well',
-        navigate:'/Food'
+        // navigate:'/Food'
     },
     {
         name:'T-shirt Collection',
         src:babycloth,
         description:'BabySuit for newly born babies.Like T-shirts, infant bodysuits come in a wide variety of designs.',
-        navigate:'/T-shirt'
+        // navigate:'/T-shirt'
     },
     {
         name:'Toy collection',
         src:walkytalky,
         description:"Baby Walker with Adjustable Height and Push Handle Bar.Sturdy design to support and nurture baby's first steps  and many more",
-        navigate:'/Toys'
+        // navigate:'/Toys'
     },
     
     
