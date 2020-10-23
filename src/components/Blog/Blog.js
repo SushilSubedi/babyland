@@ -3,10 +3,10 @@ import React from 'react';
 
 const Blog = () => {
     const classes = useStyles()
-    const clickeffect = () => {
-        var dots = document.getElementById("dots");
-        var moretext = document.getElementById("more");
-        var mybtn = document.getElementById("mybtn");
+    const clickeffect = (id, txt, btn) => {
+        var dots = document.getElementById(id);
+        var moretext = document.getElementById(txt);
+        var mybtn = document.getElementById(btn);
 
         if (dots.style.display === 'none') {
             dots.style.display = 'inline';
@@ -29,8 +29,11 @@ const Blog = () => {
                             BABY'S HEALTH IS IN PARENTS HAND
                         </Typography>
                         <Typography>
-                            Parents love their kids more than anything because thats the beautiful thing ever happened in their life .loving anything in excessive amount means to take take and give protection to them .so,children safety and health is parents main cocern.The last decade has seen the rise of parenting as an individual endeavour, which can place crushing pressure for parents to always be at their best.When it comes to preparing for your new baby whether it’s your first or your third there’s so much baby gear out there to choose from. And while every baby and family is different, some products definitely rise to the top.So,what gear to choose is a big question for the parents .In that situation we come in  for to help you and your baby for everything baby needs from pregnancy to childhood .we provide the best product for your baby that baby needs in everything step of their childhood .so parents should always have to deal what best for their child .Their duty is no match for any other jobs in their world .If a baby is healthy ,it is only because of the parenting gone well .Parents  should be aware of the every products that children consumes .Every child gears is called as baby's product while it  shoild be called as parents  choosed products.Parents are responsible for every products that a child consumes .
+                            Parents love their kids more than anything because thats the beautiful thing ever happened in their life .loving anything in excessive amount means to take take and give protection to them .so,children safety and health is parents main cocern.The last decade has seen the rise of parenting as an individual endeavour, which can place crushing pressure for parents to always be at their best.When it comes to preparing for your new baby whether it’s your first or your third there’s so much baby gear out there to choose from.<span id="dots4"> .....</span>
+                            <span id="more4">
+                                And while every baby and family is different, some products definitely rise to the top.So,what gear to choose is a big question for the parents .In that situation we come in  for to help you and your baby for everything baby needs from pregnancy to childhood .we provide the best product for your baby that baby needs in everything step of their childhood .so parents should always have to deal what best for their child .Their duty is no match for any other jobs in their world .If a baby is healthy ,it is only because of the parenting gone well .Parents  should be aware of the every products that children consumes .Every child gears is called as baby's product while it  shoild be called as parents  choosed products.Parents are responsible for every products that a child consumes .</span>
                         </Typography>
+                        <Button onClick={() => clickeffect("dots4", "more4", "mybtn4")} id="mybtn4" className={classes.button}>Learn More</Button>
                     </Container>
                 </Box>
 
@@ -42,9 +45,11 @@ const Blog = () => {
                             PREGNANCY GEAR
                         </Typography>
                         <Typography>
-                            AAAAH! You’re pregnant! This is amazing and wonderful and also OMG brace yourself because you’re about to get absolutely flooded with advice. Some will be good, some will be garbage, and a significant portion of it will come from people who have good intentions, but lack tact/common sense/the understanding that discussing your cervix while waiting in line for coffee IS NOT COOL. Here’s a smattering of the most common things we will tell you in this course of time .Think about what you’re eating, but don’t obsess because your body is going to do what it’s going to do.Nutrition and pregnancy refers to the nutrient intake, and dietary planning that is undertaken before, during and after pregnancy. Nutrition of the fetus begins at conception. For this reason, the nutrition of the mother is important from before conception (probably several months before) as well as throughout pregnancy and breast feeding. An ever-increasing number of studies have shown that the nutrition of the mother will have an effect on the child, up to and including the risk for cancer, cardiovascular disease, hypertension and diabetes throughout life.
-                            so in this case we provide you all the nutrients that you will need during pregnancy with our simple recommedated products.Some of our products like pregnancy pillow ,hot water bag ,irons will help you during your rough times .
+                            AAAAH! You’re pregnant! This is amazing and wonderful and also OMG brace yourself because you’re about to get absolutely flooded with advice. Some will be good, some will be garbage, and a significant portion of it will come from people who have good intentions, but lack tact/common sense/the understanding that discussing your cervix while waiting in line for coffee IS NOT COOL.<span id="dots3"> .....</span>
+                            <span id="more3"> Here’s a smattering of the most common things we will tell you in this course of time .Think about what you’re eating, but don’t obsess because your body is going to do what it’s going to do.Nutrition and pregnancy refers to the nutrient intake, and dietary planning that is undertaken before, during and after pregnancy. Nutrition of the fetus begins at conception. For this reason, the nutrition of the mother is important from before conception (probably several months before) as well as throughout pregnancy and breast feeding. An ever-increasing number of studies have shown that the nutrition of the mother will have an effect on the child, up to and including the risk for cancer, cardiovascular disease, hypertension and diabetes throughout life.
+                            so in this case we provide you all the nutrients that you will need during pregnancy with our simple recommedated products.Some of our products like pregnancy pillow ,hot water bag ,irons will help you during your rough times .</span>
                         </Typography>
+                        <Button onClick={() => clickeffect("dots3", "more3", "mybtn3")} id="mybtn3" className={classes.button}>Learn More</Button>
                     </Container>
                 </Box>
             </div>
@@ -55,17 +60,19 @@ const Blog = () => {
                             BABY PRODUCT SAFETY STANDARDS
                         </Typography>
                         <Typography>
-                            If you’ve ever wondered who’s in charge of making sure the products you’re using on your baby are safe, you’re not alone. The information around baby product safety is ever-evolving, and sometimes a product parents swear is a lifesaver one day is considered a ticking diaper bomb the next. If you’re in the dark about what acronyms like “ASTM”, “CPSC”, “JPMA” and “AAP” stand for and what in the sweet hell they’ve got to do with baby safety, we’ve done some digging so you don’t have to.Let’s take a peek at who they are and what they do.
-                            American Academy of Pediatrics (AAP)
-                            The American Academy of Pediatrics was created in 1930 with the aim to keep young people mentally, physically, and socially healthy. Currently, 67,000 pediatricians in the United States, Canada, Mexico and beyond are members.
-                            The AAP has over 30 committees that develop positions and programs on topics like injury and poison prevention, nutrition, and more. They work alongside Congress, the Administration and the judicial system to weigh in on child health issues and make recommendations on child safety legislation. Their partner website, healthychildren.org has information for parents on topics like safety, prevention and healthy living.
-                            Consumer Products Safety Commission (CPSC)
-                            The Consumer Products Safety Commission is the federal agency that aims to protect us and our kids from unreasonable risks of injury or death from the products we use. The CPSC keeps consumers and manufacturers informed on safety standards and product regulations. They also enforce the regulations that they’ve set. When consumers make complaints about a product, the CPSC hangs onto them and looks for patterns (like, does a particular product have a lot of complaints about kids getting their fingers caught in one of its parts?) They use that information to create new or revised standards that relate to that product. The CPSC is also in charge of product bans and recalls.
-                            American Society of Testing and Materials (ASTM)
-                            The American Society of Testing and Materials is a not-for-profit organization that develops and sets standards for consumer products. They often expand on existing mandatory government standards.
-                            The U.S. juvenile products industry has been using ATSM guidelines for over 20 years to set safety standards on those products.
-                            . The ASTM looks at the ways consumers use (and misuse) products to set standards and create warning labels for them.
+                            If you’ve ever wondered who’s in charge of making sure the products you’re using on your baby are safe, you’re not alone. The information around baby product safety is ever-evolving, and sometimes a product parents swear is a lifesaver one day is considered a ticking diaper bomb the next. If you’re in the dark about what acronyms like “ASTM”, “CPSC”, “JPMA” and “AAP” stand for and what in the sweet hell they’ve got to do with baby safety, we’ve done some digging so you don’t have to.Let’s take a peek at who they are and what they do.<span id="dots2"> .....</span>
+                            <span id="more2">
+                                American Academy of Pediatrics (AAP)
+                                The American Academy of Pediatrics was created in 1930 with the aim to keep young people mentally, physically, and socially healthy. Currently, 67,000 pediatricians in the United States, Canada, Mexico and beyond are members.
+                                The AAP has over 30 committees that develop positions and programs on topics like injury and poison prevention, nutrition, and more. They work alongside Congress, the Administration and the judicial system to weigh in on child health issues and make recommendations on child safety legislation. Their partner website, healthychildren.org has information for parents on topics like safety, prevention and healthy living.
+                                Consumer Products Safety Commission (CPSC)
+                                The Consumer Products Safety Commission is the federal agency that aims to protect us and our kids from unreasonable risks of injury or death from the products we use. The CPSC keeps consumers and manufacturers informed on safety standards and product regulations. They also enforce the regulations that they’ve set. When consumers make complaints about a product, the CPSC hangs onto them and looks for patterns (like, does a particular product have a lot of complaints about kids getting their fingers caught in one of its parts?) They use that information to create new or revised standards that relate to that product. The CPSC is also in charge of product bans and recalls.
+                                American Society of Testing and Materials (ASTM)
+                                The American Society of Testing and Materials is a not-for-profit organization that develops and sets standards for consumer products. They often expand on existing mandatory government standards.
+                                The U.S. juvenile products industry has been using ATSM guidelines for over 20 years to set safety standards on those products.
+                            . The ASTM looks at the ways consumers use (and misuse) products to set standards and create warning labels for them.</span>
                         </Typography>
+                        <Button onClick={() => clickeffect("dots2", "more2", "mybtn2")} id="mybtn2" className={classes.button}>Learn More</Button>
                     </Container>
 
                 </Box>
@@ -78,8 +85,8 @@ const Blog = () => {
                         </Typography>
                         <Typography>
                             There’s a lot you can buy for your baby. And there’s a lot you really don’t need! Admittedly, I have made my share of useless purchases in the past (for example, a nappy trash can which produces giant nappy sausages). Now, expecting our fifth baby, I think I have more of an idea of what I really need. And, I had given away most of my new baby essentials after baby Casper, so now I have to get them all over again. Taking money and space into account, I’m more picky of what I really need…
-                            So here’s my list of new baby essentials that I think are crucial (or at least very handy) to have the first weeks. Remembering: less is more, and simple is best! : )<span id="dots"> .....</span>
-                            <span id="more">
+                            So here’s my list of new baby essentials that I think are crucial (or at least very handy) to have the first weeks. Remembering: less is more, and simple is best! : )<span id="dots1"> .....</span>
+                            <span id="more1">
                                 New baby essentials: CLOTHES
                                 White envelope onesies (size 1 month). The envelope opening is the easiest when babies are curled up and tiny.
                                 Baby hats, a few different thicknesses, styles and sizes
@@ -105,7 +112,7 @@ const Blog = () => {
                             Of course, as always, I’m curious to hear if you feel there are any new baby essentials I have missed, that you feel are essential for the first weeks!</span>
 
                         </Typography>
-                        <Button onClick={clickeffect} id="mybtn">Learn More</Button>
+                        <Button onClick={() => clickeffect("dots1", "more1", "mybtn1")} id="mybtn1" className={classes.button}>Learn More</Button>
 
                     </Container>
                 </Box>
@@ -131,7 +138,7 @@ const Blog = () => {
                                 Baby Cream
                             Your baby’s sensitive skin does not have the ability to retain moisture the way that an adult’s skin does. This is why it’s important to moisturize your baby’s skin daily to help lock in moisture and keep it soft and healthy. Softsens Rich Moisturizing Cream hydrates baby’s skin from deep within, leaving it gorgeously soft and smooth. It is made from gentle yet powerful natural moisturizers like milk cream and shea butter that work together perfectly to nourish and hydrate skin. It is also packed with Vitamin E that helps keep skin hydrated for much longer and helps protect it from dryness and irritation.</span>
                         </Typography>
-                        <Button onClick={clickeffect} id="mybtn">Learn More</Button>
+                        <Button onClick={() => clickeffect("dots", "more", "mybtn")} id="mybtn" className={classes.button}>Learn More</Button>
                     </Container>
                 </Box>
             </div>
@@ -158,7 +165,10 @@ const useStyles = makeStyles(theme =>
             justifyContent: "center",
             backgroundColor: "#f5f3f0",
             width: "fit-content",
-            padding: "2%"
+            padding: "2%",
+            "& #more4": {
+                display: "none",
+            }
         },
 
         blog2: {
@@ -166,7 +176,10 @@ const useStyles = makeStyles(theme =>
             justifyContent: "center",
             backgroundColor: "#f5f3f0",
             width: "fit-content",
-            padding: "2%"
+            padding: "2%",
+            "& #more3": {
+                display: "none",
+            }
         },
 
         blog3: {
@@ -175,7 +188,7 @@ const useStyles = makeStyles(theme =>
             backgroundColor: "#f5f3f0",
             width: "fit-content",
             padding: "2%",
-            "& #more": {
+            "& #more2": {
                 display: "none",
             }
         },
@@ -186,7 +199,7 @@ const useStyles = makeStyles(theme =>
             backgroundColor: "#f5f3f0",
             width: "fit-content",
             padding: "2%",
-            "& #more": {
+            "& #more1": {
                 display: "none",
             }
 
@@ -202,6 +215,17 @@ const useStyles = makeStyles(theme =>
                 display: "none",
             }
         },
+
+        button: {
+            backgroundColor: 'hotpink',
+            textTransform: 'initial',
+            color: 'white',
+            fontSize: '16px',
+            marginTop: "20px",
+            "&:hover": {
+                backgroundColor: '#fc03d7'
+            }
+        }
 
 
 
