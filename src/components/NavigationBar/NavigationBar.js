@@ -70,7 +70,7 @@ const NavigationBar = (props) => {
             About US
           </NavigationItem>
         </Toolbar>
-        <Toolbar className={classes.SearchBox}>
+        {/* <Toolbar className={classes.SearchBox}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -84,9 +84,9 @@ const NavigationBar = (props) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-        </Toolbar>
-
-        <div>
+        </Toolbar> */}
+      <Toolbar>
+      <div>
           {token ? (
             <Button classes={{ text: classes.text }} onClick={handleOpenMenu}>
               <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
@@ -101,6 +101,7 @@ const NavigationBar = (props) => {
         <NavigationItem icon to={"/Cart"}>
           <ShoppingCartIcon style={{ paddingTop: '8px' }} fontSize="large" />
         </NavigationItem>
+      </Toolbar>
       </div>
     </AppBar>
   );

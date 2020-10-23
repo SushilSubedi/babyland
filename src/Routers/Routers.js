@@ -9,6 +9,9 @@ import { useSelector } from 'react-redux';
 // import Loader from '../GlobalComponents/Loader';
 import Blog from "../components/Blog/Blog";
 import AboutUs from "../components/AboutUs/AboutUs";
+import Food from "../components/Shop/ShopLists/Foods/Foods";
+import Tshirt from "../components/Shop/ShopLists/Tshirt/Tshirt";
+import Toys from "../components/Shop/ShopLists/Toys/Toys";
 // import ShopAlert from '../GlobalComponents/ShopAlert';
 
 const Routers = () => {
@@ -27,11 +30,14 @@ const Routers = () => {
   let switchs = (
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/shop" component={Shop} />
+      <Route path="/shop" exact component={Shop} />
       <Route path="/Authentication" component={ayscAuth} />
       <Route path="/Cart" component={Cart} />
       <Route path="/AboutUS" component={AboutUs} />
       <Route path="/Blog" component={Blog} />
+      <Route path="/shop/:Food" component={Food}/>
+      <Route path="/shop/:T-shirt" component={Tshirt}/>
+      <Route path="/shop/:Toys" component={Toys}/>
       <Redirect to='/' />
     </Switch>
   );
@@ -40,7 +46,10 @@ const Routers = () => {
     switchs = (
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/shop" component={Shop} />
+        <Route path="/shop" exact component={Shop} />
+        <Route path="/shop/:Food" component={Food}/>
+        <Route path="/shop/:T-shirt" component={Tshirt}/>
+        <Route path="/shop/:Toys" component={Toys}/>
         <Route path="/Blog" component={Blog} />
         <Route path="/AboutUS" component={AboutUs} />
         <Route path="/logout" component={ayscLogout} />

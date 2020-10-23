@@ -1,10 +1,17 @@
 import React from 'react';
 import {Box,Typography,Button,makeStyles, createStyles,Paper} from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 
 const AppCard = (props) =>{
-const {name,description,imgSrc} = props;
+const {name,description,imgSrc,navigate} = props;
 const classes = useStyles();
+const history = useHistory();
+
+const handleNavigation = () => {
+    history.push(`/${navigate}`)
+}
+
 return(
     <Box component={Paper} className={classes.card} >
         <div style={{marginRight:'auto',marginLeft:'auto',textAlign:'center'}}>
@@ -42,7 +49,7 @@ return(
                 
             </Typography>
 
-            <Button className={classes.button}>
+            <Button className={classes.button} onClick={handleNavigation}>
                 view
             </Button>
 

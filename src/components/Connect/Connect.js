@@ -43,7 +43,7 @@ const Connect = (props) => {
           customer.Please provide feedback so that we can improve our product.
         </Typography>
       </div>
-      <FeedbackDialog open={open} handleClose={handleClose} />
+      <FeedbackDialog open={open} onClose={handleClose} />
     </Box>
   );
 };

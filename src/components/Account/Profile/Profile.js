@@ -330,6 +330,7 @@ const useStyles = makeStyles(theme =>
             width: '90px',
             height:'40px',
             background: 'hotpink',
+            color:'white',
             "&:hover": {
                 backgroundColor:'#fc03d7'
             }

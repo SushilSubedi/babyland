@@ -9,20 +9,31 @@ import {
   DialogContentText,
   Button,
   Container,
+  Snackbar
 } from "@material-ui/core";
 import Input from "../../../GlobalComponents/Input";
+import fire from "../../../config/fire";
+import { Alert } from '@material-ui/lab'
 
 const FeedbackDialog = (props) => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
 
   const [isValid, setIsValid] = useState(false);
   const [emailMessage, setEmailMessage] = useState("");
   const [subjectMessage, setSubjectMessage] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const { open, handleClose } = props;
+
+  const { open, onClose } = props;
+
   const classes = useStyles();
+
+  const handleClose= () => {
+    setOpenAlert(false);
+    onClose();
+  }
 
   const handleEmail = (e) => {
     let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -72,9 +83,22 @@ const FeedbackDialog = (props) => {
       isValid === true &&
       feedbackMessage === null
     ) {
-      setSubject("");
-      setEmail("");
-      setMessage("");
+      const feedback={
+        email:email,
+        subject:subject,
+        message:message
+      }
+      setOpenAlert(true);
+      const updateData={};
+      const newPostKey = fire.database().ref().child('feedback').push().key;
+      updateData[`/feedback/`+ newPostKey] = feedback;
+      fire.database().ref().update(updateData).then(doc => {
+        setSubject("");
+        setEmail("");
+        setMessage("");
+        handleClose();
+      })
+
     } else if (!isValid) {
       setSubjectMessage("Subject field is empty");
       setEmailMessage("Email-address field is empty");
@@ -87,6 +111,10 @@ const FeedbackDialog = (props) => {
       setFeedbackMessage("Feedback is empty");
     }
   };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  }
 
   const data = [
     {
@@ -164,6 +192,11 @@ const FeedbackDialog = (props) => {
         <Button className={classes.submitbutton} onClick={onSubmitHandler}>
           Submit
         </Button>
+        <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleCloseAlert}>
+          <Alert onClose={handleCloseAlert} severity="success">
+            Thank you for your feedback!
+          </Alert>
+        </Snackbar>
       </DialogActions>
     </Dialog>
   );
@@ -192,6 +225,7 @@ const useStyles = makeStyles((theme) =>
       position: "relative",
       right: "75px",
       borderRadius: "8px",
+      color:'#fff',
       "&:hover": {
         backgroundColor: "#fc03d7",
       },
