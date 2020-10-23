@@ -9,22 +9,18 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 
-
-const Footer = () =>{
+const Footer = () => {
     const classes = useStyles();
-    return(
-        
-        <Box className={classes.Footer}>
 
-            <div className={classes.blog} >
+    return(
+        <Box className={classes.Footer}>
+            <div className={classes.blog}>
               <Typography variant="h5"  className={classes.bloghead}>Babyland.com</Typography>
               <Typography className={classes.blogtext}>We aim to provide the best of the products and brands at the most reasonable prices with the unforgettable online shopping experience, and prompt customer service. We have set a benchmark to provide customers with a virtual physical store's shopping experience; online, without the trouble of moving around the city  heavy traffic and locating stores that may or may not meet your requirements at the end of the day. </Typography>
             </div>
-
             <div className={classes.copyright}>
               Copyright@2020 Babyland.com
             </div>
-
             <div className={classes.contact}>
               <div style={{width:'200px',alignSelf:'center'}} >
                 <Typography variant="h5"  className={classes.followus}>Follow us:</Typography>

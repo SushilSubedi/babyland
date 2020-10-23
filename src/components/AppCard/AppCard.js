@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 
 const AppCard = (props) =>{
-const {name,description,imgSrc,navigate} = props;
+const {name,description,imgSrc} = props;
 const classes = useStyles();
 const history = useHistory();
 
